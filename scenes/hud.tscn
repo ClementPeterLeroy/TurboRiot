@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1"]
+[sub_resource type="StyleBoxFlat" id="HUDBackground"]
+content_margin_left = 14.0
+content_margin_right = 14.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.03, 0.05, 0.09, 0.75)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1")
+[node name="Margin" type="PanelContainer" parent="."]
+offset_left = 28.0
+offset_top = 24.0
+offset_right = 560.0
+offset_bottom = 244.0
+theme_override_styles/panel = SubResource("HUDBackground")
+theme_override_colors/font_color = Color(1, 1, 0.95, 1)
+theme_override_colors/font_shadow_color = Color(0.05, 0.08, 0.13, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+[node name="Stack" type="VBoxContainer" parent="Margin"]
+theme_override_constants/separation = 5
+[node name="Title" type="Label" parent="Margin/Stack"]
+theme_override_font_sizes/font_size = 20
+text = "TURBO RIOT    /    FIRST DRIVE"
+[node name="Speed" type="Label" parent="Margin/Stack"]
+theme_override_font_sizes/font_size = 42
+text = "000  km/h"
+[node name="Direction" type="Label" parent="Margin/Stack"]
+text = "STOPPED"
+[node name="Controls" type="Label" parent="Margin/Stack"]
+text = "W / Up: accelerate   S / Down: brake & reverse\nA D / Arrows: steer   R: reset   F3: debug   Esc: exit\nPad: left stick + triggers   Y: reset   Back: debug   Start: exit"
+[node name="Debug" type="Label" parent="Margin/Stack"]
+visible = false
+text = "Debug"
+[node name="Footer" type="Label" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -42.0
+offset_right = -28.0
+offset_bottom = -15.0
+text = "v0.1.0   /   Free drive   /   Lap timing coming in v0.2.0"

@@ -1,0 +1,6 @@
+.godot/
+builds/
+*.tmp
+
+# Private reference material
+references/

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="KartConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/kart_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+max_forward_speed = 22.0
+max_reverse_speed = 7.0
+acceleration = 16.0
+braking = 28.0
+coasting_deceleration = 6.0
+steering_rate = 110.0
+lateral_grip = 9.0
