@@ -163,6 +163,12 @@ func _test_scene(suite: SceneTree) -> void:
 		race.session.advance(0.5)
 		_cross(race, 0)
 		suite.check(race.session.lap_times.size() == lap + 1, "Scene valid lap increments once")
+		if lap == 0:
+			recovery.cooldown_remaining = 0
+			recovery.recover()
+			suite.check(race.session.lap_times.size() == 1, "Recovery preserves completed laps")
+			suite.near(race.session.last_lap_time(), 6, "Recovery preserves lap results")
+			suite.check(race.session.next_checkpoint == 1, "Recovery after finish cannot award the next lap")
 	suite.check(race.session.state == RaceSession.State.FINISHED, "Scene completes 3-lap time trial")
 	suite.check(not kart.driving_enabled, "Finish locks driving")
 	suite.near(race.session.final_time, 18, "Scene final time includes all laps")

@@ -100,6 +100,16 @@ func _test_track() -> void:
 	check(nondegenerate, "Nonzero triangle areas")
 	check(upward_faces, "Clockwise road faces collide from above")
 	check(track.get_node("Generated/Asphalt").get_child_count() > 0, "Road has collision")
+	var batch := track.get_node("Generated/BarrierVisuals0") as MultiMeshInstance3D
+	var shared_mesh := true
+	for i in 4:
+		shared_mesh = shared_mesh and track.get_node("Generated/BarrierVisuals%d" % i).multimesh.mesh == batch.multimesh.mesh
+	check(shared_mesh, "All barrier colour batches share one mesh")
+	check(batch.multimesh.instance_count > 50, "Barrier blocks are instanced in colour batches")
+	var simple_collision := true
+	for shape: CollisionShape3D in track.get_node("Generated/BarrierCollision").get_children():
+		simple_collision = simple_collision and shape.shape is BoxShape3D
+	check(simple_collision, "Barrier collision uses boxes rather than faceted triangles")
 	var count := track.get_node("Generated").get_child_count()
 	track.build()
 	track.build()

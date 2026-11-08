@@ -16,6 +16,8 @@ extends CanvasLayer
 var debug_visible := false
 
 func _ready() -> void:
+	if not race:
+		return
 	primary.pressed.connect(_on_primary)
 	ready_button.pressed.connect(race.return_to_ready)
 	$Overlay/Center/Card/Stack/Exit.pressed.connect(func() -> void: get_tree().quit())
