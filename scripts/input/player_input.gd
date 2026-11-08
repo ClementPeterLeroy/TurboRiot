@@ -7,6 +7,8 @@ func _ready() -> void:
 	_bind_keys("steer_left", [KEY_A, KEY_LEFT])
 	_bind_keys("steer_right", [KEY_D, KEY_RIGHT])
 	_bind_keys("reset_kart", [KEY_R])
+	_bind_keys("start_race", [KEY_ENTER, KEY_SPACE])
+	_bind_keys("restart_race", [KEY_F5])
 	_bind_keys("debug_hud", [KEY_F3])
 	_bind_keys("exit_game", [KEY_ESCAPE])
 	_bind_axis("steer_left", JOY_AXIS_LEFT_X, -1.0)
@@ -14,6 +16,8 @@ func _ready() -> void:
 	_bind_axis("accelerate", JOY_AXIS_TRIGGER_RIGHT, 1.0)
 	_bind_axis("brake", JOY_AXIS_TRIGGER_LEFT, 1.0)
 	_bind_button("reset_kart", JOY_BUTTON_Y)
+	_bind_button("start_race", JOY_BUTTON_A)
+	_bind_button("restart_race", JOY_BUTTON_X)
 	_bind_button("debug_hud", JOY_BUTTON_BACK)
 	_bind_button("exit_game", JOY_BUTTON_START)
 

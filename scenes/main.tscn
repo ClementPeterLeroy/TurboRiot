@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/track.tscn" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/chase_camera.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="5"]
 [ext_resource type="Script" path="res://scripts/world/environment_builder.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/race/race_manager.gd" id="7"]
 [sub_resource type="ProceduralSkyMaterial" id="SkyMaterial"]
 sky_top_color = Color(0.22, 0.58, 0.91, 1)
 sky_horizon_color = Color(0.73, 0.9, 0.99, 1)
@@ -38,7 +39,12 @@ track = NodePath("../Track")
 [node name="Kart" parent="." instance=ExtResource("3")]
 position = Vector3(75.6, 0.69, 9)
 rotation_degrees = Vector3(0, 180, 0)
+[node name="RaceManager" type="Node" parent="." node_paths=PackedStringArray("track", "kart")]
+script = ExtResource("7")
+track = NodePath("../Track")
+kart = NodePath("../Kart")
 [node name="ChaseCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4")]
 target = NodePath("../Kart")
-[node name="HUD" parent="." node_paths=PackedStringArray("kart") instance=ExtResource("5")]
+[node name="HUD" parent="." node_paths=PackedStringArray("kart", "race") instance=ExtResource("5")]
 kart = NodePath("../Kart")
+race = NodePath("../RaceManager")

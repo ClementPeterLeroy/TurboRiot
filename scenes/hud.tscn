@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1"]
 [sub_resource type="StyleBoxFlat" id="HUDBackground"]
 content_margin_left = 14.0
@@ -10,13 +10,23 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_left = 8
 corner_radius_bottom_right = 8
+[sub_resource type="StyleBoxFlat" id="CardBackground"]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 18.0
+content_margin_bottom = 18.0
+bg_color = Color(0.03, 0.05, 0.09, 0.96)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_left = 10
+corner_radius_bottom_right = 10
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1")
 [node name="Margin" type="PanelContainer" parent="."]
 offset_left = 28.0
 offset_top = 24.0
-offset_right = 560.0
-offset_bottom = 244.0
+offset_right = 455.0
+offset_bottom = 294.0
 theme_override_styles/panel = SubResource("HUDBackground")
 theme_override_colors/font_color = Color(1, 1, 0.95, 1)
 theme_override_colors/font_shadow_color = Color(0.05, 0.08, 0.13, 1)
@@ -26,18 +36,22 @@ theme_override_constants/shadow_offset_y = 2
 theme_override_constants/separation = 5
 [node name="Title" type="Label" parent="Margin/Stack"]
 theme_override_font_sizes/font_size = 20
-text = "TURBO RIOT    /    FIRST DRIVE"
+text = "TURBO RIOT   /   TIME TRIAL"
 [node name="Speed" type="Label" parent="Margin/Stack"]
 theme_override_font_sizes/font_size = 42
 text = "000  km/h"
 [node name="Direction" type="Label" parent="Margin/Stack"]
 text = "STOPPED"
 [node name="Controls" type="Label" parent="Margin/Stack"]
-text = "W / Up: accelerate   S / Down: brake & reverse\nA D / Arrows: steer   R: reset   F3: debug   Esc: exit\nPad: left stick + triggers   Y: reset   Back: debug   Start: exit"
-[node name="Debug" type="Label" parent="Margin/Stack"]
-visible = false
-text = "Debug"
+theme_override_font_sizes/font_size = 14
+text = "W / Up: gas   S / Down: brake & reverse   A D: steer\nR / Pad Y: recover   F5 / Pad X: restart   F3: debug\nPad: stick + triggers   Esc / Pad Start: exit"
+[node name="RaceTimes" type="Label" parent="Margin/Stack"]
+theme_override_font_sizes/font_size = 18
+text = "LAP 1 / 3"
 [node name="Footer" type="Label" parent="."]
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -46,4 +60,66 @@ offset_left = 28.0
 offset_top = -42.0
 offset_right = -28.0
 offset_bottom = -15.0
-text = "v0.1.0   /   Free drive   /   Lap timing coming in v0.2.0"
+text = "v0.2.0-dev   /   Race Foundations   /   Development build"
+
+[node name="DebugPanel" type="PanelContainer" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -425.0
+offset_top = 24.0
+offset_right = -28.0
+offset_bottom = 174.0
+theme_override_styles/panel = SubResource("HUDBackground")
+[node name="Debug" type="Label" parent="DebugPanel"]
+text = "Debug"
+
+[node name="Overlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+[node name="Countdown" type="Label" parent="Overlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 110
+theme_override_colors/font_color = Color(1, 0.88, 0.2, 1)
+theme_override_colors/font_shadow_color = Color(0.05, 0.05, 0.1, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "3"
+[node name="Center" type="CenterContainer" parent="Overlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+[node name="Card" type="PanelContainer" parent="Overlay/Center"]
+custom_minimum_size = Vector2(450, 0)
+theme_override_styles/panel = SubResource("CardBackground")
+[node name="Stack" type="VBoxContainer" parent="Overlay/Center/Card"]
+theme_override_constants/separation = 12
+[node name="Title" type="Label" parent="Overlay/Center/Card/Stack"]
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+text = "READY TO RACE"
+[node name="Scroll" type="ScrollContainer" parent="Overlay/Center/Card/Stack"]
+custom_minimum_size = Vector2(420, 195)
+horizontal_scroll_mode = 0
+[node name="Text" type="Label" parent="Overlay/Center/Card/Stack/Scroll"]
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Three laps."
+[node name="Primary" type="Button" parent="Overlay/Center/Card/Stack"]
+custom_minimum_size = Vector2(0, 42)
+text = "Start Race"
+[node name="Ready" type="Button" parent="Overlay/Center/Card/Stack"]
+custom_minimum_size = Vector2(0, 38)
+text = "Return to Ready"
+[node name="Exit" type="Button" parent="Overlay/Center/Card/Stack"]
+custom_minimum_size = Vector2(0, 38)
+text = "Exit"

@@ -1,6 +1,9 @@
 @tool
 class_name TrackBuilder
 extends Path3D
+signal geometry_rebuilt
+
+const CHECKPOINT_SCENE := preload("res://scenes/checkpoint.tscn")
 ## The saved Curve3D is the source of truth. Generated nodes are transient:
 ## opening a scene or editing a curve replaces one Generated subtree.
 
@@ -19,6 +22,17 @@ extends Path3D
 @export var rebuild: bool = false:
 	set(_value):
 		_schedule_rebuild()
+@export_range(4, 32) var checkpoint_count: int = 12:
+	set(value):
+		checkpoint_count = value
+		_schedule_rebuild()
+@export var show_checkpoints: bool = false:
+	set(value):
+		show_checkpoints = value
+		if has_node("Generated/Checkpoints"):
+			for gate in get_node("Generated/Checkpoints").get_children():
+				gate.set_debug_visible(value)
+var _barrier_mesh: ArrayMesh
 var _queued := false
 var road_vertices := PackedVector3Array()
 var road_indices := PackedInt32Array()
@@ -51,12 +65,10 @@ func build() -> void:
 	var generated := Node3D.new()
 	generated.name = "Generated"
 	add_child(generated)
-	var asphalt := RiotGeometry.material(Color("505766"))
+	var asphalt := RiotGeometry.material(Color("5a5a5a"))
 	asphalt.cull_mode = BaseMaterial3D.CULL_DISABLED
 	var white := RiotGeometry.material(Color("fff5df"))
 	var red := RiotGeometry.material(Color("f04b50"))
-	var palette: Array[Material] = [RiotGeometry.material(Color("19b8c7")),
-		RiotGeometry.material(Color("f6c945")), red, RiotGeometry.material(Color("566de0"))]
 	var length := curve.get_baked_length()
 	var steps := maxi(4, ceili(length / sample_spacing))
 	var normals := PackedVector3Array()
@@ -87,19 +99,7 @@ func build() -> void:
 	road.material_override = asphalt
 	generated.add_child(road)
 	road.create_trimesh_collision()
-	# All sides, including the seam, receive continuous visible barriers.
-	var sections := ceili(length / barrier_spacing)
-	for i in sections:
-		var a := length * float(i) / sections
-		var b := length * float(i + 1) / sections
-		for side in [-1.0, 1.0]:
-			var start := boundary_point(a, side, 0.95)
-			var end := boundary_point(b, side, 0.95)
-			var midpoint := (start + end) * 0.5
-			var segment := end - start
-			var wall := RiotGeometry.box(generated, "Barrier", Vector3(0.55, 0.85, segment.length() + 0.1),
-				midpoint + Vector3.UP * 0.425, palette[(i / 4) % palette.size()], true)
-			wall.rotation.y = atan2(segment.x, segment.z)
+	_build_barriers(generated)
 	var kerb_steps := ceili(length / 1.8)
 	for i in kerb_steps:
 		var a := length * float(i) / kerb_steps
@@ -111,6 +111,8 @@ func build() -> void:
 				(start + end) * 0.5, red if i % 2 == 0 else white)
 			kerb.rotation.y = atan2(end.x - start.x, end.z - start.z)
 	_build_start(generated, white)
+	_build_checkpoints(generated)
+	geometry_rebuilt.emit()
 
 func sample_center(offset: float) -> Vector3:
 	var point := curve.sample_baked(clampf(offset, 0.0, curve.get_baked_length()), true)
@@ -128,7 +130,73 @@ func boundary_point(offset: float, side: float, extra: float) -> Vector3:
 
 func spawn_transform() -> Transform3D:
 	var forward := sample_forward(0.0)
-	return global_transform * Transform3D(Basis.looking_at(forward), sample_center(0.0) + Vector3.UP * 0.65)
+	# Start behind the finish plane; crossing it initially never awards a lap.
+	return global_transform * Transform3D(Basis.looking_at(forward),
+		sample_center(0.0) - forward * 4.0 + Vector3.UP * 0.65)
+
+func _build_checkpoints(parent: Node3D) -> void:
+	var checkpoints := Node3D.new()
+	checkpoints.name = "Checkpoints"
+	parent.add_child(checkpoints)
+	for i in checkpoint_count:
+		var gate := CHECKPOINT_SCENE.instantiate() as CheckpointGate
+		gate.name = "Finish" if i == 0 else "Checkpoint%02d" % i
+		gate.gate_index = i
+		gate.gate_width = road_width
+		var offset := curve.get_baked_length() * float(i) / checkpoint_count
+		gate.transform = Transform3D(Basis.looking_at(sample_forward(offset)), sample_center(offset))
+		checkpoints.add_child(gate)
+		gate.set_debug_visible(show_checkpoints)
+
+func _build_barriers(parent: Node3D) -> void:
+	if _barrier_mesh == null:
+		_barrier_mesh = BarrierMesh.create()
+	var palette: Array[Color] = [Color("ef4444"), Color("3b82f6"), Color("facc15"), Color("22c55e")]
+	var transforms: Array = [[], [], [], []]
+	var length := curve.get_baked_length()
+	var blocks := ceili(length / 1.2)
+	for i in blocks:
+		var a := length * float(i) / blocks
+		var b := length * float(i + 1) / blocks
+		for side in [-1.0, 1.0]:
+			var start := boundary_point(a, side, 0.95)
+			var end := boundary_point(b, side, 0.95)
+			var segment := end - start
+			var basis := Basis(Vector3.UP, atan2(segment.x, segment.z))
+			basis = basis * Basis.from_scale(Vector3(0.8, 1.0, segment.length() + 0.015))
+			transforms[i % 4].append(Transform3D(basis, (start + end) * 0.5 + Vector3.UP * 0.5))
+	for color_index in 4:
+		var paint := RiotGeometry.material(palette[color_index])
+		paint.vertex_color_use_as_albedo = true
+		var batch := MultiMesh.new()
+		batch.transform_format = MultiMesh.TRANSFORM_3D
+		batch.mesh = _barrier_mesh
+		batch.instance_count = transforms[color_index].size()
+		for i in batch.instance_count:
+			batch.set_instance_transform(i, transforms[color_index][i])
+		var visual := MultiMeshInstance3D.new()
+		visual.name = "BarrierVisuals%d" % color_index
+		visual.multimesh = batch
+		visual.material_override = paint
+		parent.add_child(visual)
+	# A single static body uses simple continuous box segments. Collision is
+	# separate from the many faceted visuals and never uses their triangles.
+	var body := StaticBody3D.new()
+	body.name = "BarrierCollision"
+	parent.add_child(body)
+	var sections := ceili(length / barrier_spacing)
+	for i in sections:
+		for side in [-1.0, 1.0]:
+			var a := boundary_point(length * float(i) / sections, side, 0.95)
+			var b := boundary_point(length * float(i + 1) / sections, side, 0.95)
+			var segment := b - a
+			var shape := CollisionShape3D.new()
+			var box_shape := BoxShape3D.new()
+			box_shape.size = Vector3(0.864, 1.08, segment.length() + 0.1)
+			shape.shape = box_shape
+			body.add_child(shape)
+			shape.position = (a + b) * 0.5 + Vector3.UP * 0.5
+			shape.rotation.y = atan2(segment.x, segment.z)
 
 func _build_start(parent: Node3D, white: Material) -> void:
 	var black := RiotGeometry.material(Color("202735"))
@@ -144,6 +212,11 @@ func _build_start(parent: Node3D, white: Material) -> void:
 				+ forward * (float(row) * 0.65) + Vector3.UP * 0.025,
 				white if (row + column) % 2 == 0 else black)
 			tile.rotation.y = atan2(-forward.x, -forward.z)
+	for row in 3:
+		for side in [-1.0, 1.0]:
+			var grid := RiotGeometry.box(parent, "GridMark", Vector3(1.8, 0.012, 0.12),
+				center + forward * (-4.0 - row * 4.0) + right * side * 2.5 + Vector3.UP * 0.025, white)
+			grid.rotation.y = atan2(-forward.x, -forward.z)
 	for side in [-1.0, 1.0]:
 		RiotGeometry.box(parent, "StartPost", Vector3(0.4, 5.0, 0.4),
 			center + right * side * (road_width * 0.5 + 1.5) + Vector3.UP * 2.5, white)

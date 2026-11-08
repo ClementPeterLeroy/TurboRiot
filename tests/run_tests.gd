@@ -21,6 +21,7 @@ func _run() -> void:
 	_test_dynamics()
 	await _test_track()
 	await _test_main()
+	await preload("res://tests/race_tests.gd").new().run(self)
 	print("Turbo Riot: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 
@@ -115,6 +116,10 @@ func _test_main() -> void:
 	var main := packed.instantiate()
 	root.add_child(main)
 	var kart := main.get_node("Kart") as KartController
+	# Existing physics checks run during RACING; READY now correctly locks driving.
+	var race := main.get_node("RaceManager") as RaceManager
+	race.start_race()
+	race.session.advance(3.0)
 	for i in 60:
 		await physics_frame
 	check(kart.is_on_floor(), "Kart grounded after spawn")
@@ -160,5 +165,16 @@ func _test_main() -> void:
 	var displacement := (kart.position - track.sample_center(offset)).dot(right)
 	check(displacement < track.road_width * 0.5 + 0.8, "Visible barrier blocks kart")
 	check(absf(kart.signed_speed) < 3.0, "Wall impact reduces speed")
+	var recovery := kart.get_node("Recovery") as KartRecovery
+	recovery.stuck_seconds = 0.15
+	recovery.cooldown_remaining = 0
+	var recoveries: Array[int] = [0]
+	kart.reset_performed.connect(func() -> void: recoveries[0] += 1)
+	Input.action_press("accelerate")
+	for i in 45:
+		await physics_frame
+	Input.action_release("accelerate")
+	check(recoveries[0] == 1, "Sustained grounded wall jam recovers once")
+	check(recovery.cooldown_remaining > 0, "Stuck recovery starts cooldown")
 	main.queue_free()
 	await process_frame

@@ -8,6 +8,7 @@ signal reset_performed
 var safe_spawn: Transform3D
 var current_command := DrivingCommand.new()
 var signed_speed: float = 0.0
+var driving_enabled: bool = true
 
 func _ready() -> void:
 	assert(config != null, "Assign a KartConfig")
@@ -18,11 +19,15 @@ func reset_to_spawn() -> void:
 	global_transform = safe_spawn
 	velocity = Vector3.ZERO
 	signed_speed = 0.0
+	current_command = DrivingCommand.new()
 	reset_performed.emit()
 
 func _physics_process(delta: float) -> void:
-	if global_position.y < -12.0:
-		reset_to_spawn()
+	if not driving_enabled:
+		current_command = DrivingCommand.new()
+		velocity = Vector3(0, -0.5 if is_on_floor() else velocity.y - config.gravity * delta, 0)
+		move_and_slide()
+		signed_speed = 0.0
 		return
 	current_command = input_provider.get_command() if input_provider else DrivingCommand.new()
 	var forward := -global_basis.z
