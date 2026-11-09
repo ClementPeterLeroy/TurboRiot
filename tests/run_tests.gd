@@ -22,6 +22,8 @@ func _run() -> void:
 	await _test_track()
 	await _test_main()
 	await preload("res://tests/race_tests.gd").new().run(self)
+	await preload("res://tests/runoff_tests.gd").new().run(self)
+	await preload("res://tests/handling_tests.gd").new().run(self)
 	print("Turbo Riot: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 
@@ -164,7 +166,7 @@ func _test_main() -> void:
 	kart.reset_to_spawn()
 	# Start near a real barrier and drive into it, checking static-body response.
 	var track := main.get_node("Track") as TrackBuilder
-	var offset := 15.0
+	var offset := 8.0 # Preserve the narrow-wall regression in the start corridor.
 	var right := track.sample_forward(offset).cross(Vector3.UP)
 	kart.position = track.sample_center(offset) + right * 3.5 + Vector3.UP * 0.65
 	kart.basis = Basis.looking_at(right)

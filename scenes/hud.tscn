@@ -48,6 +48,14 @@ text = "W / Up: gas   S / Down: brake & reverse   A D: steer\nR / Pad Y: recover
 [node name="RaceTimes" type="Label" parent="Margin/Stack"]
 theme_override_font_sizes/font_size = 18
 text = "LAP 1 / 3"
+[node name="Handling" type="Label" parent="Margin/Stack"]
+theme_override_font_sizes/font_size = 17
+text = "Shift / LB: drift + steer to charge"
+[node name="Charge" type="ProgressBar" parent="Margin/Stack"]
+visible = false
+custom_minimum_size = Vector2(0, 12)
+max_value = 1.0
+show_percentage = false
 [node name="Footer" type="Label" parent="."]
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
@@ -60,7 +68,7 @@ offset_left = 28.0
 offset_top = -42.0
 offset_right = -28.0
 offset_bottom = -15.0
-text = "v0.2.0-dev   /   Race Foundations   /   Development build"
+text = "v0.3.0-dev   /   Arcade Handling   /   Development build"
 
 [node name="DebugPanel" type="PanelContainer" parent="."]
 visible = false

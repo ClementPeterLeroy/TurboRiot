@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SurfaceConfig" load_steps=2 format=3]
+[ext_resource type="Script" path="res://resources/surface_config.gd" id="1"]
+[resource]
+script = ExtResource("1")
+identifier = &"grass"
+acceleration_multiplier = 0.75
+max_speed_multiplier = 0.75
+lateral_grip_multiplier = 0.7
+resistance_multiplier = 1.35
+debug_color = Color(0.18, 0.8, 0.25, 1)
+particle_identifier = &"dust"

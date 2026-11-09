@@ -2,6 +2,7 @@ extends SceneTree
 ## Rendered UI/scenery inspection. Results are a synthetic checkpoint run,
 ## not a human driving record. Requires an actual display/graphics driver.
 var main: Node3D
+var output_prefix: String = "runoff" if "--runoff" in OS.get_cmdline_user_args() else "race"
 
 func _initialize() -> void:
 	_start.call_deferred()
@@ -9,7 +10,7 @@ func _initialize() -> void:
 func _save(label: String) -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
-	root.get_texture().get_image().save_png("res://artifacts/race_%s.png" % label)
+	root.get_texture().get_image().save_png("res://artifacts/%s_%s.png" % [output_prefix, label])
 
 func _start() -> void:
 	main = load("res://scenes/main.tscn").instantiate()
@@ -49,11 +50,11 @@ func _start() -> void:
 	var track := main.get_node("Track") as TrackBuilder
 	var forward := track.sample_forward(20)
 	var right := forward.cross(Vector3.UP)
-	var wall := track.boundary_point(20, 1.0, 0.95) + Vector3.UP * 0.5
+	var wall := track.barrier_point(20, 1.0) + Vector3.UP * 0.5
 	camera.projection = Camera3D.PROJECTION_PERSPECTIVE
 	camera.fov = 55
 	camera.position = wall - right * 5 + forward * 2.5 + Vector3.UP * 1.8
 	camera.look_at(wall, Vector3.UP)
 	await _save("barriers")
-	print("Saved race previews to artifacts/race_*.png")
+	print("Saved previews to artifacts/%s_*.png" % output_prefix)
 	quit()

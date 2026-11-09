@@ -1,4 +1,62 @@
-# v0.2.0-dev validation — Race Foundations
+# Full v0.3.0-dev validation — Arcade Handling (2026-11-09)
+
+This full handling patch is **Unreleased and pending developer acceptance**. Prior v0.2.0 acceptance is preserved, but no current-version manual gameplay/feel/controller retest is claimed. The canonical checklist contains the supplied exact regression checks 1–10 and new manual checks 11–26 at [testing/ACCEPTANCE_CHECKLIST.md](testing/ACCEPTANCE_CHECKLIST.md).
+
+## Audit and automated results
+
+The [pre-implementation audit](v0.3.0-audit.md) records the existing architecture, all three directly inspected references, and the baseline **203 checks, 0 failures**. The already-implemented runoff geometry preceded surface physics.
+
+Final `tests/run_tests.gd`: **266 checks, 0 failures**, exit 0, with Godot **4.7.2.stable.official.ed1daf0bf**, Windows. Existing controller/race/runoff assertions remain; runoff traversal duration increases to account for the new intended surface penalties. Added checks include:
+
+- Surface resource values, calculated acceleration/sustainable caps, gradual overspeed removal, debounce, smoothing and asphalt restoration.
+- Drift activation/rejection, lateral activity requirements, countersteering, all three charge thresholds, valid release and low-speed/air/wall/invalid-release cancellation.
+- Boost activation/countdown, strongest-wins rejection/refresh, explicit replacement, expiry and unchanged base config.
+- Side-specific/wrapped barrier sections, actual collider absence in the authored opening, opposite-side collision and outer perimeter containment.
+- Real scene ray/region detection of asphalt, sand, grass and boost pads; actual kart drift/countersteer; pad entry and occupancy/reset retrigger prevention.
+- Physical air behavior retaining horizontal speed despite throttle/steering, ramp contact along the incline, tangent-based launch, safe landing and finite camera positions.
+- Recovery/restart clearing drift/charge/boost, race progression preservation, upright/world-bound recovery and repeatable pad/ramp generation without duplicates.
+
+Final editor import/script registration and configured main scene startup (`--headless --path . --quit-after 240`) both completed with **exit 0**, without script/scene/physics errors. New scenes/resources are loaded through the main scene, feature preloads and kart/surface configuration. The known sandbox certificate-store message remains the only engine error emitted on those final successful runs. The child process uses project-local `.godot/sandbox_appdata` for APPDATA, without changing system settings.
+
+## Rendered inspection
+
+`tests/capture_handling_preview.gd` completed with exit 0 on the **NVIDIA GeForce RTX 3070 Ti Laptop GPU / OpenGL 3.3 Compatibility renderer**. Actual rendered 1280×720 captures in `artifacts/handling_*.png` were inspected for drift, mini-turbo, boost pad, airborne state, landing, ramp, circuit layout and perimeter. This is scripted scene inspection, not a human playtest or race record. The race clock is held for reproducible captures.
+
+The scripted driving capture accumulated **1.0167 valid drift seconds**, released, and reported the real `mini_turbo` source. Pad feedback displayed the `boost_pad` source. Ramp capture showed airborne motion followed by grounded sand contact; the incline/launch assertions run separately in the physics suite. The original road/kerb outline remains recognizable, with two pads, the optional sand ramp, the intentional outside opening and independent perimeter. No supplied reference pixels are game assets.
+
+## Remaining acceptance and limits
+
+- Checks 1–26 and the retained runoff manual regressions are **pending** for this build. Human driving feel, real keyboard/controller hardware, complete human-driven races, target hardware variety and packaged Windows export are not verified by these automated scenarios.
+- Surface regions target the current flat terrain; custom layered/banked worlds and tight/overlapping barrier edits need author review. Keep ramp inclines within the body floor-angle limit and adapt world/perimeter/recovery bounds together.
+- Camera obstruction uses a ray, not a swept volume. Tight corners can still need camera tuning; small faceted blocks/ramp edges show some shadow-map aliasing.
+- Timing still uses active physics ticks. No persistent records, AI, items/weapons, multiplayer, advanced menus, online services or realistic suspension were added.
+- No staging, commits, pushes, tags, releases, remote changes or GitHub actions were performed by Codex.
+
+---
+
+# Historical v0.3.0-dev prerequisite validation — Barrier/runoff correction
+
+The developer confirmed on 2026-11-08 that all ten v0.2.0 manual acceptance checks passed. That is the accepted regression baseline. The current correction remains **Unreleased, pending developer acceptance**; previous acceptance does not certify its new geometry. See [the cumulative manual checklist](acceptance.md).
+
+Before modification, the existing **179 automated checks passed**. After the correction, `tests/run_tests.gd` reports **203 checks, 0 failures**, exit 0, in Godot 4.7.2 on Windows. All earlier race/controller checks remain. The narrow-wall regression now targets the retained narrow start section, rather than assuming the entire lap has kerb-side walls.
+
+Final editor import and configured main-scene startup (`--headless --quit-after 240`) both completed with **exit 0**, without script/scene/physics errors. The pre-existing certificate-store warning remained.
+
+`tests/runoff_tests.gd` adds independent left/right and section-specific clearance checks, closed/finite outer geometry, configured paths clear of asphalt, consistent block lengths, box-collider positions matching CPU visual transforms, resource-edit rebuilding without duplicate nodes, scenery clearance and runoff gate rejection. Actual CharacterBody3D driving crosses both kerbs into sand/grass, stops at the outer barriers and returns to asphalt without recovery. The original 12 cm asphalt edge initially prevented re-entry; collidable sloped shoulders fix that tested failure. Handling/grip/speed calculations are unchanged.
+
+Godot's headless dummy renderer does not retain MultiMesh GPU transforms, so headless alignment checks compare the CPU transforms actually supplied to each batch with the collider positions. Actual rendered geometry was inspected separately with the Compatibility renderer on the NVIDIA RTX 3070 Ti Laptop GPU.
+
+Rendered correction captures are `artifacts/runoff_*.png` (use `tests/capture_race_preview.gd -- --runoff`). The overhead and normal driving view were inspected: road shape/kerbs are retained, boundaries flare only in selected sections, narrow containment remains elsewhere, and visible sand/grass aprons are accessible. Results captures remain synthetic race crossings, not new manual acceptance. All new V03-R criteria remain pending developer review.
+
+No surface-specific physics, drift/boost or handling tuning was introduced. Arbitrary profile edits still require author inspection for nearby-road intersections and tight/overlapping contours. Profiles are editable at runtime/editor and intentionally do not auto-repair invalid layouts. Checkpoints remain road-wide.
+
+The same pre-existing sandbox certificate-store warning was emitted; it did not prevent tests or rendering. Child-process APPDATA was redirected within `.godot/sandbox_appdata` as before. No Git mutations or GitHub actions were performed by Codex.
+
+---
+
+# Historical v0.2.0-dev validation — Race Foundations
+
+The following records the original implementation validation. The developer later confirmed all ten manual checks passed, as recorded above; its original pending-review wording is historical.
 
 Validated on 2026-11-08 with Godot **4.7.2.stable.official.ed1daf0bf**, Windows, Compatibility renderer. This is an **Unreleased development patch pending developer approval**, not an accepted v0.2.0 release.
 

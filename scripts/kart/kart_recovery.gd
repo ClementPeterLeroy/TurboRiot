@@ -2,6 +2,8 @@ class_name KartRecovery
 extends Node
 ## Recovery stays separate from driving. RaceManager maintains safe_spawn.
 @export var fall_height: float = -8.0
+## World-space safety bounds independent of road kerbs / barrier openings.
+@export var recovery_half_extents := Vector2(178, 158)
 @export_range(0.1, 5.0) var cooldown_seconds: float = 1.0
 @export_range(0.0, 15.0) var stuck_seconds: float = 5.0
 var cooldown_remaining: float = 0.0
@@ -21,7 +23,8 @@ func _physics_process(delta: float) -> void:
 	cooldown_remaining = maxf(0.0, cooldown_remaining - delta)
 	if cooldown_remaining > 0.0:
 		return
-	if kart.global_position.y < fall_height:
+	var outside := absf(kart.global_position.x) > recovery_half_extents.x or absf(kart.global_position.z) > recovery_half_extents.y
+	if outside or kart.global_position.y < fall_height or kart.global_basis.y.dot(Vector3.UP) < cos(deg_to_rad(kart.config.recovery_upright_angle)):
 		recover()
 		return
 	# Conservative stuck definition: grounded, sustained throttle against a

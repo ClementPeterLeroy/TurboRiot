@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/track.tscn" id="2"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="5"]
 [ext_resource type="Script" path="res://scripts/world/environment_builder.gd" id="6"]
 [ext_resource type="Script" path="res://scripts/race/race_manager.gd" id="7"]
+[ext_resource type="Script" path="res://scripts/track/track_features.gd" id="8"]
 [sub_resource type="ProceduralSkyMaterial" id="SkyMaterial"]
 sky_top_color = Color(0.22, 0.58, 0.91, 1)
 sky_horizon_color = Color(0.73, 0.9, 0.99, 1)
@@ -35,6 +36,9 @@ directional_shadow_max_distance = 170.0
 [node name="Track" parent="." instance=ExtResource("2")]
 [node name="Environment" type="Node3D" parent="." node_paths=PackedStringArray("track")]
 script = ExtResource("6")
+track = NodePath("../Track")
+[node name="TrackFeatures" type="Node3D" parent="." node_paths=PackedStringArray("track")]
+script = ExtResource("8")
 track = NodePath("../Track")
 [node name="Kart" parent="." instance=ExtResource("3")]
 position = Vector3(75.6, 0.69, 9)

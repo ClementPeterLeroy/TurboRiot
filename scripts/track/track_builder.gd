@@ -19,6 +19,42 @@ const CHECKPOINT_SCENE := preload("res://scenes/checkpoint.tscn")
 	set(value):
 		barrier_spacing = maxf(value, 1.0)
 		_schedule_rebuild()
+@export_group("Outer barriers (clearance beyond road edge)")
+@export var barrier_sections: Array[BarrierSection] = []:
+	set(value):
+		for section in barrier_sections:
+			if section and section.changed.is_connected(_schedule_rebuild):
+				section.changed.disconnect(_schedule_rebuild)
+		barrier_sections = value
+		for section in value:
+			if section and not section.changed.is_connected(_schedule_rebuild):
+				section.changed.connect(_schedule_rebuild)
+		_schedule_rebuild()
+@export var outer_perimeter_enabled: bool = true:
+	set(value):
+		outer_perimeter_enabled = value
+		_schedule_rebuild()
+@export var playable_half_extents := Vector2(170, 150):
+	set(value):
+		playable_half_extents = value.max(Vector2(100, 100))
+		_schedule_rebuild()
+@export var left_barrier_clearance: Curve:
+	set(value):
+		if left_barrier_clearance and left_barrier_clearance.changed.is_connected(_schedule_rebuild):
+			left_barrier_clearance.changed.disconnect(_schedule_rebuild)
+		left_barrier_clearance = value
+		if value and not value.changed.is_connected(_schedule_rebuild):
+			value.changed.connect(_schedule_rebuild)
+		_schedule_rebuild()
+@export var right_barrier_clearance: Curve:
+	set(value):
+		if right_barrier_clearance and right_barrier_clearance.changed.is_connected(_schedule_rebuild):
+			right_barrier_clearance.changed.disconnect(_schedule_rebuild)
+		right_barrier_clearance = value
+		if value and not value.changed.is_connected(_schedule_rebuild):
+			value.changed.connect(_schedule_rebuild)
+		_schedule_rebuild()
+@export_group("")
 @export var rebuild: bool = false:
 	set(_value):
 		_schedule_rebuild()
@@ -36,6 +72,8 @@ var _barrier_mesh: ArrayMesh
 var _queued := false
 var road_vertices := PackedVector3Array()
 var road_indices := PackedInt32Array()
+var barrier_paths: Array[Curve3D] = [] # Left then right; separate from asphalt.
+var barrier_block_transforms: Array[Transform3D] = [] # CPU source for batches/tests.
 
 func _ready() -> void:
 	curve_changed.connect(_schedule_rebuild)
@@ -99,6 +137,8 @@ func build() -> void:
 	road.material_override = asphalt
 	generated.add_child(road)
 	road.create_trimesh_collision()
+	SurfaceDetector.tag_collision(road, preload("res://resources/surfaces/asphalt.tres"))
+	_build_shoulders(generated)
 	_build_barriers(generated)
 	var kerb_steps := ceili(length / 1.8)
 	for i in kerb_steps:
@@ -128,6 +168,66 @@ func sample_forward(offset: float) -> Vector3:
 func boundary_point(offset: float, side: float, extra: float) -> Vector3:
 	return sample_center(offset) + sample_forward(offset).cross(Vector3.UP) * side * (road_width * 0.5 + extra)
 
+func barrier_clearance(offset: float, side: float) -> float:
+	var profile := left_barrier_clearance if side < 0.0 else right_barrier_clearance
+	var fraction := fposmod(offset, curve.get_baked_length()) / curve.get_baked_length()
+	var clearance := profile.sample(fraction) if profile and profile.point_count > 0 else 0.95
+	for section in barrier_sections:
+		if section and section.applies(fraction, side) and section.clearance_override >= 0:
+			clearance = section.clearance_override
+	return clampf(clearance, 0.95, 25.0) if is_finite(clearance) else 0.95
+
+func barrier_enabled(offset: float, side: float) -> bool:
+	var fraction := fposmod(offset, curve.get_baked_length()) / curve.get_baked_length()
+	var enabled := true
+	for section in barrier_sections:
+		if section and section.applies(fraction, side):
+			enabled = section.barriers_enabled
+	return enabled
+
+func barrier_point(offset: float, side: float) -> Vector3:
+	return boundary_point(offset, side, barrier_clearance(offset, side))
+
+func _build_shoulders(parent: Node3D) -> void:
+	# The original sand floor is 12 cm below asphalt. A ramp prevents the
+	# CharacterBody from catching the raised asphalt edge when rejoining.
+	var vertices := PackedVector3Array()
+	var normals := PackedVector3Array()
+	var indices := PackedInt32Array()
+	var length := curve.get_baked_length()
+	var steps := ceili(length / sample_spacing)
+	for side in [-1.0, 1.0]:
+		var base := vertices.size()
+		for i in range(steps + 1):
+			var offset := length * float(i) / steps
+			var inner := boundary_point(offset, side, 0)
+			var outer := boundary_point(offset, side, 1.2)
+			outer.y = -0.08
+			vertices.append(inner)
+			vertices.append(outer)
+			normals.append(Vector3.UP)
+			normals.append(Vector3.UP)
+			if i < steps:
+				var a := base + i * 2
+				if side > 0:
+					indices.append_array(PackedInt32Array([a, a + 2, a + 1, a + 1, a + 2, a + 3]))
+				else:
+					indices.append_array(PackedInt32Array([a, a + 1, a + 2, a + 1, a + 3, a + 2]))
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_NORMAL] = normals
+	arrays[Mesh.ARRAY_INDEX] = indices
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	var shoulder := MeshInstance3D.new()
+	shoulder.name = "RunoffShoulders"
+	shoulder.mesh = mesh
+	shoulder.material_override = RiotGeometry.material(Color("d7ad68"))
+	parent.add_child(shoulder)
+	shoulder.create_trimesh_collision()
+	SurfaceDetector.tag_collision(shoulder, preload("res://resources/surfaces/sand.tres"))
+
 func spawn_transform() -> Transform3D:
 	var forward := sample_forward(0.0)
 	# Start behind the finish plane; crossing it initially never awards a lap.
@@ -154,17 +254,44 @@ func _build_barriers(parent: Node3D) -> void:
 	var palette: Array[Color] = [Color("ef4444"), Color("3b82f6"), Color("facc15"), Color("22c55e")]
 	var transforms: Array = [[], [], [], []]
 	var length := curve.get_baked_length()
-	var blocks := ceili(length / 1.2)
-	for i in blocks:
-		var a := length * float(i) / blocks
-		var b := length * float(i + 1) / blocks
-		for side in [-1.0, 1.0]:
-			var start := boundary_point(a, side, 0.95)
-			var end := boundary_point(b, side, 0.95)
+	barrier_paths.clear()
+	barrier_block_transforms.clear()
+	var body := StaticBody3D.new()
+	body.name = "BarrierCollision"
+	parent.add_child(body)
+	for side in [-1.0, 1.0]:
+		# Build an independent outer polyline, then space blocks by its own arc
+		# length. Wide transitions do not stretch a few blocks across the runoff.
+		var path := Curve3D.new()
+		path.bake_interval = 0.15
+		var samples := ceili(length / 0.6)
+		for i in range(samples + 1):
+			path.add_point(barrier_point(length * float(i) / samples, side))
+		barrier_paths.append(path)
+		var path_length := path.get_baked_length()
+		var blocks := ceili(path_length / minf(1.2, barrier_spacing))
+		for i in blocks:
+			var start := path.sample_baked(path_length * float(i) / blocks)
+			var end := path.sample_baked(path_length * float(i + 1) / blocks)
+			if not barrier_enabled(curve.get_closest_offset((start + end) * 0.5), side):
+				continue
 			var segment := end - start
 			var basis := Basis(Vector3.UP, atan2(segment.x, segment.z))
 			basis = basis * Basis.from_scale(Vector3(0.8, 1.0, segment.length() + 0.015))
-			transforms[i % 4].append(Transform3D(basis, (start + end) * 0.5 + Vector3.UP * 0.5))
+			var block := Transform3D(basis, (start + end) * 0.5 + Vector3.UP * 0.5)
+			transforms[i % 4].append(block)
+			barrier_block_transforms.append(block)
+			# Colliders use the exact same endpoints as visuals, including profile
+			# transitions. No old kerb-side collider remains behind.
+			var shape := CollisionShape3D.new()
+			var box_shape := BoxShape3D.new()
+			box_shape.size = Vector3(0.864, 1.08, segment.length() + 0.015)
+			shape.shape = box_shape
+			body.add_child(shape)
+			shape.position = (start + end) * 0.5 + Vector3.UP * 0.5
+			shape.rotation.y = atan2(segment.x, segment.z)
+	if outer_perimeter_enabled:
+		_append_perimeter(transforms, body)
 	for color_index in 4:
 		var paint := RiotGeometry.material(palette[color_index])
 		paint.vertex_color_use_as_albedo = true
@@ -179,24 +306,31 @@ func _build_barriers(parent: Node3D) -> void:
 		visual.multimesh = batch
 		visual.material_override = paint
 		parent.add_child(visual)
-	# A single static body uses simple continuous box segments. Collision is
-	# separate from the many faceted visuals and never uses their triangles.
-	var body := StaticBody3D.new()
-	body.name = "BarrierCollision"
-	parent.add_child(body)
-	var sections := ceili(length / barrier_spacing)
-	for i in sections:
-		for side in [-1.0, 1.0]:
-			var a := boundary_point(length * float(i) / sections, side, 0.95)
-			var b := boundary_point(length * float(i + 1) / sections, side, 0.95)
+
+func _append_perimeter(transforms: Array, body: StaticBody3D) -> void:
+	var x := playable_half_extents.x
+	var z := playable_half_extents.y
+	var corners := [Vector3(-x, -0.08, -z), Vector3(x, -0.08, -z),
+		Vector3(x, -0.08, z), Vector3(-x, -0.08, z)]
+	for edge in 4:
+		var start: Vector3 = corners[edge]
+		var end: Vector3 = corners[(edge + 1) % 4]
+		var count := ceili(start.distance_to(end) / 1.2)
+		for i in count:
+			var a := start.lerp(end, float(i) / count)
+			var b := start.lerp(end, float(i + 1) / count)
 			var segment := b - a
+			var basis := Basis(Vector3.UP, atan2(segment.x, segment.z))
+			var size := Vector3(0.8, 1.0, segment.length() + 0.015)
+			var block := Transform3D(basis * Basis.from_scale(size), (a + b) * 0.5 + Vector3.UP * 0.5)
+			transforms[i % 4].append(block)
+			barrier_block_transforms.append(block)
 			var shape := CollisionShape3D.new()
-			var box_shape := BoxShape3D.new()
-			box_shape.size = Vector3(0.864, 1.08, segment.length() + 0.1)
-			shape.shape = box_shape
+			var box := BoxShape3D.new()
+			box.size = Vector3(0.864, 1.08, size.z)
+			shape.shape = box
 			body.add_child(shape)
-			shape.position = (a + b) * 0.5 + Vector3.UP * 0.5
-			shape.rotation.y = atan2(segment.x, segment.z)
+			shape.transform = Transform3D(basis, block.origin)
 
 func _build_start(parent: Node3D, white: Material) -> void:
 	var black := RiotGeometry.material(Color("202735"))

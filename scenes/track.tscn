@@ -1,5 +1,14 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=7 format=3]
 [ext_resource type="Script" path="res://scripts/track/track_builder.gd" id="1"]
+[ext_resource type="Curve" path="res://resources/circuit_01_left_barriers.tres" id="2"]
+[ext_resource type="Curve" path="res://resources/circuit_01_right_barriers.tres" id="3"]
+[ext_resource type="Script" path="res://resources/barrier_section.gd" id="4"]
+[sub_resource type="Resource" id="OpenOuterStraight"]
+script = ExtResource("4")
+start_fraction = 0.82
+end_fraction = 0.88
+sides = 1
+barriers_enabled = false
 [sub_resource type="Curve3D" id="Centerline"]
 bake_interval = 0.3
 _data = {
@@ -13,3 +22,6 @@ curve = SubResource("Centerline")
 road_width = 10.0
 sample_spacing = 1.5
 barrier_spacing = 4.0
+left_barrier_clearance = ExtResource("2")
+right_barrier_clearance = ExtResource("3")
+barrier_sections = Array[ExtResource("4")]([SubResource("OpenOuterStraight")])

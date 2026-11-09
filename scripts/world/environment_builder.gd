@@ -41,7 +41,8 @@ func build() -> void:
 	var grass := RiotGeometry.material(Color("2ecc40"))
 	var leaves := RiotGeometry.material(Color("299c53"))
 	var bark := RiotGeometry.material(Color("976244"))
-	RiotGeometry.box(generated, "SandGround", Vector3(360, 0.6, 320), Vector3(0, -0.38, 0), sand, true)
+	var ground := RiotGeometry.box(generated, "SandGround", Vector3(360, 0.6, 320), Vector3(0, -0.38, 0), sand, true)
+	SurfaceDetector.tag_collision(ground, preload("res://resources/surfaces/sand.tres"))
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value
 	_build_infield(generated, grass)
@@ -55,7 +56,7 @@ func build() -> void:
 		if planted >= tree_count:
 			break
 		var point := Vector3(rng.randf_range(-110, 110), -0.06, rng.randf_range(-100, 100))
-		if _road_distance(point) < track.road_width * 0.5 + 6.0:
+		if _inside_driving_envelope(point):
 			continue
 		var height := rng.randf_range(3.4, 5.5)
 		RiotGeometry.cylinder(generated, "Trunk", point + Vector3.UP * 0.7, 0.25, 0.18, 1.4, bark)
@@ -99,8 +100,26 @@ func _build_infield(parent: Node3D, grass: Material) -> void:
 	# This thin decorative polygon lies above sand, below asphalt, with no collider.
 	grass.cull_mode = BaseMaterial3D.CULL_DISABLED
 	parent.add_child(field)
+	var region := Area3D.new()
+	region.name = "GrassSurface"
+	region.collision_layer = 8
+	region.collision_mask = 0
+	region.monitoring = false
+	region.position.y = 0.2
+	parent.add_child(region)
+	var polygon := CollisionPolygon3D.new()
+	polygon.polygon = infield_outline
+	polygon.depth = 1.0
+	polygon.rotation.x = PI * 0.5
+	region.add_child(polygon)
+	region.set_meta("surface", preload("res://resources/surfaces/grass.tres"))
 
-func _road_distance(point: Vector3) -> float:
+func _inside_driving_envelope(point: Vector3) -> bool:
 	if not track or not track.curve:
-		return INF
-	return point.distance_to(track.curve.get_closest_point(point))
+		return false
+	var offset := track.curve.get_closest_offset(point)
+	var center := track.sample_center(offset)
+	var right := track.sample_forward(offset).cross(Vector3.UP)
+	var side := -1.0 if (point - center).dot(right) < 0.0 else 1.0
+	var clearance := track.road_width * 0.5 + track.barrier_clearance(offset, side) + 3.0
+	return point.distance_to(center) < clearance

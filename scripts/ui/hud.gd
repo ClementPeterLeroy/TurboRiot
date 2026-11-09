@@ -37,6 +37,15 @@ func _process(_delta: float) -> void:
 			Engine.get_frames_per_second(), kart.is_on_floor(), kart.position.x, kart.position.y,
 			kart.position.z, kart.current_command.throttle, kart.current_command.brake, kart.current_command.steering,
 			race.session.latest_checkpoint, race.session.next_checkpoint % race.session.checkpoint_count]
+		debug_label.text += "\nSurface %s | %s | %.1f km/h\nDrift %s | Level %d | Charge %.2fs\nBoost %s | %.2fs" % [
+			kart.surface_detector.current.identifier, "GROUNDED" if kart.is_on_floor() else "AIRBORNE",
+			Vector2(kart.velocity.x, kart.velocity.z).length() * 3.6, kart.drift.active,
+			kart.drift.level(kart.config), kart.drift.charge, kart.boost.source if kart.boost.active() else &"none", kart.boost.remaining]
+	$Margin/Stack/Charge.value = kart.drift.charge / maxf(0.01, kart.config.drift_charge_thresholds.z)
+	$Margin/Stack/Charge.visible = kart.drift.active
+	$Margin/Stack/Handling.text = "BOOST  %.1fs" % kart.boost.remaining if kart.boost.active() else \
+		("DRIFT  Level %d" % kart.drift.level(kart.config) if kart.drift.active else "Shift / LB: drift + steer to charge")
+	$Margin/Stack/Handling.modulate = Color(1, 0.85, 0.25) if kart.boost.active() else Color(0.6, 0.85, 1)
 	_refresh()
 
 func _refresh() -> void:

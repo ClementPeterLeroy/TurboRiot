@@ -15,3 +15,29 @@ extends Resource
 @export_group("Ground")
 @export_range(1.0, 60.0) var gravity: float = 24.0
 @export_range(0.0, 1.0) var wall_retention: float = 0.45
+@export_group("Surfaces")
+@export_range(0.1, 30.0) var surface_smoothing: float = 8.0
+@export_range(0.0, 0.3) var surface_debounce: float = 0.06
+@export_range(0.5, 3.0) var surface_probe_distance: float = 1.4
+@export_range(0.1, 40.0) var overspeed_deceleration: float = 10.0
+@export_group("Drift")
+@export_range(1.0, 30.0) var drift_min_speed: float = 8.5
+@export_range(0.1, 1.0) var drift_min_steering: float = 0.3
+@export_range(0.1, 5.0) var drift_min_lateral_speed: float = 0.65
+@export_range(0.05, 1.0) var drift_grip_multiplier: float = 0.28
+@export_range(0.5, 2.0) var drift_steering_multiplier: float = 1.18
+@export_range(1.0, 30.0) var drift_interrupt_speed: float = 6.0
+@export var drift_charge_thresholds := Vector3(1.0, 2.0, 3.5)
+@export var mini_turbo_strengths := Vector3(1.18, 1.3, 1.45)
+@export var mini_turbo_durations := Vector3(0.65, 1.0, 1.5)
+@export_group("Boost")
+enum BoostPolicy { STRONGEST_WINS, REPLACE }
+@export var boost_policy: BoostPolicy = BoostPolicy.STRONGEST_WINS
+@export_range(1.0, 4.0) var boost_acceleration_multiplier: float = 1.8
+@export_group("Air and landing")
+@export_range(0.0, 1.0) var air_steering_authority: float = 0.2
+@export_range(0.0, 1.0) var landing_speed_retention: float = 0.98
+@export_range(0.0, 20.0) var landing_soft_speed: float = 5.0
+@export_range(0.0, 1.0) var ground_snap_distance: float = 0.4
+@export_range(0.1, 3.0) var ground_contact_speed: float = 0.5
+@export_range(10.0, 85.0) var recovery_upright_angle: float = 55.0
