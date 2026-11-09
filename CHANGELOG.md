@@ -22,7 +22,7 @@ Corrects v0.3.0-dev — Arcade Handling. Implementation and automated validation
 - The new runoff correction still needs developer manual acceptance. Automated/visual validation does not carry forward manual acceptance to new geometry.
 - Profile edits must avoid intersecting neighboring roads or creating tight/overlapping outer contours; arbitrary edits are not automatically repaired.
 - Legal runoff is included in route-owned checkpoint corridors; large or irregular custom layouts require reauthoring fractions/windows and validating coverage. Recovery remains at the latest valid road checkpoint.
-- Human driving feel, real controller hardware, manual checks 1–36 and packaged Windows export remain unverified for this new build. Automated/visual checks are reported separately.
+- Human driving feel, real controller hardware, manual checks 1–49 and packaged Windows export remain unverified for this new build. Automated/visual checks are reported separately.
 - Surface regions assume the current flat sand/grass terrain; banked or layered original circuits need authoring review. Grass is a tagged polygonal region over the continuous sand support collider, avoiding a new collision step.
 - The ramp is an optional test feature in runoff, not a route shortcut. Keep authored ramp inclines below the body's floor-angle limit.
 - Camera obstruction uses a ray rather than a swept camera volume; very tight geometry/corner clipping still needs manual review. Small barrier shadows may show aliasing.
@@ -30,6 +30,23 @@ Corrects v0.3.0-dev — Arcade Handling. Implementation and automated validation
 ### v0.3.0-dev — Arcade Handling
 
 Full handling development patch, pending developer acceptance. Metadata remains `0.3.0-dev`; this is not an accepted/released v0.3.0 build. The geometry correction was implemented and its 203 checks passed before adding surface/drift/boost/jump physics.
+
+
+#### Persistent visual oscillation — second investigation, same version
+
+- Recorded the developer's manual report that high-speed visual porpoising remains despite `Ground true`; retained the validated shoulder-contact fix. Compared v0.2.0 through v0.3.1 history read-only. Cosmetic pitch/roll and wheel animation were new in v0.3.0, while raw-target render-loop chase smoothing predates it; the straight A/B trace did not implicate cosmetic pitch or camera obstruction.
+- Reproduced camera-to-kart screen-space oscillation at mismatched render/physics rates. Enabled physics render interpolation, made the camera position/focus/look point use one shared interpolated target pose, and excluded the camera/render-updated Visual local transforms from double interpolation. Replaced endpoint-only position lerp with exact exponential follow of a moving target at the same smoothing rate; orientation smoothing and driving physics remain unchanged.
+- Added retained A/B diagnostics: F4 cycles Normal / Static visuals / Fixed camera orientation / Minimal rendering, F6 toggles optional transform/screen-position CSV, and F7 tests 60/120/uncapped rendering. F3 shows the active mode and measured rates. Diagnostic modes never change kart motion/configuration.
+- Added 28 presentation assertions, a native multi-rate renderer probe, committed-camera comparison fixture and rendered-pixel inspection. Final straight probe reduces Normal-mode screen-Y range from 3.332 to 0.211 px at 120 FPS and 6.465 to 0.218 px uncapped; saved marker centroid variation drops from 3 px to zero in the sampled frames. Appended pending manual checks 46–49. Full results and limits are in `docs/presentation-investigation.md` and `docs/validation.md`.
+- Original symptom acceptance remains pending on developer hardware; stable body Y alone is insufficient. No version advance, roadmap change or Git actions.
+
+#### Vertical-contact corrective pass — same development version
+
+- Diagnosed physics-body false takeoffs at asphalt/shoulder joins using body Y, vertical velocity, floor state/normal/distance, visual-child height and camera Y traces. Straight flat asphalt was stable; the circuit trace reproduced 56 airborne frames in 6,000 ticks before correction. Upward tangent velocity disabled automatic floor snapping, and cached ground motion then amplified those false takeoffs.
+- Ordinary grounded movement now requests horizontal velocity with the existing downward contact speed, allowing CharacterBody3D to resolve slopes and snap to connected ground. Upward tangent/takeoff momentum is limited to actual floor contact with an authored launch ramp; ramp colliders carry an explicit launch marker separate from asphalt surface identity. No gravity, collider sizes/margins, road geometry, visual bobbing or camera smoothing constants were changed.
+- Added quantitative flat-floor idle/acceleration/braking/steering/drift and real asphalt/sand join regressions, plus recovery/restart assertions. Appended pending manual checks 37–45. Existing ramp takeoff/landing, pad, race and camera scenarios remain required. See `docs/vertical-stability.md` and `docs/validation.md` for measurements and actual results.
+- Remains within the existing v0.3.0 development patch, Unreleased and pending developer acceptance. Existing v0.3.1 documentation history, roadmap milestones and project/HUD/export version metadata are preserved; no version advance or Git actions.
+
 
 #### Added
 
@@ -61,7 +78,7 @@ Full handling development patch, pending developer acceptance. Metadata remains 
 
 #### Fixed
 
-- Grounded ramp motion presses into the floor normal so an ascending tangent does not prematurely detach the kart before the launch edge.
+- Grounded ramp motion presses into the floor normal so an ascending tangent does not prematurely detach the kart before the launch edge. The later vertical-contact correction restricts this path to authored launch-ramp contact; ordinary ground uses downward movement and automatic snapping.
 - Recovery/restart/finish no longer leave temporary drift charge, boost or launch motion; pad reset guards prevent immediate boost farming while remaining on a pad.
 - Surface/boost cap reductions remove excess speed gradually rather than snapping velocity when a multiplier changes.
 

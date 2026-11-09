@@ -31,3 +31,9 @@ Drift requires ground contact, forward speed at least 8.5 m/s and steering magni
 The cyan arrow pads boost once per grounded entry, smoothly propelling and turning toward the arrow even if entered in reverse. During the default one-second redirect, the pad controls direction; normal steering/pedals resume afterward. Exit/re-enter after cooldown to use one again; standing on a pad cannot repeatedly trigger it. The optional amber ramp is outside the long left straight, reached through sand near 56% lap fraction. Approach along its incline at speed; no jump button is needed. Air steering has 20% yaw authority and cannot redirect/add horizontal momentum. Required checkpoints include legal sand/grass runoff within their route corridor. Follow the ordered circuit; skipping route sections still invalidates progress.
 
 F3 also shows surface, grounded/airborne state, drift/charge level, boost source and remaining duration. Sand and grass restore to asphalt handling gradually on return. R/restart clear drift charge, active boosts and launch state; recovery also handles extreme body tilt and independent world safety bounds.
+
+## Presentation A/B diagnostics — pending acceptance
+
+Focus the game window. F3 displays the debug panel; F4 cycles **A Normal**, **B Static visuals**, **C Fixed camera orientation** and **D Minimal rendering**. F6 toggles optional per-frame CSV capture (path printed in Godot Output). F7 cycles 60/120/uncapped rendering and disables VSync temporarily; physics stays at 60 Hz. Restart restores the normal render settings and mode A. These controls do not change driving physics or race progress.
+
+Use a straight at about 80 km/h; C freezes world camera orientation and D omits camera obstruction response, so they are diagnostic views. Return to A for acceptance. Compare with recording off as well. See [the investigation and exact procedure](presentation-investigation.md).

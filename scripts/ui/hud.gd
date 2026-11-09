@@ -41,6 +41,14 @@ func _process(_delta: float) -> void:
 			kart.surface_detector.current.identifier, "GROUNDED" if kart.is_on_floor() else "AIRBORNE",
 			Vector2(kart.velocity.x, kart.velocity.z).length() * 3.6, kart.drift.active,
 			kart.drift.level(kart.config), kart.drift.charge, kart.boost.source if kart.boost.active() else &"none", kart.boost.remaining]
+		var presentation := get_parent().get_node_or_null("PresentationDebug")
+		if presentation:
+			debug_label.text += "\n%s\nF4 mode | F6 CSV | F7 FPS cap\nRender %.0f / Physics %.0f Hz | Cap %s" % [
+				presentation.LABELS[presentation.mode], presentation.rendered_fps, presentation.physics_fps,
+				str(Engine.max_fps) if Engine.max_fps > 0 else "uncapped"]
+			if not presentation.latest.is_empty():
+				debug_label.text += "\nCamera pitch %.3f | Screen Y %.2f\nCSV %s" % [presentation.latest.relative_pitch,
+					presentation.latest.helmet_y, "ON" if presentation.capture_path != "" and presentation._file else "off"]
 	$Margin/Stack/Charge.value = kart.drift.charge / maxf(0.01, kart.config.drift_charge_thresholds.z)
 	$Margin/Stack/Charge.visible = kart.drift.active
 	$Margin/Stack/Handling.text = "BOOST  %.1fs" % kart.boost.remaining if kart.boost.active() else \

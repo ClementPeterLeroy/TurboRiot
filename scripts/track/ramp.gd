@@ -50,6 +50,10 @@ func build() -> void:
 	generated.add_child(ramp_mesh)
 	ramp_mesh.create_trimesh_collision()
 	SurfaceDetector.tag_collision(ramp_mesh, preload("res://resources/surfaces/asphalt.tres"))
+	# Identify a genuine launch surface, independently of its asphalt handling.
+	# The controller preserves rising tangent motion at this genuine launch edge.
+	for body in ramp_mesh.find_children("*", "StaticBody3D", true, false):
+		body.set_meta("launch_ramp", self)
 	for side in [-1.0, 1.0]:
 		var stripe := RiotGeometry.box(generated, "EdgeStripe", Vector3(0.12, 0.025, Vector2(length, height).length()),
 			Vector3(side * (width * 0.5 - 0.15), height * 0.5 + 0.02, -length * 0.5), RiotGeometry.material(Color("fff1ba")))

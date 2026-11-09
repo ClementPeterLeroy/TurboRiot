@@ -1,4 +1,36 @@
-# v0.3.1 — Corrective Patch validation (2026-11-09)
+# v0.3.0 development patch — persistent visual oscillation, second investigation
+
+**Unreleased; developer acceptance pending.** The developer confirmed the first contact correction did not eliminate the original high-speed visual symptom. The shoulder fix is retained; stable body Y is not visual acceptance. No version advance or roadmap change.
+
+- Read-only Git history compared v0.2.0/v0.2.1/v0.3.0/v0.3.1. The new cosmetic script and camera obstruction changes were inspected. A/B isolation reproduced camera/render timing oscillation with cosmetic pitch essentially zero; raw physics-target follow already existed in v0.2.0, so the exact reason for the developer's v0.3.0 regression remains subject to manual confirmation.
+- Final complete `tests/run_tests.gd`: **519 checks, 0 failures**, exit 0, Godot **4.7.2.stable.official.ed1daf0bf**, Windows. The prior 491 controller/race/runoff/handling/corrective/contact assertions remain. Added **28 presentation assertions** cover render-rate/pacing-invariant follow, interpolation ownership, physics-safe A/B modes, fixed orientation, shared render projection, reset, optional CSV and debug HUD.
+- Native renderer probe: **12 corrected mode/rate scenarios, 0 failures**. At 79.2 km/h on the long upper straight, Normal-mode projected screen-Y range is **0.307 px at 60 FPS**, **0.211 px at 120.2 FPS**, and **0.218 px at 299.6 FPS uncapped**. Historical committed-camera comparison gives **0.232 / 3.332 / 6.465 px**, respectively (uncapped historical rate 325.6 FPS). All samples stay grounded; the presentation measurement is separate from body Y.
+- Actual saved-frame marker centroid varies by **3 px before** and **0 px across eight sampled corrected frames**. Pixel capture is outside the timed rate window because GPU readback changes pacing. Timed samples use `frame_post_draw`, after camera/visual updates. Optional pads/ramp are removed only from this fixed-speed probe scene; production driving physics and features are unchanged.
+- Final editor import and configured main startup (`--headless --path . --quit-after 240`) both exit 0 without script/scene/physics errors. Rendered handling capture passes, reporting real drift activity (charge 1.0167 s), `mini_turbo` on release and ramp airborne state true; handling review images refreshed. The pre-existing Windows root-certificate-store warning remains.
+
+Implementation: explicit render interpolation in `project.godot` (version untouched), shared-pose/moving-target follow in ChaseCamera, render-only cosmetic interpolation ownership in KartVisuals, scene-local PresentationDebug and HUD integration. New presentation tests, native capture helper and historical camera fixture accompany documentation updates and pending manual checks **46–49**. The earlier kart-controller/ramp shoulder correction is unchanged by this second investigation.
+
+Use **F3** for telemetry, **F4** for A/B/C/D, **F6** for optional CSV and **F7** for temporary 60/120/uncapped rendering. **A — Normal** is the acceptance mode. Detailed evidence, controls, measurements, fixture limitations and historical attribution are in [presentation-investigation.md](presentation-investigation.md). The exact developer-visible symptom on their hardware remains unaccepted until manually confirmed, even with the improved transform and rendered-pixel evidence. No staging, commits, pushes, tags or GitHub actions.
+
+---
+
+# Historical v0.3.0 development patch — vertical-contact validation (2026-11-09)
+
+**Unreleased, manual acceptance pending; project version remains `0.3.0-dev`.** This further correction stays within v0.3.0. The existing v0.3.1 documentation history below is preserved. No roadmap/version advance or Git actions.
+
+- Final full `tests/run_tests.gd`: **491 checks, 0 failures**, exit 0, Godot **4.7.2.stable.official.ed1daf0bf**, Windows. All 464 previous assertions remain, including real ramp takeoff/upward momentum/landing, drifting, pads, race progression, recovery and camera tests. The new suite adds 27 quantitative vertical-contact assertions.
+- Four 240-tick flat-floor scenarios (idle, acceleration/braking, steering and drifting) have **zero airborne frames**. Maximum body-height range is **0.00006187 m** (under 0.062 mm); maximum camera-height range is **0.00022888 m**, without changing camera smoothing or cosmetic animation. Both sides' actual source-road exit/re-entry crossings retain contact on every sampled tick.
+- Diagnosis was performed before controller changes. An identical 6,000-tick source-circuit probe changes from **56 airborne frames before** to **0 after**. The permanent shoulder assertions were additionally exercised against a temporary subclass restoring the pre-fix movement equations: two re-entry regressions fail as expected (seven airborne frames each, 8 checks/2 failures). The corrected controller passes them unchanged. No production file was reverted for that comparison.
+- Final editor import (`--headless --path . --editor --import --quit`) and main startup (`--headless --path . --quit-after 240`) both exit 0 without script/scene/physics errors. The existing Windows root-certificate-store warning remains.
+- Rendered handling capture exits 0 and reports active drift with 1.0167 s charge, `mini_turbo` on release and real ramp airborne state true. Review images in `artifacts/handling_*.png` were refreshed. This is scripted validation, not manual acceptance.
+
+Root cause, temporary debug channels, collision review, exact measurements and limitations are recorded in [vertical-stability.md](vertical-stability.md). Implementation changes are limited to ordinary ground movement/takeoff selection in `scripts/kart/kart_controller.gd` and a generated launch-surface marker in `scripts/track/ramp.gd`. Tests add `tests/vertical_stability_tests.gd` and extend the runner; README, changelog, architecture and acceptance documents are updated. Nine pending manual checks **37–45** are appended; previous checks/history are retained.
+
+The reproduced cause is false takeoff at shoulder joins; straight asphalt was already stable before the change. The developer should confirm the original visible symptom on their hardware and rerun the cumulative manual checklist. No collider dimensions/margins, gravity/snap constants, road geometry, artificial suspension or camera smoothing changes conceal the underlying contact behavior. Different devices/frame rates and exhaustive possible driving lines remain unverified.
+
+---
+
+# Historical v0.3.1 — Corrective Patch validation (2026-11-09)
 
 **Unreleased, pending developer acceptance**, following **v0.3.0-dev — Arcade Handling**. The corrective work is now documented as v0.3.1 at the developer’s request; tests below ran with project/HUD identity `0.3.0-dev` and Windows resource version `0.3.0.0`. This documentation relabeling does not rerun tests or change build metadata. Roadmap milestones and accepted v0.2.0 history are preserved. Manual checks 1–26 remain preserved and checks 27–36 are appended in [the cumulative checklist](testing/ACCEPTANCE_CHECKLIST.md). No current manual pass is claimed.
 

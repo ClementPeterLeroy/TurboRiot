@@ -76,6 +76,10 @@ The early right straight and long left straight connect to grass through intenti
 
 TrackFeatures places pads at 55%/81% and the ramp at 56% of source-curve length. Pads accelerate toward their own forward axis even when approached in reverse; velocity and yaw change gradually during the default one-second redirect. Strength/duration/cooldown/redirect duration are editable. Ramp geometry rebuilds from width/length/height; its center sits 10.5 m outside the long left straight.
 
+The existing v0.3.0 development patch also includes a [vertical-contact correction](docs/vertical-stability.md): ordinary road/shoulder movement keeps automatic floor snapping available, while marked launch ramps retain genuine takeoff momentum. Project version is unchanged.
+
+The developer reported persistent high-speed visual oscillation after the shoulder fix. A [second investigation](docs/presentation-investigation.md) corrects camera/render timing and retains A/B tools: **F4 modes, F6 CSV, F7 render cap**, shown with F3. Test **A Normal** at about 80 km/h for acceptance; stable body Y alone is insufficient. Project version remains unchanged.
+
 ## Tests
 
 From this directory, substituting your Godot executable:
@@ -92,9 +96,11 @@ The runner also includes `tests/runoff_tests.gd`, with real kart exits/rejoins o
 
 `tests/handling_tests.gd` covers surface/drift/boost models plus real pad entry, airborne restrictions, ramp contact/launch/landing, cleanup and opening/perimeter collision. `godot --path . --script tests/capture_handling_preview.gd` drives scripted rendering scenarios and saves `artifacts/handling_*.png`. These are automated scene inspections, not a human playtest or accepted race record.
 
+`tests/vertical_stability_tests.gd` measures body-height variance, contact flicker, cosmetic separation and camera stability on triangulated asphalt, plus actual source-track shoulder crossings.
+
 `tests/corrective_tests.gd` adds reference landmarks, grouped colour continuity, bounded gate coverage, continuous off-road laps, reverse/wrong-heading pad entries and real trunk/foliage collision checks. `godot --path . --script tests/capture_corrective_preview.gd` saves the overhead review to `artifacts/corrective_layout.png`.
 
-See [validation](docs/validation.md) for actual results and limits, the [cumulative manual checklist](docs/testing/ACCEPTANCE_CHECKLIST.md) for checks 1–36, and the [handling audit](docs/v0.3.0-audit.md) for baseline/reference inspection. The [earlier runoff procedures](docs/acceptance.md) are retained. See [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md) and [VERSIONING.md](VERSIONING.md) for scope, actual changes and development status. Each patch must rerun the accepted baseline and append its own manual criteria; v0.3.0-dev handling and v0.3.1 corrective acceptance remain pending.
+See [validation](docs/validation.md) for actual results and limits, the [cumulative manual checklist](docs/testing/ACCEPTANCE_CHECKLIST.md) for checks 1–49, and the [handling audit](docs/v0.3.0-audit.md) for baseline/reference inspection. The [earlier runoff procedures](docs/acceptance.md) are retained. See [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md) and [VERSIONING.md](VERSIONING.md) for scope, actual changes and development status. Each patch must rerun the accepted baseline and append its own manual criteria; v0.3.0-dev handling and v0.3.1 corrective acceptance remain pending.
 
 ## Reference and distribution
 

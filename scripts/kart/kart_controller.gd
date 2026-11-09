@@ -78,6 +78,13 @@ func _physics_process(delta: float) -> void:
 	var forward := -global_basis.z
 	var right := global_basis.x
 	var grounded := is_on_floor()
+	var launch_surface := false
+	if grounded:
+		for i in get_slide_collision_count():
+			var contact := get_slide_collision(i)
+			if contact.get_normal().dot(up_direction) >= cos(floor_max_angle) and contact.get_collider().has_meta("launch_ramp"):
+				launch_surface = true
+				break
 	var speed := velocity.dot(forward)
 	var lateral := velocity.dot(right)
 	var award := drift.update(current_command, speed, lateral, grounded, false, config, delta)
@@ -100,14 +107,21 @@ func _physics_process(delta: float) -> void:
 			var yaw := KartDynamics.steering_radians(speed, current_command, config, delta)
 			rotate_y(yaw * (config.drift_steering_multiplier if drift.active else 1.0))
 			horizontal = forward * speed + right * lateral
-		var normal := get_floor_normal()
-		var tangent := horizontal.slide(normal)
-		if tangent.length_squared() > 0.00001:
-			tangent = tangent.normalized() * horizontal.length()
-		# Keep contact with an ascending ramp until its actual edge. A purely
-		# tangent upward velocity can otherwise detach because upward movement
-		# disables automatic floor snapping in CharacterBody3D.
-		velocity = tangent - normal * config.ground_contact_speed
+		# Let move_and_slide project motion onto the floor. Supplying our own
+		# upward tangent disables automatic snapping at shoulder/ramp crests,
+		# producing false takeoffs even when adjoining asphalt supports us.
+		# A downward request keeps snapping available; floor_constant_speed
+		# preserves slope speed. Real incline motion is retained at a launch edge.
+		velocity = horizontal - Vector3.UP * config.ground_contact_speed
+		if launch_surface:
+			# Authored launch ramps intentionally keep their rising tangent.
+			# Restrict this snap-disabling path to their physical floor contact;
+			# ordinary road/shoulder joins must never manufacture takeoffs.
+			var normal := get_floor_normal()
+			var tangent := horizontal.slide(normal)
+			if tangent.length_squared() > 0.00001:
+				tangent = tangent.normalized() * horizontal.length()
+			velocity = tangent - normal * config.ground_contact_speed
 	else:
 		# Air steering changes heading only; throttle cannot manufacture momentum.
 		rotate_y(KartDynamics.air_yaw(speed, current_command, config, delta))
@@ -122,7 +136,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x *= config.wall_retention
 			velocity.z *= config.wall_retention
 			break
-	if grounded and not is_on_floor():
+	if grounded and launch_surface and not is_on_floor():
 		velocity.y = maxf(velocity.y, _ground_motion.y)
 	if is_on_floor():
 		_ground_motion = get_real_velocity()

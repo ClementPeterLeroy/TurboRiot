@@ -5,6 +5,7 @@
 - **v0.2.0:** All ten original checks were manually accepted by the developer (confirmed 2026-11-08). Their exact wording below was supplied in the v0.3.0 brief on 2026-11-09.
 - **v0.3.0-dev — Arcade Handling:** Checks 11–26 and baseline regressions remain pending manual acceptance.
 - **v0.3.1 — Corrective Patch:** Checks 27–36 plus all earlier regressions remain pending. No checkbox is marked passed merely because automation or rendering succeeded. No current gameplay/feel/hardware acceptance is claimed by Codex. Record the actual runtime build identity alongside the patch label; see [versioning](../../VERSIONING.md).
+- **v0.3.0 vertical-contact correction:** Checks 37–45 and all prior regressions remain pending; runtime version is unchanged.
 - Preserve checks and append new ones for later patches. Record build, date, tester, controls/hardware, resolution, result and issue links. Historical acceptance does not automatically accept changed behavior.
 - The earlier [runoff checklist](../acceptance.md) remains preserved with stable V02/V03-R IDs. Its access, re-entry, collision and race-integrity checks remain regressions. The correction-only expectation of unchanged surface behavior is superseded by checks 14–15 in this full handling patch. No earlier pending correction check is silently marked accepted.
 
@@ -57,12 +58,39 @@ Checks 1–26 above are retained verbatim as history/regressions. For the correc
 
 For 27–30 compare the overhead and chase views, inspect both grass openings, and try colour group size three then restore five. For 31–32 test both sides of corners, grass at finish, reverse/order violations and large infield cuts. For 33–34 enter each pad forward, backward and facing away; check smooth acceleration/yaw, cooldown and expiry, plus drift mini-turbos. For 35–36 drive into a trunk and through adjacent crown space. Rerun earlier race, drift, recovery and camera checks and record actual hardware.
 
+## v0.3.0 development patch — vertical-contact correction, manual verification pending
+
+This is an additional correction within the existing v0.3.0 patch, with no project version advance. Earlier v0.3.0-dev handling and v0.3.1 corrective history/checks remain preserved. Rerun all prior regressions with these new checks; no automated result marks a manual checkbox accepted.
+
+- [ ] **37. Kart remains vertically stable on flat asphalt.**
+- [ ] **38. Kart remains stable while accelerating and braking.**
+- [ ] **39. Kart remains stable during normal steering.**
+- [ ] **40. Kart remains stable during drifting.**
+- [ ] **41. Kart transitions smoothly between asphalt and sand.**
+- [ ] **42. Kart can still jump and land normally.**
+- [ ] **43. Camera remains stable without artificial bobbing.**
+- [ ] **44. Grounded state does not flicker on flat terrain.**
+- [ ] **45. Recovery and restart work correctly.**
+
+Test the right and left straights in both directions, coast/stop/brake, countersteer and drift, then cross each sloping shoulder out and back repeatedly. In F3, inspect floor contact while comparing the body and chase view. Use the optional ramp for a genuine takeoff and landing; it must not be pulled down by snapping. Exercise R and F5 before and after a jump. Record real keyboard/gamepad hardware, frame rate and any reproducible remaining bounce. See [diagnosis](../vertical-stability.md).
+
+## v0.3.0 — high-speed visual presentation, manual verification pending
+
+The developer reports the original visual symptom remained after the contact correction. Retain the shoulder fix and all earlier checklist wording/history. The following checks verify visible presentation, including camera angle and rendered screen position; stable body Y or `Ground true` alone cannot pass them.
+
+- [ ] **46. Normal mode remains visually stable at about 80 km/h on a straight.** In A, inspect chassis, helmet, wheels and the road/camera relationship continuously while accelerating, coasting and holding speed. Confirm no periodic apparent pitching or vertical screen movement.
+- [ ] **47. A/B modes isolate presentation without changing driving.** F4 cycles A/B/C/D; active mode is visible in F3. Compare the same straight and inputs. B removes cosmetic motion, C freezes orientation, and D uses direct shared-pose follow. Return to A afterward and record which modes still show any symptom.
+- [ ] **48. Presentation stays stable across rendering rates.** Use F7 for 60/120/uncapped where supported, with and without F6 recording. Record actual render/physics rates, VSync/device details and relative angle/screen behavior. Capture a short CSV if the symptom remains.
+- [ ] **49. Full presentation and existing mechanics survive the fix.** In A, confirm drift lean/wheel animation, a real ramp jump/landing, smooth chase/obstruction behavior, R recovery and F5 restart with immediate camera reset and no old pose trail.
+
+See [diagnosis, capture instructions and measured evidence](../presentation-investigation.md). These remain developer acceptance checks, not automated checkboxes.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
 | --- | --- | --- | --- | --- |
 | v0.2.0 | Developer, confirmed 2026-11-08 | Original device details not recorded | Original 1–10 reported passed | Accepted baseline |
-| v0.3.0-dev — Arcade Handling | Pending | Pending | 1–26 plus retained runoff regressions pending | Not accepted/released |
+| v0.3.0-dev — Arcade Handling | Pending | Pending | Handling 1–26, retained corrections/regressions and vertical checks 37–45 and presentation checks 46–49 pending | Not accepted/released |
 | v0.3.1 — Corrective Patch | Pending | Pending | 1–36 plus retained runoff regressions pending; runtime identity currently 0.3.0-dev | Not accepted/released |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

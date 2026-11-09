@@ -25,6 +25,8 @@ func _run() -> void:
 	await preload("res://tests/runoff_tests.gd").new().run(self)
 	await preload("res://tests/handling_tests.gd").new().run(self)
 	await preload("res://tests/corrective_tests.gd").new().run(self)
+	await preload("res://tests/vertical_stability_tests.gd").new().run(self)
+	await preload("res://tests/presentation_tests.gd").new().run(self)
 	print("Turbo Riot: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 

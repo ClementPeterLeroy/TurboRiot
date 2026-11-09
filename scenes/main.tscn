@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/track.tscn" id="2"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/world/environment_builder.gd" id="6"]
 [ext_resource type="Script" path="res://scripts/race/race_manager.gd" id="7"]
 [ext_resource type="Script" path="res://scripts/track/track_features.gd" id="8"]
+[ext_resource type="Script" path="res://scripts/debug/presentation_diagnostics.gd" id="9"]
 [sub_resource type="ProceduralSkyMaterial" id="SkyMaterial"]
 sky_top_color = Color(0.22, 0.58, 0.91, 1)
 sky_horizon_color = Color(0.73, 0.9, 0.99, 1)
@@ -52,3 +53,5 @@ target = NodePath("../Kart")
 [node name="HUD" parent="." node_paths=PackedStringArray("kart", "race") instance=ExtResource("5")]
 kart = NodePath("../Kart")
 race = NodePath("../RaceManager")
+[node name="PresentationDebug" type="Node" parent="."]
+script = ExtResource("9")

@@ -3,8 +3,12 @@ extends Node3D
 @onready var kart: KartController = get_parent() as KartController
 var _dust: CPUParticles3D
 var _flame: MeshInstance3D
+var cosmetics_enabled := true
 
 func _ready() -> void:
+	# The parent body is physics-interpolated. Cosmetics are already evaluated
+	# per render frame: do not interpolate their local transforms a second time.
+	physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
 	_dust = CPUParticles3D.new()
 	_dust.name = "TyreDust"
 	_dust.amount = 32
@@ -52,6 +56,14 @@ func _process(delta: float) -> void:
 	var blend := 1.0 - exp(-10.0 * delta)
 	var level := kart.drift.level(kart.config)
 	var steering := kart.current_command.steering
+	if not cosmetics_enabled:
+		rotation = Vector3.ZERO
+		for pivot: Node3D in $Wheels.get_children():
+			if str(pivot.name).begins_with("Front"):
+				pivot.rotation.y = lerpf(pivot.rotation.y, -steering * deg_to_rad(28), blend)
+		_dust.emitting = false
+		_flame.visible = false
+		return
 	rotation.z = lerpf(rotation.z, -steering * (0.14 if kart.drift.active else 0.045), blend)
 	var normal := kart.surface_detector.normal
 	var pitch := -atan2(normal.dot(-kart.global_basis.z), maxf(0.1, normal.y)) if kart.is_on_floor() \
