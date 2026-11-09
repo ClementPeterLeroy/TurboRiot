@@ -2,6 +2,9 @@
 
 ## History and status
 
+- **v0.3.2:** Latest released baseline as reported by the developer in the v0.4.0 brief; local commit `96934a4`, no local tags, old runtime metadata `0.3.0-dev`. Earlier checkbox wording/status remains historical; detailed manual results are not reconstructed from a release label.
+- **v0.4.0-dev:** Unreleased, pending developer testing of all retained regressions plus new checks 50–65. High-speed visible stability remains required.
+
 - **v0.2.0:** All ten original checks were manually accepted by the developer (confirmed 2026-11-08). Their exact wording below was supplied in the v0.3.0 brief on 2026-11-09.
 - **v0.3.0-dev — Arcade Handling:** Checks 11–26 and baseline regressions remain pending manual acceptance.
 - **v0.3.1 — Corrective Patch:** Checks 27–36 plus all earlier regressions remain pending. No checkbox is marked passed merely because automation or rendering succeeded. No current gameplay/feel/hardware acceptance is claimed by Codex. Record the actual runtime build identity alongside the patch label; see [versioning](../../VERSIONING.md).
@@ -85,6 +88,27 @@ The developer reports the original visual symptom remained after the contact cor
 
 See [diagnosis, capture instructions and measured evidence](../presentation-investigation.md). These remain developer acceptance checks, not automated checkboxes.
 
+## v0.4.0 — Racing Competitors, manual verification pending
+
+- [ ] **50. Seven karts appear on the starting grid.**
+- [ ] **51. All racers respect the countdown.**
+- [ ] **52. AI completes full laps without skipping checkpoints.**
+- [ ] **53. AI brakes appropriately before corners.**
+- [ ] **54. AI follows smooth racing lines.**
+- [ ] **55. AI can recover from collisions or getting stuck.**
+- [ ] **56. AI can overtake slower competitors.**
+- [ ] **57. AI does not repeatedly oscillate between passing targets.**
+- [ ] **58. Difficulty profiles produce observable differences.**
+- [ ] **59. Live positions update correctly.**
+- [ ] **60. Race rankings remain valid during off-road driving.**
+- [ ] **61. AI and human competitors share physical handling rules.**
+- [ ] **62. Finishing order and results are correct.**
+- [ ] **63. Restart resets every competitor correctly.**
+- [ ] **64. Player kart remains visually stable at high speed.**
+- [ ] **65. Existing drifting, boosts, jumps and recovery still work.**
+
+For 50–57 inspect grid clearance, hold controls before GO, drive/block slowly on a straight, force one AI off-road and compare F3/F8 commands and held passing side. For 58 rerun the same field with Casual/Standard/Challenging; compare braking/drift/traffic competence without changing KartConfig. For 59–62 try legal runoff, missed/reversed gates, AI-first and human-first finishes, plus an idle driver/DNF deadline; compare the live table against actual crossings. For 63 restart during countdown/racing/results and after recovery; verify every competitor. For 64 rerun retained presentation checks 46–49 at 60/120/uncapped where possible in A Normal; stable body Y alone is not acceptance. For 65 exercise drift/mini-turbos, pads, the optional ramp, R and F5 with opponents present. Record real device/feel issues and results separately from automation. See [play and debugging procedures](../racing-competitors.md).
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -92,5 +116,7 @@ See [diagnosis, capture instructions and measured evidence](../presentation-inve
 | v0.2.0 | Developer, confirmed 2026-11-08 | Original device details not recorded | Original 1–10 reported passed | Accepted baseline |
 | v0.3.0-dev — Arcade Handling | Pending | Pending | Handling 1–26, retained corrections/regressions and vertical checks 37–45 and presentation checks 46–49 pending | Not accepted/released |
 | v0.3.1 — Corrective Patch | Pending | Pending | 1–36 plus retained runoff regressions pending; runtime identity currently 0.3.0-dev | Not accepted/released |
+| v0.3.2 | Developer-reported released baseline | Historical device details not supplied | Prior detailed checkbox results not reconstructed | Released baseline per developer |
+| v0.4.0-dev | Pending | Pending | Retained 1–49 plus new 50–65 pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

@@ -11,6 +11,7 @@ func _ready() -> void:
 	_bind_keys("start_race", [KEY_ENTER, KEY_SPACE])
 	_bind_keys("restart_race", [KEY_F5])
 	_bind_keys("debug_hud", [KEY_F3])
+	_bind_keys("debug_ai", [KEY_F8])
 	_bind_keys("exit_game", [KEY_ESCAPE])
 	_bind_axis("steer_left", JOY_AXIS_LEFT_X, -1.0)
 	_bind_axis("steer_right", JOY_AXIS_LEFT_X, 1.0)

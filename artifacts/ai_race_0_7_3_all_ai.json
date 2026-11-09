@@ -1,0 +1,97 @@
+{
+	"brake_frames": 9455,
+	"difficulty": 0,
+	"drift_frames": 0,
+	"laps": 3,
+	"mini_turbo_frames": 0,
+	"passed": true,
+	"racers": 7,
+	"results": [
+		{
+			"dnf": false,
+			"laps": [
+				38.4999999999991,
+				38.6499999999978,
+				38.0999999999978
+			],
+			"name": "Dash",
+			"order": 1,
+			"recoveries": 0,
+			"time": 115.249999999995
+		},
+		{
+			"dnf": false,
+			"laps": [
+				41.3999999999989,
+				38.0166666666645,
+				37.2333333333312
+			],
+			"name": "Rivet",
+			"order": 2,
+			"recoveries": 0,
+			"time": 116.649999999995
+		},
+		{
+			"dnf": false,
+			"laps": [
+				39.8833333333324,
+				38.3166666666645,
+				39.0499999999978
+			],
+			"name": "Moxie",
+			"order": 3,
+			"recoveries": 0,
+			"time": 117.249999999995
+		},
+		{
+			"dnf": false,
+			"laps": [
+				39.7666666666657,
+				39.2666666666644,
+				39.3333333333311
+			],
+			"name": "You (AI)",
+			"order": 4,
+			"recoveries": 0,
+			"time": 118.366666666661
+		},
+		{
+			"dnf": false,
+			"laps": [
+				42.5999999999989,
+				38.2999999999978,
+				38.6833333333311
+			],
+			"name": "Comet",
+			"order": 5,
+			"recoveries": 0,
+			"time": 119.583333333328
+		},
+		{
+			"dnf": false,
+			"laps": [
+				45.1499999999987,
+				38.0833333333312,
+				38.1333333333312
+			],
+			"name": "Volt",
+			"order": 6,
+			"recoveries": 0,
+			"time": 121.366666666661
+		},
+		{
+			"dnf": false,
+			"laps": [
+				46.4666666666653,
+				39.4999999999978,
+				38.1166666666645
+			],
+			"name": "Echo",
+			"order": 7,
+			"recoveries": 0,
+			"time": 124.083333333328
+		}
+	],
+	"simulation_seconds": 127.099999999994,
+	"wall_seconds": 23.669191
+}

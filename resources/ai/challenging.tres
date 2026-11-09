@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AIDriverProfile" load_steps=2 format=3]
+[ext_resource type="Script" path="res://resources/ai_driver_profile.gd" id="1"]
+[resource]
+script = ExtResource("1")
+display_name = "Challenging"
+speed_fraction = 1.0
+lateral_acceleration = 9.0
+braking_confidence = 0.7
+lookahead_base = 3.5
+lookahead_seconds = 0.28
+steering_response = 5.2
+passing_distance = 25.0
+lane_change_speed = 2.0
+recovery_delay = 3.0
+offroad_delay = 1.5
+drift_seconds = 2.1
+drift_reward_level = 2

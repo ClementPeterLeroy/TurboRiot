@@ -1,0 +1,20 @@
+[
+	{
+		"max_sampled_physics_ms": 0.937,
+		"mean_draw_calls": 288.105294467579,
+		"mean_physics_ms": 0.77905472932777,
+		"physics_hz": 57.3039555054775,
+		"racers": 1,
+		"render_fps": 560.04621630644,
+		"seconds": 3.001538
+	},
+	{
+		"max_sampled_physics_ms": 3.276,
+		"mean_draw_calls": 322.270251396648,
+		"mean_physics_ms": 2.70138617318438,
+		"physics_hz": 59.9300017579467,
+		"racers": 7,
+		"render_fps": 476.776458429887,
+		"seconds": 3.003504
+	}
+]

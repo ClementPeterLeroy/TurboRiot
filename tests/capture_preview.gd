@@ -9,6 +9,7 @@ func _initialize() -> void:
 
 func _start() -> void:
 	main = load("res://scenes/main.tscn").instantiate()
+	main.get_node("RaceManager").opponent_count = 0 # Isolated legacy mechanics/presentation fixture.
 	root.add_child(main)
 	root.size = Vector2i(1280, 720)
 	await create_timer(1.5).timeout

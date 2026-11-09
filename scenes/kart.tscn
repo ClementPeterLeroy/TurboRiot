@@ -37,7 +37,7 @@ script = ExtResource("1")
 config = ExtResource("2")
 input_provider = NodePath("PlayerInput")
 collision_layer = 2
-collision_mask = 1
+collision_mask = 3
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 shape = SubResource("BodyShape")

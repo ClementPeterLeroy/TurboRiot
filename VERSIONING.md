@@ -1,19 +1,19 @@
 # Versioning
 
-The existing project used three-part milestone versions (`0.1.0`) and four-part numeric Windows resource versions (`0.1.0.0`). There was no VERSIONING.md before this patch. Those formats are retained, with an explicit development suffix to distinguish unaccepted work.
+The established MAJOR.MINOR.PATCH convention, development suffix and numeric four-part Windows format are preserved.
 
 | Location | Current value | Meaning |
 | --- | --- | --- |
-| `project.godot`, `application/config/version` | `0.3.0-dev` | Current unaccepted development milestone |
-| Race HUD footer | `v0.3.0-dev` | Same development build identity |
-| Windows file/product resource version | `0.3.0.0` | Numeric format required by the export metadata |
-| Windows file description | `Arcade Handling (Development)` | Preserves development status where numeric fields cannot |
-| ROADMAP.md | v0.3.0-dev — Arcade Handling; v0.3.1 — Corrective Patch | Milestone and subsequent corrective scope |
-| CHANGELOG.md | Unreleased: separate v0.3.1 and v0.3.0-dev entries | Actual changes pending review |
+| `project.godot`, application config/version | `0.4.0-dev` | Current unaccepted development milestone |
+| Race HUD footer | `v0.4.0-dev — Racing Competitors` | Same development identity |
+| Windows file/product resource version | `0.4.0.0` | Numeric export metadata, not release acceptance |
+| Windows file description | `Racing Competitors (Development)` | Explicit development status |
+| ROADMAP.md | v0.4.0 current development | Preserved milestone sequence/scope |
+| CHANGELOG.md | v0.4.0-dev under Unreleased | Actual changes pending developer review |
 
-The developer confirmed acceptance of all ten v0.2.0 manual checks on 2026-11-08. Preserve that baseline and historical build identifiers. This does not accept v0.3.0 or imply publication/tagging. The handling implementation is documented as **v0.3.0-dev — Arcade Handling**, building on the prerequisite runoff correction. Its subsequent reference geometry, corridor checkpoint, directional pad and trunk fixes are documented separately as **v0.3.1 — Corrective Patch**. Both remain Unreleased and pending developer acceptance. Its surfaces, drifting, mini-turbos, pads and jumps require the new manual criteria in [docs/testing/ACCEPTANCE_CHECKLIST.md](docs/testing/ACCEPTANCE_CHECKLIST.md); no current-version manual retest is inferred from past approval.
+The developer identifies **v0.3.2** as the latest released baseline. Read-only repository inspection found HEAD `96934a4` named v0.3.2, earlier v0.3.1/v0.3.0-dev commits, and no local tags. Baseline metadata still used `0.3.0-dev` / `0.3.0.0`; those actual historical identifiers and prior changelog wording remain documented. This patch adds a v0.3.2 baseline note without fabricating a tag, release date or retroactive numeric version. See [the audit](docs/v0.4.0-audit.md).
 
-The developer requested the v0.3.1 corrective label after the original brief described these fixes as same-version work. That label supersedes the earlier documentation wording. This is a documentation change: project/HUD identifiers remain `0.3.0-dev` and Windows resource versions remain `0.3.0.0`, as shown above. Historical test reports retain the actual build identity used for execution; the v0.3.1 report identifies that distinction explicitly. No acceptance, release date or new test run is implied by relabeling.
+The accepted v0.2.0 ten-check history remains preserved. A later release label does not reconstruct granular manual check results. All prior regression checks, including v0.3.2 high-speed presentation, remain required for v0.4.0, followed by the new competitor criteria. No current-version manual acceptance is inferred from automated completion.
 
 Versions use MAJOR.MINOR.PATCH. The agreed 0.x milestones are preserved through v1.0.0. Keep unfinished milestone work under **Unreleased** with `-dev` in the project/HUD. Only developer approval can accept a release and remove that suffix. Future corrections can use the patch component without silently advancing milestone scope.
 

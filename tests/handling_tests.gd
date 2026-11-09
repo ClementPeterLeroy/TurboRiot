@@ -85,6 +85,7 @@ func _place(kart: KartController, location: Vector3, basis: Basis = Basis.IDENTI
 
 func _scene(s: SceneTree) -> void:
 	var main := load("res://scenes/main.tscn").instantiate() as Node3D
+	main.get_node("RaceManager").opponent_count = 0 # Isolated legacy mechanics/presentation fixture.
 	s.root.add_child(main)
 	var race := main.get_node("RaceManager") as RaceManager
 	race.set_physics_process(false)

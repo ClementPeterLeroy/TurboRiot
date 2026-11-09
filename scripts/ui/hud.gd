@@ -31,6 +31,8 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("debug_hud"):
 		debug_visible = not debug_visible
 		race.set_debug_visible(debug_visible)
+	if InputMap.has_action("debug_ai") and Input.is_action_just_pressed("debug_ai"):
+		race.debug_ai_index += 1
 	$DebugPanel.visible = debug_visible
 	if debug_visible:
 		debug_label.text = "FPS %d | Ground %s\nPosition %.1f, %.1f, %.1f\nThrottle %.2f  Brake %.2f  Steering %.2f\nValidated gate %d | Next %d" % [
@@ -49,6 +51,7 @@ func _process(_delta: float) -> void:
 			if not presentation.latest.is_empty():
 				debug_label.text += "\nCamera pitch %.3f | Screen Y %.2f\nCSV %s" % [presentation.latest.relative_pitch,
 					presentation.latest.helmet_y, "ON" if presentation.capture_path != "" and presentation._file else "off"]
+		debug_label.text += race.ai_debug_summary()
 	$Margin/Stack/Charge.value = kart.drift.charge / maxf(0.01, kart.config.drift_charge_thresholds.z)
 	$Margin/Stack/Charge.visible = kart.drift.active
 	$Margin/Stack/Handling.text = "BOOST  %.1fs" % kart.boost.remaining if kart.boost.active() else \
@@ -60,9 +63,11 @@ func _refresh() -> void:
 	if not race:
 		return
 	var session := race.session
+	# Fit the default seven-name table at 720p; longer fields/lap details still scroll.
+	$Overlay/Center/Card/Stack/Scroll.custom_minimum_size.y = 330 if session.state == RaceSession.State.FINISHED and race.competitors.size() > 1 else 200
 	$Margin.visible = session.state == RaceSession.State.COUNTDOWN or session.state == RaceSession.State.RACING
-	race_label.text = "LAP %d / %d     TOTAL %s\nLAP TIME   %s\nLAST   %s     BEST   %s" % [
-		session.current_lap(), session.lap_count, format_time(session.race_time),
+	race_label.text = "POSITION %d / %d    LAP %d / %d\nTOTAL %s     LAP %s\nLAST %s     BEST %s" % [
+		race.player_position(), race.competitors.size(), session.current_lap(), session.lap_count, format_time(session.race_time),
 		format_time(session.current_lap_time()), optional_time(session.last_lap_time()), optional_time(session.best_lap_time())]
 	indicator.text = session.indicator()
 	indicator.visible = not indicator.text.is_empty()
@@ -70,11 +75,20 @@ func _refresh() -> void:
 	ready_button.visible = session.state == RaceSession.State.FINISHED
 	if session.state == RaceSession.State.READY:
 		card_title.text = "READY TO RACE"
-		card_text.text = "%d laps. Follow the circuit in order.\n\nEnter / Space / Pad A starts the countdown.\nR recovers your kart; the clock keeps running.\nF5 / Pad X restarts the whole race." % session.lap_count
+		card_text.text = "%d racers, %d laps. Follow the circuit in order.\n\nEnter / Space / Pad A starts the countdown.\nR recovers your kart; the clock keeps running.\nF5 / Pad X restarts every racer." % [race.competitors.size(), session.lap_count]
 		primary.text = "Start Race"
 	elif session.state == RaceSession.State.FINISHED:
-		card_title.text = "TIME TRIAL COMPLETE"
-		card_text.text = "FINAL TIME   %s\nBEST LAP      %s\n\n" % [format_time(session.final_time), format_time(session.best_lap_time())]
+		card_title.text = "RACE RESULTS"
+		var player := race.competitors[0]
+		card_text.text = "POSITION %s / %d\nFINAL TIME   %s\nBEST LAP      %s\n\n" % [
+			"DNF" if player.dnf else str(player.finish_order), race.competitors.size(),
+			"DNF" if player.dnf else format_time(session.final_time), format_time(session.best_lap_time())]
+		for record in race.standings():
+			var status := format_time(record.session.final_time) if record.finish_order > 0 else ("DNF" if record.dnf else "RACING")
+			card_text.text += "%s  %s   %s\n" % [str(record.finish_order) if record.finish_order > 0 else "—", record.display_name, status]
+		if not race.race_complete:
+			card_text.text += "\nOther racers are still finishing.\n"
+		card_text.text += "\nYOUR LAPS\n"
 		for i in session.lap_times.size():
 			card_text.text += "Lap %d     %s\n" % [i + 1, format_time(session.lap_times[i])]
 		primary.text = "Restart Race"

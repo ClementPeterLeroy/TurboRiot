@@ -36,7 +36,7 @@ theme_override_constants/shadow_offset_y = 2
 theme_override_constants/separation = 5
 [node name="Title" type="Label" parent="Margin/Stack"]
 theme_override_font_sizes/font_size = 20
-text = "TURBO RIOT   /   TIME TRIAL"
+text = "TURBO RIOT   /   RACE"
 [node name="Speed" type="Label" parent="Margin/Stack"]
 theme_override_font_sizes/font_size = 42
 text = "000  km/h"
@@ -68,7 +68,7 @@ offset_left = 28.0
 offset_top = -42.0
 offset_right = -28.0
 offset_bottom = -15.0
-text = "v0.3.0-dev   /   Arcade Handling   /   Development build"
+text = "v0.4.0-dev   /   Racing Competitors   /   Development build"
 
 [node name="DebugPanel" type="PanelContainer" parent="."]
 visible = false

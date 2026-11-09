@@ -1,0 +1,133 @@
+{
+	"brake_frames": 5636,
+	"difficulty": 1,
+	"drift_frames": 851,
+	"laps": 1,
+	"mini_turbo_frames": 78,
+	"passed": true,
+	"racers": 12,
+	"results": [
+		{
+			"dnf": false,
+			"laps": [
+				32.7833333333328
+			],
+			"name": "Dash",
+			"order": 1,
+			"recoveries": 0,
+			"time": 32.7833333333328
+		},
+		{
+			"dnf": false,
+			"laps": [
+				33.766666666666
+			],
+			"name": "You (AI)",
+			"order": 2,
+			"recoveries": 0,
+			"time": 33.766666666666
+		},
+		{
+			"dnf": false,
+			"laps": [
+				34.2833333333327
+			],
+			"name": "Moxie",
+			"order": 3,
+			"recoveries": 0,
+			"time": 34.2833333333327
+		},
+		{
+			"dnf": false,
+			"laps": [
+				35.016666666666
+			],
+			"name": "Rivet",
+			"order": 4,
+			"recoveries": 0,
+			"time": 35.016666666666
+		},
+		{
+			"dnf": false,
+			"laps": [
+				35.8499999999992
+			],
+			"name": "Echo",
+			"order": 5,
+			"recoveries": 0,
+			"time": 35.8499999999992
+		},
+		{
+			"dnf": false,
+			"laps": [
+				36.6666666666659
+			],
+			"name": "Jinx",
+			"order": 6,
+			"recoveries": 0,
+			"time": 36.6666666666659
+		},
+		{
+			"dnf": false,
+			"laps": [
+				37.0499999999992
+			],
+			"name": "Comet",
+			"order": 7,
+			"recoveries": 0,
+			"time": 37.0499999999992
+		},
+		{
+			"dnf": false,
+			"laps": [
+				37.8666666666658
+			],
+			"name": "Blaze",
+			"order": 8,
+			"recoveries": 0,
+			"time": 37.8666666666658
+		},
+		{
+			"dnf": false,
+			"laps": [
+				38.2833333333324
+			],
+			"name": "Nova",
+			"order": 9,
+			"recoveries": 0,
+			"time": 38.2833333333324
+		},
+		{
+			"dnf": false,
+			"laps": [
+				38.2999999999991
+			],
+			"name": "Volt",
+			"order": 10,
+			"recoveries": 0,
+			"time": 38.2999999999991
+		},
+		{
+			"dnf": false,
+			"laps": [
+				39.7666666666657
+			],
+			"name": "Pip",
+			"order": 11,
+			"recoveries": 0,
+			"time": 39.7666666666657
+		},
+		{
+			"dnf": false,
+			"laps": [
+				40.9833333333323
+			],
+			"name": "Bolt",
+			"order": 12,
+			"recoveries": 0,
+			"time": 40.9833333333323
+		}
+	],
+	"simulation_seconds": 43.9999999999988,
+	"wall_seconds": 12.639964
+}

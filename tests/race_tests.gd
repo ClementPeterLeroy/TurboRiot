@@ -118,6 +118,7 @@ func _cross(race: RaceManager, index: int, reverse: bool = false, lateral: float
 
 func _test_scene(suite: SceneTree) -> void:
 	var main := load("res://scenes/main.tscn").instantiate() as Node3D
+	main.get_node("RaceManager").opponent_count = 0 # Isolated legacy mechanics/presentation fixture.
 	suite.root.add_child(main)
 	var race := main.get_node("RaceManager") as RaceManager
 	var kart := main.get_node("Kart") as KartController

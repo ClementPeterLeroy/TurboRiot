@@ -1,8 +1,8 @@
-# Turbo Riot — v0.3.0-dev — Arcade Handling + v0.3.1 Corrective Patch
+# Turbo Riot — v0.4.0-dev — Racing Competitors
 
-A Godot 4 single-player time-trial prototype for Windows, using GDScript and original low-poly geometry. The developer accepted all ten v0.2.0 manual checks. **v0.3.0-dev — Arcade Handling and v0.3.1 — Corrective Patch are unreleased and pending developer acceptance.** It includes surfaces, drifting, mini-turbos, pads and jumps, plus the v0.3.1 corrective patch for reference geometry, runoff gates, directional propulsion and tree trunks. No plugins, downloaded game art, global singletons, AI, weapons/items, multiplayer, persistent records or realistic suspension.
+A Godot 4 Windows arcade racer with one human and six AI opponents by default. **v0.4.0 is Unreleased and pending developer testing.** It builds on the developer-reported v0.3.2 baseline and preserves surfaces, drift/mini-turbos, directional pads, jumps, recovery and the high-speed presentation corrections. No downloaded game art, plugins, singletons, weapons/items, networking, split-screen, persistent leaderboard or realistic suspension.
 
-The documentation identifies the corrective work as **v0.3.1**. Existing project/HUD metadata still reads `0.3.0-dev` and Windows export metadata `0.3.0.0`; this documentation pass does not change build identifiers or publish a release. See [versioning](VERSIONING.md).
+All racers share the existing kart controller and handling resource; AI supplies DrivingCommand inputs. Cached circuit pursuit, anticipatory braking, three configurable difficulty profiles, traffic passing, independent progress and ordered results form this milestone. See [competitor authoring and validation](docs/racing-competitors.md), [repository audit](docs/v0.4.0-audit.md) and [version policy](VERSIONING.md).
 
 ## Open and play
 
@@ -10,7 +10,7 @@ The documentation identifies the corrective work as **v0.3.1**. Existing project
 2. Open `scenes/main.tscn`. Allow the initial script scan to finish.
 3. Press **F5** in the editor to play. The main scene is already configured.
 4. On READY, click **Start Race** or press **Enter / Space / Pad A**. Drive after 3, 2, 1, GO.
-5. Complete the checkpoints in order and cross the finish forward for each of three laps. Results include final time, individual laps and best lap.
+5. Complete the checkpoints in order and cross the finish forward for each of three laps. The HUD shows position/lap/time; results include finishing order, names, race times, your laps/best lap and RACING/DNF statuses.
 
 The current project configuration and validation use Godot **4.7.2 stable**, Windows and the Compatibility renderer. Other Godot 4.x versions have not been validated. No .NET build is needed.
 
@@ -20,15 +20,19 @@ W/Up accelerates; S/Down brakes then reverses; A/D or Left/Right steers. **R / P
 
 Sand and grass reduce acceleration, sustainable speed and grip smoothly; asphalt restores normal handling. Cyan arrow pads provide temporary boosts on the long left straight and upper diagonal (55% / 81% of the lap). The amber ramp is optional in the **outside sand of the long left straight**, around 56% of the lap; align with it and approach at speed. It does not replace a required route section. Air yaw has reduced authority, throttle does not add mid-air momentum, and gravity returns the kart to the terrain.
 
+Select **RaceManager** in `main.tscn` before launch to change Opponent Count, Difficulty (Casual/Standard/Challenging), Lap Count and grid/grace/timeout settings. Default is 6 opponents / Standard / 3 laps. **F3** shows AI line/targets and commands; **F8** cycles selected AI telemetry. All racers lock until GO; F5 restarts everyone, while R recovers only you. Finishers stop blocking traffic, and opponents can continue while your results update.
+
 ## Included
 
+- One human/six configurable AI competitors using the same kart scene/config, staggered coloured grid, cached pursuit and braking, stable passing targets and shared recovery.
+- Live route-validated positions, independent per-racer clocks/checkpoints, persistent finish order and grace/timeout DNF.
 - CharacterBody3D arcade controller: acceleration, brake/reverse, coast, speed-sensitive steering, lateral grip, gravity, ground snapping, static collisions, and safe reset.
 - Separate normalized input provider, reusable handling resource and kart scene.
 - Independent smooth chase camera with immediate reset snapping.
 - Editor-visible procedural circuit: saved Curve3D, asphalt mesh/collision, red-and-white kerbs, coloured collidable barriers and a checkered start line.
 - Seeded low-poly trees, reference-shaped grass infield, sandy ground, distant green hills, sky and lighting.
 - Speed in km/h, movement direction, controls, and optional debug HUD.
-- READY/countdown/racing/finished lifecycle, ordered directional checkpoint validation, configurable three-lap time trial and active-race-only timing.
+- READY/countdown/racing/finished lifecycle, ordered directional checkpoint validation, configurable multi-kart three-lap race and active-race-only timing.
 - Recovery from falls or a sustained grounded wall jam; cooldown and teleport-safe progression. Restart Race, Return to Ready and Exit result buttons.
 - Shared faceted red/blue/yellow/green barrier mesh, grid markings, reference-shaped grass infield, rounded trees and low-poly hills.
 - Reference-traced stepped outer fence and T-shaped infield fence, with two explicit grass access openings and collidable shoulders for road re-entry.
@@ -45,7 +49,8 @@ scenes/                      Main, kart, camera, HUD and editable track
 resources/                   KartConfig, surface resources and boundary data
 scripts/input/               Device input and normalized driving commands
 scripts/kart/                Dynamics, controller, surfaces, drift/boost and visuals
-scripts/race/                RaceSession, RaceManager and bounded directed gates
+scripts/race/                Per-competitor state, field manager and directed gates
+scripts/ai/                  Cached racing line and AI DrivingInput provider
 scripts/camera/              Chase camera
 scripts/track/               Track builder, BoostPad, Ramp and feature placement
 scripts/world/               Primitive helpers and seeded environment
@@ -76,9 +81,9 @@ The early right straight and long left straight connect to grass through intenti
 
 TrackFeatures places pads at 55%/81% and the ramp at 56% of source-curve length. Pads accelerate toward their own forward axis even when approached in reverse; velocity and yaw change gradually during the default one-second redirect. Strength/duration/cooldown/redirect duration are editable. Ramp geometry rebuilds from width/length/height; its center sits 10.5 m outside the long left straight.
 
-The existing v0.3.0 development patch also includes a [vertical-contact correction](docs/vertical-stability.md): ordinary road/shoulder movement keeps automatic floor snapping available, while marked launch ramps retain genuine takeoff momentum. Project version is unchanged.
+The inherited v0.3.2 baseline retains the [vertical-contact correction](docs/vertical-stability.md): ordinary road/shoulder movement keeps automatic floor snapping available, while marked launch ramps retain genuine takeoff momentum.
 
-The developer reported persistent high-speed visual oscillation after the shoulder fix. A [second investigation](docs/presentation-investigation.md) corrects camera/render timing and retains A/B tools: **F4 modes, F6 CSV, F7 render cap**, shown with F3. Test **A Normal** at about 80 km/h for acceptance; stable body Y alone is insufficient. Project version remains unchanged.
+The inherited [presentation correction and investigation](docs/presentation-investigation.md) retains **F4 modes, F6 CSV and F7 render cap**, shown with F3. Rerun **A Normal** at about 80 km/h as a v0.4.0 regression; stable body Y alone is insufficient.
 
 ## Tests
 
@@ -90,7 +95,7 @@ godot --headless --path . --script tests/run_tests.gd
 godot --headless --path . --quit-after 120
 ```
 
-Import first on a fresh checkout so Godot registers global script classes. The test runner runs the existing physics suite plus `tests/race_tests.gd` and exits nonzero if a check fails. It tests real GDScript functions and running physics scenes. For optional rendered screenshots, run `godot --path . --script tests/capture_race_preview.gd`. This requires an actual display/graphics driver and saves `artifacts/race_*.png`. The results screenshot uses synthetic checkpoint crossings, not a manually driven record. The v0.1 preview helper remains available for baseline review.
+Import first on a fresh checkout so Godot registers global script classes. The test runner runs all existing physics/race/runoff/handling/presentation suites plus `tests/competitor_tests.gd` and exits nonzero if a check fails. It tests real GDScript functions and running physics scenes. For optional rendered screenshots, run `godot --path . --script tests/capture_race_preview.gd`. This requires an actual display/graphics driver and saves `artifacts/race_*.png`. The results screenshot uses synthetic checkpoint crossings, not a manually driven record. The v0.1 preview helper remains available for baseline review.
 
 The runner also includes `tests/runoff_tests.gd`, with real kart exits/rejoins on both sides, barrier geometry and legal runoff checkpoint registration. To capture separate correction previews use `godot --path . --script tests/capture_race_preview.gd -- --runoff`; output is `artifacts/runoff_*.png`.
 
@@ -100,7 +105,9 @@ The runner also includes `tests/runoff_tests.gd`, with real kart exits/rejoins o
 
 `tests/corrective_tests.gd` adds reference landmarks, grouped colour continuity, bounded gate coverage, continuous off-road laps, reverse/wrong-heading pad entries and real trunk/foliage collision checks. `godot --path . --script tests/capture_corrective_preview.gd` saves the overhead review to `artifacts/corrective_layout.png`.
 
-See [validation](docs/validation.md) for actual results and limits, the [cumulative manual checklist](docs/testing/ACCEPTANCE_CHECKLIST.md) for checks 1–49, and the [handling audit](docs/v0.3.0-audit.md) for baseline/reference inspection. The [earlier runoff procedures](docs/acceptance.md) are retained. See [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md) and [VERSIONING.md](VERSIONING.md) for scope, actual changes and development status. Each patch must rerun the accepted baseline and append its own manual criteria; v0.3.0-dev handling and v0.3.1 corrective acceptance remain pending.
+See [validation](docs/validation.md) for actual results and limits, the [cumulative manual checklist](docs/testing/ACCEPTANCE_CHECKLIST.md) for checks 1–65, and the [handling audit](docs/v0.3.0-audit.md) for baseline/reference inspection. The [earlier runoff procedures](docs/acceptance.md) are retained. See [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md) and [VERSIONING.md](VERSIONING.md) for scope, actual changes and development status. Each patch must rerun the accepted baseline and append its own manual criteria; v0.4.0 acceptance remains pending; earlier history is retained.
+
+For real physical AI-only validation, run `godot --headless --fixed-fps 60 --path . --script tests/run_ai_race.gd`. Append `-- --difficulty=casual`, `-- --difficulty=challenging` or `-- --idle-human`; reports go to `artifacts/ai_race_*.json`. For an interactive AI-only game use `godot --path . -- --ai-only --auto-start`. The renderer preview is `tests/capture_competitor_preview.gd`; benchmark one/seven karts with `tests/benchmark_competitors.gd` **without** `--fixed-fps`. See [full instructions and limits](docs/racing-competitors.md).
 
 ## Reference and distribution
 

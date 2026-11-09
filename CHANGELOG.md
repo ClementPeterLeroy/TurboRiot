@@ -1,6 +1,37 @@
 # Changelog
 
-## Unreleased
+## Unreleased — v0.4.0-dev — Racing Competitors
+
+Pending developer testing/acceptance. Project/HUD use `0.4.0-dev`; Windows numeric fields use `0.4.0.0`. No v0.4.0 release, tag or publication is claimed.
+
+### Added
+
+- Default seven-kart field (one human/six AI), configurable opponent count, three difficulty resources, curve-following staggered grid, per-driver colours/names and simultaneous countdown/GO.
+- AIInput implements the existing DrivingInput/DrivingCommand contract and reuses the shared kart controller/config. Cached circuit-derived pursuit, curvature/braking-horizon speed planning, bounded steering, drift/mini-turbo decisions and shared-API recovery for stalls/off-road/missed gates. No AI transform driving, physics advantages or rubber-banding.
+- Straight-line traffic passing with lane occupancy checks, retained side/target, smooth lane transitions, close-traffic braking and return to the line. Lane interpolation initializes at the actual grid/recovery offset to prevent an initial inward swerve.
+- Independent CompetitorState/RaceSession data per kart; legal route/travel-constrained live ranking, subtick ordering of simultaneous finishes, continued AI racing after human results and configurable finish grace/timeout DNF. Finishers become nonblocking until restart.
+- Position/lap/time HUD, live result standings with names/times/RACING/DNF, optional F3 line/waypoints/targets and selected-driver telemetry; F8 cycles AI debug selection. Presentation A/B controls remain available.
+- Competitor unit/integration tests, physical overtake and kart collision checks, real AI-only/mixed races, rendered race capture and one/seven-kart native benchmark. Manual acceptance checks 50–65 appended; all previous checks and v0.3.2 visual-stability coverage retained.
+
+### Changed
+
+- RaceManager coordinates the whole field while preserving its player `session`/movement API. Kart collision mask now includes other kart bodies; all competitors share identical movement/handling rules.
+- Restart/Return to Ready reset the entire field; recovery/finish/reset samples remain competitor-local. Cached line data rebuilds with track geometry without duplicating opponents.
+- Current roadmap/README/versioning/architecture/controls/validation updated for v0.4.0 development. Source circuit geometry, controller dynamics, camera and visual-oscillation corrections are preserved.
+
+### Validation and limits
+
+- Before implementation: 519 checks, 0 failures. Final expanded suite: **568 checks, 0 failures**. Physical race/render/performance results are recorded in `docs/validation.md` and `docs/racing-competitors.md`; automation does not claim manual acceptance.
+- Passing is basic and primarily on straights; hard blocking can require shared recovery. Performance observations cover one Windows/RTX 3070 Ti Laptop GPU configuration. Real devices/feel/controller/export testing remains pending. No networking, split-screen, items, weapons, new circuit, selection menu or persistent leaderboard.
+- No staging, commits, pushes, tags, release creation or GitHub actions by Codex.
+
+## v0.3.2 — Persistent Visual Oscillation fix — developer-reported released baseline
+
+The v0.4.0 brief identifies v0.3.2 as the latest released baseline. Local history contains commit `96934a4` with that title, including the shoulder-contact correction, camera/shared-render-pose interpolation and moving-target follow, retained A/B diagnostics and 519 passing automated checks. No local tags are present. That commit's project/HUD/export metadata still read `0.3.0-dev` / `0.3.0.0`; no release date, tag or corrected historical metadata is invented here. See `docs/v0.4.0-audit.md`.
+
+The earlier v0.3.0/v0.3.1 entries below are preserved as originally recorded. Their development/pending wording is historical, rather than a new assertion about the developer-reported v0.3.2 release. Granular manual checkbox results are not reconstructed from a release label.
+
+## Historical development record — formerly Unreleased
 
 ### v0.3.1 — Corrective Patch
 

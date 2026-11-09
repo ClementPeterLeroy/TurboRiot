@@ -1,3 +1,56 @@
+# v0.4.0-dev — Racing Competitors validation (2026-11-10)
+
+**Unreleased, pending developer testing/acceptance.** The developer identifies v0.3.2 as the latest released baseline. [The initial audit](v0.4.0-audit.md) records local commit `96934a4`, absent local tags and the older `0.3.0-dev` metadata found there; earlier history below remains preserved. Current project/HUD identifiers are `0.4.0-dev`, with numeric Windows export fields `0.4.0.0`.
+
+## Baseline and complete regression suite
+
+Before implementation: **519 checks, 0 failures**. Final `tests/run_tests.gd`: **568 checks, 0 failures**, exit 0, Godot **4.7.2.stable.official.ed1daf0bf**, Windows. All 519 existing assertions are retained, including contact, camera/render interpolation, drifting, surface transitions, directional pads, ramps, race/recovery and presentation diagnostics. Their single-kart fixtures explicitly set Opponent Count to zero so unrelated traffic cannot invalidate isolated mechanics measurements. New field tests use the default seven racers and actual kart-to-kart interaction.
+
+The 49 added assertions cover default grid spacing/orientation and actual-lane initialization, shared physical config with independent states, synchronized countdown clocks/lock/GO, cached closed racing line, curvature anticipation and profile decisions, steering response/sign, stall/missed-gate recovery and cooldown, per-driver isolation, AI-first/human-first finishing, results/continued racing/DNF, all-driver restart, validated progress ranking, teleport rejection, subtick ordering, optional debug/cache regeneration, a real controlled overtake with held passing side/return to line, and actual CharacterBody kart collision. Restart tests include AI timers, target/pass/drift state and collision restoration.
+
+Use `--fixed-fps 60` for fast deterministic headless simulation at the existing 1/60 physics step. It does not increase the runtime physics tick rate or alter handling.
+
+## Physical race completion
+
+`tests/run_ai_race.gd` drives real karts through actual collisions, surfaces and directed gates. It never injects transforms or checkpoint events during racing. The final seven-AI three-lap runs all exit 0:
+
+| Profile | Finished | First–last race time | AI recoveries / DNFs | Drift / mini-turbo active frame observations |
+| --- | --- | --- | --- | --- |
+| Casual | 7/7, three laps each | 115.250–124.083 s | 0 / 0 | 0 / 0 |
+| Standard | 7/7, three laps each | 97.517–104.767 s | 0 / 0 | 2,730 / 390 |
+| Challenging | 7/7, three laps each | 89.383–97.017 s | 0 / 0 | 3,315 / 810 |
+
+These are deterministic scenario observations, not promises of fixed player-relative performance. Difficulty parameters change decisions; the shared KartConfig is unchanged. Pads can produce the same boosted speeds for all racers. Counts refer to active frames across the field, not unique drift/turbo awards. Reports: `artifacts/ai_race_0_7_3_all_ai.json`, `ai_race_1_7_3_all_ai.json`, `ai_race_2_7_3_all_ai.json`.
+
+The final mixed run with a deliberately idle human also exits 0: all six AI complete three laps in **96.467–106.433 s**, with **zero AI recoveries/DNFs**, while the idle human becomes DNF at the configured first-finisher grace deadline. A default one-lap idle-human diagnostic also passes. A **twelve-AI one-lap** configuration stress run completes **12/12**, with zero recoveries/DNFs (32.783–40.983 s). Physical/unit fixtures separately force stuck/missed-gate recovery; successful ordinary runs are not the only recovery evidence. Reports are saved under `artifacts/ai_race_*.json`.
+
+## Presentation, rendering and performance
+
+The retained native presentation probe passes **12/12** Normal/Static/Fixed-orientation/Minimal scenarios at 60/120/uncapped rendering. Normal-mode screen-Y range is **0.263 / 0.209 / 0.220 px**, respectively, below its one-pixel limit. This is an isolated single-competitor straight regression, not a claim of manual acceptance or collision-induced motion stability. Camera, KartController and the validated shoulder/ramp correction code are unchanged by v0.4.0.
+
+`tests/capture_competitor_preview.gd` completes a **real seven-AI one-lap rendered race**, exit 0. Its grid, racing, optional F3 debug and finished results images were inspected directly. All seven default standings fit the 720p result card; longer lap details remain scrollable. Captures: [grid](../artifacts/competitors_grid.png), [racing](../artifacts/competitors_racing.png), [debug](../artifacts/competitors_debug.png), [results](../artifacts/competitors_results.png). No synthetic finish event was used for these screenshots.
+
+`tests/benchmark_competitors.gd` uses the native Compatibility renderer on **NVIDIA RTX 3070 Ti Laptop GPU**, 1280×720, VSync disabled/uncapped, sequential three-second samples after warmup, with no simultaneous benchmark workload:
+
+| Moving racers | Measured render FPS | Measured physics Hz | Mean physics time | Maximum sampled physics time | Mean draw calls |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | 560.0 | 57.3 | 0.779 ms | 0.937 ms | 288.1 |
+| 7 | 476.8 | 59.9 | 2.701 ms | 3.276 ms | 322.3 |
+
+Report: `artifacts/competitors_performance.json`. This representative chase-view sample shows the seven-kart workload within a 60 Hz frame budget on this machine. It is not a worst-case guarantee, broad hardware benchmark or claim that every kart is in the camera frustum throughout the sample. Headless fixed-step simulation throughput is not presented as graphical FPS.
+
+## Engine checks and remaining acceptance
+
+Final editor import and configured main-scene startup (`--headless --path . --quit-after 300 -- --auto-start`) both exit 0 without script/scene/physics errors. The pre-existing Windows root-certificate-store warning remains. Read-only diff/whitespace and cumulative checklist checks also pass. No packaged Windows export or physical controller test is claimed.
+
+Manual checks **50–65** are appended while preserving **1–49**, including visible high-speed stability. Human driving feel, hard blocking/complex traffic, broad device/VSync/controller behavior, alternate authored circuits and packaged export remain pending. Passing is basic/primarily straight-line, recovery can be necessary under deliberate obstruction, and route guards are prototype safeguards rather than online anti-cheat. No new circuit geometry, rubber-banding, weapons/items, networking, split-screen, selection menu or persistent leaderboard is introduced. **No staging, commits, pushes, tags, releases or GitHub actions.**
+
+See [architecture, parameters and manual play instructions](racing-competitors.md), [current roadmap](../ROADMAP.md) and [version policy](../VERSIONING.md).
+
+---
+
+# Historical v0.3.x validation record
+
 # v0.3.0 development patch — persistent visual oscillation, second investigation
 
 **Unreleased; developer acceptance pending.** The developer confirmed the first contact correction did not eliminate the original high-speed visual symptom. The shoulder fix is retained; stable body Y is not visual acceptance. No version advance or roadmap change.

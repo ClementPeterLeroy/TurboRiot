@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AIDriverProfile" load_steps=2 format=3]
+[ext_resource type="Script" path="res://resources/ai_driver_profile.gd" id="1"]
+[resource]
+script = ExtResource("1")
+display_name = "Casual"
+speed_fraction = 0.78
+lateral_acceleration = 4.5
+braking_confidence = 0.38
+lookahead_base = 4.5
+lookahead_seconds = 0.4
+steering_response = 3.2
+imperfection = 0.025
+passing_distance = 15.0
+lane_change_speed = 1.4
+recovery_delay = 5.0
+offroad_delay = 2.5
+drift_enabled = false

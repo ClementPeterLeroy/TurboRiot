@@ -17,6 +17,7 @@ func _place(kart: KartController, transform: Transform3D) -> void:
 func _start() -> void:
 	DirAccess.make_dir_recursive_absolute("res://artifacts")
 	main = load("res://scenes/main.tscn").instantiate()
+	main.get_node("RaceManager").opponent_count = 0 # Isolated legacy mechanics/presentation fixture.
 	root.add_child(main)
 	root.size = Vector2i(1280, 720)
 	var race := main.get_node("RaceManager") as RaceManager

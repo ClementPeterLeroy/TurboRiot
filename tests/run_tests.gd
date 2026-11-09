@@ -27,6 +27,7 @@ func _run() -> void:
 	await preload("res://tests/corrective_tests.gd").new().run(self)
 	await preload("res://tests/vertical_stability_tests.gd").new().run(self)
 	await preload("res://tests/presentation_tests.gd").new().run(self)
+	await preload("res://tests/competitor_tests.gd").new().run(self)
 	print("Turbo Riot: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 
@@ -129,6 +130,7 @@ func _test_main() -> void:
 	if not packed:
 		return
 	var main := packed.instantiate()
+	main.get_node("RaceManager").opponent_count = 0 # Isolated legacy mechanics/presentation fixture.
 	root.add_child(main)
 	var kart := main.get_node("Kart") as KartController
 	# Existing physics checks run during RACING; READY now correctly locks driving.

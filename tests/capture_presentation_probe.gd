@@ -8,6 +8,7 @@ func _initialize() -> void:
 func _run() -> void:
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	main = load("res://scenes/main.tscn").instantiate()
+	main.get_node("RaceManager").opponent_count = 0 # Isolated legacy mechanics/presentation fixture.
 	var legacy := "--legacy" in OS.get_cmdline_user_args()
 	if legacy:
 		var legacy_kart := main.get_node("Kart") as KartController
