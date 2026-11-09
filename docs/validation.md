@@ -1,4 +1,31 @@
-# Full v0.3.0-dev validation — Arcade Handling (2026-11-09)
+# v0.3.1 — Corrective Patch validation (2026-11-09)
+
+**Unreleased, pending developer acceptance**, following **v0.3.0-dev — Arcade Handling**. The corrective work is now documented as v0.3.1 at the developer’s request; tests below ran with project/HUD identity `0.3.0-dev` and Windows resource version `0.3.0.0`. This documentation relabeling does not rerun tests or change build metadata. Roadmap milestones and accepted v0.2.0 history are preserved. Manual checks 1–26 remain preserved and checks 27–36 are appended in [the cumulative checklist](testing/ACCEPTANCE_CHECKLIST.md). No current manual pass is claimed.
+
+## Actual results
+
+- Before this correction: **266 checks, 0 failures**. Final complete `tests/run_tests.gd`: **464 checks, 0 failures**, exit 0, Godot **4.7.2.stable.official.ed1daf0bf**, Windows. The new corrective suite alone passed **198 checks, 0 failures**.
+- Editor import (`--headless --path . --editor --import --quit`) and configured main startup (`--headless --path . --quit-after 240`) both exited 0 without script, scene or physics errors. The existing Windows sandbox root-certificate-store warning remains; it did not prevent validation.
+- Geometry checks cover traced landmarks, closed finite road, upward triangle winding after widening, shared block/collider positions, exact configurable colour groups and deterministic resource rebuilding. Existing runoff driving now uses the actual infield opening and physical fence bounds.
+- Every gate accepts representative road/runoff lines on both sides, including 85% of each asymmetric extent; backwards crossings and finite-edge violations fail. Continuous movement fixtures complete three ordered laps with sand crossings and a final grass finish. Isolated distant gate crossings cannot fabricate progress. Original ordering, reverse-finish, reset/recovery, timing and lifecycle scenarios remain.
+- Real Area3D entries activate and propel in pad-forward direction for forward, reverse and wrong-heading approaches. Scenarios check bounded displacement/yaw, reset cleanup and nondirectional mini-turbos. Existing latch/cooldown/overlap/expiry, drift, surface, ramp, recovery and camera regressions pass. Pad occupancy tests explicitly hold the kart on the Area while verifying the latch, since propulsion now moves it out naturally.
+- Generated trunks share a lightweight inscribed cylinder. Ray queries and actual kart movement verify trunk obstruction and clear passage beside the trunk under non-solid foliage.
+
+## Rendered inspection
+
+`tests/capture_corrective_preview.gd` exited 0 on the Compatibility renderer with NVIDIA RTX 3070 Ti Laptop GPU and saved [the corrected overhead](../artifacts/corrective_layout.png). The image was directly inspected: stepped outer frame, T-shaped infield, two access gaps, widened road and continuous grouped colours. Its separate gate probe accepted all three sampled lines at each of twelve gates (36/36). Reference-shape agreement remains subject to developer comparison, particularly corner proportions.
+
+`tests/capture_handling_preview.gd` exited 0, reporting active drift with 1.0167 seconds of charge, `mini_turbo` after release and real ramp airborne state true. It refreshed drift, mini-turbo, pad, ramp, airborne and landing review images. These scripted scenes are not a human-driven race or manual camera/feel acceptance.
+
+## Files and limits
+
+Implementation is in `scenes/track.tscn`; the new `resources/barrier_run.gd` and outer/infield fence resources; TrackBuilder, BoostPad and TrackFeatures; CheckpointGate/RaceManager; KartConfig, KartController/BoostController/KartRecovery; and EnvironmentBuilder. Tests add `corrective_tests.gd` and `capture_corrective_preview.gd`, extend the runner and adapt race/runoff/handling fixtures and the race capture helper. README, changelog, architecture, controls, reference authoring and cumulative/historical acceptance documents describe current behavior.
+
+Human reference comparison, exhaustive possible off-road racing lines, driving feel, real controller hardware, complete manual regressions and packaged Windows export remain pending. Gate sector/travel guards are course-specific safeguards, not comprehensive anti-cheat; arbitrary replacement layouts need authoring review and coverage tests. Camera obstruction remains a ray; tight-corner clipping/shadow aliasing may need tuning. No staging, commits, pushes, tags, releases, remote changes or GitHub actions were performed.
+
+---
+
+# Historical full v0.3.0-dev validation — Arcade Handling (2026-11-09)
 
 This full handling patch is **Unreleased and pending developer acceptance**. Prior v0.2.0 acceptance is preserved, but no current-version manual gameplay/feel/controller retest is claimed. The canonical checklist contains the supplied exact regression checks 1–10 and new manual checks 11–26 at [testing/ACCEPTANCE_CHECKLIST.md](testing/ACCEPTANCE_CHECKLIST.md).
 

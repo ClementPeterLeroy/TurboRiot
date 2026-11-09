@@ -94,21 +94,22 @@ func _scene(s: SceneTree) -> void:
 	kart.get_node("Recovery").stuck_seconds = 0
 	var track := main.get_node("Track") as TrackBuilder
 	var length := track.curve.get_baked_length()
-	s.check(not track.barrier_enabled(length * 0.85, -1) and track.barrier_enabled(length * 0.85, 1), "Authored outer opening keeps opposite boundary enabled")
+	var infield := track.barrier_runs[1]
+	s.check(not infield.enabled_at((infield.gaps[0].x + infield.gaps[0].y) * 0.5), "Authored grass opening is enabled")
 	var perimeter := kart.get_world_3d().direct_space_state.intersect_ray(
-		PhysicsRayQueryParameters3D.create(Vector3(168, 0.5, 0), Vector3(172, 0.5, 0), 1))
+		PhysicsRayQueryParameters3D.create(Vector3(89, 0.5, 0), Vector3(92, 0.5, 0), 1))
 	# Wait for newly created static geometry to enter the physics world.
 	await s.physics_frame
 	await s.physics_frame
 	perimeter = kart.get_world_3d().direct_space_state.intersect_ray(
-		PhysicsRayQueryParameters3D.create(Vector3(168, 0.5, 0), Vector3(172, 0.5, 0), 1))
+		PhysicsRayQueryParameters3D.create(Vector3(89, 0.5, 0), Vector3(92, 0.5, 0), 1))
 	s.check(not perimeter.is_empty(), "Visible outer perimeter contains open sections")
-	var opening := track.barrier_point(length * 0.85, -1) + Vector3.UP * 0.5
-	var across := track.sample_forward(length * 0.85).cross(Vector3.UP) * 2
+	var opening := Vector3(53.64, 0.5, 14.4)
+	var across := Vector3(2, 0, 0)
 	var gap := kart.get_world_3d().direct_space_state.intersect_ray(
 		PhysicsRayQueryParameters3D.create(opening - across, opening + across, 1))
 	s.check(gap.is_empty(), "Disabled barrier section has no invisible collision wall")
-	var opposite := track.barrier_point(length * 0.85, 1) + Vector3.UP * 0.5
+	var opposite := Vector3(41.04, 0.5, 14.4)
 	var wall := kart.get_world_3d().direct_space_state.intersect_ray(
 		PhysicsRayQueryParameters3D.create(opposite - across, opposite + across, 1))
 	s.check(not wall.is_empty(), "Opposite side remains collidable beside opening")
@@ -162,6 +163,7 @@ func _scene(s: SceneTree) -> void:
 		await s.physics_frame
 	s.check(kart.boost.active() and kart.boost.source == &"boost_pad", "Area boost pad activates on a grounded kart")
 	s.check(kart.surface_detector.current.identifier == &"boost_pad", "Boost pad surface detected independently of asphalt")
+	kart.set_physics_process(false) # Hold occupancy while testing the pad's latch.
 	kart.boost.clear()
 	for i in 70:
 		await s.physics_frame
@@ -171,6 +173,7 @@ func _scene(s: SceneTree) -> void:
 	for i in 70:
 		await s.physics_frame
 	s.check(not kart.boost.active(), "Reset on occupied pad clears boost without re-triggering after cooldown")
+	kart.set_physics_process(true)
 	var ramp := features.get_node("Generated/RunoffJump") as KartRamp
 	_place(kart, ramp.to_global(Vector3(0, 0.42, 2.0)), ramp.global_basis)
 	for i in 15:

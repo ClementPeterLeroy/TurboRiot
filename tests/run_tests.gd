@@ -24,6 +24,7 @@ func _run() -> void:
 	await preload("res://tests/race_tests.gd").new().run(self)
 	await preload("res://tests/runoff_tests.gd").new().run(self)
 	await preload("res://tests/handling_tests.gd").new().run(self)
+	await preload("res://tests/corrective_tests.gd").new().run(self)
 	print("Turbo Riot: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 
@@ -168,14 +169,15 @@ func _test_main() -> void:
 	var track := main.get_node("Track") as TrackBuilder
 	var offset := 8.0 # Preserve the narrow-wall regression in the start corridor.
 	var right := track.sample_forward(offset).cross(Vector3.UP)
-	kart.position = track.sample_center(offset) + right * 3.5 + Vector3.UP * 0.65
+	var wall_distance := track.corridor_limits(offset).y
+	kart.position = track.sample_center(offset) + right * (wall_distance - 2.0) + Vector3.UP * 0.65
 	kart.basis = Basis.looking_at(right)
 	Input.action_press("accelerate")
 	for i in 90:
 		await physics_frame
 	Input.action_release("accelerate")
 	var displacement := (kart.position - track.sample_center(offset)).dot(right)
-	check(displacement < track.road_width * 0.5 + 0.8, "Visible barrier blocks kart")
+	check(displacement < wall_distance + 0.1, "Visible barrier blocks kart")
 	check(absf(kart.signed_speed) < 3.0, "Wall impact reduces speed")
 	var recovery := kart.get_node("Recovery") as KartRecovery
 	recovery.stuck_seconds = 0.15

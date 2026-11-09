@@ -1,6 +1,8 @@
+> v0.3.1 — Corrective Patch, following v0.3.0-dev — Arcade Handling (both Unreleased; acceptance pending): this historical procedure remains preserved. Current fence positions/openings and legal runoff checkpoint behavior are specified in [track-reference.md](track-reference.md) and cumulative checks 27–36 in [testing/ACCEPTANCE_CHECKLIST.md](testing/ACCEPTANCE_CHECKLIST.md); older road-only checkpoint and perimeter coordinates below are superseded.
+
 # Manual acceptance and regression baseline
 
-**Current canonical checklist:** [docs/testing/ACCEPTANCE_CHECKLIST.md](testing/ACCEPTANCE_CHECKLIST.md), including the exact ten v0.2.0 criteria supplied in the full v0.3.0 brief and new checks 11–26. The earlier procedures below are preserved as history/regressions. V03-R02's correction-only "no off-road penalty" expectation is superseded by the full patch's surface tests; it is not a regression failure. No pending manual result has been silently accepted.
+**Current canonical checklist:** [docs/testing/ACCEPTANCE_CHECKLIST.md](testing/ACCEPTANCE_CHECKLIST.md), including the exact ten v0.2.0 criteria supplied in the full v0.3.0 brief and v0.3.0-dev handling checks 11–26 plus v0.3.1 corrective checks 27–36. The earlier procedures below are preserved as history/regressions. V03-R02's correction-only "no off-road penalty" expectation is superseded by the full patch's surface tests; it is not a regression failure. No pending manual result has been silently accepted.
 
 ## Acceptance record and policy
 

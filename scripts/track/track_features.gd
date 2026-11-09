@@ -11,7 +11,7 @@ const RAMP := preload("res://scenes/ramp.tscn")
 	set(value):
 		ramp_fraction = value
 		_schedule()
-@export var ramp_side_offset: float = -9.0:
+@export var ramp_side_offset: float = -10.5:
 	set(value):
 		ramp_side_offset = value
 		_schedule()

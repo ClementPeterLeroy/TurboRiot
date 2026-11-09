@@ -6,16 +6,13 @@ extends Node3D
 @export var tree_count: int = 65
 ## Metre coordinates traced from the reference's central grass footprint.
 ## Editable separately from the circuit when authoring an original layout.
-@export var infield_outline := PackedVector2Array([
-	Vector2(-59.4, -60.3), Vector2(-42.3, -60.3), Vector2(-42.3, -22.5),
-	Vector2(31.5, -22.5), Vector2(31.5, -15.3), Vector2(53.1, -15.3),
-	Vector2(53.1, 53.1), Vector2(42.3, 53.1), Vector2(42.3, -2.7),
-	Vector2(-42.3, -2.7), Vector2(-42.3, 14.4), Vector2(-59.4, 14.4)])
+@export var infield_outline := PackedVector2Array([Vector2(-59.0400, -60.3000), Vector2(-41.9400, -60.3000), Vector2(-41.9400, -22.5000), Vector2(31.3200, -22.5000), Vector2(31.3200, -15.3000), Vector2(53.6400, -15.3000), Vector2(53.6400, 53.6400), Vector2(41.0400, 53.6400), Vector2(41.0400, -2.3400), Vector2(-41.9400, -2.3400), Vector2(-41.9400, 14.7600), Vector2(-58.6800, 14.7600), Vector2(-58.6800, 27.7200), Vector2(-64.9800, 27.7200), Vector2(-64.9800, 8.6400), Vector2(-59.0400, 8.6400)])
 @export var rebuild: bool = false:
 	set(_value):
 		if is_inside_tree():
 			_schedule_build()
 var _queued := false
+var _trunk_shape: CylinderShape3D
 
 func _ready() -> void:
 	if track:
@@ -41,11 +38,17 @@ func build() -> void:
 	var grass := RiotGeometry.material(Color("2ecc40"))
 	var leaves := RiotGeometry.material(Color("299c53"))
 	var bark := RiotGeometry.material(Color("976244"))
+	if _trunk_shape == null:
+		_trunk_shape = CylinderShape3D.new()
+		_trunk_shape.radius = 0.18 # Inscribed within the visible 0.25 -> 0.18 taper.
+		_trunk_shape.height = 1.4
 	var ground := RiotGeometry.box(generated, "SandGround", Vector3(360, 0.6, 320), Vector3(0, -0.38, 0), sand, true)
 	SurfaceDetector.tag_collision(ground, preload("res://resources/surfaces/sand.tres"))
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_value
 	_build_infield(generated, grass)
+	_grass_patch(generated, Vector3(65.25, -0.06, -75.78), Vector2(49.5, 28.44), grass)
+	_grass_patch(generated, Vector3(-47.7, -0.06, 77.4), Vector2(84.6, 25.2), grass)
 	var crown_mesh := SphereMesh.new()
 	crown_mesh.radius = 1.0
 	crown_mesh.height = 2.0
@@ -59,7 +62,13 @@ func build() -> void:
 		if _inside_driving_envelope(point):
 			continue
 		var height := rng.randf_range(3.4, 5.5)
-		RiotGeometry.cylinder(generated, "Trunk", point + Vector3.UP * 0.7, 0.25, 0.18, 1.4, bark)
+		var trunk := RiotGeometry.cylinder(generated, "Trunk", point + Vector3.UP * 0.7, 0.25, 0.18, 1.4, bark)
+		var body := StaticBody3D.new()
+		body.name = "TrunkCollision"
+		trunk.add_child(body)
+		var collision := CollisionShape3D.new()
+		collision.shape = _trunk_shape
+		body.add_child(collision)
 		var crown := MeshInstance3D.new()
 		crown.name = "Crown"
 		crown.mesh = crown_mesh
@@ -80,7 +89,7 @@ func build() -> void:
 		hill.mesh = hill_mesh
 		hill.material_override = grass
 		generated.add_child(hill)
-		hill.position = Vector3(cos(angle) * 145.0, -2.0, sin(angle) * 130.0)
+		hill.position = Vector3(cos(angle) * 170.0, -2.0, sin(angle) * 155.0)
 		hill.scale = Vector3(25.0, rng.randf_range(12, 22), 23.0)
 
 func _build_infield(parent: Node3D, grass: Material) -> void:
@@ -113,6 +122,22 @@ func _build_infield(parent: Node3D, grass: Material) -> void:
 	polygon.rotation.x = PI * 0.5
 	region.add_child(polygon)
 	region.set_meta("surface", preload("res://resources/surfaces/grass.tres"))
+
+func _grass_patch(parent: Node3D, center: Vector3, size: Vector2, grass: Material) -> void:
+	RiotGeometry.box(parent, "OuterGrass", Vector3(size.x, 0.015, size.y), center, grass)
+	var area := Area3D.new()
+	area.name = "OuterGrassSurface"
+	area.position = Vector3(center.x, 0.2, center.z)
+	area.collision_layer = 8
+	area.collision_mask = 0
+	area.monitoring = false
+	parent.add_child(area)
+	var collision := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(size.x, 1, size.y)
+	collision.shape = box
+	area.add_child(collision)
+	area.set_meta("surface", preload("res://resources/surfaces/grass.tres"))
 
 func _inside_driving_envelope(point: Vector3) -> bool:
 	if not track or not track.curve:

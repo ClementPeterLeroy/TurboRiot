@@ -3,11 +3,12 @@
 ## History and status
 
 - **v0.2.0:** All ten original checks were manually accepted by the developer (confirmed 2026-11-08). Their exact wording below was supplied in the v0.3.0 brief on 2026-11-09.
-- **v0.3.0-dev:** Manual acceptance is pending. Every checkbox below records a fresh v0.3.0 manual run; none is marked passed merely because automation or rendering succeeded. No manual v0.3.0 gameplay/feel/hardware validation is claimed by Codex.
+- **v0.3.0-dev — Arcade Handling:** Checks 11–26 and baseline regressions remain pending manual acceptance.
+- **v0.3.1 — Corrective Patch:** Checks 27–36 plus all earlier regressions remain pending. No checkbox is marked passed merely because automation or rendering succeeded. No current gameplay/feel/hardware acceptance is claimed by Codex. Record the actual runtime build identity alongside the patch label; see [versioning](../../VERSIONING.md).
 - Preserve checks and append new ones for later patches. Record build, date, tester, controls/hardware, resolution, result and issue links. Historical acceptance does not automatically accept changed behavior.
 - The earlier [runoff checklist](../acceptance.md) remains preserved with stable V02/V03-R IDs. Its access, re-entry, collision and race-integrity checks remain regressions. The correction-only expectation of unchanged surface behavior is superseded by checks 14–15 in this full handling patch. No earlier pending correction check is silently marked accepted.
 
-## v0.2.0 regressions — previously manually accepted; current v0.3.0 run pending
+## v0.2.0 regressions — previously manually accepted; current v0.3.1 regression run pending
 
 - [ ] **1. Track layout follows the overhead reference.** Check the overhead, corner order/proportions and normal chase view.
 - [ ] **2. Coloured faceted barriers render correctly.** Inspect red/blue/yellow/green faces and collision placement, including the outer perimeter/open section.
@@ -20,7 +21,7 @@
 - [ ] **9. Restart clears the entire race state.** Try during countdown, racing and results; verify one fresh countdown, grid spawn, empty laps/zero clocks.
 - [ ] **10. Camera, driving and collisions remain functional.** Test keyboard and available gamepad, reverse/brake, walls and reset snapping. Record devices actually used.
 
-## New v0.3.0 checks — manual verification pending
+## v0.3.0-dev — Arcade Handling checks — manual verification pending
 
 - [ ] **11. Kart can leave asphalt and drive onto sand.** Cross the kerb on both sides of the early straight; drive back via the sloped shoulder without R.
 - [ ] **12. Kart can drive onto grass where intended.** Cross the sand strip into the infield from the early right straight or long left straight.
@@ -39,11 +40,29 @@
 - [ ] **25. Recovery and restart clear temporary movement states.** Clear drift/charge/boost on R, automatic fall/upright/bounds recovery, restart and race finish. No leftover acceleration, charge or orientation from the previous run.
 - [ ] **26. Existing race progression remains functional.** Complete three laps with surfaces/drifts/pads mixed in. Optional ramp/runoff exploration must not bypass required checkpoints. Results/restart/Return to Ready still work.
 
+## v0.3.1 — Corrective Patch checks — manual verification pending
+
+Checks 1–26 above are retained verbatim as history/regressions. For the corrected source circuit, check 13’s former profile/opening/perimeter coordinates are superseded by the stepped outer fence and two infield openings described in [track-reference.md](../track-reference.md). Legal runoff now counts at checkpoints; any older road-only expectation is superseded by check 31. No checkbox below is pre-accepted.
+
+- [ ] **27. Circuit geometry closely matches the overhead reference.**
+- [ ] **28. Barrier locations match the intended circuit layout.**
+- [ ] **29. Barrier colours repeat in groups of five.**
+- [ ] **30. Kart can access intended sand and grass runoff.**
+- [ ] **31. Checkpoints register valid off-road racing lines.**
+- [ ] **32. Invalid shortcuts still fail lap validation.**
+- [ ] **33. Reverse entry onto boost pads produces forward propulsion.**
+- [ ] **34. Normal forward entry onto boost pads still works.**
+- [ ] **35. Kart collides with tree trunks.**
+- [ ] **36. Kart can pass beneath or beside foliage without oversized invisible collisions.**
+
+For 27–30 compare the overhead and chase views, inspect both grass openings, and try colour group size three then restore five. For 31–32 test both sides of corners, grass at finish, reverse/order violations and large infield cuts. For 33–34 enter each pad forward, backward and facing away; check smooth acceleration/yaw, cooldown and expiry, plus drift mini-turbos. For 35–36 drive into a trunk and through adjacent crown space. Rerun earlier race, drift, recovery and camera checks and record actual hardware.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
 | --- | --- | --- | --- | --- |
 | v0.2.0 | Developer, confirmed 2026-11-08 | Original device details not recorded | Original 1–10 reported passed | Accepted baseline |
-| v0.3.0-dev | Pending | Pending | 1–26 plus retained runoff regressions pending | Not accepted/released |
+| v0.3.0-dev — Arcade Handling | Pending | Pending | 1–26 plus retained runoff regressions pending | Not accepted/released |
+| v0.3.1 — Corrective Patch | Pending | Pending | 1–36 plus retained runoff regressions pending; runtime identity currently 0.3.0-dev | Not accepted/released |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

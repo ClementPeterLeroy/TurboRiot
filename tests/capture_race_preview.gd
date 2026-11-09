@@ -30,11 +30,9 @@ func _start() -> void:
 	for lap in 3:
 		for index in range(1, race.gates.size()):
 			race.session.advance(3.5 + lap * 0.2)
-			var gate := race.gates[index]
-			race.process_movement(gate.to_global(Vector3(0, 1, 2)), gate.to_global(Vector3(0, 1, -2)))
+			preload("res://tests/race_tests.gd").new()._cross(race, index)
 		race.session.advance(3.5)
-		var finish := race.gates[0]
-		race.process_movement(finish.to_global(Vector3(0, 1, 2)), finish.to_global(Vector3(0, 1, -2)))
+		preload("res://tests/race_tests.gd").new()._cross(race, 0)
 	await _save("results")
 	root.size = Vector2i(1024, 576)
 	await _save("results_1024")

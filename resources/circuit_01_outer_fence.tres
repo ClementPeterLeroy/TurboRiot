@@ -1,0 +1,5 @@
+[gd_resource type="Resource" script_class="BarrierRun" load_steps=2 format=3]
+[ext_resource type="Script" path="res://resources/barrier_run.gd" id="1"]
+[resource]
+script = ExtResource("1")
+points = PackedVector3Array(-88.5600, -0.08, -88.5600, 40.5000, -0.08, -88.5600, 40.5000, -0.08, -61.5600, 90.0000, -0.08, -61.5600, 90.0000, -0.08, 90.0000, -5.4000, -0.08, 90.0000, -5.4000, -0.08, 64.8000, -88.5600, -0.08, 64.8000)

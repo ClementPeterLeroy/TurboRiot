@@ -46,6 +46,24 @@ func activate_boost(source: StringName, strength: float, duration: float) -> boo
 		return false
 	return boost.activate(source, strength, duration, config.boost_policy)
 
+func activate_directional_boost(direction: Vector3, strength: float, duration: float, redirect_seconds: float) -> bool:
+	if not driving_enabled or not direction.is_finite():
+		return false
+	direction.y = 0
+	if direction.length_squared() < 0.0001:
+		return false
+	# Pads always act. Under strongest-wins retain a stronger active cap and
+	# the longer timer; they cannot be ignored because approach is backwards.
+	if config.boost_policy == KartConfig.BoostPolicy.STRONGEST_WINS and boost.active():
+		strength = maxf(strength, boost.strength)
+		duration = maxf(duration, boost.remaining)
+	if not boost.activate(&"boost_pad", strength, duration, KartConfig.BoostPolicy.REPLACE):
+		return false
+	boost.direction = direction.normalized()
+	boost.direction_remaining = minf(redirect_seconds, duration)
+	drift.clear()
+	return true
+
 func _physics_process(delta: float) -> void:
 	surface_detector.update(self, config, delta)
 	floor_snap_length = config.ground_snap_distance
@@ -65,14 +83,23 @@ func _physics_process(delta: float) -> void:
 	var award := drift.update(current_command, speed, lateral, grounded, false, config, delta)
 	if grounded:
 		var surface := surface_detector.effective
-		var acceleration_multiplier := surface.x * (config.boost_acceleration_multiplier if boost.active() else 1.0)
-		speed = KartDynamics.longitudinal_speed(speed, current_command, config, delta,
-			acceleration_multiplier, surface.y, surface.w, boost.strength)
-		var grip := config.lateral_grip * surface.z * (config.drift_grip_multiplier if drift.active else 1.0)
-		lateral = KartDynamics.damp_lateral(lateral, grip, delta)
-		var yaw := KartDynamics.steering_radians(speed, current_command, config, delta)
-		rotate_y(yaw * (config.drift_steering_multiplier if drift.active else 1.0))
-		var horizontal := forward * speed + right * lateral
+		var horizontal: Vector3
+		if boost.direction_remaining > 0:
+			drift.clear()
+			award = 0
+			horizontal = Vector3(velocity.x, 0, velocity.z).move_toward(
+				boost.direction * config.max_forward_speed * surface.y * boost.strength, config.pad_propulsion_acceleration * delta)
+			var target_yaw := atan2(-boost.direction.x, -boost.direction.z)
+			rotate_y(clampf(wrapf(target_yaw - global_rotation.y, -PI, PI), -deg_to_rad(config.pad_turn_rate) * delta, deg_to_rad(config.pad_turn_rate) * delta))
+		else:
+			var acceleration_multiplier := surface.x * (config.boost_acceleration_multiplier if boost.active() else 1.0)
+			speed = KartDynamics.longitudinal_speed(speed, current_command, config, delta,
+				acceleration_multiplier, surface.y, surface.w, boost.strength)
+			var grip := config.lateral_grip * surface.z * (config.drift_grip_multiplier if drift.active else 1.0)
+			lateral = KartDynamics.damp_lateral(lateral, grip, delta)
+			var yaw := KartDynamics.steering_radians(speed, current_command, config, delta)
+			rotate_y(yaw * (config.drift_steering_multiplier if drift.active else 1.0))
+			horizontal = forward * speed + right * lateral
 		var normal := get_floor_normal()
 		var tangent := horizontal.slide(normal)
 		if tangent.length_squared() > 0.00001:

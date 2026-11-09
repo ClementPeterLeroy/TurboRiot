@@ -8,10 +8,12 @@ The existing project used three-part milestone versions (`0.1.0`) and four-part 
 | Race HUD footer | `v0.3.0-dev` | Same development build identity |
 | Windows file/product resource version | `0.3.0.0` | Numeric format required by the export metadata |
 | Windows file description | `Arcade Handling (Development)` | Preserves development status where numeric fields cannot |
-| ROADMAP.md | v0.3.0 current development | Scope and priorities |
-| CHANGELOG.md | Unreleased | Actual changes pending review |
+| ROADMAP.md | v0.3.0-dev — Arcade Handling; v0.3.1 — Corrective Patch | Milestone and subsequent corrective scope |
+| CHANGELOG.md | Unreleased: separate v0.3.1 and v0.3.0-dev entries | Actual changes pending review |
 
-The developer confirmed acceptance of all ten v0.2.0 manual checks on 2026-11-08. Preserve that baseline and historical build identifiers. This does not accept v0.3.0 or imply publication/tagging. The full handling patch retains `0.3.0-dev`, building on the prerequisite runoff correction. Its surfaces, drifting, mini-turbos, pads and jumps require the new manual criteria in [docs/testing/ACCEPTANCE_CHECKLIST.md](docs/testing/ACCEPTANCE_CHECKLIST.md); no current-version manual retest is inferred from past approval.
+The developer confirmed acceptance of all ten v0.2.0 manual checks on 2026-11-08. Preserve that baseline and historical build identifiers. This does not accept v0.3.0 or imply publication/tagging. The handling implementation is documented as **v0.3.0-dev — Arcade Handling**, building on the prerequisite runoff correction. Its subsequent reference geometry, corridor checkpoint, directional pad and trunk fixes are documented separately as **v0.3.1 — Corrective Patch**. Both remain Unreleased and pending developer acceptance. Its surfaces, drifting, mini-turbos, pads and jumps require the new manual criteria in [docs/testing/ACCEPTANCE_CHECKLIST.md](docs/testing/ACCEPTANCE_CHECKLIST.md); no current-version manual retest is inferred from past approval.
+
+The developer requested the v0.3.1 corrective label after the original brief described these fixes as same-version work. That label supersedes the earlier documentation wording. This is a documentation change: project/HUD identifiers remain `0.3.0-dev` and Windows resource versions remain `0.3.0.0`, as shown above. Historical test reports retain the actual build identity used for execution; the v0.3.1 report identifies that distinction explicitly. No acceptance, release date or new test run is implied by relabeling.
 
 Versions use MAJOR.MINOR.PATCH. The agreed 0.x milestones are preserved through v1.0.0. Keep unfinished milestone work under **Unreleased** with `-dev` in the project/HUD. Only developer approval can accept a release and remove that suffix. Future corrections can use the patch component without silently advancing milestone scope.
 

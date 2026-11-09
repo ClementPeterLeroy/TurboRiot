@@ -6,12 +6,21 @@ extends Node3D
 @export var gate_index: int = 0
 @export var gate_width: float = 10.0
 @export var gate_height: float = 4.0
+var left_extent: float = -1.0
+var right_extent: float = -1.0
+var route_curve: Curve3D
+var route_transform := Transform3D.IDENTITY
+var route_offset: float = 0.0
+var route_window: float = INF
+var legal_outline := PackedVector2Array()
 
 func _ready() -> void:
 	var mesh := BoxMesh.new()
-	mesh.size = Vector3(gate_width, gate_height, 0.04)
+	var left := left_extent if left_extent >= 0 else gate_width * 0.5
+	var right := right_extent if right_extent >= 0 else gate_width * 0.5
+	mesh.size = Vector3(left + right, gate_height, 0.04)
 	$Debug.mesh = mesh
-	$Debug.position.y = gate_height * 0.5
+	$Debug.position = Vector3((right - left) * 0.5, gate_height * 0.5, 0)
 
 func crossing_fraction(from: Vector3, to: Vector3) -> float:
 	var inverse := global_transform.affine_inverse()
@@ -23,8 +32,18 @@ func crossing_fraction(from: Vector3, to: Vector3) -> float:
 		return -1.0
 	var fraction := a.z / (a.z - b.z)
 	var intersection := a.lerp(b, fraction)
-	if absf(intersection.x) > gate_width * 0.5 or intersection.y < 0.0 or intersection.y > gate_height:
+	var left := left_extent if left_extent >= 0 else gate_width * 0.5
+	var right := right_extent if right_extent >= 0 else gate_width * 0.5
+	if intersection.x < -left or intersection.x > right or intersection.y < 0.0 or intersection.y > gate_height:
 		return -1.0
+	if route_curve:
+		var point := route_transform.affine_inverse() * from.lerp(to, fraction)
+		if not legal_outline.is_empty() and not Geometry2D.is_point_in_polygon(Vector2(point.x, point.z), legal_outline):
+			return -1.0
+		var length := route_curve.get_baked_length()
+		var difference := absf(route_curve.get_closest_offset(point) - route_offset)
+		if minf(difference, length - difference) > route_window:
+			return -1.0 # A broad cross-section must never catch another route leg.
 	return fraction
 
 func set_debug_visible(value: bool) -> void:

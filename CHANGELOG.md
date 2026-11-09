@@ -1,10 +1,37 @@
 # Changelog
 
-## Unreleased — v0.3.0: Arcade Handling
+## Unreleased
+
+### v0.3.1 — Corrective Patch
+
+Corrects v0.3.0-dev — Arcade Handling. Implementation and automated validation are complete; developer manual acceptance and release remain pending.
+
+#### Fixed and changed
+
+- Reinspected all three private references at their actual `references/` location. Re-proportioned the closed source curve and 14.4 m road from the overhead; authored the stepped outer fence and T-shaped infield fence independently at 0.18 m/pixel. Smoothed corner tangents to keep road/shoulder triangles valid. Added two intentional infield grass openings, matching grass footprints and more distant hills. The optional generic rectangle is disabled for this circuit.
+- Added editable BarrierRun points/gaps and configurable five-block red/blue/yellow/green groups, continuous around corners and resource seams. Blocks and colliders use identical endpoints; closed runs preserve complete colour cycles.
+- Repositioned twelve gates after corners and widened them asymmetrically to enabled physical boundaries and connected route sectors. Legal sand/grass lines now count. Finite height/outer polygon/route-window checks, expected order/direction, minimum interval travel and oversized-sweep rejection preserve route validation; recovery resamples the guards.
+- Directional pad entries now accelerate toward pad forward, including reverse/wrong-heading entries, with bounded acceleration/yaw during a configurable redirect phase. Pad duration/latch/cooldown remain; strongest-wins preserves a stronger active cap/longer timer while always applying pad direction. Mini-turbos retain normal kart-forward movement.
+- Added one reused lightweight cylinder shape for procedural trunk obstacles; foliage remains non-solid. Moved the optional sand ramp outward to clear the wider road.
+- Added a short obstacle-verifying ray for sustained wall jams that report floor-only slide contacts, preserving existing recovery gates/cooldown.
+- Appended manual checks 27–36 and added corrective geometry, gate coverage/off-road laps, directional pad and real trunk/foliage scenarios. Updated earlier synthetic race fixtures to feed continuous movement; retained the accepted v0.2.0 checklist and all earlier scenarios. Actual results are recorded in `docs/validation.md`.
+- Recorded as v0.3.1 — Corrective Patch following v0.3.0-dev — Arcade Handling. Unreleased and awaiting developer acceptance. This documentation update leaves project/HUD/export build metadata unchanged; no Git mutations or GitHub actions.
+
+#### Known limitations
+
+- The new runoff correction still needs developer manual acceptance. Automated/visual validation does not carry forward manual acceptance to new geometry.
+- Profile edits must avoid intersecting neighboring roads or creating tight/overlapping outer contours; arbitrary edits are not automatically repaired.
+- Legal runoff is included in route-owned checkpoint corridors; large or irregular custom layouts require reauthoring fractions/windows and validating coverage. Recovery remains at the latest valid road checkpoint.
+- Human driving feel, real controller hardware, manual checks 1–36 and packaged Windows export remain unverified for this new build. Automated/visual checks are reported separately.
+- Surface regions assume the current flat sand/grass terrain; banked or layered original circuits need authoring review. Grass is a tagged polygonal region over the continuous sand support collider, avoiding a new collision step.
+- The ramp is an optional test feature in runoff, not a route shortcut. Keep authored ramp inclines below the body's floor-angle limit.
+- Camera obstruction uses a ray rather than a swept camera volume; very tight geometry/corner clipping still needs manual review. Small barrier shadows may show aliasing.
+
+### v0.3.0-dev — Arcade Handling
 
 Full handling development patch, pending developer acceptance. Metadata remains `0.3.0-dev`; this is not an accepted/released v0.3.0 build. The geometry correction was implemented and its 203 checks passed before adding surface/drift/boost/jump physics.
 
-### Added
+#### Added
 
 - SurfaceConfig resources for asphalt, grass, sand and boost pads; tagged physical ground plus procedural surface-region queries; debounced, exponentially smoothed handling multipliers and gradual excess-speed removal.
 - Normalized drift commands on Shift/LB, grounded/speed/steering activation, reduced grip and steering response, countersteering, activity-based three-tier mini-turbo charge and valid-release-only rewards.
@@ -23,30 +50,20 @@ Full handling development patch, pending developer acceptance. Metadata remains 
 - Automated runoff checks covering side/segment variation, closed paths, asphalt clearance, block spacing, collider/visual source alignment, profile edits and actual kart exit/re-entry through sand and grass.
 - A durable manual acceptance/regression document, preserving the v0.2.0 baseline and adding the current correction criteria and an append-only policy for future patches.
 
-### Changed
+#### Changed
 
 - KartController composes surface, drift and boost models. Its grounded motion follows floor tangents and air movement no longer manufactures speed from throttle. Recovery, restart, race finish and pre-GO locks clear temporary states.
 - Camera retains its chase architecture with a terrain obstruction ray and height floor for jump/landing follow.
 - Runoff drive-test durations account for the new speed penalties while preserving wall/access/re-entry assertions.
-- Coloured barriers no longer universally follow kerbs at a fixed distance. Road width, saved centerline, kerbs, checkpoints and handling parameters are preserved.
+- Coloured barriers no longer universally follow kerbs at a fixed distance. This prerequisite separated road and fence geometry; the subsequent v0.3.1 corrective patch above reauthors the source road proportions and gates.
 - Barrier collider segments now follow individual visual block endpoints, including transitions, so no kerb-side collision wall is left in widened areas.
 - Updated milestone/version metadata, README, architecture and testing policy for v0.3.0 development.
 
-### Fixed
+#### Fixed
 
 - Grounded ramp motion presses into the floor normal so an ascending tangent does not prematurely detach the kart before the launch edge.
 - Recovery/restart/finish no longer leave temporary drift charge, boost or launch motion; pad reset guards prevent immediate boost farming while remaining on a pad.
 - Surface/boost cap reductions remove excess speed gradually rather than snapping velocity when a multiplier changes.
-
-### Known limitations
-
-- The new runoff correction still needs developer manual acceptance. Automated/visual validation does not carry forward manual acceptance to new geometry.
-- Profile edits must avoid intersecting neighboring roads or creating tight/overlapping outer contours; arbitrary edits are not automatically repaired.
-- Checkpoints remain road-wide: crossing them through runoff does not count, and recovery remains at the latest valid road checkpoint.
-- Human driving feel, real controller hardware, manual checks 1–26 and packaged Windows export remain unverified for this new build. Automated/visual checks are reported separately.
-- Surface regions assume the current flat sand/grass terrain; banked or layered original circuits need authoring review. Grass is a tagged polygonal region over the continuous sand support collider, avoiding a new collision step.
-- The ramp is an optional test feature in runoff, not a route shortcut. Checkpoints remain road-wide. Keep authored ramp inclines below the body's floor-angle limit.
-- Camera obstruction uses a ray rather than a swept camera volume; very tight geometry/corner clipping still needs manual review. Small barrier shadows may show aliasing.
 
 ## v0.2.0 — Race Foundations — Developer-accepted baseline
 

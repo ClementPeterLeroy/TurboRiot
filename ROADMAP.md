@@ -1,12 +1,12 @@
 # Turbo Riot roadmap
 
-**Current development milestone: v0.3.0 — Arcade Handling.** The developer reports all ten v0.2.0 manual acceptance checks passed. v0.2.0 is the accepted regression baseline; the v0.3.0 work remains unreleased and pending developer acceptance.
+**Current development milestone: v0.3.0-dev — Arcade Handling; subsequent patch: v0.3.1 — Corrective Patch.** The developer reports all ten v0.2.0 manual acceptance checks passed. v0.2.0 is the accepted regression baseline; both handling and corrective work remain unreleased and pending developer acceptance.
 
 | Milestone | Scope |
 | --- | --- |
 | **v0.1.0 — First Drive** | Existing baseline: arcade kart, independent input/camera, editable reference circuit, environment, HUD, tests and docs. |
 | **v0.2.0 — Race Foundations** | Developer-accepted baseline: single-player time trial, READY/countdown/racing/results, ordered directional checkpoints, three laps, timing, checkpoint-based recovery, restart, reference environment refinement. Preserve its ten manual checks as regression requirements. |
-| **v0.3.0 — Arcade Handling** | Current development: independent segment-specific barriers/runoff, optional openings and outer perimeter; surface-dependent acceleration/grip/speed; controlled drifting and three mini-turbo tiers; shared temporary boosts and pads; an optional runoff ramp, airborne momentum/steering and stable landing; feedback, tuning and cumulative regressions. The geometry prerequisite is implemented before physics. Full patch manual acceptance pending. |
+| **v0.3.0-dev — Arcade Handling** | Current development: independent segment-specific barriers/runoff, optional openings and outer perimeter; surface-dependent acceleration/grip/speed; controlled drifting and three mini-turbo tiers; shared temporary boosts and pads; an optional runoff ramp, airborne momentum/steering and stable landing; feedback, tuning and cumulative regressions. The geometry prerequisite is implemented before physics. Full patch manual acceptance pending. |
 | **v0.4.0 — Racing Competitors** | Competitor driving, path following, overtaking and difficulty. |
 | **v0.5.0 — Power-Up Mayhem** | Original power-ups, pickups, interactions, readable effects and balance. |
 | **v0.6.0 — Playable Alpha** | Cohesive race loop, menus, sound, original circuits and broader device testing. |
@@ -16,6 +16,10 @@
 | **v1.0.0 — First Release** | Release-ready original content, tested builds, onboarding and packaging. |
 
 The full v0.3.0 brief authorizes one coherent handling patch after the implemented/tested geometry correction. All handling systems remain development work until the developer accepts the full checklist. Persistent records, advanced menus, kart selection, AI, power-up items, weapons, multiplayer and online services remain outside this patch. No new full circuit or realistic suspension is introduced.
+
+## v0.3.1 — Corrective Patch
+
+Implemented corrections to v0.3.0-dev — Arcade Handling: overhead-aligned road and independent fence geometry, configurable five-block colour groups, bounded runoff checkpoints with route safeguards, forward-directed pads on reverse entry and shared tree-trunk collision. Automated result: 464 checks, 0 failures; manual acceptance pending. These corrections remain within the Arcade Handling milestone; v0.4.0 and every later milestone above retain their scope. See [CHANGELOG.md](CHANGELOG.md) for actual changes and [VERSIONING.md](VERSIONING.md) for unchanged runtime build identifiers.
 
 ## Acceptance and regression policy
 

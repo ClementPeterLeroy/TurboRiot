@@ -91,10 +91,29 @@ func _test_gate(suite: SceneTree) -> void:
 		"Transformed gate uses local direction")
 	gate.queue_free()
 
-func _cross(race: RaceManager, index: int, reverse: bool = false) -> void:
+func _cross(race: RaceManager, index: int, reverse: bool = false, lateral: float = 0.0) -> void:
 	var gate := race.gates[index]
-	var a := gate.to_global(Vector3(0, 0.6, 2))
-	var b := gate.to_global(Vector3(0, 0.6, -2))
+	if not reverse and index == race.session.next_checkpoint % race.gates.size():
+		# Exercise a continuous racing line, not an unsupported map teleport.
+		var length := race.track.curve.get_baked_length()
+		var start := race.gates[race.session.latest_checkpoint].route_offset
+		var distance := fposmod(gate.route_offset - start, length)
+		var previous := race.track.to_global(race.track.sample_center(fposmod(start + 2.0, length)) + Vector3.UP * 0.6)
+		var traveled := 4.0
+		while traveled < distance - 2.0:
+			var point := race.track.to_global(race.track.sample_center(fposmod(start + traveled, length)) + Vector3.UP * 0.6)
+			race.process_movement(previous, point)
+			previous = point
+			traveled += 2.0
+		var approach := gate.to_global(Vector3(0, 0.6, 2))
+		race.process_movement(previous, approach)
+		var steps := maxi(1, ceili(absf(lateral)))
+		for step in steps:
+			var point := gate.to_global(Vector3(lateral * float(step + 1) / steps, 0.6, 2))
+			race.process_movement(approach, point)
+			approach = point
+	var a := gate.to_global(Vector3(lateral, 0.6, 2))
+	var b := gate.to_global(Vector3(lateral, 0.6, -2))
 	race.process_movement(b if reverse else a, a if reverse else b)
 
 func _test_scene(suite: SceneTree) -> void:
