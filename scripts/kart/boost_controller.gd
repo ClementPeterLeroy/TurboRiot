@@ -10,6 +10,7 @@ var direction_remaining: float = 0.0
 var mushroom_remaining := 0.0
 var feedback_remaining := 0.0
 var feedback_serial := 0 # Monotonic; a new accepted pad/mushroom starts a burst.
+var activation_serial := 0 # All accepted sources, including repeated mini-turbos.
 
 func active() -> bool:
 	return remaining > 0.0
@@ -25,6 +26,7 @@ func activate(new_source: StringName, multiplier: float, duration: float, policy
 		remaining = duration
 	strength = multiplier
 	source = new_source
+	activation_serial += 1
 	var own_duration := duration if source_duration < 0 else source_duration
 	if policy == KartConfig.BoostPolicy.REPLACE:
 		mushroom_remaining = 0

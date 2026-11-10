@@ -4,12 +4,12 @@ The established MAJOR.MINOR.PATCH convention, development suffix and numeric fou
 
 | Location | Current value | Meaning |
 | --- | --- | --- |
-| `project.godot`, application config/version | `0.5.0-dev` | Current unaccepted development milestone |
-| Race HUD footer | `v0.5.0-dev — Power-Up Mayhem` | Same development identity |
-| Windows file/product resource version | `0.5.0.0` | Numeric export metadata, not release acceptance |
-| Windows file description | `Power-Up Mayhem (Development)` | Explicit development status |
-| ROADMAP.md | v0.5.0 current development | Preserved milestone sequence/scope |
-| CHANGELOG.md | v0.5.0-dev under Unreleased | Actual changes pending developer review |
+| `project.godot`, application config/version | `0.6.0-dev` | Current unaccepted development milestone |
+| Race HUD footer | `v0.6.0-dev — Playable Alpha` | Same development identity |
+| Windows file/product resource version | `0.6.0.0` | Numeric export metadata, not release acceptance |
+| Windows file description | `Playable Alpha (Development)` | Explicit development status |
+| ROADMAP.md | v0.6.0 current development | Preserved milestone sequence/scope |
+| CHANGELOG.md | v0.6.0-dev under Unreleased | Actual changes pending developer review |
 
 The developer identifies **v0.3.2** as the latest released baseline. Read-only repository inspection found HEAD `96934a4` named v0.3.2, earlier v0.3.1/v0.3.0-dev commits, and no local tags. Baseline metadata still used `0.3.0-dev` / `0.3.0.0`; those actual historical identifiers and prior changelog wording remain documented. This patch adds a v0.3.2 baseline note without fabricating a tag, release date or retroactive numeric version. See [the audit](docs/v0.4.0-audit.md).
 
@@ -22,3 +22,5 @@ Keep metadata, HUD, export preset, README and changelog consistent when changing
 Codex must not stage, commit, push, tag, create releases or perform GitHub actions for this patch. The developer handles Git through VS Code.
 
 The v0.4.0 implementation and its original Unreleased changelog record are preserved. Local history now includes `0d69490` (v0.4.0); a commit title alone does not establish manual acceptance or publication. Only 5A-5D are active; 5E remains reserved. See [v0.5 audit](docs/v0.5.0-audit.md).
+
+The v0.6.0 patch keeps these conventions unchanged and updates only the current development identity to `0.6.0-dev` / `0.6.0.0`. v0.6.1 is roadmap work only. Local history now includes `a31ff9f` (v0.5.0) and `e22a2f2` (v0.5.1); their runtime metadata remained 0.5.0-dev. These commit labels do not establish acceptance or retroactively rename the recorded development entries. Current regression criteria are 1-119; v0.4/v0.5 and v0.6 acceptance remain pending.

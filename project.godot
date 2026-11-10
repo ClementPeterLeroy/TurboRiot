@@ -16,8 +16,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Turbo Riot"
 config/description="An original low-poly arcade kart prototype."
-config/version="0.5.0-dev"
-run/main_scene="res://scenes/main.tscn"
+config/version="0.6.0-dev"
+run/main_scene="res://scenes/app.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [display]
@@ -27,6 +27,7 @@ window/size/viewport_height=720
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [physics]
 

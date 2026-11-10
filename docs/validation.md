@@ -1,3 +1,50 @@
+# v0.6.0-dev — Playable Alpha validation
+
+2026-11-10. **Unreleased, pending developer acceptance.** Baseline source audit found HEAD `e22a2f2` titled v0.5.1, earlier v0.5.0 commit `a31ff9f`, and runtime metadata still `0.5.0-dev`. Commit labels do not supply acceptance or retroactively rename earlier history. Target identity is `0.6.0-dev` / Windows `0.6.0.0`; latest developer-reported released baseline remains v0.3.2. Earlier validation reports below remain verbatim.
+
+## Automated suite
+
+Godot **4.7.2.stable.official.ed1daf0bf**, Windows, Compatibility renderer. Before code changes: **842 checks, zero failures**. Expanded suite: **925 checks, zero failures**, retaining all earlier assertions and adding 83 alpha checks. No existing test is removed or skipped. Headless editor import and configured-application runtime smoke validation pass. Logs are local under ignored `.godot/`; process-local APPDATA points inside `.godot/sandbox_appdata`.
+
+`tests/alpha_tests.gd` covers configuration limits/defaults and mode copies; Time Trial isolation; ConfigFile round-trip, invalid/unrecognized values and save failure; independent volume/mute UI callbacks and audio buses; valid shared generated waveforms/loops/headroom; actual GUI keyboard/mouse/injected D-pad/A/B routing and focus; physical-key-event keyboard-only input and unavailable-device isolation; cancellable initialization; READY/countdown/GO; pause settings/resume; held-item release guard; exact freeze of race time, human/AI transforms, projectiles, boosts/spins and box respawn; same-source mini-turbo audio; fresh restart and old-node disposal; ordered model completion/results/finish deduplication; overall timer/effect sealing; focusable results; repeated sessions without stale signals/audio; and focus-loss pause.
+
+All 842 earlier checks still run, including kart dynamics, real item collisions, 360°/540° spins, mushroom terrain restoration, ramp/landing, shoulder contact, live positions/DNF, AI passing and camera/shared-render-pose regressions. Actual post-correction spin measurements remain 360.000° / 540.000°, body Y ranges at most 0.00000286 m on the flat fixture, and zero measured wall overlap. This is not a substitute for subjective high-speed presentation acceptance.
+
+The tests exposed and corrected deferred focus targeting removed nodes, missing A/B default UI mappings in this engine, and UI cue cut-off during race audio disposal. Separate UI voices preserve Confirm/Back tails; focus callbacks check live/in-tree controls. Settings parsing permits unrecognized content to act like missing keys and use defaults; no fabricated parse rejection is claimed.
+
+## Native application and display
+
+`tests/capture_alpha_preview.gd` uses the actual application scene, menu/pages and gameplay subtree. On NVIDIA RTX 3070 Ti Laptop GPU / OpenGL Compatibility it captures and directly supports inspection of:
+
+- Main menu, Quick Race configuration, Credits, Settings and scrolled mapping/Apply controls.
+- READY, synchronized countdown, racing, pause, pause settings, full results and Time Trial pages.
+- 1280×720, 1920×1080, 1024×768 with UI scale 125%, actual fullscreen entry and return to windowed mode.
+- A single persistent engine stream, paused engine/race clock, restart-from-pause restoring engine audio, and UI cues surviving race-audio reset.
+- A complete one-lap seven-racer Quick Race and a complete one-lap Time Trial, using real physics, checkpoints and AI driving commands attached to the player for automation. No checkpoint injection is used in these native races. All seven Quick Race competitors finish without DNF; Time Trial has one competitor and competitive items disabled.
+
+Native assertions report **zero failures**. Captures: `artifacts/alpha_*.png`. The capture temporarily disables automatic focus-loss pause because automation manages the window; product default remains enabled and the notification/pause state is separately tested. Fixed-step captures run faster than real time, so they do not establish perceived audio timing or hardware-driver/controller feel. They are not developer manual acceptance. No new performance benchmark claim is made; pools and draw complexity remain bounded.
+
+Headless validations omit audio playback to avoid artificial-time mixer backlog, while waveform data and bus configuration are tested. Native validation exercises real playback/stream state; audible mix quality and a physical listening/controller session remain manual. The existing Windows sandbox root-certificate-store warning is still emitted; it does not prevent the offline tests or engine startup. No other script/runtime errors or leaks are accepted in the final logs.
+
+## Reproduce
+
+```powershell
+godot --headless --editor --path . --quit
+godot --headless --fixed-fps 60 --path . --script tests/run_tests.gd
+godot --headless --fixed-fps 60 --path . --quit-after 180
+godot --path . --fixed-fps 60 --script tests/capture_alpha_preview.gd
+```
+
+Use editor F5 for normal-speed manual play, starting at the application main menu. Re-run cumulative checks **1–119**; new alpha checks **105–119** remain unchecked. Follow [Playable Alpha](playable-alpha.md) for controls, settings, device loss and deferred work. Test physical keyboard/gamepad driving and menu feel, actual listening/mix, window dragging, focus loss/refocus, device unplug/reconnect, DPI/multiple monitors, relaunch persistence and Windows exports. No physical controller or exported build is claimed tested here.
+
+## Scope and prerequisites
+
+No new circuit or framework is implemented. ROADMAP explicitly moves that scope to v0.6.1, including the original circuit pipeline and five private educational reference circuits; v0.7 identity/soundtrack and future milestones remain. The existing scene still owns circuit-specific environment, feature/loot anchors, gates and AI line assumptions; these need encapsulation/validation in v0.6.1. The application/session boundary is ready to host that work without redesigning current driving physics. All v0.4/v0.5 acceptance remains pending unless the developer explicitly confirms it.
+
+No staging, commits, pushes, tags, releases or remote actions by Codex. Earlier reports follow unchanged.
+
+---
+
 # v0.5.0-dev — Power-Up Balancing & Feedback validation
 
 2026-11-10. **Unreleased; developer acceptance pending.** Local history at the start of this correction showed HEAD `0d69490` (v0.4.0), no tags, `0.5.0-dev` / Windows `0.5.0.0` metadata and an explicit Unreleased v0.5.0 changelog. This work stays inside that patch; no v0.5.1 release or metadata change is claimed. Earlier reports and release entries below retain their original wording/results.

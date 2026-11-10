@@ -1,10 +1,12 @@
 # Architecture and editing
 
-Applies to **v0.5.0-dev — Power-Up Mayhem**, Unreleased and pending developer acceptance. Earlier v0.3/v0.4 implementation and validation records are preserved; see [versioning](../VERSIONING.md).
+Applies to **v0.6.0-dev - Playable Alpha**, Unreleased and pending developer acceptance. Earlier implementation/validation records remain preserved.
 
 ## Scene composition
 
-`main.tscn` composes Track, Environment, TrackFeatures, Kart, RaceManager, Items, ChaseCamera, HUD, sky and sun. `main.gd` routes start/restart/recover/exit actions. RaceManager derives the initial spawn and orchestrates race rules without implementing kart physics or camera math. There are no autoloads. Physics runs at the default 60 Hz; camera, visual feedback and HUD update on rendered frames.
+`app.tscn` is the application entry: TurboApplication owns one AlphaMenu, AudioDirector, AppSettings, coherent RaceSetup copies and one disposable PAUSABLE gameplay subtree. UI/audio processing remains ALWAYS so pause freezes world simulation without blocking navigation. No autoload is introduced.
+
+The reusable `main.tscn` composes Track, Environment, TrackFeatures, Kart, RaceManager, Items, ChaseCamera, HUD, sky and sun. `main.gd` routes start/restart/recover/exit actions. RaceManager derives the initial spawn and orchestrates race rules without implementing kart physics or camera math. There are no autoloads. Physics runs at the default 60 Hz; camera, visual feedback and HUD update on rendered frames.
 
 `kart.tscn` contains a CharacterBody3D, box collision shape, primitive visual chassis/nose/seat/helmet, four wheel pivots with spinning tyre children, PlayerInput, Recovery and Inventory. The front is local **-Z**; AI chassis/nose materials receive distinct colours without changing meshes or collision. Body layer 2 uses mask 3 to collide with static world layer 1 and other kart bodies. Finished/DNF bodies use world-only collision until restart. Layer 4 (bit mask 8) is reserved for non-solid surface regions/triggers. Wheel animation and body lean/pitch are cosmetic, not suspension or physical body rotation.
 
@@ -163,3 +165,11 @@ The unreleased balancing correction extends KartEffects with physical yaw spin, 
 BoostController independently tracks mushroom immunity, eligible-feedback duration and an activation serial. SurfaceDetector combines that immunity with its existing live terrain blend, preserving identity/resistance and smoothly restoring reduced multipliers after expiry. Pads/mini-turbos do not acquire immunity. BoostSpeedLines is one reusable screen-space Control behind the HUD, projecting the helmet through the active camera/canvas, drawing bounded edge streaks and handling burst/sustain/fade without transform writes. Full tuning and validation are in [Power-Up Balancing & Feedback](power-up-balancing.md).
 
 Three LootRowConfig resources project inspected map anchors onto Curve3D; each LootBoxRow places four evenly spaced Area pickups across the asphalt. AI chooses available box lanes while empty and not passing, then supplies contextual use-item pulses to the same inventory API as the player. Mesh/material sharing, actor/FX/audio caps and cached field references limit work; native synthesized cues and HUD feedback remain separate from driving and camera transforms.
+
+## Playable Alpha application integration
+
+RaceSetup validates mode, 0-6 menu opponents, difficulty, 1-20 laps and driving assignment before scene ready. Quick Race and Time Trial preferences are separate copies; Time Trial always disables AI and competitive items. Loading uses a generation token; cancellation cannot produce a hidden old scene. Restart replaces the whole race scene, and main-menu return removes it after disabling processing/unbinding sound. Legacy raw-scene contracts and larger authoring field limits remain intact.
+
+RaceManager field_completed seals overall results exactly once. Managed sessions clear actors/inventories and stop item/race timers while HUD/camera remain live; player-first finish still permits remaining AI/DNF policy. PlayerInput assignment and resume release protection prevent menu/gameplay overlap. Managed HUD routes Restart/Main Menu to the application and offers focusable result scrolling.
+
+ConfigFile settings validate type/range/defaults and persist locally. AudioDirector owns Music/Effects buses into Master, one modulated engine loop, drift/music loops and a bounded effect pool. ItemSystem delegates managed cues through a signal; wall/contact/lap/state/accepted-boost events supply remaining hooks. An activation serial tracks repeated accepted mini-turbos without altering boost physics or speed-line eligibility. No new track/camera/handling framework is introduced. See [architecture, file map and procedures](playable-alpha.md).

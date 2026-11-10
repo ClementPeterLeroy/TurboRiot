@@ -1,5 +1,30 @@
 # Changelog
 
+## Unreleased — v0.6.0-dev — Playable Alpha
+
+Pending developer acceptance. Current project/menu/HUD use `0.6.0-dev`; Windows numeric metadata uses `0.6.0.0`. Local commit labels v0.5.0/v0.5.1 do not establish acceptance; all earlier entries below and the developer-reported v0.3.2 baseline remain preserved.
+
+### Added
+
+- Application entry scene with Main Menu, Quick Race, Time Trial, Settings, Credits and Exit; responsive scrollable pages, consistent focus/hover states, keyboard/mouse/controller navigation and explicit A/B UI bindings.
+- Central validated RaceSetup, per-mode preferences, existing-circuit initialization/READY/countdown/results flow, fresh-scene restart and complete disposal. Quick Race supports 0–6 AI, three existing difficulty profiles, laps defaulting to three and available controller assignment. Time Trial has one human, no AI/competitive items, lap/total results and the same fresh restart/menu flow.
+- Pause overlay with Resume/Restart/Settings/Main Menu. PAUSABLE gameplay stops physics, AI, race/item/boost/spin timers together while UI/audio remain responsive. Focus loss and assigned-controller disconnect pause; resume guards held item input. Overall completion clears competitive effects and seals timers; results remain interactive while existing DNF/other-racer policy is preserved.
+- ConfigFile display/audio persistence and safe defaults/range validation: window/fullscreen, common resolutions, VSync, UI scale, independent Master/Music/Effects volumes/mutes. Live audio preview can be cancelled; controls reference is included. Canvas expansion and menu scrolling support different aspect ratios.
+- Modular audio director, separate bounded UI/race voice pools, persistent speed-modulated engine/drift/music loops and original synthesized placeholder cues for required menu/race/item/lap/finish events. Managed item sound delegates centrally; raw race fixtures retain compatibility. No external music or samples downloaded.
+- Alpha lifecycle/settings/audio/input tests, native menu/display/pause/race/Time Trial captures and permanent manual criteria 105–119, preserving all previous checks.
+
+### Integration and scope
+
+- Existing race scene remains the raw authoring/test fixture, wrapped by the new application. Small changes add managed shortcut/result routing, device assignment, safe deferred focus, overall-completion and wall/item/accepted-boost audio hooks. Handling, source geometry, camera/interpolation, surface/drift/spin and projectile mechanics are retained.
+- Approved roadmap amendment: v0.6.0 contains no new circuits; v0.6.1 owns Testing Grounds & Circuit Framework and original/private educational circuit development. v0.7 retains Graffiti Speed / Graffiti Impact and full identity/audio work; unrelated future milestones are preserved. Canonical and documentation roadmap pointers are synchronized.
+- Metadata, README, controls, architecture, version table, cumulative checklist and validation updated. v0.4/v0.5 are not retrospectively accepted or released.
+
+### Validation and limitations
+
+- Baseline **842 checks, 0 failures**; expanded suite **925 checks, 0 failures**. Headless import/runtime validation and native application/display checks pass; actual results and procedures are recorded in `docs/validation.md` and `docs/playable-alpha.md`.
+- Native validation includes 720p/1080p, 4:3 at 125% UI scale, window/fullscreen transitions, engine pause/restart and complete physical Quick Race/Time Trial flows driven by test AI commands. These are not physical-controller, human driving, audio-mix or developer acceptance claims. Exported builds, DPI/multiple-monitor coverage and real devices remain manual work. Audio/visual menus are temporary, not v0.7 branding or soundtrack.
+- No staging, commits, pushes, tags, releases or GitHub/remote actions by Codex.
+
 ## Unreleased — v0.5.0-dev — Power-Up Mayhem
 
 Pending developer testing/acceptance. Project/HUD identity is `0.5.0-dev`; Windows numeric versions are `0.5.0.0`. This is not a release. The v0.4.0 Unreleased record and all earlier history below are preserved.

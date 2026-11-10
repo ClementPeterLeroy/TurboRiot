@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 signal reset_performed
 signal landed(impact_speed: float)
+signal wall_impacted(strength: float)
 
 @export var config: KartConfig
 @export var input_provider: DrivingInput
@@ -207,6 +208,7 @@ func _physics_process(delta: float) -> void:
 			landed.emit(maxf(0.0, -before_move.y))
 	if severe_collision or not is_on_floor():
 		drift.clear()
+		if severe_collision: wall_impacted.emit(Vector2(before_move.x, before_move.z).length())
 	elif award > 0:
 		activate_boost(&"mini_turbo", config.mini_turbo_strengths[award - 1], config.mini_turbo_durations[award - 1])
 	_follow_heading.global_basis = effects.driving_basis(global_basis)

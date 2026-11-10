@@ -1,6 +1,7 @@
 class_name RaceManager
 extends Node
 signal race_reset
+signal field_completed
 ## Each physical kart owns its own race model, validation and recovery cursor.
 const KART_SCENE := preload("res://scenes/kart.tscn")
 const PROFILES := [preload("res://resources/ai/casual.tres"), preload("res://resources/ai/standard.tres"), preload("res://resources/ai/challenging.tres")]
@@ -13,6 +14,7 @@ const COLOURS := [Color("ef4444"), Color("3b82f6"), Color("facc15"), Color("22c5
 @export_enum("Casual", "Standard", "Challenging") var difficulty := 1
 @export var driver_profile_override: AIDriverProfile
 @export var ai_only := false
+var use_command_line_configuration := true
 @export_range(3.0, 12.0) var grid_row_spacing := 5.5
 @export_range(2.0, 6.0) var grid_lane_spacing := 4.2
 @export_range(0.0, 3.0) var grid_stagger := 2.0
@@ -46,6 +48,7 @@ func _ready() -> void:
 	assert(track and kart)
 	process_physics_priority = 10 # Validate after every kart moves.
 	for argument in OS.get_cmdline_user_args():
+		if not use_command_line_configuration: break
 		if argument == "--ai-only": ai_only = true
 		if argument.begins_with("--opponents="): opponent_count = clampi(argument.get_slice("=", 1).to_int(), 0, 11)
 		if argument.begins_with("--difficulty="):
@@ -199,6 +202,7 @@ func _physics_process(delta: float) -> void:
 		if all_done:
 			race_complete = true
 			phase = RaceSession.State.FINISHED
+			field_completed.emit()
 		_update_ranking()
 	_sync_player_aliases()
 	if debug_visible:

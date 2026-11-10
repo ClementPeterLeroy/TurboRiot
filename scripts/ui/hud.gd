@@ -1,5 +1,10 @@
 class_name RaceHUD
 extends CanvasLayer
+signal restart_requested
+signal menu_requested
+var managed := false
+var time_trial := false
+var _card_was_visible := false
 
 @export var kart: KartController
 @export var race: RaceManager
@@ -32,7 +37,17 @@ func _ready() -> void:
 	if not race:
 		return
 	primary.pressed.connect(_on_primary)
-	ready_button.pressed.connect(race.return_to_ready)
+	ready_button.pressed.connect(func() -> void:
+		if managed: menu_requested.emit()
+		else: race.return_to_ready())
+	if managed:
+		ready_button.text = "Main Menu"
+		$Overlay/Center/Card/Stack/Exit.visible = false
+		$Margin/Stack/Controls.text = "WASD / arrows / Pad stick + triggers: drive\nShift / LB: drift   Space / B: item   R / Y: recover\nF5 / X: restart   Esc / Start: pause   F3: debug"
+		var scroll := $Overlay/Center/Card/Stack/Scroll as ScrollContainer
+		scroll.gui_input.connect(_scroll_results)
+		scroll.focus_neighbor_bottom = primary.get_path()
+		scroll.focus_neighbor_right = primary.get_path()
 	$Overlay/Center/Card/Stack/Exit.pressed.connect(func() -> void: get_tree().quit())
 	_refresh()
 
@@ -42,6 +57,9 @@ func _process(_delta: float) -> void:
 	var inventory := kart.get_node("Inventory") as KartInventory
 	item_icon.texture = inventory.held.icon if inventory.held else null
 	item_label.text = "%s\n%s" % [inventory.held.display_name, "READY: Space / Pad B" if inventory.cooldown == 0 else "Recharging..."] if inventory.held else "ITEM: empty\nDrive through a loot box"
+	if time_trial:
+		item_icon.texture = null
+		item_label.text = "TIME TRIAL\nCompetitive items disabled"
 	speed_label.text = "%03d  km/h" % roundi(Vector2(kart.velocity.x, kart.velocity.z).length() * 3.6)
 	direction_label.text = "REVERSE" if kart.signed_speed < -0.1 else ("FORWARD" if kart.signed_speed > 0.1 else "STOPPED")
 	if Input.is_action_just_pressed("debug_hud"):
@@ -93,13 +111,18 @@ func _refresh() -> void:
 	indicator.text = session.indicator()
 	indicator.visible = not indicator.text.is_empty()
 	card.visible = session.state == RaceSession.State.READY or session.state == RaceSession.State.FINISHED
+	if managed and card.visible and not _card_was_visible: focus_primary.call_deferred()
+	_card_was_visible = card.visible
 	ready_button.visible = session.state == RaceSession.State.FINISHED
+	if managed:
+		$Overlay/Center/Card/Stack/Scroll.focus_mode = Control.FOCUS_ALL if ready_button.visible else Control.FOCUS_NONE
+		primary.focus_neighbor_top = $Overlay/Center/Card/Stack/Scroll.get_path() if ready_button.visible else primary.get_path()
 	if session.state == RaceSession.State.READY:
 		card_title.text = "READY TO RACE"
 		card_text.text = "%d racers, %d laps. Follow the circuit in order.\n\nEnter / Space / Pad A starts the countdown.\nR recovers your kart; the clock keeps running.\nF5 / Pad X restarts every racer." % [race.competitors.size(), session.lap_count]
 		primary.text = "Start Race"
 	elif session.state == RaceSession.State.FINISHED:
-		card_title.text = "RACE RESULTS"
+		card_title.text = "TIME TRIAL RESULTS" if time_trial else "RACE RESULTS"
 		var player := race.competitors[0]
 		card_text.text = "POSITION %s / %d\nFINAL TIME   %s\nBEST LAP      %s\n\n" % [
 			"DNF" if player.dnf else str(player.finish_order), race.competitors.size(),
@@ -118,7 +141,25 @@ func _on_primary() -> void:
 	if race.session.state == RaceSession.State.READY:
 		race.start_race()
 	else:
-		race.restart_race()
+		if managed: restart_requested.emit()
+		else: race.restart_race()
+
+func focus_primary() -> void:
+	if is_inside_tree() and is_instance_valid(primary) and card.is_visible_in_tree() and not get_tree().paused:
+		primary.grab_focus()
+
+func _scroll_results(event: InputEvent) -> void:
+	var scroll := $Overlay/Center/Card/Stack/Scroll as ScrollContainer
+	var bar := scroll.get_v_scroll_bar()
+	if event.is_action_pressed("ui_down"):
+		if bar.value < bar.max_value - bar.page: scroll.scroll_vertical += 40
+		else: primary.grab_focus()
+	elif event.is_action_pressed("ui_up"):
+		if scroll.scroll_vertical > 0: scroll.scroll_vertical -= 40
+		else: ready_button.grab_focus()
+	elif event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_right") or event.is_action_pressed("ui_left"): primary.grab_focus()
+	else: return
+	scroll.accept_event()
 
 static func format_time(seconds: float) -> String:
 	var milliseconds := maxi(0, floori(seconds * 1000.0 + 0.000001))

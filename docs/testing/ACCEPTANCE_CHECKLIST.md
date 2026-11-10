@@ -160,6 +160,28 @@ Unreleased, pending developer acceptance; no v0.5.1 release is introduced. All p
 
 Use [the balancing procedures](../power-up-balancing.md) for both terrains, actual body spins, control recovery, speed-line intensity/fade and retained high-speed presentation diagnostics. Automated success does not mark these checks manually passed.
 
+## v0.6.0 - Playable Alpha, manual verification pending
+
+The application now starts at Main Menu; apply prior READY/startup/controls criteria inside a launched session. The raw race scene remains available for exact legacy fixtures. Managed Escape/Start pauses and results return to Main Menu; the new milestone intentionally replaces those raw-scene navigation controls without deleting their historical wording. No old check is marked accepted by this patch.
+
+- [ ] **105. Main menu navigation with keyboard and mouse.**
+- [ ] **106. Main menu navigation with a controller.**
+- [ ] **107. Quick Race configuration and launch.**
+- [ ] **108. Time Trial configuration and launch.**
+- [ ] **109. Correct READY/countdown/race progression.**
+- [ ] **110. Full race completion and results.**
+- [ ] **111. Pause/resume without timer or physics progression.**
+- [ ] **112. Restart without stale race state.**
+- [ ] **113. Return to main menu from gameplay and results.**
+- [ ] **114. Audio feedback and independent volume settings.**
+- [ ] **115. Settings persistence after relaunch.**
+- [ ] **116. Windowed/fullscreen and resolution behavior.**
+- [ ] **117. Gamepad driving and UI interaction.**
+- [ ] **118. No critical regressions in AI, drifting, boosts or items.**
+- [ ] **119. Repeated races without crashes, duplicated entities or stale signals.**
+
+Record real keyboard/controller, audio/display/DPI and repeated-session results using [Playable Alpha procedures](../playable-alpha.md). Injected events and automated captures are not physical-device or developer acceptance.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -171,5 +193,6 @@ Use [the balancing procedures](../power-up-balancing.md) for both terrains, actu
 | v0.4.0-dev | Pending | Pending | Retained 1–49 plus new 50–65 pending | Unreleased / not accepted |
 | v0.5.0-dev | Pending | Pending | Retained 1-65 plus new 66-90 pending | Unreleased / not accepted |
 | v0.5.0-dev balancing correction | Pending | Pending | Retained 1-90 plus new 91-104 pending | Unreleased / not accepted |
+| v0.6.0-dev | Pending | Pending | Retained 1-104 plus alpha 105-119 pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

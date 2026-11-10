@@ -68,7 +68,7 @@ offset_left = 28.0
 offset_top = -42.0
 offset_right = -28.0
 offset_bottom = -15.0
-text = "v0.5.0-dev   /   Power-Up Mayhem   /   Development build"
+text = "v0.6.0-dev   /   Playable Alpha   /   Development build"
 
 [node name="DebugPanel" type="PanelContainer" parent="."]
 visible = false

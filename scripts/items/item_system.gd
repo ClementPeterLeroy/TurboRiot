@@ -1,11 +1,13 @@
 @tool
 class_name ItemSystem
 extends Node3D
+signal sound_requested(event: StringName, at: Vector3)
 const ROW := preload("res://scenes/items/loot_box_row.tscn")
 const ROW_CONFIGS: Array[LootRowConfig] = [preload("res://resources/items/row_upper.tres"), preload("res://resources/items/row_lower.tres"), preload("res://resources/items/row_central.tres")]
 @export var track: TrackBuilder
 @export var race: RaceManager
 @export var enabled := true
+var external_audio := false
 @export var row_configurations: Array[LootRowConfig] = ROW_CONFIGS
 @export var rebuild: bool:
 	set(_value):
@@ -37,9 +39,11 @@ func _ready() -> void:
 	race.race_reset.connect(reset_items)
 	for record in race.competitors:
 		if record.kart.input_provider is AIInput: record.kart.input_provider.item_system = self
+	var contacts := race.get_node_or_null("KartContacts")
+	if contacts: contacts.impact.connect(func(at: Vector3, _strength: float) -> void: feedback(at, 3))
 	# Headless simulations have no listener or rendered feedback. Avoid queuing
 	# audio playbacks faster than the real-time mixer can drain them.
-	if DisplayServer.get_name() == "headless": return
+	if DisplayServer.get_name() == "headless" or external_audio: return
 	for i in 8:
 		var voice := AudioStreamPlayer3D.new()
 		voice.max_distance = 45
@@ -47,8 +51,6 @@ func _ready() -> void:
 		add_child(voice)
 		_voices.append(voice)
 	for kind in 4: _sounds.append(_tone(kind))
-	var contacts := race.get_node_or_null("KartContacts")
-	if contacts: contacts.impact.connect(func(at: Vector3, _strength: float) -> void: feedback(at, 3))
 
 func rebuild_rows() -> void:
 	for row in rows:
@@ -163,13 +165,18 @@ func ai_should_use(driver: AIInput) -> bool:
 	return false
 
 func feedback(at: Vector3, kind: int) -> void:
-	if Engine.is_editor_hint() or _feedback_delay > 0 or _voices.is_empty(): return
+	if Engine.is_editor_hint(): return
+	if external_audio: sound_requested.emit([&"pickup", &"item_use", &"item_hit", &"collision"][kind], at)
+	if _feedback_delay > 0: return
 	_feedback_delay = 0.035
-	var voice := _voices[_voice % _voices.size()]
-	_voice += 1
-	voice.global_position = at
-	voice.stream = _sounds[kind]
-	voice.play()
+	if not external_audio: sound_requested.emit([&"pickup", &"item_use", &"item_hit", &"collision"][kind], at)
+	if not _voices.is_empty():
+		var voice := _voices[_voice % _voices.size()]
+		_voice += 1
+		voice.global_position = at
+		voice.stream = _sounds[kind]
+		voice.play()
+	if DisplayServer.get_name() == "headless": return
 	if _fx.size() < 12:
 		var ring := TorusMesh.new()
 		ring.inner_radius = 0.4

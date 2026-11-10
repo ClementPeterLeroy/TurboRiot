@@ -1,4 +1,6 @@
 extends DrivingInput
+var assigned_device := -2
+var suppress_item_until_release := false
 
 func _ready() -> void:
 	# Set up named actions once; all device access stays in this provider.
@@ -27,8 +29,34 @@ func _ready() -> void:
 	_bind_button("exit_game", JOY_BUTTON_START)
 
 func get_command() -> DrivingCommand:
+	if assigned_device != -2:
+		var gas := 0.0
+		var brake := 0.0
+		var steering := 0.0
+		var drifting := false
+		var item := false
+		if assigned_device == -1:
+			gas = 1.0 if Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP) else 0.0
+			brake = 1.0 if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN) else 0.0
+			steering = float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)) - float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT))
+			drifting = Input.is_physical_key_pressed(KEY_SHIFT)
+			item = Input.is_physical_key_pressed(KEY_SPACE)
+		elif assigned_device in Input.get_connected_joypads():
+			gas = maxf(0, _axis_strength(Input.get_joy_axis(assigned_device, JOY_AXIS_TRIGGER_RIGHT), "accelerate"))
+			brake = maxf(0, _axis_strength(Input.get_joy_axis(assigned_device, JOY_AXIS_TRIGGER_LEFT), "brake"))
+			steering = _axis_strength(Input.get_joy_axis(assigned_device, JOY_AXIS_LEFT_X), "steer_right")
+			drifting = Input.is_joy_button_pressed(assigned_device, JOY_BUTTON_LEFT_SHOULDER)
+			item = Input.is_joy_button_pressed(assigned_device, JOY_BUTTON_B)
+		if not item: suppress_item_until_release = false
+		return DrivingCommand.new(gas, brake, steering, drifting, item and not suppress_item_until_release)
+	if not Input.is_action_pressed("use_item"): suppress_item_until_release = false
 	return DrivingCommand.new(Input.get_action_strength("accelerate"),
-		Input.get_action_strength("brake"), Input.get_axis("steer_left", "steer_right"), Input.is_action_pressed("drift"), Input.is_action_pressed("use_item"))
+		Input.get_action_strength("brake"), Input.get_axis("steer_left", "steer_right"), Input.is_action_pressed("drift"), Input.is_action_pressed("use_item") and not suppress_item_until_release)
+
+func _axis_strength(value: float, action: String) -> float:
+	# Match InputMap normalization when polling one assigned device directly.
+	var deadzone := InputMap.action_get_deadzone(action)
+	return signf(value) * clampf((absf(value) - deadzone) / maxf(0.001, 1 - deadzone), 0, 1)
 
 func _bind_keys(action: String, keys: Array) -> void:
 	if InputMap.has_action(action):
