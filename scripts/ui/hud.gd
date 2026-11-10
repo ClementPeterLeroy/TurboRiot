@@ -18,6 +18,10 @@ var item_label := Label.new()
 var item_icon := TextureRect.new()
 
 func _ready() -> void:
+	var speed_lines := preload("res://scenes/ui/boost_speed_lines.tscn").instantiate() as BoostSpeedLines
+	speed_lines.kart = kart
+	add_child(speed_lines)
+	move_child(speed_lines, 0) # Streaks remain behind the HUD and result panels.
 	var item_row := HBoxContainer.new()
 	item_icon.custom_minimum_size = Vector2(48, 48)
 	item_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -55,6 +59,8 @@ func _process(_delta: float) -> void:
 			kart.surface_detector.current.identifier, "GROUNDED" if kart.is_on_floor() else "AIRBORNE",
 			Vector2(kart.velocity.x, kart.velocity.z).length() * 3.6, kart.drift.active,
 			kart.drift.level(kart.config), kart.drift.charge, kart.boost.source if kart.boost.active() else &"none", kart.boost.remaining]
+		debug_label.text += "\nMushroom terrain %.2fs\nSpin %.0f/%.0f deg | Control %.0f%%" % [kart.boost.mushroom_remaining,
+			rad_to_deg(kart.effects.spin_angle), rad_to_deg(kart.effects.total_rotation), kart.effects.control_authority() * 100]
 		var presentation := get_parent().get_node_or_null("PresentationDebug")
 		if presentation:
 			debug_label.text += "\n%s\nF4 mode | F6 CSV | F7 FPS cap\nRender %.0f / Physics %.0f Hz | Cap %s" % [
@@ -69,6 +75,9 @@ func _process(_delta: float) -> void:
 	$Margin/Stack/Handling.text = "BOOST  %.1fs" % kart.boost.remaining if kart.boost.active() else \
 		("DRIFT  Level %d" % kart.drift.level(kart.config) if kart.drift.active else "Shift / LB: drift + steer to charge")
 	$Margin/Stack/Handling.modulate = Color(1, 0.85, 0.25) if kart.boost.active() else Color(0.6, 0.85, 1)
+	if kart.effects.active() and kart.effects.total_rotation != 0:
+		$Margin/Stack/Handling.text = "SPIN-OUT" if kart.effects.spinning() else "RECOVERING CONTROL"
+		$Margin/Stack/Handling.modulate = Color(1, 0.65, 0.4)
 	_refresh()
 
 func _refresh() -> void:

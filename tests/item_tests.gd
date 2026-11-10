@@ -216,7 +216,7 @@ func _actors(s: SceneTree, world: ItemSystem, a: KartController, b: KartControll
 	s.check(hit and not is_instance_valid(red), "Real red shell sweeps into target and applies one timed hit")
 	s.check(b.velocity.length() > 0.1, "Shell hit is a controlled disturbance rather than an enforced full stop")
 	s.check(not b.receive_item_hit(Vector3.RIGHT * 8, 1, 0.7, 0.5, 0.5), "Brief immunity prevents rapid repeated hit stacking")
-	for i in 65: await s.physics_frame
+	for i in ceili((ItemCatalog.ITEMS[1].hit_seconds + ItemCatalog.ITEMS[1].control_recovery_seconds + 0.1) * 60): await s.physics_frame
 	s.check(b.effects.remaining == 0 and b.effects.grip_multiplier == 1, "Hit effect expires and restores normal handling")
 	_place(b, Vector3(505, 0.5, 499))
 	red = _spawn(world, 1, a, Vector3(500, 0.3, 507))

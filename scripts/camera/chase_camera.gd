@@ -39,6 +39,9 @@ func _process(delta: float) -> void:
 	if not is_instance_valid(target):
 		return
 	render_target_transform = target.get_global_transform_interpolated()
+	# A physics-interpolated traction heading keeps a real spinning body visible
+	# without orbiting the chase view. In ordinary driving it equals body heading.
+	render_target_transform.basis = target.camera_heading_interpolated()
 	var desired := render_target_transform.origin + render_target_transform.basis.z * distance + Vector3.UP * height
 	if diagnostic_mode == 2:
 		global_position = desired

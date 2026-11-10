@@ -8,11 +8,15 @@ func _run() -> void:
 	var main := load("res://scenes/main.tscn").instantiate() as Node3D
 	main.get_node("Items").enabled = "--items" in OS.get_cmdline_user_args()
 	var race := main.get_node("RaceManager") as RaceManager
+	var report_prefix := "v05"
 	var idle_human := "--idle-human" in OS.get_cmdline_user_args()
 	race.ai_only = not idle_human
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--laps="): race.lap_count = clampi(argument.get_slice("=", 1).to_int(), 1, 20)
+		if argument.begins_with("--report-prefix="): report_prefix = argument.get_slice("=", 1).validate_filename()
 	root.add_child(main)
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--item-seed="): main.get_node("Items").rng.seed = argument.get_slice("=", 1).to_int()
 	race.start_race()
 	var started := Time.get_ticks_usec()
 	var brakes := 0
@@ -62,7 +66,7 @@ func _run() -> void:
 		results.append({"order": record.finish_order, "name": record.display_name, "laps": record.session.lap_times,
 			"time": record.session.final_time, "recoveries": record.recoveries, "dnf": record.dnf})
 	DirAccess.make_dir_recursive_absolute("res://artifacts")
-	var report := FileAccess.open("res://artifacts/v05_ai_race_%d_%d_%d_%s_%s.json" % [race.difficulty, race.competitors.size(), race.lap_count, "idle" if idle_human else "all_ai", "items" if item_world.enabled else "baseline"], FileAccess.WRITE)
+	var report := FileAccess.open("res://artifacts/%s_ai_race_%d_%d_%d_%s_%s.json" % [report_prefix, race.difficulty, race.competitors.size(), race.lap_count, "idle" if idle_human else "all_ai", "items" if item_world.enabled else "baseline"], FileAccess.WRITE)
 	report.store_string(JSON.stringify({"difficulty": race.difficulty, "racers": race.competitors.size(), "laps": race.lap_count,
 		"simulation_seconds": elapsed, "wall_seconds": wall_seconds, "items_enabled": item_world.enabled,
 		"pickups": pickups, "item_uses": uses, "active_items": item_world.actors.size(), "brake_frames": brakes, "drift_frames": drifts,

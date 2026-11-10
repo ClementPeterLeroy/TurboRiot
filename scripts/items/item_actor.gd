@@ -129,7 +129,9 @@ func _hit(kart: KartController) -> void:
 	if spent: return
 	var kick := direction * 1.5 + kart.global_basis.x * definition.knockback
 	if definition.identifier == &"5D": kick = kart.global_basis.x * definition.knockback
-	var accepted := kart.receive_item_hit(kick, definition.hit_seconds, definition.speed_multiplier, definition.grip_multiplier, definition.momentum_retention)
+	var accepted := kart.receive_item_hit(kick, definition.hit_seconds, definition.speed_multiplier,
+		definition.grip_multiplier, definition.momentum_retention, definition.spin_degrees,
+		definition.hit_control, definition.control_recovery_seconds)
 	if accepted: system.feedback(kart.global_position, 2)
 	expire()
 

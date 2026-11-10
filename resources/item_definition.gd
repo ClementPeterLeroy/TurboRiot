@@ -13,8 +13,11 @@ extends Resource
 @export var turn_degrees := 110.0
 @export var target_range := 45.0
 @export var maximum_bounces := 4
-@export var hit_seconds := 0.8
-@export var speed_multiplier := 0.78
-@export var grip_multiplier := 0.75
-@export var momentum_retention := 0.75
+@export var hit_seconds := 1.35
+@export var spin_degrees := 360.0
+@export_range(0.0, 0.5) var hit_control := 0.12
+@export_range(0.1, 0.8) var control_recovery_seconds := 0.35
+@export var speed_multiplier := 0.55
+@export var grip_multiplier := 0.24
+@export var momentum_retention := 0.55
 @export var knockback := 5.0

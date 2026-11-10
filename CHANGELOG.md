@@ -4,6 +4,19 @@
 
 Pending developer testing/acceptance. Project/HUD identity is `0.5.0-dev`; Windows numeric versions are `0.5.0.0`. This is not a release. The v0.4.0 Unreleased record and all earlier history below are preserved.
 
+### Power-Up Balancing & Feedback correction — 2026-11-10
+
+This correction remains inside **v0.5.0-dev**. Read-only local history showed HEAD `0d69490` (v0.4.0), no tags and v0.5.0 explicitly Unreleased; no v0.5.1 version or release is introduced. Earlier entries below are preserved.
+
+- Mushroom-only sand/grass acceleration, speed-cap and grip immunity now composes through BoostController/SurfaceDetector. Detection/name/resistance remain live; expiry smoothly restores terrain penalties. Independent source timers prevent retained pad caps from extending immunity. Pads and mini-turbos alone retain their previous terrain behavior.
+- Reusable KartEffects spin/recovery state now rotates the actual CharacterBody/collider: red/green shells turn 360° over 1.35 seconds; bananas turn 540° over 1.65 seconds. One bounded planar hit reduces momentum substantially, impairs input and then restores traction/control over 0.35 seconds. Inertial sliding avoids scripted circles, while final physical heading affects driving. Configurable tuning, whole-reaction overlap protection and recovery/restart/finish cleanup are shared by human/AI.
+- A physics-interpolated traction-heading child keeps the chase view steady while the kart spins visibly. Existing camera moving-target integration, vertical contact, ramp/jump rules, visual animation and collision geometry remain. No vertical bob, shake, teleport or artificial zero-speed reset is added.
+- Reusable screen-space speed lines for mushroom/pad activation: brief burst, subtle sustained radial edge streaks, strength-scaled intensity and smooth fade. Camera/canvas projection supports different resolutions/follow positions; lines stay behind the HUD and avoid the central kart area. Mini-turbos alone do not activate them. F3 adds immunity/spin/control telemetry.
+- Added permanent checks 91–104 without changing checks 1–90, balancing/state/real-body tests, native 720p/1080p previews, distinct seeded AI reports and prefixed native presentation traces. Current implementation/controls/architecture/validation docs are updated; ROADMAP and version metadata retain their scope/values.
+- Validation: baseline **691 checks**, expanded **842 checks, 0 failures**; all 12 native presentation scenarios pass at 60/120/uncapped rendering. Seven AI finish item-enabled races on all three difficulties, including a three-lap Challenging run with 29 pickups, 28 uses and one ordinary recovery. Details and limits are in `docs/validation.md` and `docs/power-up-balancing.md`.
+- Developer acceptance remains pending, including real controller feel, spin recovery/motion comfort and line intensity. No staging, commits, pushes, tags, releases or GitHub actions performed by Codex.
+
+
 ### Added
 
 - Shared data-driven ItemDefinition/catalog, one-slot KartInventory and DrivingCommand item activation for human and AI. Space / Pad B activates on a new press; full inventory cannot consume/replace a pickup. Weighted pool contains only 5A–5D; 5E is reserved.

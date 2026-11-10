@@ -139,6 +139,27 @@ For 50–57 inspect grid clearance, hold controls before GO, drive/block slowly 
 
 Checks 1-65 and their history remain verbatim. Historical pad-direction lock/full-stop expectations are superseded by the v0.5 requirements for immediate controls and controlled momentum exchange; all other baseline checks remain required. Use [item procedures](../power-up-mayhem.md) for controls, models, placement, tuning and diagnostic comparisons. Automated success does not mark any manual check passed.
 
+## v0.5.0 development correction - Power-Up Balancing & Feedback
+
+Unreleased, pending developer acceptance; no v0.5.1 release is introduced. All prior checks remain unchanged.
+
+- [ ] **91. Mushroom ignores sand speed penalties.**
+- [ ] **92. Mushroom ignores grass speed penalties.**
+- [ ] **93. Normal off-road penalties return after mushroom expiration.**
+- [ ] **94. Red shell causes a visible 360-degree spin.**
+- [ ] **95. Green shell causes a visible 360-degree spin.**
+- [ ] **96. Banana causes a longer spin-out.**
+- [ ] **97. Spin-outs meaningfully reduce racing speed.**
+- [ ] **98. Karts recover control smoothly.**
+- [ ] **99. AI and human racers receive identical effects.**
+- [ ] **100. Mushroom activates radial speed lines.**
+- [ ] **101. Speed pads activate radial speed lines.**
+- [ ] **102. Speed lines fade correctly and do not obscure gameplay.**
+- [ ] **103. High-speed visual stability remains intact.**
+- [ ] **104. Existing races, checkpoints, drifting, collisions and items still work.**
+
+Use [the balancing procedures](../power-up-balancing.md) for both terrains, actual body spins, control recovery, speed-line intensity/fade and retained high-speed presentation diagnostics. Automated success does not mark these checks manually passed.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -149,5 +170,6 @@ Checks 1-65 and their history remain verbatim. Historical pad-direction lock/ful
 | v0.3.2 | Developer-reported released baseline | Historical device details not supplied | Prior detailed checkbox results not reconstructed | Released baseline per developer |
 | v0.4.0-dev | Pending | Pending | Retained 1–49 plus new 50–65 pending | Unreleased / not accepted |
 | v0.5.0-dev | Pending | Pending | Retained 1-65 plus new 66-90 pending | Unreleased / not accepted |
+| v0.5.0-dev balancing correction | Pending | Pending | Retained 1-90 plus new 91-104 pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

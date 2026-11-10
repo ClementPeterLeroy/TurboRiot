@@ -20,6 +20,7 @@ var environment_contacts := PackedVector3Array()
 var _pending_impulse := Vector3.ZERO
 var _pending_retention := 1.0
 var _ground_motion := Vector3.ZERO
+var _follow_heading: Node3D
 var driving_enabled: bool = true:
 	set(value):
 		driving_enabled = value
@@ -32,6 +33,12 @@ func _ready() -> void:
 	floor_snap_length = config.ground_snap_distance
 	floor_constant_speed = true
 	floor_stop_on_slope = true
+	_follow_heading = Node3D.new()
+	_follow_heading.name = "FollowHeading"
+	add_child(_follow_heading)
+
+func camera_heading_interpolated() -> Basis:
+	return _follow_heading.get_global_transform_interpolated().basis if is_instance_valid(_follow_heading) else get_global_transform_interpolated().basis
 
 func reset_to_spawn() -> void:
 	global_transform = safe_spawn
@@ -53,14 +60,20 @@ func clear_temporary_states() -> void:
 	kart_contacts.clear()
 	environment_contacts.clear()
 	contact_frame = -1
+	surface_detector.clear_boost_override()
+	if is_instance_valid(_follow_heading):
+		_follow_heading.basis = Basis.IDENTITY
+		_follow_heading.reset_physics_interpolation()
 
 func activate_boost(source: StringName, strength: float, duration: float) -> bool:
 	if not driving_enabled:
 		return false
 	return boost.activate(source, strength, duration, config.boost_policy)
 
-func receive_item_hit(impulse: Vector3, duration: float, speed_multiplier: float, grip_multiplier: float, retention: float) -> bool:
-	if not driving_enabled or not impulse.is_finite() or not effects.apply(duration, speed_multiplier, grip_multiplier): return false
+func receive_item_hit(impulse: Vector3, duration: float, speed_multiplier: float, grip_multiplier: float, retention: float,
+		spin_degrees := 0.0, control := 0.12, recovery_seconds := 0.35) -> bool:
+	if not driving_enabled or not impulse.is_finite() or not effects.apply(duration, speed_multiplier, grip_multiplier,
+		spin_degrees, control, recovery_seconds, global_basis): return false
 	_pending_impulse = impulse.limit_length(12)
 	_pending_impulse.y = 0
 	_pending_retention = clampf(retention, 0.5, 1)
@@ -69,10 +82,11 @@ func receive_item_hit(impulse: Vector3, duration: float, speed_multiplier: float
 
 func activate_item_boost(source: StringName, strength: float, duration: float) -> bool:
 	if not driving_enabled: return false
+	var own_duration := duration
 	if config.boost_policy == KartConfig.BoostPolicy.STRONGEST_WINS and boost.active():
 		strength = maxf(strength, boost.strength)
 		duration = maxf(duration, boost.remaining)
-	return boost.activate(source, strength, duration, KartConfig.BoostPolicy.REPLACE)
+	return boost.activate(source, strength, duration, config.boost_policy, own_duration)
 
 func activate_directional_boost(direction: Vector3, strength: float, duration: float, initial_impulse: float = -1.0) -> bool:
 	if not driving_enabled or not direction.is_finite():
@@ -82,10 +96,11 @@ func activate_directional_boost(direction: Vector3, strength: float, duration: f
 		return false
 	# Pads always act. Under strongest-wins retain a stronger active cap and
 	# the longer timer; they cannot be ignored because approach is backwards.
+	var own_duration := duration
 	if config.boost_policy == KartConfig.BoostPolicy.STRONGEST_WINS and boost.active():
 		strength = maxf(strength, boost.strength)
 		duration = maxf(duration, boost.remaining)
-	if not boost.activate(&"boost_pad", strength, duration, KartConfig.BoostPolicy.REPLACE):
+	if not boost.activate(&"boost_pad", strength, duration, config.boost_policy, own_duration):
 		return false
 	direction = direction.normalized()
 	# One entry impulse, never a persistent velocity/yaw override. Cancel any
@@ -111,14 +126,17 @@ func _physics_process(delta: float) -> void:
 		signed_speed = 0.0
 		return
 	boost.advance(delta)
-	effects.advance(delta)
+	rotate_y(effects.advance(delta))
+	var surface := surface_detector.handling_multipliers(boost, delta, config.surface_smoothing)
 	velocity.x = velocity.x * _pending_retention + _pending_impulse.x
 	velocity.z = velocity.z * _pending_retention + _pending_impulse.z
 	_pending_impulse = Vector3.ZERO
 	_pending_retention = 1
 	current_command = input_provider.get_command() if input_provider else DrivingCommand.new()
-	var forward := -global_basis.z
-	var right := global_basis.x
+	var drive_command := effects.driving_command(current_command)
+	var traction_basis := effects.driving_basis(global_basis)
+	var forward := -traction_basis.z
+	var right := traction_basis.x
 	var grounded := is_on_floor()
 	var launch_surface := false
 	if grounded:
@@ -129,17 +147,17 @@ func _physics_process(delta: float) -> void:
 				break
 	var speed := velocity.dot(forward)
 	var lateral := velocity.dot(right)
-	var award := drift.update(current_command, speed, lateral, grounded, false, config, delta)
+	var award := drift.update(drive_command, speed, lateral, grounded, false, config, delta)
 	if grounded:
-		var surface := surface_detector.effective
 		var horizontal: Vector3
 		var acceleration_multiplier := surface.x * (config.boost_acceleration_multiplier if boost.active() else 1.0)
-		speed = KartDynamics.longitudinal_speed(speed, current_command, config, delta,
+		speed = KartDynamics.longitudinal_speed(speed, drive_command, config, delta,
 			acceleration_multiplier, surface.y * effects.speed_multiplier, surface.w, boost.strength)
 		var grip := config.lateral_grip * surface.z * effects.grip_multiplier * (config.drift_grip_multiplier if drift.active else 1.0)
 		lateral = KartDynamics.damp_lateral(lateral, grip, delta)
-		var yaw := KartDynamics.steering_radians(speed, current_command, config, delta)
-		rotate_y(yaw * (config.drift_steering_multiplier if drift.active else 1.0))
+		var yaw := KartDynamics.steering_radians(speed, drive_command, config, delta) * (config.drift_steering_multiplier if drift.active else 1.0)
+		rotate_y(yaw)
+		effects.steer_inertia(yaw)
 		horizontal = forward * speed + right * lateral
 		# Let move_and_slide project motion onto the floor. Supplying our own
 		# upward tangent disables automatic snapping at shoulder/ramp crests,
@@ -158,7 +176,9 @@ func _physics_process(delta: float) -> void:
 			velocity = tangent - normal * config.ground_contact_speed
 	else:
 		# Air steering changes heading only; throttle cannot manufacture momentum.
-		rotate_y(KartDynamics.air_yaw(speed, current_command, config, delta))
+		var yaw := KartDynamics.air_yaw(speed, drive_command, config, delta)
+		rotate_y(yaw)
+		effects.steer_inertia(yaw)
 		velocity.y -= config.gravity * delta
 	var before_move := velocity
 	contact_velocity = velocity
@@ -189,4 +209,5 @@ func _physics_process(delta: float) -> void:
 		drift.clear()
 	elif award > 0:
 		activate_boost(&"mini_turbo", config.mini_turbo_strengths[award - 1], config.mini_turbo_durations[award - 1])
+	_follow_heading.global_basis = effects.driving_basis(global_basis)
 	signed_speed = velocity.dot(-global_basis.z)

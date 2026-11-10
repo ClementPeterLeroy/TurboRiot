@@ -8,6 +8,7 @@ func _initialize() -> void:
 func _run() -> void:
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	main = load("res://scenes/main.tscn").instantiate()
+	main.get_node("Items").enabled = false # Isolate normal presentation from items.
 	main.get_node("RaceManager").opponent_count = 0 # Isolated legacy mechanics/presentation fixture.
 	var legacy := "--legacy" in OS.get_cmdline_user_args()
 	if legacy:
@@ -47,7 +48,10 @@ func _run() -> void:
 	var failures := 0
 	DirAccess.make_dir_recursive_absolute("res://artifacts")
 	var pixel_only := "--pixels-only" in OS.get_cmdline_user_args()
-	var output := FileAccess.open("res://artifacts/presentation_legacy.csv" if legacy else ("res://artifacts/presentation_pixels_probe.csv" if pixel_only else "res://artifacts/presentation_probe.csv"), FileAccess.WRITE)
+	var artifact_prefix := ""
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--report-prefix="): artifact_prefix = argument.get_slice("=", 1).validate_filename() + "_"
+	var output := FileAccess.open("res://artifacts/" + artifact_prefix + ("presentation_legacy.csv" if legacy else ("presentation_pixels_probe.csv" if pixel_only else "presentation_probe.csv")), FileAccess.WRITE)
 	output.store_csv_line(PackedStringArray(["cap", "mode", "time", "physics_tick", "body_y", "visual_pitch", "camera_pitch", "relative_z", "relative_pitch", "helmet_y", "nose_y", "grounded"]))
 	for cap in ([120] if pixel_only else [60, 120, 0]):
 		Engine.max_fps = cap
@@ -82,12 +86,12 @@ func _run() -> void:
 				failures += 1
 				push_error("Presentation exceeds one-pixel screen-Y range")
 			await RenderingServer.frame_post_draw
-			root.get_texture().get_image().save_png("res://artifacts/presentation_%s_%s_%s.png" % ["legacy" if legacy else "fixed",cap,mode])
+			root.get_texture().get_image().save_png("res://artifacts/%spresentation_%s_%s_%s.png" % [artifact_prefix,"legacy" if legacy else "fixed",cap,mode])
 			# Readback can stall the GPU. Keep it outside the timed rate window.
 			if mode == 0 and cap == 120:
 				for frame in 8:
 					await RenderingServer.frame_post_draw
-					root.get_texture().get_image().save_png("res://artifacts/presentation_%s_pixel_%02d.png" % ["legacy" if legacy else "fixed",frame])
+					root.get_texture().get_image().save_png("res://artifacts/%spresentation_%s_pixel_%02d.png" % [artifact_prefix,"legacy" if legacy else "fixed",frame])
 	Input.action_release("accelerate")
 	output.close()
 	Engine.max_fps = 0

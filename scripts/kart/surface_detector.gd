@@ -11,6 +11,7 @@ var ground_distance: float = INF
 var has_ground := false
 var _candidate: SurfaceConfig
 var _candidate_time: float = 0.0
+var _boost_override := 0.0
 
 static func tag_collision(root: Node, surface: SurfaceConfig) -> void:
 	if root is StaticBody3D or root is Area3D:
@@ -19,6 +20,7 @@ static func tag_collision(root: Node, surface: SurfaceConfig) -> void:
 		tag_collision(child, surface)
 
 func reset() -> void:
+	clear_boost_override()
 	current = ASPHALT
 	effective = Vector4.ONE
 	normal = Vector3.UP
@@ -26,6 +28,21 @@ func reset() -> void:
 	has_ground = false
 	_candidate = null
 	_candidate_time = 0.0
+
+func clear_boost_override() -> void:
+	_boost_override = 0
+
+func handling_multipliers(boost: BoostController, delta: float, smoothing: float) -> Vector4:
+	# Detection, labels and the underlying blend stay live. Only mushroom's
+	# own timer neutralizes reduced acceleration/cap/grip; resistance is retained.
+	if boost.mushroom_remaining > 0:
+		_boost_override = 1
+	else:
+		_boost_override *= exp(-smoothing * delta)
+		if _boost_override < 0.0001: _boost_override = 0
+	return Vector4(lerpf(effective.x, maxf(1, effective.x), _boost_override),
+		lerpf(effective.y, maxf(1, effective.y), _boost_override),
+		lerpf(effective.z, maxf(1, effective.z), _boost_override), effective.w)
 
 func blend(surface: SurfaceConfig, delta: float, smoothing: float, debounce: float) -> void:
 	if surface != _candidate:

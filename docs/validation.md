@@ -1,3 +1,64 @@
+# v0.5.0-dev — Power-Up Balancing & Feedback validation
+
+2026-11-10. **Unreleased; developer acceptance pending.** Local history at the start of this correction showed HEAD `0d69490` (v0.4.0), no tags, `0.5.0-dev` / Windows `0.5.0.0` metadata and an explicit Unreleased v0.5.0 changelog. This work stays inside that patch; no v0.5.1 release or metadata change is claimed. Earlier reports and release entries below retain their original wording/results.
+
+## Automated regressions
+
+Godot **4.7.2.stable.official.ed1daf0bf**, Windows, Compatibility renderer. Before correction: **691 checks, zero failures**. Expanded suite: **842 checks, zero failures**, adding 151 assertions. Headless editor import/runtime validation pass. The only engine error output is the existing Windows sandbox root-certificate-store warning; no network access is required. Test logs/traces remain under ignored `.godot/` and process-local APPDATA stays within that folder.
+
+`tests/powerup_balance_tests.gd` covers mushroom acceleration/cap/grip immunity on both terrains, unchanged identity/resistance/resources, smooth expiry, independent overlap timers, unaffected pad/mini terrain rules, REPLACE cleanup; spin integration at 30/60/120/144 Hz, overlapping-hit rejection, exact angles, smooth recovery and later re-hit; actual moving human/opponent bodies, real wall separation, airborne ascent/landing and recovery/restart/finish cleanup; burst/sustain/fade, strength scaling, repeated same-source activation, non-eligible mini-turbos, race locks and streak geometry at four aspect/resolution settings and varied focus positions.
+
+The earlier item expiry assertion now waits for the configured spin plus control recovery rather than assuming the old short penalty. All other prior assertions remain; ground/shoulder/ramp, drifting, collisions, ordered checkpoints/results, inventory/projectile behavior and presentation regressions pass.
+
+| Actual-body test, starting at 20 m/s | Measured spin | Early hit speed | Body Y range | Maximum chase lateral offset while spinning |
+| --- | ---: | ---: | ---: | ---: |
+| Red shell | 360.000° | 11.284 m/s | 0.00000003 m | 0.151 m |
+| Green shell | 360.000° | 11.284 m/s | 0.00000003 m | 0.151 m |
+| Banana | 540.000° | 10.305 m/s | 0.00000286 m | 0.160 m |
+
+These samples use real CharacterBody movement on a flat fixture with identical commands for human/opponent bodies. Every spin stays grounded, takes at most nine degrees per sampled physics tick and finishes with normal authority restored. The wall case reports **zero measured box penetration** and no excessive movement. An airborne hit preserves an existing +6 m/s vertical launch, continues rising and later lands normally. Actual sand/grass runs exceed 29 m/s during mushroom immunity, keep the detected identifier and return below ordinary terrain caps afterward. This evidence does not replace developer feel/visual acceptance.
+
+## Native presentation and feedback
+
+Captured and directly inspected scripted `artifacts/balance_*.png` previews: mushroom burst/sustain/fade at 1280×720, burst at 1920×1080 with changed FOV/height/distance, pad feedback, actual shell/banana spin poses and active sand detection. These are review captures, not accepted gameplay or race records. The effect is one Control with 28 edge streaks, no textures or transform writes, drawn behind the HUD; the kart center stays clear.
+
+The retained native moving-target A/B probe ran all 12 scenarios, preserving its one-pixel screen-Y limit at about 79.2 km/h. New files use the `balance_` prefix, leaving previous captures/traces intact.
+
+| Render cap | A Normal screen-Y range | B Static visuals | C Fixed orientation | D Minimal follow |
+| --- | ---: | ---: | ---: | ---: |
+| 60 | 0.24979 px | 0.18506 px | 0.16141 px | 0.000061 px |
+| 120 | 0.20081 px | 0.20828 px | 0.17050 px | 0.000061 px |
+| Uncapped | 0.21686 px | 0.21771 px | 0.17181 px | 0.000061 px |
+
+Result: **12 scenarios, 0 failures**. Normal-mode relative-pitch ranges are 0.04702° / 0.03888° / 0.04157° respectively. This checks actual render/camera/screen-position timing, not only stable physics Y. Hardware: NVIDIA RTX 3070 Ti Laptop GPU, OpenGL Compatibility. No broad device/export guarantee is inferred.
+
+## Real AI races
+
+Seven physical AI racers, item seed 42, no transform driving/checkpoint injection:
+
+| Difficulty | Laps | Finish times | Pickups / uses | Recoveries / DNF |
+| --- | ---: | --- | ---: | ---: |
+| Casual | 1 | 39.317–46.450 s | 9 / 9 | 0 / 0 |
+| Standard | 1 | 33.383–39.567 s | 9 / 9 | 0 / 0 |
+| Challenging | 3 | 92.717–105.767 s | 29 / 28 | 1 / 0 |
+
+All seven finish each run with valid ordered progress. Challenging simulation lasts 108.8 s, with 8,139 braking frames, 2,894 drifting frames and 609 mini-turbo frames. The stronger reactions can legitimately require ordinary recovery. Distinct reports: `artifacts/balance_ai_race_*_items.json`; earlier v0.5 baseline reports remain intact. The seed makes this validation repeatable; normal gameplay remains random.
+
+## Reproduce and accept
+
+```powershell
+godot --headless --editor --path . --quit
+godot --headless --fixed-fps 60 --path . --script tests/run_tests.gd
+godot --headless --fixed-fps 60 --path . --quit-after 180
+godot --headless --fixed-fps 60 --path . --script tests/run_ai_race.gd -- --items --laps=3 --difficulty=challenging --report-prefix=balance --item-seed=42
+godot --path . --fixed-fps 60 --script tests/capture_balance_preview.gd
+godot --path . --script tests/capture_presentation_probe.gd -- --report-prefix=balance
+```
+
+Do not use fixed FPS for the native render-rate probe. Re-run cumulative checks **1–104**; new **91–104** remain unchecked. Manual work includes actual input/control recovery, spin motion comfort, edge-line intensity/visibility, real gamepads and exported builds. This remains a kinematic arcade reaction with simple traffic/homing; dense corner/traffic traps may use existing recovery. See [implementation/tuning/procedures](power-up-balancing.md). No Git index changes, commits, pushes, tags, releases or GitHub actions by Codex.
+
+---
+
 # v0.5.0-dev — Power-Up Mayhem validation (2026-11-10)
 
 **Unreleased, pending developer acceptance.** Current identity: `0.5.0-dev` / numeric Windows `0.5.0.0`. Earlier reports below retain their original versions/results; they are not claims about the new patch.

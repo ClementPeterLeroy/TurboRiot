@@ -22,6 +22,8 @@ A grounded pad entry applies one horizontal arrow-aligned impulse. It removes a 
 
 Default pad bonus: **1.5 strength / 1.4 seconds**. Mushroom: **1.4 / 1.8 seconds**. Both increase acceleration using the existing boost acceleration multiplier. Under default STRONGEST_WINS, these sources retain the stronger cap and longer timer; they never add multipliers. REPLACE overwrites the bonus. Mini-turbos retain their established weaker-ignore policy. Sources remain `boost_pad`, `mushroom` and `mini_turbo`. Expiry uses existing smooth excess-speed deceleration; base KartConfig is never mutated.
 
+The unreleased [balancing correction](power-up-balancing.md) adds mushroom-only sand/grass acceleration, speed and grip immunity through the existing surface pipeline. Its separate timer cannot be extended by a retained pad cap; expiry restores terrain behavior smoothly without changing the detected name. Pads and mini-turbos retain normal terrain penalties. Mushroom/pad activations also trigger radial edge streaks with burst, sustain and fade; no camera shake or bob is added.
+
 ## Inventory and item architecture
 
 `ItemDefinition` resources contain identifier, name, scene/icon, weight and effect/projectile tuning. `ItemCatalog` includes exactly four shared definitions, with weights **35/25/25/15**. There is no position advantage or hidden AI pool. `5E` is explicitly reserved and cannot be drawn. Model scenes and native SVG icons can be replaced without changing activation code.
@@ -30,15 +32,15 @@ Each reusable kart has `KartInventory`: one held definition, a press latch and 0
 
 | ID | Item | Default behaviour |
 | --- | --- | --- |
-| 5A | Mushroom | 1.8-second acceleration/speed boost; no direction lock or drift interruption. |
+| 5A | Mushroom | 1.8-second acceleration/speed boost and off-road immunity; no direction lock or drift interruption. |
 | 5B | Red Shell | Forward launch, 30 m/s; acquire an active opponent within 45 m, forward cone and unobstructed line of sight. Turn at most 110°/s. If no target, continue straight. Hit or world-wall contact consumes it; lifetime 8 seconds. |
 | 5C | Green Shell | Forward 30 m/s; no homing even if a target exists. Reflect from world-wall normals, up to four bounces, 8-second lifetime. |
-| 5D | Banana | Drop 2 m behind, fall onto support, then remain stationary. One eligible contact causes a 1.1-second grip disturbance. Lifetime 20 seconds. |
+| 5D | Banana | Drop 2 m behind, fall onto support, then remain stationary. One eligible contact causes a 540° / 1.65-second spin-out plus smooth control recovery. Lifetime 20 seconds. |
 | 5E | Reserved | No definition, actor, model, pickup or active probability. |
 
 Shells use swept sphere queries and explicit initial-overlap detection, so a thin wall or close opponent is not skipped. Spawn paths check static obstacles. Forward target selection cannot guarantee a hit around corners; red shells have no path planner or automatic reacquisition. Ground-follow rays keep shells above support; missing ground applies gravity. Bananas settle before checking kart overlaps. Fresh shells exclude their owner for 0.6 seconds; bananas for 1 second. Returning items may hit their owner after grace. Each actor is spent once.
 
-`KartEffects` holds temporary speed/grip and repeat-hit immunity. A hit queues one bounded planar impulse and one momentum-retention application; the controller applies them on the next physics tick. Shell defaults: 0.8-second penalty, speed cap multiplier 0.78, grip 0.75, retained momentum 0.75. Banana defaults: grip 0.4, speed 0.92, retention 0.92. These preserve steering and pedals, never impose a full stop, and clear drift charge. A 0.65-second guard limits repeated hits; effects do not stack permanent penalties, rotate/teleport bodies or change race progress.
+`KartEffects` now provides the shared physical spin-out state. Shell defaults are 360° over 1.35 seconds, speed cap 0.55, grip 0.24 and retained momentum 0.55. Banana defaults are 540° over 1.65 seconds, speed cap 0.5, grip 0.2 and retention 0.5. Initial input authority is impaired, followed by 0.35 seconds of smooth control/traction restoration. The actual CharacterBody rotates while sliding under inertia; no zero-speed reset or teleport is applied. Active spin/recovery and a short post-recovery grace reject overlapping hits. Human/AI use identical rules; race progress and vertical jump physics remain separate. See [state, camera and configuration details](power-up-balancing.md).
 
 ## The three blue-marker rows
 
@@ -58,11 +60,11 @@ AI follows available box lanes only while empty and not passing; traffic retains
 
 Recovery clears inventory, active combat modifiers/immunity and queued impulses; it retains valid race progress/timing. F5/Return to Ready synchronously clears every inventory, actor/trap, box timer, feedback and AI decision state. Finished drivers cannot activate or be targeted. Active effects cannot grant checkpoints, laps or ranking progress.
 
-Caps: **32 active actors, 12 transient feedback rings, 8 spatial audio voices**. Procedural meshes/materials are shared, including shell scutes; four short synthesized cues distinguish pickup/use/hit/ricochet. Headless simulations omit audiovisual feedback and audio playback; native rendering exercises them. No camera shake or kart vertical bob is added. The inherited camera/shared-render-pose and visual update timing remain unchanged.
+Caps: **32 active actors, 12 transient feedback rings, 8 spatial audio voices**. Procedural meshes/materials are shared, including shell scutes; four short synthesized cues distinguish pickup/use/hit/ricochet. Headless simulations omit spatial audio/world feedback; native rendering exercises them. No camera shake or kart vertical bob is added. Shared render-pose timing remains; spin-outs add an interpolated traction-heading reference to prevent the chase view from orbiting the rotating body.
 
 ## Developer acceptance procedure
 
-Run cumulative checks **1–90**, with new checks **66–90** still unchecked. First compare rear/side/head-on contact and confirm control while boosted, including reverse pad entry and drifting. Collect/use each of the four items; compare models with the private references. Check all three rows against the marked map, all four lanes, full inventory, respawn and simultaneous pickup contention. Check homing limits, thin-wall ricochet, owner grace, temporary hit recovery, AI item use and F5/R during effects.
+Run cumulative checks **1–104**, including retained **66–90** and new balancing checks **91–104**, all pending developer acceptance. First compare rear/side/head-on contact and confirm control while boosted, including reverse pad entry and drifting. Collect/use each of the four items; compare models with the private references. Check all three rows against the marked map, all four lanes, full inventory, respawn and simultaneous pickup contention. Check homing limits, thin-wall ricochet, owner grace, physical spin-outs/control recovery, mushroom off-road immunity, speed lines, AI item use and F5/R during effects.
 
 Rerun F3/F4 A Normal at approximately 80 km/h and F7 60/120/uncapped where supported. Stable body Y alone does not accept visual stability. Confirm ordinary drifting, shoulder contact, a real ramp jump/landing and per-driver recovery/results. Record real keyboard/controller feel and visual/audio results separately from automation.
 

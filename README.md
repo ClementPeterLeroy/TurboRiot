@@ -24,6 +24,8 @@ Select **RaceManager** in `main.tscn` before launch to change Opponent Count, Di
 
 Collect a floating question-mark box, then press **Space / Pad B** to use the held item. Holding the button cannot consume subsequent pickups. Three rows of four boxes follow the blue-marked map; boxes respawn after five seconds. See [manual item tests](docs/power-up-mayhem.md).
 
+The current unreleased [balancing correction](docs/power-up-balancing.md) adds mushroom-only off-road immunity, physical 360° shell / 540° banana spin-outs with smooth control recovery, and radial screen-edge feedback for mushrooms/pads. Local release history keeps this work inside **0.5.0-dev**. New acceptance checks 91–104 extend the retained 1–90; no release is claimed.
+
 ## Included
 
 - Weighted one-slot inventories, four original item models/icons, homing/ricocheting shells, banana traps and 3 x 4 editor-visible loot boxes.
@@ -110,7 +112,7 @@ The runner also includes `tests/runoff_tests.gd`, with real kart exits/rejoins o
 
 `tests/corrective_tests.gd` adds reference landmarks, grouped colour continuity, bounded gate coverage, continuous off-road laps, reverse/wrong-heading pad entries and real trunk/foliage collision checks. `godot --path . --script tests/capture_corrective_preview.gd` saves the overhead review to `artifacts/corrective_layout.png`.
 
-See [validation](docs/validation.md) for actual results and limits, the [cumulative manual checklist](docs/testing/ACCEPTANCE_CHECKLIST.md) for checks 1-90, and the [handling audit](docs/v0.3.0-audit.md) for baseline/reference inspection. The [earlier runoff procedures](docs/acceptance.md) are retained. See [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md) and [VERSIONING.md](VERSIONING.md) for scope, actual changes and development status. Each patch must rerun the accepted baseline and append its own manual criteria; v0.5.0 acceptance remains pending; earlier history is retained.
+See [validation](docs/validation.md) for actual results and limits, the [cumulative manual checklist](docs/testing/ACCEPTANCE_CHECKLIST.md) for checks 1-104, and the [handling audit](docs/v0.3.0-audit.md) for baseline/reference inspection. The [earlier runoff procedures](docs/acceptance.md) are retained. See [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md) and [VERSIONING.md](VERSIONING.md) for scope, actual changes and development status. Each patch must rerun the accepted baseline and append its own manual criteria; v0.5.0 acceptance remains pending; earlier history is retained.
 
 For real physical AI-only validation, run `godot --headless --fixed-fps 60 --path . --script tests/run_ai_race.gd`. Append `-- --difficulty=casual`, `-- --difficulty=challenging` or `-- --idle-human`; reports go to `artifacts/ai_race_*.json`. For an interactive AI-only game use `godot --path . -- --ai-only --auto-start`. The renderer preview is `tests/capture_competitor_preview.gd`; benchmark one/seven karts with `tests/benchmark_competitors.gd` **without** `--fixed-fps`. See [full instructions and limits](docs/racing-competitors.md).
 
