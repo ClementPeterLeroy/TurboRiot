@@ -109,6 +109,36 @@ See [diagnosis, capture instructions and measured evidence](../presentation-inve
 
 For 50–57 inspect grid clearance, hold controls before GO, drive/block slowly on a straight, force one AI off-road and compare F3/F8 commands and held passing side. For 58 rerun the same field with Casual/Standard/Challenging; compare braking/drift/traffic competence without changing KartConfig. For 59–62 try legal runoff, missed/reversed gates, AI-first and human-first finishes, plus an idle driver/DNF deadline; compare the live table against actual crossings. For 63 restart during countdown/racing/results and after recovery; verify every competitor. For 64 rerun retained presentation checks 46–49 at 60/120/uncapped where possible in A Normal; stable body Y alone is not acceptance. For 65 exercise drift/mini-turbos, pads, the optional ramp, R and F5 with opponents present. Record real device/feel issues and results separately from automation. See [play and debugging procedures](../racing-competitors.md).
 
+## v0.5.0 — Power-Up Mayhem, manual verification pending
+
+- [ ] **66. Kart-to-kart collisions no longer cause unjustified full stops.**
+- [ ] **67. Rear-end impacts produce controlled momentum exchange.**
+- [ ] **68. Side impacts preserve reasonable forward movement.**
+- [ ] **69. Karts do not become stuck inside one another.**
+- [ ] **70. Speed pads boost without locking steering.**
+- [ ] **71. Braking and drifting remain available during boosts.**
+- [ ] **72. Reverse entry onto speed pads works correctly.**
+- [ ] **73. Mushroom visual matches the reference.**
+- [ ] **74. Red shell visual matches the reference.**
+- [ ] **75. Green shell visual matches the reference.**
+- [ ] **76. Banana visual matches the reference.**
+- [ ] **77. Loot boxes match the supplied reference.**
+- [ ] **78. Exactly three loot-box rows appear at the blue map markers.**
+- [ ] **79. Each row contains four evenly spaced loot boxes.**
+- [ ] **80. All twelve loot boxes are reachable.**
+- [ ] **81. Loot boxes disappear and respawn correctly.**
+- [ ] **82. Mushroom boosts correctly.**
+- [ ] **83. Red shell homes toward opponents.**
+- [ ] **84. Green shell travels straight and ricochets.**
+- [ ] **85. Banana causes a temporary handling disturbance.**
+- [ ] **86. AI collects and uses items.**
+- [ ] **87. Item effects do not break race progression.**
+- [ ] **88. Restart clears temporary items and projectiles.**
+- [ ] **89. High-speed kart visual stability remains correct.**
+- [ ] **90. Existing AI racing, drifting, jumping and recovery still work.**
+
+Checks 1-65 and their history remain verbatim. Historical pad-direction lock/full-stop expectations are superseded by the v0.5 requirements for immediate controls and controlled momentum exchange; all other baseline checks remain required. Use [item procedures](../power-up-mayhem.md) for controls, models, placement, tuning and diagnostic comparisons. Automated success does not mark any manual check passed.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -118,5 +148,6 @@ For 50–57 inspect grid clearance, hold controls before GO, drive/block slowly 
 | v0.3.1 — Corrective Patch | Pending | Pending | 1–36 plus retained runoff regressions pending; runtime identity currently 0.3.0-dev | Not accepted/released |
 | v0.3.2 | Developer-reported released baseline | Historical device details not supplied | Prior detailed checkbox results not reconstructed | Released baseline per developer |
 | v0.4.0-dev | Pending | Pending | Retained 1–49 plus new 50–65 pending | Unreleased / not accepted |
+| v0.5.0-dev | Pending | Pending | Retained 1-65 plus new 66-90 pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

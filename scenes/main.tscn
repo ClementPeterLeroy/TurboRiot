@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://dj4f3iikupqqt" path="res://scripts/track/track_features.gd" id="8"]
 [ext_resource type="Script" uid="uid://cavqovyrxmkke" path="res://scripts/debug/presentation_diagnostics.gd" id="9"]
 
+[ext_resource type="Script" path="res://scripts/items/item_system.gd" id="10"]
+
 [sub_resource type="ProceduralSkyMaterial" id="SkyMaterial"]
 sky_top_color = Color(0.22, 0.58, 0.91, 1)
 sky_horizon_color = Color(0.73, 0.9, 0.99, 1)
@@ -69,3 +71,8 @@ race = NodePath("../RaceManager")
 
 [node name="PresentationDebug" type="Node" parent="." unique_id=895298100]
 script = ExtResource("9")
+
+[node name="Items" type="Node3D" parent="." node_paths=PackedStringArray("track", "race")]
+script = ExtResource("10")
+track = NodePath("../Track")
+race = NodePath("../RaceManager")

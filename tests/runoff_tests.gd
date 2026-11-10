@@ -2,6 +2,7 @@ extends RefCounted
 
 func run(suite: SceneTree) -> void:
 	var main := load("res://scenes/main.tscn").instantiate() as Node3D
+	main.get_node("Items").enabled = false # Isolate pre-item regression fixture.
 	main.get_node("RaceManager").opponent_count = 0 # Isolated legacy mechanics/presentation fixture.
 	suite.root.add_child(main)
 	var track := main.get_node("Track") as TrackBuilder

@@ -1,8 +1,8 @@
-# Turbo Riot — v0.4.0-dev — Racing Competitors
+# Turbo Riot — v0.5.0-dev — Power-Up Mayhem
 
-A Godot 4 Windows arcade racer with one human and six AI opponents by default. **v0.4.0 is Unreleased and pending developer testing.** It builds on the developer-reported v0.3.2 baseline and preserves surfaces, drift/mini-turbos, directional pads, jumps, recovery and the high-speed presentation corrections. No downloaded game art, plugins, singletons, weapons/items, networking, split-screen, persistent leaderboard or realistic suspension.
+A Godot 4 Windows arcade racer with one human and six AI opponents, four collectible items and twelve loot boxes. **v0.5.0 is Unreleased and pending developer acceptance.** Existing AI racing, surfaces, drifting, jumps, recovery and high-speed presentation corrections remain. No downloaded game art, plugins, networking, split-screen or realistic suspension.
 
-All racers share the existing kart controller and handling resource; AI supplies DrivingCommand inputs. Cached circuit pursuit, anticipatory braking, three configurable difficulty profiles, traffic passing, independent progress and ordered results form this milestone. See [competitor authoring and validation](docs/racing-competitors.md), [repository audit](docs/v0.4.0-audit.md) and [version policy](VERSIONING.md).
+This milestone adds controlled kart-to-kart momentum exchange, boost pads with immediate steering/braking, and shared player/AI inventory, projectiles and traps. Only Mushroom (5A), Red Shell (5B), Green Shell (5C) and Banana (5D) are active; 5E is reserved. See [items, tuning and testing](docs/power-up-mayhem.md), [v0.5 audit](docs/v0.5.0-audit.md), [AI configuration](docs/racing-competitors.md) and [version policy](VERSIONING.md).
 
 ## Open and play
 
@@ -20,10 +20,14 @@ W/Up accelerates; S/Down brakes then reverses; A/D or Left/Right steers. **R / P
 
 Sand and grass reduce acceleration, sustainable speed and grip smoothly; asphalt restores normal handling. Cyan arrow pads provide temporary boosts on the long left straight and upper diagonal (55% / 81% of the lap). The amber ramp is optional in the **outside sand of the long left straight**, around 56% of the lap; align with it and approach at speed. It does not replace a required route section. Air yaw has reduced authority, throttle does not add mid-air momentum, and gravity returns the kart to the terrain.
 
-Select **RaceManager** in `main.tscn` before launch to change Opponent Count, Difficulty (Casual/Standard/Challenging), Lap Count and grid/grace/timeout settings. Default is 6 opponents / Standard / 3 laps. **F3** shows AI line/targets and commands; **F8** cycles selected AI telemetry. All racers lock until GO; F5 restarts everyone, while R recovers only you. Finishers stop blocking traffic, and opponents can continue while your results update.
+Select **RaceManager** in `main.tscn` before launch to change Opponent Count, Difficulty (Casual/Standard/Challenging), Lap Count and grid/grace/timeout settings. The current saved scene uses 6 opponents / Challenging / 3 laps; the script default is Standard. **F3** shows AI line/targets and commands; **F8** cycles selected AI telemetry. All racers lock until GO; F5 restarts everyone, while R recovers only you. Finishers stop blocking traffic, and opponents can continue while your results update.
+
+Collect a floating question-mark box, then press **Space / Pad B** to use the held item. Holding the button cannot consume subsequent pickups. Three rows of four boxes follow the blue-marked map; boxes respawn after five seconds. See [manual item tests](docs/power-up-mayhem.md).
 
 ## Included
 
+- Weighted one-slot inventories, four original item models/icons, homing/ricocheting shells, banana traps and 3 x 4 editor-visible loot boxes.
+- Mass-based kart contact impulses and controllable one-entry boost pads.
 - One human/six configurable AI competitors using the same kart scene/config, staggered coloured grid, cached pursuit and braking, stable passing targets and shared recovery.
 - Live route-validated positions, independent per-racer clocks/checkpoints, persistent finish order and grace/timeout DNF.
 - CharacterBody3D arcade controller: acceleration, brake/reverse, coast, speed-sensitive steering, lateral grip, gravity, ground snapping, static collisions, and safe reset.
@@ -51,6 +55,7 @@ scripts/input/               Device input and normalized driving commands
 scripts/kart/                Dynamics, controller, surfaces, drift/boost and visuals
 scripts/race/                Per-competitor state, field manager and directed gates
 scripts/ai/                  Cached racing line and AI DrivingInput provider
+scripts/items/               Inventory, catalog, models, actors, rows and feedback
 scripts/camera/              Chase camera
 scripts/track/               Track builder, BoostPad, Ramp and feature placement
 scripts/world/               Primitive helpers and seeded environment
@@ -69,7 +74,7 @@ artifacts/                   Rendered review images, excluded by .gdignore
 
 Open `resources/default_kart.tres` in the Inspector to tune handling. Defaults are 22 m/s forward, 7 m/s reverse, 16 m/s² acceleration, 28 m/s² braking, 6 m/s² coast, 110°/s steering and 9 s⁻¹ lateral grip. Duplicate this resource and assign it on a kart for independent tuning.
 
-The same resource exposes drift activation/grip/steering, ordered positive charge thresholds, mini-turbo strengths/durations, boost policy/acceleration, air steering, gravity/landing, surface smoothing/debounce and probe/snap distance. Terrain multipliers live in `resources/surfaces/`. Defaults: grass acceleration/speed/grip = 0.75/0.75/0.70; sand = 0.60/0.60/0.55. Generic mini-turbo policy defaults to **strongest wins**: weaker requests are ignored; equal/stronger requests retain the longer remaining duration. The alternative **replace** policy overwrites strength and duration. Directional pad entries always redirect toward the pad arrow; strongest-wins preserves any stronger cap/longer timer while applying that direction. Nothing permanently changes the base config.
+The same resource exposes drift activation/grip/steering, ordered positive charge thresholds, mini-turbo strengths/durations, boost policy/acceleration, air steering, gravity/landing, surface smoothing/debounce and probe/snap distance. Terrain multipliers live in `resources/surfaces/`. Defaults: grass acceleration/speed/grip = 0.75/0.75/0.70; sand = 0.60/0.60/0.55. Generic mini-turbo policy defaults to **strongest wins**: weaker requests are ignored; equal/stronger requests retain the longer remaining duration. The alternative **replace** policy overwrites strength and duration. Pad entries apply one arrow-aligned impulse, preserving stronger caps/longer timers. Steering, braking and drift remain available immediately. Mushroom boosts use the same non-additive cap policy. Nothing permanently changes the base config.
 
 Open `scenes/track.tscn`, select the Path3D and use the path editing tools to move points and handles. The last point duplicates the first to close the circuit; keep their positions and handles identical. Edit road width and sampling in the Inspector. Details and constraints are in [architecture](docs/architecture.md).
 
@@ -79,11 +84,11 @@ Road edges/kerbs are independent from physical barriers. Track's **Barrier Runs*
 
 The early right straight and long left straight connect to grass through intentional infield fence openings. Cross both kerbs, traverse sand/grass, and rejoin using the shoulders. Gates cover the bounded corridor owned by their route sector, including legal runoff. They retain order, crossing direction, adjacent-route exclusion and minimum interval travel checks. Recovery stays at the latest validated road checkpoint. See [reference geometry and corridor authoring](docs/track-reference.md).
 
-TrackFeatures places pads at 55%/81% and the ramp at 56% of source-curve length. Pads accelerate toward their own forward axis even when approached in reverse; velocity and yaw change gradually during the default one-second redirect. Strength/duration/cooldown/redirect duration are editable. Ramp geometry rebuilds from width/length/height; its center sits 10.5 m outside the long left straight.
+TrackFeatures places pads at 55%/81% and the ramp at 56% of source-curve length. Pads give one forward impulse even on reverse entry; they never take over yaw or continuously redirect movement. Strength/duration/cooldown/initial impulse are editable. Ramp geometry rebuilds from width/length/height; its center sits 10.5 m outside the long left straight.
 
 The inherited v0.3.2 baseline retains the [vertical-contact correction](docs/vertical-stability.md): ordinary road/shoulder movement keeps automatic floor snapping available, while marked launch ramps retain genuine takeoff momentum.
 
-The inherited [presentation correction and investigation](docs/presentation-investigation.md) retains **F4 modes, F6 CSV and F7 render cap**, shown with F3. Rerun **A Normal** at about 80 km/h as a v0.4.0 regression; stable body Y alone is insufficient.
+The inherited [presentation correction and investigation](docs/presentation-investigation.md) retains **F4 modes, F6 CSV and F7 render cap**, shown with F3. Rerun **A Normal** at about 80 km/h as a v0.5.0 regression; stable body Y alone is insufficient.
 
 ## Tests
 
@@ -105,10 +110,12 @@ The runner also includes `tests/runoff_tests.gd`, with real kart exits/rejoins o
 
 `tests/corrective_tests.gd` adds reference landmarks, grouped colour continuity, bounded gate coverage, continuous off-road laps, reverse/wrong-heading pad entries and real trunk/foliage collision checks. `godot --path . --script tests/capture_corrective_preview.gd` saves the overhead review to `artifacts/corrective_layout.png`.
 
-See [validation](docs/validation.md) for actual results and limits, the [cumulative manual checklist](docs/testing/ACCEPTANCE_CHECKLIST.md) for checks 1–65, and the [handling audit](docs/v0.3.0-audit.md) for baseline/reference inspection. The [earlier runoff procedures](docs/acceptance.md) are retained. See [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md) and [VERSIONING.md](VERSIONING.md) for scope, actual changes and development status. Each patch must rerun the accepted baseline and append its own manual criteria; v0.4.0 acceptance remains pending; earlier history is retained.
+See [validation](docs/validation.md) for actual results and limits, the [cumulative manual checklist](docs/testing/ACCEPTANCE_CHECKLIST.md) for checks 1-90, and the [handling audit](docs/v0.3.0-audit.md) for baseline/reference inspection. The [earlier runoff procedures](docs/acceptance.md) are retained. See [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md) and [VERSIONING.md](VERSIONING.md) for scope, actual changes and development status. Each patch must rerun the accepted baseline and append its own manual criteria; v0.5.0 acceptance remains pending; earlier history is retained.
 
 For real physical AI-only validation, run `godot --headless --fixed-fps 60 --path . --script tests/run_ai_race.gd`. Append `-- --difficulty=casual`, `-- --difficulty=challenging` or `-- --idle-human`; reports go to `artifacts/ai_race_*.json`. For an interactive AI-only game use `godot --path . -- --ai-only --auto-start`. The renderer preview is `tests/capture_competitor_preview.gd`; benchmark one/seven karts with `tests/benchmark_competitors.gd` **without** `--fixed-fps`. See [full instructions and limits](docs/racing-competitors.md).
 
 ## Reference and distribution
 
 The three supplied images are in `references/` for private educational review only. The brief's suggested `docs/references/circuit_01/` path is absent in this checkout; references were inspected at their actual location. `references/` is ignored by Git and Godot; no game resource loads its images. All game geometry/materials are original. The Windows export preset excludes documentation, tests, references and review artifacts. Install matching export templates before exporting; no exported executable is included or validated. This patch performs no Git mutations or GitHub actions.
+
+Run an item-enabled race with `godot --headless --fixed-fps 60 --path . --script tests/run_ai_race.gd -- --items --laps=3`. Native model/row/HUD captures: `godot --path . --fixed-fps 60 --script tests/capture_items_preview.gd`. Performance: `godot --path . --script tests/benchmark_items.gd` (no fixed FPS). See [validation](docs/validation.md).

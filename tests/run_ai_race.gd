@@ -6,6 +6,7 @@ func _initialize() -> void:
 
 func _run() -> void:
 	var main := load("res://scenes/main.tscn").instantiate() as Node3D
+	main.get_node("Items").enabled = "--items" in OS.get_cmdline_user_args()
 	var race := main.get_node("RaceManager") as RaceManager
 	var idle_human := "--idle-human" in OS.get_cmdline_user_args()
 	race.ai_only = not idle_human
@@ -35,7 +36,14 @@ func _run() -> void:
 				states.append("%s:L%d/G%d %.1fm/s R%d" % [record.display_name, record.session.lap_times.size(), record.session.next_checkpoint,
 					record.kart.velocity.length(), record.recoveries])
 			print("AI %.0fs " % elapsed, " | ".join(states))
-	var failed := false
+	var item_world := main.get_node("Items") as ItemSystem
+	var pickups := 0
+	var uses := 0
+	for record in race.competitors:
+		pickups += record.kart.get_node("Inventory").collected
+		uses += record.kart.get_node("Inventory").used
+	print("ITEM RACE: enabled=%s pickups=%d uses=%d active=%d" % [item_world.enabled, pickups, uses, item_world.actors.size()])
+	var failed := item_world.enabled and (pickups == 0 or uses == 0)
 	for record in race.standings():
 		print("RESULT %d %s laps=%d time=%.3f recoveries=%d dnf=%s" % [record.finish_order, record.display_name,
 			record.session.lap_times.size(), record.session.final_time, record.recoveries, record.dnf])
@@ -43,6 +51,9 @@ func _run() -> void:
 			failed = failed or not record.dnf
 		else:
 			failed = failed or record.dnf or record.session.lap_times.size() != race.lap_count or record.finish_order == 0
+	for record in race.competitors:
+		var inventory := record.kart.get_node("Inventory") as KartInventory
+		failed = failed or inventory.used > inventory.collected
 	var wall_seconds := (Time.get_ticks_usec() - started) / 1000000.0
 	print("AI RACE: racers=%d laps=%d brake_frames=%d drift_frames=%d mini_turbo_frames=%d simulation=%.1fs wall=%.2fs result=%s" % [
 		race.competitors.size(), race.lap_count, brakes, drifts, mini, elapsed, wall_seconds, "FAIL" if failed else "PASS"])
@@ -51,9 +62,10 @@ func _run() -> void:
 		results.append({"order": record.finish_order, "name": record.display_name, "laps": record.session.lap_times,
 			"time": record.session.final_time, "recoveries": record.recoveries, "dnf": record.dnf})
 	DirAccess.make_dir_recursive_absolute("res://artifacts")
-	var report := FileAccess.open("res://artifacts/ai_race_%d_%d_%d_%s.json" % [race.difficulty, race.competitors.size(), race.lap_count, "idle" if idle_human else "all_ai"], FileAccess.WRITE)
+	var report := FileAccess.open("res://artifacts/v05_ai_race_%d_%d_%d_%s_%s.json" % [race.difficulty, race.competitors.size(), race.lap_count, "idle" if idle_human else "all_ai", "items" if item_world.enabled else "baseline"], FileAccess.WRITE)
 	report.store_string(JSON.stringify({"difficulty": race.difficulty, "racers": race.competitors.size(), "laps": race.lap_count,
-		"simulation_seconds": elapsed, "wall_seconds": wall_seconds, "brake_frames": brakes, "drift_frames": drifts,
+		"simulation_seconds": elapsed, "wall_seconds": wall_seconds, "items_enabled": item_world.enabled,
+		"pickups": pickups, "item_uses": uses, "active_items": item_world.actors.size(), "brake_frames": brakes, "drift_frames": drifts,
 		"mini_turbo_frames": mini, "passed": not failed, "results": results}, "\t"))
 	report.close()
 	main.queue_free()

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://resources/item_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/items/green_shell.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://assets/icons/green_shell.svg" id="3"]
+[resource]
+script = ExtResource("1")
+identifier = &"5C"
+display_name = "Green Shell"
+model = ExtResource("2")
+icon = ExtResource("3")
+weight = 25

@@ -1,0 +1,22 @@
+[
+	{
+		"items": false,
+		"max_sampled_physics_ms": 2.896,
+		"mean_active_actors": 0.0,
+		"mean_draw_calls": 397.658125915081,
+		"mean_physics_ms": 2.49333674963394,
+		"physics_hz": 59.9517588180711,
+		"racers": 7,
+		"render_fps": 454.967236363806
+	},
+	{
+		"items": true,
+		"max_sampled_physics_ms": 3.081,
+		"mean_active_actors": 6.90809968847352,
+		"mean_draw_calls": 953.252336448598,
+		"mean_physics_ms": 2.87676947040499,
+		"physics_hz": 59.9048311915138,
+		"racers": 7,
+		"render_fps": 213.660564583066
+	}
+]

@@ -5,6 +5,8 @@ var kart: KartController
 var line: RacingLine
 var profile: AIDriverProfile
 var traffic: Array[KartController] = []
+var item_system: Node
+var _item_delay := 0.0
 var driver_id := 0
 var expected_offset := 0.0
 var validated_offset := 0.0
@@ -35,6 +37,7 @@ func get_command() -> DrivingCommand:
 	return _command
 
 func reset_navigation() -> void:
+	_item_delay = 1.0
 	_time = 0
 	target_speed = 0
 	target_point = kart.global_position
@@ -59,6 +62,7 @@ func reset_navigation() -> void:
 	recovery_state = "ready"
 
 func _physics_process(delta: float) -> void:
+	_command.use_item = false
 	if not kart.driving_enabled:
 		_command.throttle = 0
 		_command.brake = 0
@@ -87,6 +91,12 @@ func _physics_process(delta: float) -> void:
 	var front_speed := _traffic_decision(delta, speed, curvature)
 	if front_speed >= 0:
 		target_speed = minf(target_speed, front_speed)
+	if item_system and passing_side == 0 and not kart.get_node("Inventory").held:
+		lane_target = item_system.collection_lane(kart, current_offset, projection.y)
+	_item_delay = maxf(0, _item_delay - delta)
+	if item_system and _item_delay == 0 and item_system.ai_should_use(self):
+		_command.use_item = true
+		_item_delay = 1.5 + (driver_id % 3) * 0.25
 	lane_offset = move_toward(lane_offset, lane_target, profile.lane_change_speed * delta)
 	var lookahead := profile.lookahead_base + speed * profile.lookahead_seconds
 	target_point = line.point_at(current_offset + lookahead, lane_offset)

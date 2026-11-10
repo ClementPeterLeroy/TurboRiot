@@ -1,5 +1,6 @@
 class_name RaceManager
 extends Node
+signal race_reset
 ## Each physical kart owns its own race model, validation and recovery cursor.
 const KART_SCENE := preload("res://scenes/kart.tscn")
 const PROFILES := [preload("res://resources/ai/casual.tres"), preload("res://resources/ai/standard.tres"), preload("res://resources/ai/challenging.tres")]
@@ -132,6 +133,10 @@ func _create_field() -> void:
 	for record in competitors: physical_karts.append(record.kart)
 	for record in competitors:
 		if record.kart.input_provider is AIInput: record.kart.input_provider.traffic = physical_karts
+	var contacts := KartContactSolver.new()
+	contacts.name = "KartContacts"
+	contacts.karts = physical_karts
+	add_child(contacts)
 	_ranking.assign(competitors)
 
 func start_race() -> void:
@@ -163,6 +168,7 @@ func _reset_field(countdown: bool) -> void:
 		record.session.reset(countdown)
 		_update_driver_gates(record)
 	_update_ranking()
+	race_reset.emit()
 
 func _restore_start() -> void:
 	for record in competitors:

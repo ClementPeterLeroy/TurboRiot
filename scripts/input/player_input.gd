@@ -8,6 +8,8 @@ func _ready() -> void:
 	_bind_keys("steer_right", [KEY_D, KEY_RIGHT])
 	_bind_keys("reset_kart", [KEY_R])
 	_bind_keys("drift", [KEY_SHIFT])
+	_bind_keys("use_item", [KEY_SPACE])
+	_bind_button("use_item", JOY_BUTTON_B)
 	_bind_keys("start_race", [KEY_ENTER, KEY_SPACE])
 	_bind_keys("restart_race", [KEY_F5])
 	_bind_keys("debug_hud", [KEY_F3])
@@ -26,7 +28,7 @@ func _ready() -> void:
 
 func get_command() -> DrivingCommand:
 	return DrivingCommand.new(Input.get_action_strength("accelerate"),
-		Input.get_action_strength("brake"), Input.get_axis("steer_left", "steer_right"), Input.is_action_pressed("drift"))
+		Input.get_action_strength("brake"), Input.get_axis("steer_left", "steer_right"), Input.is_action_pressed("drift"), Input.is_action_pressed("use_item"))
 
 func _bind_keys(action: String, keys: Array) -> void:
 	if InputMap.has_action(action):

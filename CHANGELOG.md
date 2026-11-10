@@ -1,5 +1,33 @@
 # Changelog
 
+## Unreleased — v0.5.0-dev — Power-Up Mayhem
+
+Pending developer testing/acceptance. Project/HUD identity is `0.5.0-dev`; Windows numeric versions are `0.5.0.0`. This is not a release. The v0.4.0 Unreleased record and all earlier history below are preserved.
+
+### Added
+
+- Shared data-driven ItemDefinition/catalog, one-slot KartInventory and DrivingCommand item activation for human and AI. Space / Pad B activates on a new press; full inventory cannot consume/replace a pickup. Weighted pool contains only 5A–5D; 5E is reserved.
+- Mushroom acceleration/speed boost, bounded-turn red-shell homing with forward fallback, non-homing green shells with swept thin-wall ricochets, and settling banana traps. Bounded hit impulses/speed/grip penalties, owner grace, repeat-hit protection, lifetimes and active-object caps preserve driving controls and race rules.
+- Four reusable original low-poly item models, native SVG HUD icons, jewel-panel/question-mark loot-box scene, float/rotation, atomic Area pickup and configurable five-second respawn. Private reference PNGs remain ignored and unused at runtime.
+- Exactly three editor-visible rows of four boxes, projected from inspected blue-map anchors and spaced across the existing road. Reusable row resources expose anchor/count/spacing/respawn; no circuit geometry changes.
+- Contextual AI box-lane selection and item use through the same inventory/command/physics rules. Item HUD name/icon/readiness, bounded feedback rings and pooled synthesized spatial cues.
+- Permanent manual checks 66–90, item/momentum/real-pickup/projectile/lifecycle tests, item-enabled AI race reports, native model/row/HUD captures and a sustained seven-item rendering benchmark.
+
+### Changed and fixed
+
+- Kart contacts no longer receive the static-wall speed-retention penalty. A common post-movement solver deduplicates actual pairs and exchanges mass-weighted normal momentum from relative closing speed, preserving tangential motion and avoiding additive contact energy. Existing world-wall sliding/retention remains.
+- Pads now apply one initial arrow-aligned impulse and temporary bonuses. Removed the continuous propulsion/yaw authority branch; steering, braking and drift are available immediately, including reverse entry. Pad/mushroom overlap retains stronger caps/longer timers under default policy without additive stacking; mini-turbo rules remain.
+- Recovery clears inventory/combat effects/pending impulses; restart/Return to Ready clear all inventories, actors, traps, box timers, feedback and AI item state. No item effect can grant checkpoints or race progress.
+- Metadata, roadmap, architecture, controls, README, audit and validation describe v0.5 development. Prior ground/ramp and camera/render-pose corrections, source circuit and saved Challenging difficulty remain.
+- Updated explicitly superseded regression assumptions: pad tests measure the initial impulse and immediate control rather than a prolonged lock; kart collision retains nonpenetration coverage and gains moving-pair momentum tests rather than requiring a full stop. Pre-item fixtures disable ItemSystem; new integration tests and real item races enable it.
+
+### Validation and limits
+
+- Baseline **568 checks, 0 failures**; expanded suite **691 checks, 0 failures**. Headless import/runtime validation and native review captures pass; details and real AI race/performance evidence are in `docs/validation.md`.
+- Seven AI completed a three-lap item-enabled race, with 30 pickups, 27 uses, zero recoveries/DNFs. Manual art/feel/controller/high-speed visual acceptance remains pending. Homing is bounded pursuit, not obstacle navigation; dense contacts use a simple sequential solver. Performance observations cover one Windows/GPU setup.
+- No staging, commits, pushes, tags, releases or GitHub actions performed by Codex.
+
+
 ## Unreleased — v0.4.0-dev — Racing Competitors
 
 Pending developer testing/acceptance. Project/HUD use `0.4.0-dev`; Windows numeric fields use `0.4.0.0`. No v0.4.0 release, tag or publication is claimed.

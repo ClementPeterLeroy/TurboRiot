@@ -4,7 +4,7 @@ extends Node3D
 @export_range(1.01, 2.5) var strength: float = 1.5
 @export_range(0.1, 5.0) var duration: float = 1.4
 @export_range(0.0, 5.0) var cooldown: float = 1.0
-@export_range(0.1, 2.0) var redirect_duration: float = 1.0
+@export_range(1.0, 20.0) var initial_impulse: float = 12.0
 @export var pad_size := Vector2(3.5, 4.0)
 @export var rebuild: bool = false:
 	set(_value):
@@ -80,7 +80,7 @@ func try_activate(kart: KartController) -> bool:
 		return false
 	_latched[id] = true # Even a weaker ignored request consumes this entry.
 	_cooldowns[id] = cooldown
-	return kart.activate_directional_boost(-global_basis.z, strength, duration, redirect_duration)
+	return kart.activate_directional_boost(-global_basis.z, strength, duration, initial_impulse)
 
 func _on_reset(id: int) -> void:
 	_cooldowns[id] = cooldown

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemDefinition" load_steps=4 format=3]
+[ext_resource type="Script" path="res://resources/item_definition.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/items/banana.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://assets/icons/banana.svg" id="3"]
+[resource]
+script = ExtResource("1")
+identifier = &"5D"
+display_name = "Banana"
+model = ExtResource("2")
+icon = ExtResource("3")
+weight = 15
+lifetime = 20.0
+hit_seconds = 1.1
+speed_multiplier = 0.92
+grip_multiplier = 0.4
+momentum_retention = 0.92
+knockback = 3.0

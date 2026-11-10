@@ -15,6 +15,10 @@ extends Resource
 @export_group("Ground")
 @export_range(1.0, 60.0) var gravity: float = 24.0
 @export_range(0.0, 1.0) var wall_retention: float = 0.45
+@export_group("Kart impacts")
+@export_range(1.0, 1000.0) var impact_mass := 100.0
+@export_range(0.0, 0.5) var impact_restitution := 0.1
+@export_range(1.0, 30.0) var impact_max_delta := 18.0
 @export_group("Surfaces")
 @export_range(0.1, 30.0) var surface_smoothing: float = 8.0
 @export_range(0.0, 0.3) var surface_debounce: float = 0.06
@@ -34,8 +38,7 @@ extends Resource
 enum BoostPolicy { STRONGEST_WINS, REPLACE }
 @export var boost_policy: BoostPolicy = BoostPolicy.STRONGEST_WINS
 @export_range(1.0, 4.0) var boost_acceleration_multiplier: float = 1.8
-@export_range(1.0, 100.0) var pad_propulsion_acceleration: float = 42.0
-@export_range(30.0, 360.0) var pad_turn_rate: float = 180.0
+@export_range(1.0, 20.0) var pad_entry_impulse := 12.0
 @export_group("Air and landing")
 @export_range(0.0, 1.0) var air_steering_authority: float = 0.2
 @export_range(0.0, 1.0) var landing_speed_retention: float = 0.98

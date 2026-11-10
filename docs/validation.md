@@ -1,3 +1,62 @@
+# v0.5.0-dev — Power-Up Mayhem validation (2026-11-10)
+
+**Unreleased, pending developer acceptance.** Current identity: `0.5.0-dev` / numeric Windows `0.5.0.0`. Earlier reports below retain their original versions/results; they are not claims about the new patch.
+
+## Automated evidence
+
+Engine: Godot **4.7.2.stable.official.ed1daf0bf**, Windows, Compatibility renderer. Baseline before edits: **568 checks, 0 failures**. Expanded `tests/run_tests.gd`: **691 checks, 0 failures**, including 123 new item/contact assertions. Engine imports and runtime smoke checks pass without script/parse errors. Windows emits the existing sandbox root-certificate-store warning; no network access is needed by the game/tests. Headless simulation omits audiovisual feedback/audio playback; native captures and the benchmark exercise the render/audio path.
+
+The retained suite still covers surfaces, drifting, ramp launch/landing, shoulder contact, recovery, race progress/results, AI passing and shared render-pose/camera interpolation. Only superseded requirements changed: pad tests now measure the initial forward impulse and unrestricted controls instead of a one-second direction lock; the frozen-kart collision test still checks nonpenetration but does not require a full stop. Pad-surface detection samples the traversal rather than assuming a boosted kart remains over a four-metre pad after 20 ticks. Other pre-item fixtures explicitly disable items; new integration tests run with items enabled.
+
+`tests/item_tests.gd` covers mass-weighted momentum/energy/tangential conservation, head-on/rear-end strength, separating/resting contacts, actual moving CharacterBody pair transfer and deduplication/nonpenetration; reverse pad impulse, immediate brake/steer/drift and expiry; active pool/5E exclusion/weights/assets; 3×4 rows, road clearances, spacing/tangent and actual Area pickup at every source-track box; one-slot/full-inventory/edge latch/contention/respawn; mushroom consumption/source/overlap/expiry; red target/turn/fallback/real hit; green straight flight/thin-wall reflection/bounce limit/tagged-support separation; initial overlap and owner exclusion; banana settling/grace/temporary grip; hit control/expiry/recovery; actor cap/lifetime; restart cleanup and unchanged race progress.
+
+The four flat-road vertical scenarios still report zero airborne frames and a body Y range at most 0.00006187 m; all four real shoulder crossings retain contact. These are physics regressions, not a substitute for visible high-speed acceptance. Presentation A/B regressions remain; neither camera nor KartVisuals source is changed by this milestone.
+
+## Real item-enabled AI races
+
+Real seven-kart physical races, with no synthetic transforms/checkpoint injection:
+
+| Run | Result | Pickups / uses | Recovery / DNF |
+| --- | --- | --- | --- |
+| Challenging, 1 lap | All seven finish, 30.750–35.467 s | 8 / 8 | 0 / 0 |
+| Challenging, 3 laps | All seven finish, 91.183-101.467 s | 30 / 27 | 0 / 0 |
+| Casual, 1 lap | All seven finish, 39.417–46.483 s | 9 / 9 | 0 / 0 |
+| Standard, 1 lap | All seven finish, 33.400–38.900 s | 8 / 8 | 0 / 0 |
+
+The final three-lap simulation lasted 104.5 s (18.78 s wall time with fixed render stepping), with 7,891 braking frames, 3,214 drift frames and 729 mini-turbo frames. Random item distribution can change results on reruns. Reports use distinct `artifacts/v05_ai_race_*_items.json` names, preserving v0.4 baseline reports. Counters in this validation are transient test evidence, not a persistent gameplay statistics system.
+
+## Native render inspection and load
+
+Captured and directly inspected original models, all three source-track rows, a close row and the racing item HUD in `artifacts/items_*.png`. Corrected local detail transforms exposed by gallery inspection. Models use shared geometry/materials and retain a recognizable cap/spots/stem, segmented shell/rim, three-peel banana and framed question-mark cube. These captures do not constitute developer reference-art acceptance.
+
+Native 1280×720, OpenGL Compatibility, NVIDIA RTX 3070 Ti Laptop GPU, VSync off/uncapped, no `--fixed-fps`: `tests/benchmark_items.gd` warms a seven-AI field and measures three seconds with/without twelve boxes and a sustained approximately seven shells spawned ahead of the player. This is a short local observation, not an export/device guarantee.
+
+| Configuration | Render FPS | Physics Hz | Mean / max sampled physics ms | Mean draw calls | Mean active actors |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Seven karts, items disabled | 455.0 | 59.95 | 2.49 / 2.90 | 397.7 | 0.00 |
+| Seven karts, boxes + sustained shells | 213.7 | 59.90 | 2.88 / 3.08 | 953.3 | 6.91 |
+
+Actual report: `artifacts/items_performance.json`. The measured field sustains 60 Hz physics with seven concurrent item queries. Actor/feedback/audio caps are 32/12/8; this benchmark does not establish worst-case performance at the full cap or on other hardware.
+
+## Reproduction
+
+From project root, using your Godot executable in place of `godot`:
+
+```powershell
+godot --headless --editor --path . --quit
+godot --headless --fixed-fps 60 --path . --script tests/run_tests.gd
+godot --headless --fixed-fps 60 --path . --quit-after 180
+godot --headless --fixed-fps 60 --path . --script tests/run_ai_race.gd -- --items --laps=3
+godot --path . --fixed-fps 60 --script tests/capture_items_preview.gd
+godot --path . --script tests/benchmark_items.gd
+```
+
+Here automated runs redirected process-local APPDATA to `.godot/sandbox_appdata` to stay within workspace permissions. `--fixed-fps 60` accelerates simulated time with the normal physics step; it is omitted for native wall-time performance measurement. Logs/traces stay locally under ignored `.godot/`.
+
+Remaining manual work: cumulative checks **1–90**, all new **66–90** unchecked; real keyboard/gamepad feel, reference comparison, audio balance, exported build and A Normal at ~80 km/h with 60/120/uncapped rendering where supported. Homing does not route around obstacles, AI item tactics are basic, dense kart piles may still require shared recovery, and local performance is not a device matrix. See [procedures/tuning](power-up-mayhem.md), [audit](v0.5.0-audit.md) and [checklist](testing/ACCEPTANCE_CHECKLIST.md). No Git mutations or publication by Codex.
+
+---
+
 # v0.4.0-dev — Racing Competitors validation (2026-11-10)
 
 **Unreleased, pending developer testing/acceptance.** The developer identifies v0.3.2 as the latest released baseline. [The initial audit](v0.4.0-audit.md) records local commit `96934a4`, absent local tags and the older `0.3.0-dev` metadata found there; earlier history below remains preserved. Current project/HUD identifiers are `0.4.0-dev`, with numeric Windows export fields `0.4.0.0`.

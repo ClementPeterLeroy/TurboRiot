@@ -10,6 +10,7 @@ func _run() -> void:
 	var results: Array[Dictionary] = []
 	for count in [1, 7]:
 		var main := load("res://scenes/main.tscn").instantiate() as Node3D
+		main.get_node("Items").enabled = false # Isolate pre-item regression fixture.
 		var race := main.get_node("RaceManager") as RaceManager
 		race.opponent_count = count - 1
 		race.ai_only = true

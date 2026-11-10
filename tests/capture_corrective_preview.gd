@@ -5,6 +5,7 @@ func _initialize() -> void:
 
 func _start() -> void:
 	var main := load("res://scenes/main.tscn").instantiate() as Node3D
+	main.get_node("Items").enabled = false # Isolate pre-item regression fixture.
 	root.add_child(main)
 	root.size = Vector2i(1000, 1000)
 	main.get_node("HUD").visible = false

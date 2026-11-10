@@ -1,0 +1,5 @@
+[gd_resource type="Resource" script_class="LootRowConfig" load_steps=2 format=3]
+[ext_resource type="Script" path="res://resources/loot_row_config.gd" id="1"]
+[resource]
+script = ExtResource("1")
+map_anchor = Vector2(565.52, 643.09)

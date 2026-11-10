@@ -2,6 +2,7 @@ extends RefCounted
 
 func run(s: SceneTree) -> void:
 	var main := load("res://scenes/main.tscn").instantiate() as Node3D
+	main.get_node("Items").enabled = false # Isolate pre-item regression fixture.
 	main.get_node("RaceManager").opponent_count = 0 # Isolated legacy mechanics/presentation fixture.
 	s.root.add_child(main)
 	var track := main.get_node("Track") as TrackBuilder
@@ -102,18 +103,20 @@ func _pads(s: SceneTree, main: Node3D) -> void:
 		var previous_yaw := kart.rotation.y
 		var stable := true
 		var saw_boost := false
+		var entry_speed := 0.0
 		for i in 65:
 			await s.physics_frame
 			stable = stable and kart.position.distance_to(previous) < 1.5
-			stable = stable and absf(wrapf(kart.rotation.y - previous_yaw, -PI, PI)) <= deg_to_rad(kart.config.pad_turn_rate) / 60 + 0.005
+			stable = stable and absf(wrapf(kart.rotation.y - previous_yaw, -PI, PI)) < 0.005
 			previous = kart.position
 			previous_yaw = kart.rotation.y
+			if not saw_boost and kart.boost.source == &"boost_pad": entry_speed = kart.velocity.dot(forward)
 			saw_boost = saw_boost or kart.boost.source == &"boost_pad"
 		Input.action_release("accelerate")
 		Input.action_release("brake")
 		s.check(saw_boost, "Pad activates for " + scenario)
-		s.check(kart.velocity.dot(forward) > 5, "Pad propels in track direction for " + scenario)
-		s.check(stable, "Pad redirection has bounded acceleration/rotation and no teleport: " + scenario)
+		s.check(entry_speed > 5, "Pad initial impulse propels in track direction for " + scenario)
+		s.check(stable, "Pad has no automatic yaw lock or teleport: " + scenario)
 	kart.reset_to_spawn()
 	s.check(kart.boost.direction_remaining == 0 and kart.boost.direction == Vector3.ZERO, "Recovery clears pad redirection")
 	kart.activate_boost(&"mini_turbo", 1.3, 1)

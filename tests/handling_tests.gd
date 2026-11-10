@@ -85,6 +85,7 @@ func _place(kart: KartController, location: Vector3, basis: Basis = Basis.IDENTI
 
 func _scene(s: SceneTree) -> void:
 	var main := load("res://scenes/main.tscn").instantiate() as Node3D
+	main.get_node("Items").enabled = false # Isolate pre-item regression fixture.
 	main.get_node("RaceManager").opponent_count = 0 # Isolated legacy mechanics/presentation fixture.
 	s.root.add_child(main)
 	var race := main.get_node("RaceManager") as RaceManager
@@ -160,10 +161,12 @@ func _scene(s: SceneTree) -> void:
 	Input.action_release("drift")
 	var pad := features.get_node("Generated").get_child(0) as BoostPad
 	_place(kart, pad.global_position + Vector3.UP * 0.42, pad.global_basis)
+	var saw_pad_surface := false
 	for i in 20:
 		await s.physics_frame
+		saw_pad_surface = saw_pad_surface or kart.surface_detector.current.identifier == &"boost_pad"
 	s.check(kart.boost.active() and kart.boost.source == &"boost_pad", "Area boost pad activates on a grounded kart")
-	s.check(kart.surface_detector.current.identifier == &"boost_pad", "Boost pad surface detected independently of asphalt")
+	s.check(saw_pad_surface, "Boost pad surface detected independently of asphalt")
 	kart.set_physics_process(false) # Hold occupancy while testing the pad's latch.
 	kart.boost.clear()
 	for i in 70:

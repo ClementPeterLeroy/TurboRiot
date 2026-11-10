@@ -14,8 +14,17 @@ extends CanvasLayer
 @onready var primary: Button = $Overlay/Center/Card/Stack/Primary
 @onready var ready_button: Button = $Overlay/Center/Card/Stack/Ready
 var debug_visible := false
+var item_label := Label.new()
+var item_icon := TextureRect.new()
 
 func _ready() -> void:
+	var item_row := HBoxContainer.new()
+	item_icon.custom_minimum_size = Vector2(48, 48)
+	item_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	item_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	item_row.add_child(item_icon)
+	item_row.add_child(item_label)
+	$Margin/Stack.add_child(item_row)
 	if not race:
 		return
 	primary.pressed.connect(_on_primary)
@@ -26,6 +35,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not kart or not race:
 		return
+	var inventory := kart.get_node("Inventory") as KartInventory
+	item_icon.texture = inventory.held.icon if inventory.held else null
+	item_label.text = "%s\n%s" % [inventory.held.display_name, "READY: Space / Pad B" if inventory.cooldown == 0 else "Recharging..."] if inventory.held else "ITEM: empty\nDrive through a loot box"
 	speed_label.text = "%03d  km/h" % roundi(Vector2(kart.velocity.x, kart.velocity.z).length() * 3.6)
 	direction_label.text = "REVERSE" if kart.signed_speed < -0.1 else ("FORWARD" if kart.signed_speed > 0.1 else "STOPPED")
 	if Input.is_action_just_pressed("debug_hud"):

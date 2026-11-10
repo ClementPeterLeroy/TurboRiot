@@ -3,6 +3,7 @@ extends RefCounted
 ## exercised separately by capture_presentation_probe.gd.
 func run(s: SceneTree) -> void:
 	var main := load("res://scenes/main.tscn").instantiate() as Node3D
+	main.get_node("Items").enabled = false # Isolate pre-item regression fixture.
 	main.get_node("RaceManager").opponent_count = 0 # Isolated legacy mechanics/presentation fixture.
 	s.root.add_child(main)
 	await s.process_frame

@@ -9,6 +9,7 @@ func _save(label: String) -> void:
 
 func _run() -> void:
 	var main := load("res://scenes/main.tscn").instantiate() as Node3D
+	main.get_node("Items").enabled = false # Isolate pre-item regression fixture.
 	var race := main.get_node("RaceManager") as RaceManager
 	race.ai_only = true
 	race.lap_count = 1
