@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Turbo Riot"
 config/description="An original low-poly arcade kart prototype."
-config/version="0.6.0-dev"
+config/version="0.6.1-dev"
 run/main_scene="res://scenes/app.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 

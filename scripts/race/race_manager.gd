@@ -15,6 +15,7 @@ const COLOURS := [Color("ef4444"), Color("3b82f6"), Color("facc15"), Color("22c5
 @export var driver_profile_override: AIDriverProfile
 @export var ai_only := false
 var use_command_line_configuration := true
+var recovery_half_extents := Vector2.ZERO # Zero preserves the original fixture.
 @export_range(3.0, 12.0) var grid_row_spacing := 5.5
 @export_range(2.0, 6.0) var grid_lane_spacing := 4.2
 @export_range(0.0, 3.0) var grid_stagger := 2.0
@@ -64,6 +65,8 @@ func _on_track_rebuilt() -> void:
 	if competitors.is_empty(): _create_field()
 	for record in competitors:
 		record.session.checkpoint_count = gates.size()
+		if recovery_half_extents != Vector2.ZERO:
+			record.kart.get_node("Recovery").recovery_half_extents = recovery_half_extents
 		record.session.lap_count = lap_count
 		record.grid = grid_transform(record.id)
 		if record.kart.input_provider is AIInput: record.kart.input_provider.line = racing_line

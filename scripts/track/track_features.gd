@@ -3,6 +3,7 @@ extends Node3D
 const PAD := preload("res://scenes/boost_pad.tscn")
 const RAMP := preload("res://scenes/ramp.tscn")
 @export var track: TrackBuilder
+@export var ramp_enabled := true
 @export var boost_fractions := PackedFloat32Array([0.55, 0.81]):
 	set(value):
 		boost_fractions = value
@@ -42,6 +43,7 @@ func build() -> void:
 		var offset := length * clampf(fraction, 0.0, 1.0)
 		pad.global_transform = track.global_transform * Transform3D(Basis.looking_at(track.sample_forward(offset)),
 			track.sample_center(offset) + Vector3.UP * 0.02)
+	if not ramp_enabled: return
 	var ramp := RAMP.instantiate() as KartRamp
 	ramp.name = "RunoffJump"
 	generated.add_child(ramp)

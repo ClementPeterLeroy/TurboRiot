@@ -1,5 +1,7 @@
 # v0.3.0 development patch — vertical-contact correction
 
+Historical correction record. The later [v0.6.1 Figure-8 crossing correction](figure-8-crossing-fix.md) replaces the sharp kart box with a compound rounded underside while preserving its outer dimensions. It retains the ground-contact/controller correction documented here and passes its unchanged regressions; the original inspection findings below describe the collider used at that time.
+
 > **Developer follow-up:** the original high-speed visual porpoising remained after this contact fix, even with `Ground true`. The shoulder fix is retained. This report establishes contact behavior only; see [the second presentation investigation](presentation-investigation.md) for camera/visual isolation, rendered-pixel evidence and pending acceptance.
 
 Unreleased, pending developer acceptance. This correction stays within the existing `0.3.0-dev` project version. The documentation history for **v0.3.0-dev — Arcade Handling** and **v0.3.1 — Corrective Patch** remains preserved; no new patch number, roadmap milestone or release is introduced.

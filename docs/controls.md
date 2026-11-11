@@ -1,6 +1,8 @@
 # Controls
 
-Applies to **v0.6.0-dev - Playable Alpha**, Unreleased and pending developer acceptance. F5 launches the application menu; direct F6 on the raw race scene retains legacy shortcuts for authoring/tests.
+Applies to **v0.6.1-dev - Circuit Selection & First Testing Grounds**, Unreleased and pending developer acceptance. F5 launches the application menu; direct F6 on the raw race scene retains legacy shortcuts for authoring/tests.
+
+Quick Race / Time Trial → configuration → Choose Circuit → select a card → Start Race. Mouse click, arrow keys/Enter or D-pad/A select cards; Esc/B or Back returns to configuration with settings/selection preserved. Restart keeps the chosen circuit. The HUD minimap uses the selected circuit's geometry. See [Testing Grounds](testing-grounds.md).
 
 | Action | Keyboard | Gamepad |
 | --- | --- | --- |
@@ -26,7 +28,7 @@ Start Race runs a three-second countdown. All racers remain locked until one sha
 
 R clears velocity, restores the latest validated checkpoint's safe location/orientation and immediately resets the camera. It **preserves all race timing and checkpoint/lap progress**; the clock keeps running. Until the first numbered checkpoint, recovery uses the starting grid. Falling below the configured threshold also recovers. Sustained grounded wall contact under throttle with no steering/braking attempt triggers recovery after 5 seconds by default; this is not a universal stuck detector. A one-second cooldown prevents repeated resets.
 
-F5/Pad X **restarts the whole field**: all grid poses, empty results, zero clocks, checkpoint/AI state reset and a fresh countdown. It works during countdown, racing and results. In the editor F5 runs the project; the restart binding applies to the focused game window. Enter/Pad A starts only from READY. Results buttons can be clicked with the mouse; no separate main-menu system exists.
+F5/Pad X **restarts the whole field**: all grid poses, empty results, zero clocks, checkpoint/AI state reset and a fresh countdown. It works during countdown, racing and results. In the editor F5 runs the project; the restart binding applies to the focused game window. Enter/Pad A starts only from READY. Results buttons can be clicked with the mouse or reached by keyboard/controller focus. The application provides Restart Race and Main Menu.
 
 F3 shows checkpoint planes plus floor contact, coordinates, FPS, normalized inputs and expected checkpoint in a separate debug panel. Speed uses actual horizontal velocity in km/h; direction is FORWARD, REVERSE or STOPPED based on longitudinal movement. Esc/Pad Start pauses in the application; direct raw-scene fixtures retain their earlier exit action. No timings or records are saved between runs.
 

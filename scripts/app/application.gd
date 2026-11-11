@@ -1,6 +1,5 @@
 class_name TurboApplication
 extends Node
-const RACE := preload("res://scenes/main.tscn")
 const MENU := preload("res://scenes/ui/alpha_menu.tscn")
 var settings := AppSettings.new()
 var setup := RaceSetup.new()
@@ -17,6 +16,7 @@ var _generation := 0
 var _settings_back := "home"
 var _draft: AppSettings
 var _controller_ids: Array[int] = []
+var _circuit_mode := RaceSetup.Mode.QUICK_RACE
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -54,7 +54,7 @@ func _bind_pause() -> void:
 
 func show_home() -> void:
 	screen = "home"
-	menu.page("TURBO RIOT", "PLAYABLE ALPHA  /  v0.6.0-dev")
+	menu.page("TURBO RIOT", "TESTING GROUNDS  /  v0.6.1-dev")
 	menu.button("Quick Race", func() -> void: show_configuration(RaceSetup.Mode.QUICK_RACE))
 	menu.button("Time Trial", func() -> void: show_configuration(RaceSetup.Mode.TIME_TRIAL))
 	menu.button("Settings", func() -> void: show_settings("home"))
@@ -66,7 +66,7 @@ func show_configuration(mode: RaceSetup.Mode) -> void:
 	screen = "config"
 	var draft := quick_setup.validated() if mode == RaceSetup.Mode.QUICK_RACE else trial_setup.validated()
 	draft.mode = mode
-	menu.page("TIME TRIAL" if mode == RaceSetup.Mode.TIME_TRIAL else "QUICK RACE", "Single player / Circuit 01")
+	menu.page("TIME TRIAL" if mode == RaceSetup.Mode.TIME_TRIAL else "QUICK RACE", "Single player / Race configuration")
 	var opponents: OptionButton
 	var difficulty: OptionButton
 	if mode == RaceSetup.Mode.QUICK_RACE:
@@ -83,14 +83,36 @@ func show_configuration(mode: RaceSetup.Mode) -> void:
 		devices.append("Controller %d: %s" % [device + 1, Input.get_joy_name(device)])
 	var selected := _controller_ids.find(draft.controller)
 	var controller := menu.option("Player controls", devices, maxi(0, selected))
-	menu.button("Start Race", func() -> void:
+	menu.button("Choose Circuit", func() -> void:
 		draft.opponents = opponents.selected if is_instance_valid(opponents) else 0
 		draft.difficulty = difficulty.selected if is_instance_valid(difficulty) else draft.difficulty
 		draft.laps = laps.selected + 1
 		draft.controller = _controller_ids[controller.selected]
-		start_session(draft))
+		show_circuits(draft))
 	menu.button("Back", show_home, true)
 	menu.finish()
+
+func show_circuits(request: RaceSetup) -> void:
+	var draft := request.validated()
+	_circuit_mode = draft.mode
+	if draft.mode == RaceSetup.Mode.QUICK_RACE: quick_setup = draft
+	else: trial_setup = draft
+	screen = "circuits"
+	menu.page("CIRCUIT SELECTION", "Choose a circuit, then Start Race")
+	for definition in TrackRegistry.entries():
+		var selected := draft.circuit_id == definition.identifier
+		menu.button(("[SELECTED] " if selected else "") + definition.display_name, func() -> void:
+			draft.circuit_id = definition.identifier
+			show_circuits(draft))
+		menu.text(definition.category + " / Available\n" + definition.description)
+		var preview := CircuitMap.new()
+		preview.custom_minimum_size = Vector2(0, 100)
+		preview.configure(definition.preview_curve())
+		menu.body.add_child(preview)
+	menu.button("Start Race", func() -> void: start_session(draft))
+	menu.button("Back", func() -> void: show_configuration(draft.mode), true)
+	menu.finish()
+	menu._focus_later.call_deferred(menu.focusables[TrackRegistry.IDS.find(draft.circuit_id)])
 
 func start_session(request: RaceSetup, countdown := false) -> void:
 	if transitioning: return
@@ -109,7 +131,7 @@ func start_session(request: RaceSetup, countdown := false) -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame # Present loading before procedural initialization.
 	if generation != _generation: return
-	var instance := RACE.instantiate() as Node3D
+	var instance := TrackRegistry.get_definition(setup.circuit_id).instantiate_race()
 	instance.managed = true
 	instance.process_mode = Node.PROCESS_MODE_PAUSABLE
 	var race := instance.get_node("RaceManager") as RaceManager
@@ -258,6 +280,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			else: return
 		elif screen == "pause": resume_session()
 		elif screen == "settings": close_settings()
+		elif screen == "circuits": show_configuration(_circuit_mode)
 		elif screen == "config" or screen == "credits": show_home()
 		elif screen == "loading": return_home()
 		get_viewport().set_input_as_handled()

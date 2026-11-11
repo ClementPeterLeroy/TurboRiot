@@ -182,6 +182,63 @@ The application now starts at Main Menu; apply prior READY/startup/controls crit
 
 Record real keyboard/controller, audio/display/DPI and repeated-session results using [Playable Alpha procedures](../playable-alpha.md). Injected events and automated captures are not physical-device or developer acceptance.
 
+## v0.6.1-dev — Circuit Selection & First Testing Grounds
+
+**Pending developer acceptance.** Rerun baseline checks 1–119, then check both new circuits below. Automated evidence and private-source comparison procedures: [Testing Grounds](../testing-grounds.md). No physical-device or human-play result is inferred.
+
+- [ ] **120. All three implemented circuits appear with correct names and availability.**
+- [ ] **121. Each circuit card shows the matching geometry-derived preview, category and description.**
+- [ ] **122. Mouse selects circuits and launches the chosen race.**
+- [ ] **123. Keyboard focus/navigation selects circuits and reaches Start Race and Back.**
+- [ ] **124. Controller D-pad/A/B navigation works on real hardware.**
+- [ ] **125. Back preserves race configuration and selected circuit.**
+- [ ] **126. Each selected circuit loads the correct world and minimap.**
+- [ ] **127. Restart preserves circuit selection.**
+- [ ] **128. Quick Race and Time Trial both work on Figure-8 and Yoshi DS.**
+- [ ] **129. Both new circuits form continuous closed loops.**
+- [ ] **130. Road meshes have no gaps or inverted normals.**
+- [ ] **131. Road/shoulder joins and crossing approaches have no critical collision seams.**
+- [ ] **132. No unintended at-grade intersections; Figure-8 crossing decks remain separate.**
+- [ ] **133. No disconnected road segments.**
+- [ ] **134. No unplanned shortcuts, especially near Yoshi close sections.**
+- [ ] **135. All seven grid spawns are on road and clear of barriers/other racers.**
+- [ ] **136. Road width remains usable without severe distortion at tight corners.**
+- [ ] **137. Compare both native top views with private annotated sources; no major silhouette, start or width discrepancy.**
+- [ ] **138. Three-lap races count and complete correctly on both circuits.**
+- [ ] **139. Directional checkpoints accept only the intended route and direction.**
+- [ ] **140. Reverse finish-line crossing does not award a lap.**
+- [ ] **141. Skipping a checkpoint does not award a lap.**
+- [ ] **142. AI can complete both circuits; review Casual, Standard and Challenging.**
+- [ ] **143. Recovery returns to a valid checkpoint pose without advancing progress.**
+- [ ] **144. Restart clears temporary boosts, spins, inventory, projectiles and race state.**
+- [ ] **145. Items, drifting, mini-turbos, collisions, pause and results retain prior behavior.**
+- [ ] **146. Repeated circuit changes leave no old race state or timers.**
+- [ ] **147. No duplicated racers after switch/restart/menu cycles.**
+- [ ] **148. AI uses the newly selected route, without stale path data.**
+- [ ] **149. No orphaned projectiles after leaving or restarting a race.**
+- [ ] **150. No duplicated audio loops or stale race bindings.**
+- [ ] **151. No critical runtime errors; high-speed visual stability remains intact.**
+
+## v0.6.1-dev — Figure-8 false-wall correction
+
+Preserve checks 1–151. The [crossing diagnosis and physical regression evidence](../figure-8-crossing-fix.md) records automated results separately; developer acceptance remains pending.
+
+- [ ] **152. Upper crossing stays clear across the driving lanes.** Traverse the upper Figure-8 road at about 80 km/h in the center and both passing lanes; no invisible collision or sudden stop.
+- [ ] **153. Boosted and opposite-direction crossing traversal stays supported.** Repeat with a mushroom and in the opposite direction; no phantom walls, contact flicker or unexpected launch.
+- [ ] **154. Lower road remains clear beneath the crossing.** Drive under the upper road across all three lanes; no collisions with geometry above or unrelated barrier blocks.
+- [ ] **155. Rounded lower contacts preserve existing behavior.** Check genuine walls/kart collisions, drifting, shell/banana spins, stable presentation and the original runoff ramp/jump on the reference circuit; repeat ordinary driving on Yoshi.
+- [ ] **156. Recovery and restart remain correct on the crossing.** Recover before/on/after the grade and restart during the race; retain the selected circuit, legal checkpoint progress and clean temporary state.
+
+## v0.6.1-dev — circuit racing performance correction
+
+Preserve checks 1–156. Automated timing and geometry results are recorded in the [performance investigation](../circuit-performance.md); these manual checks remain pending.
+
+- [ ] **157. Yoshi racing performance improves with normal gameplay enabled.** Compare reference and Yoshi using the same opponent count, resolution and VSync, with debug overlays/collision shapes off; record FPS during a full race rather than only READY.
+- [ ] **158. Cached minimaps retain the route and live markers.** Confirm start position, recognizable circuit shape, player marker and moving AI markers on every circuit, in both race modes and selection cards.
+- [ ] **159. Map projection remains correct after display changes.** Resize/change resolution and UI scale, including 4:3; route and markers remain aligned without stretching or clipping.
+- [ ] **160. Optimized road support preserves handling.** Drive Yoshi/reference straights and tight corners, cross asphalt/runoff boundaries, drift, boost and receive spin-outs; retain stable contact and presentation. Recheck the reference ramp and both Figure-8 decks.
+- [ ] **161. Repeated sessions retain performance and clean state.** Switch circuits, restart and return to menu repeatedly; no stale minimap, duplicated markers, runtime errors or progressive slowdown.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -194,5 +251,8 @@ Record real keyboard/controller, audio/display/DPI and repeated-session results 
 | v0.5.0-dev | Pending | Pending | Retained 1-65 plus new 66-90 pending | Unreleased / not accepted |
 | v0.5.0-dev balancing correction | Pending | Pending | Retained 1-90 plus new 91-104 pending | Unreleased / not accepted |
 | v0.6.0-dev | Pending | Pending | Retained 1-104 plus alpha 105-119 pending | Unreleased / not accepted |
+| v0.6.1-dev | Pending | Pending | Retained 1–119 plus circuits 120–151 pending | Unreleased / not accepted |
+| v0.6.1-dev crossing correction | Pending | Pending | Retained 1–151 plus crossing 152–156 pending | Unreleased / not accepted |
+| v0.6.1-dev performance correction | Pending | Pending | Retained 1–156 plus performance 157–161 pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

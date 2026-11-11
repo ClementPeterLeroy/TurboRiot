@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c2k3vpdcm47f2"
+
+[deps]
+
+files=["res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.distance.translation", "res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.lap.translation", "res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.x.translation", "res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.y.translation", "res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.z.translation", "res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.z.translation"]
+
+source_file="res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.csv"
+dest_files=["res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.distance.translation", "res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.lap.translation", "res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.x.translation", "res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.y.translation", "res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.z.translation", "res://resources/tracks/Bikini_bottom/Blender/bikini_bottom_elevation_centerline.z.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

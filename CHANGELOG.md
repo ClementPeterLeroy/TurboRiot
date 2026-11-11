@@ -1,5 +1,32 @@
 # Changelog
 
+## Unreleased — v0.6.1-dev — Circuit Selection & First Testing Grounds
+
+Pending developer acceptance. Project/menu/HUD identify `0.6.1-dev`; Windows numeric metadata uses `0.6.1.0`. Historical entries below remain unchanged; no prior milestone is retrospectively accepted or released.
+
+Version scope: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The existing reference circuit remains available. These circuits are playable greybox testing layouts; no beta release or developer acceptance is implied.
+
+### Circuit racing performance correction — 2026-11-11
+
+- Reproduced Yoshi's racing-only slowdown with overlays off. Profiling localized expensive kart motion queries against the full concave asphalt mesh and unnecessary per-frame rebuilding/drawing of the 8,927-point minimap route.
+- Flat, unbanked asphalt now uses convex sections with the same top vertices and road footprint. Elevated/banked roads retain their triangle collision, including Figure-8's crossing. Cached display-sized minimap paths redraw on configuration/resize; a separate layer keeps racer markers live. Handling, camera, AI difficulty, items and scenery remain unchanged.
+- Same-process, same-GPU native seven-racer A/B at 1280 × 720 measured Yoshi **10.5 → 77.4 FPS**, reference **48.4 → 116.9 FPS**. These are hardware-specific results, not guarantees. Added 21 collision/minimap assertions and manual criteria 157–161; full suite **1,062 checks, zero failures**. See [performance diagnosis and benchmark](docs/circuit-performance.md). Version remains 0.6.1-dev, Unreleased pending developer acceptance.
+
+### Figure-8 crossing collision correction — 2026-11-11
+
+- Reproduced the upper-road stop as an opposing false wall contact inside the inclined asphalt collision, caused by the kart's sharp box underside catching a triangle edge. Disabling barriers did not remove it; the original box still fails the new regressions.
+- Replaced the single kart box with an upper box and two native spherical lower contacts, retaining the combined 1.25 × 0.75 × 2.1 m bounds and broad side-contact surfaces. Shared human/AI scene; no controller constants, road geometry/elevation, barriers, surfaces, camera or jump/contact corrections changed.
+- Added 52 physical crossing/contact assertions and manual criteria 152–156. Full suite: **1,041 checks, zero failures**, retaining all prior tests without relaxed tolerances. Tests cover normal/boosted/opposite-direction upper traversal, lower underpass, multiple lanes, complete collision-contact reports, terrain detection and dimensions. Restoring only the original box fails 13/52 crossing checks. See [diagnosis and validation](docs/figure-8-crossing-fix.md).
+
+### Initial circuit delivery
+
+- Added Circuit Selection after Quick Race/Time Trial configuration, three selectable entries, geometry-derived previews, selected/availability state and keyboard/mouse/controller navigation. RaceSetup carries the circuit ID through Back, loading, fresh restart and per-mode preferences.
+- Added reusable TrackDefinition/TrackRegistry and two original greybox track scenes traced from the directly inspected private DS overhead maps: Figure-8 Circuit and GCN Yoshi Circuit (DS). Shared grid, ordered gates/finish, cached AI route, surfaces, recovery bounds and circuit-local pickup fractions feed the existing race controller. The original reference circuit and its exact three item rows/pads/ramp/runoff remain preserved.
+- Extended the road mesher with opt-in authored elevation/banking, normalized cross-sections and slope normals. The developer approved a simple raised Figure-8 crossing; conservative heights are documented assumptions. Yoshi remains flat. Curvature-constrained trace fitting fixes initially detected inner-edge folds without changing driving physics. Height-aware AI route acquisition distinguishes crossing decks.
+- Added the same curve-derived minimap to menu previews and the race HUD, with player/AI indicators. Private annotated source traces, overlays and side-by-side comparisons remain ignored under `references/analysis/`; native geometry-only renders and numerical comparison reports are in `artifacts/`. No Nintendo artwork or source assets enter runtime resources.
+- Added geometry/topology/grid/gate/recovery/navigation/mode/switch/restart regressions, native menu/Time Trial captures and cumulative manual criteria 120–151, preserving 1–119. Seven AI completed item-enabled three-lap races on both new circuits; native Time Trials also complete. Detailed test results, scale assumptions, source-fitting limitations and manual review procedures are in [Testing Grounds](docs/testing-grounds.md) and [validation](docs/validation.md).
+- Updated current metadata, README, architecture, controls, versioning and roadmap. Original circuit development remains within Testing Grounds; Baby Park, Wario Stadium (DS) and Delfino Square (DS) are deferred. v0.7+ scope is preserved. No staging, commits, pushes, tags, releases, GitHub actions or remote mutations performed.
+
 ## Unreleased — v0.6.0-dev — Playable Alpha
 
 Pending developer acceptance. Current project/menu/HUD use `0.6.0-dev`; Windows numeric metadata uses `0.6.0.0`. Local commit labels v0.5.0/v0.5.1 do not establish acceptance; all earlier entries below and the developer-reported v0.3.2 baseline remain preserved.

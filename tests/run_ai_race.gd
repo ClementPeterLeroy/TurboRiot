@@ -5,7 +5,10 @@ func _initialize() -> void:
 	_run.call_deferred()
 
 func _run() -> void:
-	var main := load("res://scenes/main.tscn").instantiate() as Node3D
+	var circuit: StringName = &"reference"
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--circuit="): circuit = StringName(argument.get_slice("=", 1))
+	var main := TrackRegistry.get_definition(circuit).instantiate_race()
 	main.get_node("Items").enabled = "--items" in OS.get_cmdline_user_args()
 	var race := main.get_node("RaceManager") as RaceManager
 	var report_prefix := "v05"

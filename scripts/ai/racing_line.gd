@@ -53,14 +53,14 @@ func project(position: Vector3, hint: int = -1) -> Vector3:
 		var index := scan if hint < 0 else posmod(hint + scan - 12, count)
 		var a := points[index]
 		var segment := points[(index + 1) % count] - a
-		var flat := Vector3(position.x, a.y, position.z)
-		var fraction := clampf((flat - a).dot(segment) / segment.length_squared(), 0, 1)
+		# Include height when acquiring a route: projected crossings are separate roads.
+		var fraction := clampf((position - a).dot(segment) / segment.length_squared(), 0, 1)
 		var closest := a + segment * fraction
-		var squared := flat.distance_squared_to(closest)
+		var squared := position.distance_squared_to(closest)
 		if squared < distance:
 			distance = squared
 			best = Vector3(fposmod((index + fraction) * spacing, length),
-				(flat - closest).dot(forwards[index].cross(Vector3.UP)), index)
+				(position - closest).dot(forwards[index].cross(Vector3.UP).normalized()), index)
 	if hint >= 0 and distance > 18.0 * 18.0:
 		return project(position)
 	return best

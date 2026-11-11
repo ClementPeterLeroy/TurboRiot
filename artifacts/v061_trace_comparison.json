@@ -1,0 +1,24 @@
+{
+  "figure_8": {
+    "image_size": [
+      1046,
+      511
+    ],
+    "source": "Figure 8/figure_8_overhead_map.png",
+    "generated_to_landmarks_mean_pixels": 0.6768147585922294,
+    "symmetric_landmark_fit_max_pixels": 2.0883345731557195,
+    "approximate_asphalt_mask_iou": 0.6607286057967694,
+    "disclaimer": "Landmarks were manually traced; fit is not independent source accuracy. Mask includes occlusion/decoration errors. Human comparison remains pending."
+  },
+  "yoshi_ds": {
+    "image_size": [
+      512,
+      542
+    ],
+    "source": "Yoshi circuit/yoshi_circuit_overhead_map.png",
+    "generated_to_landmarks_mean_pixels": 1.1368163750479128,
+    "symmetric_landmark_fit_max_pixels": 9.156345172340579,
+    "approximate_asphalt_mask_iou": 0.7532151139637846,
+    "disclaimer": "Landmarks were manually traced; fit is not independent source accuracy. Mask includes occlusion/decoration errors. Human comparison remains pending."
+  }
+}

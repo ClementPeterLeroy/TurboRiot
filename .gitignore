@@ -1,6 +1,7 @@
 .godot/
 builds/
 *.tmp
+__pycache__/
 
 # Private reference material
 references/

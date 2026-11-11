@@ -64,6 +64,8 @@ func rebuild_rows() -> void:
 		row.name = "LootRow%d" % (rows.size() + 1)
 		var anchor := Vector3((config.map_anchor.x - 500) * 0.18, 0.04, (config.map_anchor.y - 500) * 0.18)
 		row.track_offset = track.curve.get_closest_offset(anchor)
+		if config.route_fraction >= 0:
+			row.track_offset = clampf(config.route_fraction, 0, 1) * track.curve.get_baked_length()
 		add_child(row)
 		row.global_transform = track.global_transform * Transform3D(Basis.looking_at(track.sample_forward(row.track_offset)), track.sample_center(row.track_offset))
 		rows.append(row)

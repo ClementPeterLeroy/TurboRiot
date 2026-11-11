@@ -1,0 +1,64 @@
+{
+	"engine": "4.7.2-stable (official)",
+	"gpu": "AMD Radeon(TM) Graphics",
+	"physics_ticks": 60,
+	"resolution": [
+		1280,
+		720
+	],
+	"results": [
+		{
+			"circuit": "reference",
+			"fps": 48.3601087135244,
+			"legacy": true,
+			"map_points": 2745,
+			"mean_draw_calls": 2051.00344827586,
+			"mean_physics_ms": 10.4486448275862,
+			"p95_frame_ms": 29.895,
+			"physics_hz": 60.0332384029958,
+			"rendered_frames": 290,
+			"seconds": 5.996678,
+			"static_route_redraws": 289
+		},
+		{
+			"circuit": "reference",
+			"fps": 116.890570943835,
+			"legacy": false,
+			"map_points": 264,
+			"mean_draw_calls": 2010.63817663818,
+			"mean_physics_ms": 7.03070655270659,
+			"p95_frame_ms": 14.32,
+			"physics_hz": 59.9438825352999,
+			"rendered_frames": 702,
+			"seconds": 6.005617,
+			"static_route_redraws": 0
+		},
+		{
+			"circuit": "yoshi_ds",
+			"fps": 10.5132002263623,
+			"legacy": true,
+			"map_points": 8927,
+			"mean_draw_calls": 2672.71875,
+			"mean_physics_ms": 14.932359375,
+			"p95_frame_ms": 129.966,
+			"physics_hz": 59.3010200268251,
+			"rendered_frames": 64,
+			"seconds": 6.087585,
+			"static_route_redraws": 63
+		},
+		{
+			"circuit": "yoshi_ds",
+			"fps": 77.3532517956707,
+			"legacy": false,
+			"map_points": 596,
+			"mean_draw_calls": 2559.1099137931,
+			"mean_physics_ms": 8.9674784482759,
+			"p95_frame_ms": 18.365,
+			"physics_hz": 60.0154539793997,
+			"rendered_frames": 464,
+			"seconds": 5.998455,
+			"static_route_redraws": 0
+		}
+	],
+	"vsync": false
+}

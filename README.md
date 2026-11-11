@@ -1,15 +1,19 @@
-# Turbo Riot - v0.6.0-dev - Playable Alpha
+# Turbo Riot - v0.6.1-dev - Circuit Selection & First Testing Grounds
 
-A Godot 4 Windows arcade racer with a complete single-player application flow: main menu, Quick Race, Time Trial, pause, settings, sound and results. **v0.6.0 is Unreleased and pending developer acceptance.** The existing circuit, AI racing, handling and power-ups remain; no new circuit, networking, kart selection or v0.7 branding is implemented.
+A Godot 4 Windows arcade racer with a complete single-player application flow: main menu, Quick Race, Time Trial, pause, settings, sound and results. **v0.6.1 is Unreleased and pending developer acceptance.** Circuit selection includes the preserved reference circuit and **two new beta test circuits: Figure-8 Circuit and GCN Yoshi Circuit (DS)**. Both are playable greybox layouts **without finished environments or scenery**, intended as private educational testing grounds. This version also corrects racing FPS drops. See [circuit architecture, tracing and validation](docs/testing-grounds.md).
 
 See [Playable Alpha play/configuration/architecture](docs/playable-alpha.md), [controls](docs/controls.md) and [validation](docs/validation.md). Earlier v0.4/v0.5 history and pending acceptance remain preserved. Only Mushroom (5A), Red Shell (5B), Green Shell (5C) and Banana (5D) are active in Quick Race; 5E remains reserved.
+
+The Figure-8 upper-road stop is addressed by a rounded kart collision underside; see [diagnosis, fix and regressions](docs/figure-8-crossing-fix.md). This correction stays within v0.6.1-dev.
+
+The racing-performance correction optimizes flat-road collision and caches minimap routes. Its controlled native benchmark measured Yoshi at 10.5 → 77.4 FPS; see [results, limitations and retesting](docs/circuit-performance.md). Stop and relaunch the game to initialize the updated generated scene.
 
 ## Open and play
 
 1. In Godot's Project Manager choose **Import** and select `project.godot` in this folder.
 2. Run **F5** to launch `scenes/app.tscn` and the main menu.
 3. Choose **Quick Race** (0-6 AI, difficulty, laps, controls) or **Time Trial** (one human, no competitive items).
-4. Select Start Race, then start from READY with Enter / Space / Pad A. Drive after 3, 2, 1, GO.
+4. Select Choose Circuit, select a card and Start Race, then start from READY with Enter / Space / Pad A. Drive after 3, 2, 1, GO.
 5. Use **Esc / Pad Start** for Pause, Settings, Restart or Main Menu. Results provide a fresh Restart and Main Menu.
 
 Settings persist through Apply, including independent volume/mutes, VSync, UI scale, window size/fullscreen. Focus loss pauses rather than continuing the race. See [full procedures and limits](docs/playable-alpha.md).
@@ -119,7 +123,7 @@ The runner also includes `tests/runoff_tests.gd`, with real kart exits/rejoins o
 
 `tests/corrective_tests.gd` adds reference landmarks, grouped colour continuity, bounded gate coverage, continuous off-road laps, reverse/wrong-heading pad entries and real trunk/foliage collision checks. `godot --path . --script tests/capture_corrective_preview.gd` saves the overhead review to `artifacts/corrective_layout.png`.
 
-See [validation](docs/validation.md) for actual results and limits, the [cumulative manual checklist](docs/testing/ACCEPTANCE_CHECKLIST.md) for checks 1-119, and the [handling audit](docs/v0.3.0-audit.md) for baseline/reference inspection. The [earlier runoff procedures](docs/acceptance.md) are retained. See [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md) and [VERSIONING.md](VERSIONING.md) for scope, actual changes and development status. Each patch must rerun the accepted baseline and append its own manual criteria; v0.6.0 acceptance remains pending (earlier v0.4/v0.5 acceptance is not inferred); earlier history is retained.
+See [validation](docs/validation.md) for actual results and limits, the [cumulative manual checklist](docs/testing/ACCEPTANCE_CHECKLIST.md) for checks 1-161, and the [handling audit](docs/v0.3.0-audit.md) for baseline/reference inspection. The [earlier runoff procedures](docs/acceptance.md) are retained. See [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md) and [VERSIONING.md](VERSIONING.md) for scope, actual changes and development status. Each patch must rerun the accepted baseline and append its own manual criteria; v0.6.1 acceptance remains pending (earlier v0.4/v0.5 acceptance is not inferred); earlier history is retained.
 
 For real physical AI-only validation, run `godot --headless --fixed-fps 60 --path . --script tests/run_ai_race.gd`. Append `-- --difficulty=casual`, `-- --difficulty=challenging` or `-- --idle-human`; reports go to `artifacts/ai_race_*.json`. For an interactive AI-only game use `godot --path . -- --ai-only --auto-start`. The renderer preview is `tests/capture_competitor_preview.gd`; benchmark one/seven karts with `tests/benchmark_competitors.gd` **without** `--fixed-fps`. See [full instructions and limits](docs/racing-competitors.md).
 

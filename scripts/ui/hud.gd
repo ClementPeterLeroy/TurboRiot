@@ -36,6 +36,17 @@ func _ready() -> void:
 	$Margin/Stack.add_child(item_row)
 	if not race:
 		return
+	var minimap := CircuitMap.new()
+	minimap.name = "CircuitMap"
+	minimap.track = race.track
+	minimap.race = race
+	minimap.configure(race.track.curve)
+	add_child(minimap)
+	minimap.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	minimap.offset_left = -244
+	minimap.offset_top = -184
+	minimap.offset_right = -24
+	minimap.offset_bottom = -24
 	primary.pressed.connect(_on_primary)
 	ready_button.pressed.connect(func() -> void:
 		if managed: menu_requested.emit()

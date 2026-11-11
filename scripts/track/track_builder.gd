@@ -2,6 +2,9 @@
 class_name TrackBuilder
 extends Path3D
 signal geometry_rebuilt
+## Opt-in authored elevation; the original reference remains exactly flat.
+@export var use_curve_elevation := false
+@export var use_curve_banking := false
 
 const CHECKPOINT_SCENE := preload("res://scenes/checkpoint.tscn")
 ## The saved Curve3D is the source of truth. Generated nodes are transient:
@@ -136,10 +139,12 @@ func build() -> void:
 	for i in range(steps + 1):
 		var offset := length * float(i) / steps
 		var center := sample_center(offset)
-		var right := sample_forward(offset).cross(Vector3.UP).normalized()
+		var forward := sample_forward(offset)
+		var right := road_right(offset)
+		var normal := right.cross(forward).normalized()
 		for side in [-1.0, 1.0]:
 			road_vertices.append(center + right * side * road_width * 0.5)
-			normals.append(Vector3.UP)
+			normals.append(normal)
 			uvs.append(Vector2((side + 1.0) * 0.5, offset / road_width))
 		if i < steps:
 			var a := i * 2
@@ -158,7 +163,7 @@ func build() -> void:
 	road.mesh = mesh
 	road.material_override = asphalt
 	generated.add_child(road)
-	road.create_trimesh_collision()
+	_build_road_collisions(road)
 	SurfaceDetector.tag_collision(road, preload("res://resources/surfaces/asphalt.tres"))
 	_build_shoulders(generated)
 	_build_barriers(generated)
@@ -176,9 +181,51 @@ func build() -> void:
 	_build_checkpoints(generated)
 	geometry_rebuilt.emit()
 
+func _build_road_collisions(road: MeshInstance3D) -> void:
+	if use_curve_elevation or use_curve_banking:
+		road.create_trimesh_collision()
+		return
+	# Flat quads have one planar top face. Native convex slabs avoid repeatedly
+	# sweeping the karts against one circuit-wide concave triangle mesh.
+	var body := StaticBody3D.new()
+	body.name = "Asphalt_col"
+	road.add_child(body)
+	for row in range(road_vertices.size() / 2 - 1):
+		var a := road_vertices[row * 2]
+		var b := road_vertices[row * 2 + 1]
+		var c := road_vertices[row * 2 + 2]
+		var d := road_vertices[row * 2 + 3]
+		var polygon: Array[Vector3] = [a, c, d, b]
+		var convex := true
+		for index in 4:
+			var edge := polygon[(index+1)%4]-polygon[index]
+			var next := polygon[(index+2)%4]-polygon[(index+1)%4]
+			if edge.cross(next).y >= -0.000001: convex = false
+		if convex:
+			_add_road_prism(body, polygon)
+		else:
+			_add_road_prism(body, [a,c,b])
+			_add_road_prism(body, [b,c,d])
+
+func _add_road_prism(body: StaticBody3D, top: Array[Vector3]) -> void:
+	var midpoint := Vector3.ZERO
+	for point in top: midpoint += point
+	midpoint /= top.size()
+	var origin := Vector3(roundf(midpoint.x), 0, roundf(midpoint.z))
+	var vertices := PackedVector3Array()
+	for point in top: vertices.append(point - origin)
+	# Twelve centimetres is the existing asphalt-to-terrain support depth.
+	for point in top: vertices.append(point - origin - Vector3.UP * 0.12)
+	var shape := ConvexPolygonShape3D.new()
+	shape.points = vertices
+	var collision := CollisionShape3D.new()
+	collision.shape = shape
+	body.add_child(collision)
+	collision.position = origin
+
 func sample_center(offset: float) -> Vector3:
 	var point := curve.sample_baked(clampf(offset, 0.0, curve.get_baked_length()), true)
-	point.y = 0.04 # Ignore accidental vertical handle edits: this milestone is flat.
+	if not use_curve_elevation: point.y = 0.04 # Preserve original authoring behavior.
 	return point
 
 func sample_forward(offset: float) -> Vector3:
@@ -188,7 +235,12 @@ func sample_forward(offset: float) -> Vector3:
 	return (b - a).normalized()
 
 func boundary_point(offset: float, side: float, extra: float) -> Vector3:
-	return sample_center(offset) + sample_forward(offset).cross(Vector3.UP) * side * (road_width * 0.5 + extra)
+	return sample_center(offset) + road_right(offset) * side * (road_width * 0.5 + extra)
+
+func road_right(offset: float) -> Vector3:
+	if use_curve_banking:
+		return curve.sample_baked_with_rotation(clampf(offset, 0, curve.get_baked_length()), true, true).basis.x.normalized()
+	return sample_forward(offset).cross(Vector3.UP).normalized()
 
 func barrier_clearance(offset: float, side: float) -> float:
 	if not barrier_runs.is_empty():
@@ -257,7 +309,7 @@ func _build_shoulders(parent: Node3D) -> void:
 			var offset := length * float(i) / steps
 			var inner := boundary_point(offset, side, 0)
 			var outer := boundary_point(offset, side, 1.2)
-			outer.y = -0.08
+			outer.y = inner.y - 0.12
 			vertices.append(inner)
 			vertices.append(outer)
 			normals.append(Vector3.UP)

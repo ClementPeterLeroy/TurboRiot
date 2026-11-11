@@ -1,0 +1,133 @@
+{
+  "version": "0.6.1-dev",
+  "full_suite": {
+    "checks": 1041,
+    "failures": 0
+  },
+  "legacy_box": {
+    "checks": 52,
+    "failures": 13,
+    "expected_failure": true
+  },
+  "traversals": [
+    {
+      "mode": "upper",
+      "lane": 0.0,
+      "minimum_velocity": 22.0,
+      "minimum_horizontal_motion": 21.824,
+      "airborne_frames": 0,
+      "false_wall_contacts": 0,
+      "completed": true
+    },
+    {
+      "mode": "upper",
+      "lane": -4.5,
+      "minimum_velocity": 22.0,
+      "minimum_horizontal_motion": 21.829,
+      "airborne_frames": 0,
+      "false_wall_contacts": 0,
+      "completed": true
+    },
+    {
+      "mode": "upper",
+      "lane": 4.5,
+      "minimum_velocity": 22.0,
+      "minimum_horizontal_motion": 21.821,
+      "airborne_frames": 0,
+      "false_wall_contacts": 0,
+      "completed": true
+    },
+    {
+      "mode": "mushroom",
+      "lane": 0.0,
+      "minimum_velocity": 30.8,
+      "minimum_horizontal_motion": 30.551,
+      "airborne_frames": 0,
+      "false_wall_contacts": 0,
+      "completed": true
+    },
+    {
+      "mode": "mushroom",
+      "lane": -4.5,
+      "minimum_velocity": 30.8,
+      "minimum_horizontal_motion": 30.551,
+      "airborne_frames": 0,
+      "false_wall_contacts": 0,
+      "completed": true
+    },
+    {
+      "mode": "mushroom",
+      "lane": 4.5,
+      "minimum_velocity": 30.8,
+      "minimum_horizontal_motion": 30.552,
+      "airborne_frames": 0,
+      "false_wall_contacts": 0,
+      "completed": true
+    },
+    {
+      "mode": "upper_reverse",
+      "lane": 0.0,
+      "minimum_velocity": 22.0,
+      "minimum_horizontal_motion": 21.814,
+      "airborne_frames": 0,
+      "false_wall_contacts": 0,
+      "completed": true
+    },
+    {
+      "mode": "upper_reverse",
+      "lane": -4.5,
+      "minimum_velocity": 22.0,
+      "minimum_horizontal_motion": 21.818,
+      "airborne_frames": 0,
+      "false_wall_contacts": 0,
+      "completed": true
+    },
+    {
+      "mode": "upper_reverse",
+      "lane": 4.5,
+      "minimum_velocity": 22.0,
+      "minimum_horizontal_motion": 21.82,
+      "airborne_frames": 0,
+      "false_wall_contacts": 0,
+      "completed": true
+    },
+    {
+      "mode": "lower",
+      "lane": 0.0,
+      "minimum_velocity": 22.0,
+      "minimum_horizontal_motion": 22.0,
+      "airborne_frames": 0,
+      "false_wall_contacts": 0,
+      "completed": true
+    },
+    {
+      "mode": "lower",
+      "lane": -4.5,
+      "minimum_velocity": 22.0,
+      "minimum_horizontal_motion": 21.999,
+      "airborne_frames": 0,
+      "false_wall_contacts": 0,
+      "completed": true
+    },
+    {
+      "mode": "lower",
+      "lane": 4.5,
+      "minimum_velocity": 22.0,
+      "minimum_horizontal_motion": 21.999,
+      "airborne_frames": 0,
+      "false_wall_contacts": 0,
+      "completed": true
+    }
+  ],
+  "maximum_road_collision_visual_height_error_m": 0.00335,
+  "original_collider_bounds_m": [
+    1.25,
+    0.75,
+    2.1
+  ],
+  "new_collider_bounds_m": [
+    1.25,
+    0.75,
+    2.1
+  ]
+}

@@ -1,3 +1,57 @@
+# v0.6.1-dev — Circuit Selection & First Testing Grounds validation
+
+2026-11-11. **Unreleased, pending developer acceptance.** Audit baseline was clean `1d97794` (v0.6.0). Earlier validation sections below remain unchanged. Current metadata is `0.6.1-dev` / Windows `0.6.1.0`. Full architecture, reference evidence, comparison limitations and commands are in [Testing Grounds](testing-grounds.md).
+
+## Circuit racing performance correction — current results
+
+See [diagnosis, implementation and benchmark procedure](circuit-performance.md). Flat-road collision now uses exact-top convex sections; elevated/banked roads retain the prior triangle collision. Minimap routes use cached display-resolution paths and independent live marker drawing. No handling, camera, AI difficulty, scenery or version change.
+
+- Final suite: **1,062 checks, zero failures** (1,041 retained + 21 collision/minimap assertions), with all Figure-8 crossing and prior stability regressions intact.
+- Godot 4.7.2 headless editor import, complete suite and configured-application runtime all exit 0. Only the existing Windows certificate-store warning remains.
+- Controlled native A/B, same process/GPU (AMD Radeon(TM) Graphics), 1280 × 720, seven AI, Challenging, items seed 42, uncapped rendering, 60 Hz physics: **Yoshi 10.5 → 77.4 FPS**, reference **48.4 → 116.9 FPS**. Yoshi 95th-percentile frame time falls from 129.97 to 18.37 ms. Hardware-specific short-run results, not a universal performance guarantee. Full report: `artifacts/v061_circuit_performance.json`; reproducible fixture: `tests/benchmark_circuits.gd`.
+- **Yoshi, seven AI, three laps, Challenging, items seed 42:** all finish, no DNF or recovery; 30 pickups / 30 uses; times 227.917–232.383 s. Report: `artifacts/v061_performance_yoshi_ai_race_2_7_3_all_ai_items.json`.
+- **Reference, seven AI, one lap, Challenging, items seed 42:** all finish, no DNF or recovery; 10 pickups / 10 uses; times 30.617–35.650 s. Report: `artifacts/v061_performance_reference_ai_race_2_7_1_all_ai_items.json`.
+- Native application Time Trials pass: Figure-8 33.533 s, Yoshi 77.633 s; no recoveries. Selection/READY/live-map/results captures use `artifacts/v061_performance_*.png`, preserving previous captures.
+
+Logs: ignored `.godot/performance_*.log`, `.godot/circuit_performance_final.log`. Manual criteria 157–161 extend retained 1–156. Developer hardware, human driving, exported builds and prolonged-play performance remain pending acceptance. No staging, commits, pushes, tags, releases or GitHub actions performed.
+
+## Figure-8 crossing correction — preceding validation
+
+The [collision investigation](figure-8-crossing-fix.md) reproduced a sharp kart-box underside catching a triangle seam and producing a secondary opposing wall normal. The final change is confined to the shared kart collision hull: an upper native box and two native lower spheres, retaining the original combined dimensions. Road/trace/barrier, controller/handling, surface and camera code remain unchanged. Experimental road replacements and beveled/capsule hulls were rejected and removed.
+
+- Full suite: **1,041 checks, zero failures** (989 retained + 52 crossing assertions), without removed checks or relaxed existing tolerances.
+- All 12 targeted physical traversals complete with zero airborne frames and zero false wall contacts. Lowest measured horizontal motion is 21.814 m/s at the 22 m/s normal speed and 30.551 m/s under a 30.8 m/s mushroom boost. Tests include three lanes on the upper approach, the opposite direction and the lower underpass. Replacing only the new hull with `--legacy-box` fails 13/52 assertions, as expected.
+- Unmodified road collision differs from the sampled visual surface by at most 3.35 mm across the measured lanes. Actual kart-contact, wall, drift, ramp/jump, recovery/restart, original ground/presentation and item regressions pass. Shell/banana flat-spin body-height variation stays below 0.0000004 m.
+- Godot 4.7.2 headless import and configured-application runtime both exit 0. Final logs contain the existing Windows certificate-store warning, with no script/runtime errors.
+- **Figure-8, 7 AI, 3 laps, Challenging, items, seed 42:** all seven finish; no DNF; 28 pickups / 26 uses; one recovery total; finishing times 98.317–105.683 s. Report: `artifacts/v061_crossing_fix_figure_ai_race_2_7_3_all_ai_items.json`.
+- **Original reference circuit and Yoshi DS, 7 AI, 1 lap, Challenging, items, seed 42:** all seven finish on each circuit; no DNF or recovery. Reports use `v061_crossing_fix_reference_*` and `v061_crossing_fix_yoshi_ds_*` prefixes, preserving earlier evidence.
+- Native application Time Trials also complete without recovery: Figure-8 33.533 s and Yoshi DS 77.633 s. New captures use `artifacts/v061_crossing_fix_*.png`; earlier captures remain preserved.
+
+Quantitative summary: `artifacts/v061_crossing_fix_validation.json`. Logs: ignored `.godot/crossing_*.log`. These are automated/native checks, not developer acceptance or physical-controller testing. New manual criteria 152–156 extend the retained 1–151. No version increment, staging, commits, pushes, tags, releases or GitHub actions were performed for this correction.
+
+## Initial v0.6.1 delivery results
+
+| Check | Actual result |
+| --- | --- |
+| Original automated baseline | 925 checks, 0 failures |
+| Expanded permanent suite | **989 checks, 0 failures**; all original checks retained |
+| Godot 4.7.2 headless editor import | Exit 0; no script/import errors |
+| Configured application headless smoke | Exit 0, 60 frames; no script/runtime errors |
+| Figure-8 geometry | Closed seam, full 15 m width, 1328 finite/correctly wound road triangles; 663.56 m loop |
+| Yoshi DS geometry | Closed seam, full 19.5 m width, 2378 finite/correctly wound road triangles; 1188.52 m loop |
+| Route topology | No at-grade centerline intersections; exactly one separated Figure-8 projected crossing with over 4 m clearance |
+| New regression coverage | Grid separation, directional/adjacent-route gate rejection, circuit-local pickups, recovery, opt-in tilt frame, shared previews/minimap, mouse/keyboard/injected pad selection, rapid Back, both modes, six switch/restart/disposal cycles |
+| Figure-8 final Challenging / 7 AI / 3 laps / items / seed 42 | All finish, no DNF, 36 pickups / 35 uses, 2 recoveries total; times 102.883–162.433 s |
+| Yoshi DS Challenging / 7 AI / 3 laps / items / seed 42 | All finish, no DNF, 30 pickups / 30 uses, zero recoveries; times 227.700–233.367 s |
+| Native application Time Trial, Figure-8 | One lap, one kart, no competitive items; 34.867 s, zero recoveries |
+| Native application Time Trial, Yoshi DS | One lap, one kart, no competitive items; 77.633 s, zero recoveries |
+| Native menu/display captures | Circuit cards/selection, 1280×720 and 1024×768 at 125% UI scale, both READY/minimap/results screens; inspected captures |
+| Source comparison | Native orthographic maps aligned to source dimensions; ignored private annotations/overlays/side-by-sides generated; fit/mask measurements in `artifacts/v061_trace_comparison.json` |
+
+Final reports: `artifacts/v061_figure_final_ai_race_2_7_3_all_ai_items.json`, `artifacts/v061_yoshi_ai_race_2_7_3_all_ai_items.json`. Earlier initial Figure-8 validation is preserved separately and passed before Yoshi geometry began. Source-comparison bitmaps stay private in ignored `references/analysis/`; native geometry-only captures use `artifacts/v061_*.png`. Logs are local under ignored `.godot/v061_*.log`, with process-local APPDATA redirected inside the workspace. Windows continues to emit the existing unavailable root-certificate-store warning; scans found no other engine/script errors in final runs.
+
+These are automated/native-render checks, not developer acceptance, physical-controller testing or human handling assessment. Review cumulative checks **1–151**, including source silhouette/width comparisons, Figure-8 bridge/camera clearance, high-speed visual presentation, all AI difficulty profiles and real devices. Curvature fitting, constant widths and crossing elevations are documented approximations. Broad hardware performance, long-duration allocation profiling and exported builds remain unverified. No stage/commit/push/tag/release/GitHub/remote actions were performed.
+
 # v0.6.0-dev — Playable Alpha validation
 
 2026-11-10. **Unreleased, pending developer acceptance.** Baseline source audit found HEAD `e22a2f2` titled v0.5.1, earlier v0.5.0 commit `a31ff9f`, and runtime metadata still `0.5.0-dev`. Commit labels do not supply acceptance or retroactively rename earlier history. Target identity is `0.6.0-dev` / Windows `0.6.0.0`; latest developer-reported released baseline remains v0.3.2. Earlier validation reports below remain verbatim.
