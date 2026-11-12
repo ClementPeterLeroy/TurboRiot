@@ -2,9 +2,11 @@
 
 Unreleased, pending developer acceptance. This is the first Testing Grounds delivery. It preserves the v0.6.0 application, original reference circuit and all preceding handling/contact/presentation/item mechanics. No Git mutations were performed.
 
-The subsequent [Figure-8 crossing correction](figure-8-crossing-fix.md) removes the kart's false wall contacts on the upper incline through a rounded native collision hull. The later [racing-performance correction](circuit-performance.md) optimizes flat-road collision and caches minimap routes while retaining the crossing's elevated triangle collider. Current validation is **1,062 checks, zero failures**; manual checks now extend through **161**. Initial-delivery evidence below is preserved.
+The subsequent [Figure-8 crossing correction](figure-8-crossing-fix.md) removes the kart's false wall contacts on the upper incline through a rounded native collision hull. The later [racing-performance correction](circuit-performance.md) optimizes flat-road collision and caches minimap routes while retaining the crossing's elevated triangle collider. The [Bikini Bottom sandbox recovery correction](validation.md) adds road-specific startup safety bounds without changing the existing circuits. Current validation is **1,076 checks, zero failures**; manual checks now extend through **164**. Initial-delivery evidence below is preserved.
 
 ## Repository audit and architecture
+
+The next authoring foundation is described in [Blender circuit workflow and architecture](blender-circuit-workflow.md). This is a proposal, not an implemented importer: the current loader copies procedural settings and does not preserve arbitrary model children.
 
 Read-only local history at the start was clean HEAD `1d97794` (v0.6.0), preceded by `e22a2f2`, `a31ff9f` and `0d69490`. Commit names do not establish acceptance or publication. The baseline suite passed **925 checks, zero failures**. The canonical roadmap already assigned circuit work to v0.6.1; v0.7+ scopes remain unchanged.
 

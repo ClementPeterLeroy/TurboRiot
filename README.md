@@ -10,6 +10,8 @@ The racing-performance correction optimizes flat-road collision and caches minim
 
 ## Open and play
 
+For future Blender-authored circuits, see the [proposed import workflow and architecture](docs/blender-circuit-workflow.md). It records the required whole-scene loading refactor, reusable circuit package and validation tools; imported-track runtime support is not implemented yet.
+
 1. In Godot's Project Manager choose **Import** and select `project.godot` in this folder.
 2. Run **F5** to launch `scenes/app.tscn` and the main menu.
 3. Choose **Quick Race** (0-6 AI, difficulty, laps, controls) or **Time Trial** (one human, no competitive items).
@@ -123,7 +125,7 @@ The runner also includes `tests/runoff_tests.gd`, with real kart exits/rejoins o
 
 `tests/corrective_tests.gd` adds reference landmarks, grouped colour continuity, bounded gate coverage, continuous off-road laps, reverse/wrong-heading pad entries and real trunk/foliage collision checks. `godot --path . --script tests/capture_corrective_preview.gd` saves the overhead review to `artifacts/corrective_layout.png`.
 
-See [validation](docs/validation.md) for actual results and limits, the [cumulative manual checklist](docs/testing/ACCEPTANCE_CHECKLIST.md) for checks 1-161, and the [handling audit](docs/v0.3.0-audit.md) for baseline/reference inspection. The [earlier runoff procedures](docs/acceptance.md) are retained. See [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md) and [VERSIONING.md](VERSIONING.md) for scope, actual changes and development status. Each patch must rerun the accepted baseline and append its own manual criteria; v0.6.1 acceptance remains pending (earlier v0.4/v0.5 acceptance is not inferred); earlier history is retained.
+See [validation](docs/validation.md) for actual results and limits, the [cumulative manual checklist](docs/testing/ACCEPTANCE_CHECKLIST.md) for checks 1-164, and the [handling audit](docs/v0.3.0-audit.md) for baseline/reference inspection. The [earlier runoff procedures](docs/acceptance.md) are retained. See [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md) and [VERSIONING.md](VERSIONING.md) for scope, actual changes and development status. Each patch must rerun the accepted baseline and append its own manual criteria; v0.6.1 acceptance remains pending (earlier v0.4/v0.5 acceptance is not inferred); earlier history is retained.
 
 For real physical AI-only validation, run `godot --headless --fixed-fps 60 --path . --script tests/run_ai_race.gd`. Append `-- --difficulty=casual`, `-- --difficulty=challenging` or `-- --idle-human`; reports go to `artifacts/ai_race_*.json`. For an interactive AI-only game use `godot --path . -- --ai-only --auto-start`. The renderer preview is `tests/capture_competitor_preview.gd`; benchmark one/seven karts with `tests/benchmark_competitors.gd` **without** `--fixed-fps`. See [full instructions and limits](docs/racing-competitors.md).
 

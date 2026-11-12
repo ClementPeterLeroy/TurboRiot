@@ -6,6 +6,11 @@ Pending developer acceptance. Project/menu/HUD identify `0.6.1-dev`; Windows num
 
 Version scope: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The existing reference circuit remains available. These circuits are playable greybox testing layouts; no beta release or developer acceptance is implied.
 
+### Bikini Bottom sandbox recovery correction — 2026-11-12
+
+- Reproduced valid-road resets caused by the shared fall threshold of −8 m and X bounds of ±178 m: the imported blockout reaches about −12 m elevation and extends beyond ±178 m. The Bikini Bottom test scene now computes its own world-space recovery envelope from the imported road on startup, with configurable 12 m horizontal margin and 10 m fall clearance. Shared recovery defaults, kart physics, model geometry/placement and the authored safe spawn remain unchanged.
+- Added 14 regressions: both original reset paths reproduced, real kart contact retained at low/outer road locations, every road collision triangle inside the envelope, out-of-bounds/fall/manual recovery, spawn support, cooldown and unchanged shared defaults. Full suite: **1,076 checks, zero failures**. Permanent manual criteria 162–164 extend the existing checklist. This is a sandbox correction, not completed Blender race integration or developer acceptance; version remains 0.6.1-dev.
+
 ### Circuit racing performance correction — 2026-11-11
 
 - Reproduced Yoshi's racing-only slowdown with overlays off. Profiling localized expensive kart motion queries against the full concave asphalt mesh and unnecessary per-frame rebuilding/drawing of the 8,927-point minimap route.

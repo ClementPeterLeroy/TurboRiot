@@ -239,6 +239,14 @@ Preserve checks 1–156. Automated timing and geometry results are recorded in t
 - [ ] **160. Optimized road support preserves handling.** Drive Yoshi/reference straights and tight corners, cross asphalt/runoff boundaries, drift, boost and receive spin-outs; retain stable contact and presentation. Recheck the reference ramp and both Figure-8 decks.
 - [ ] **161. Repeated sessions retain performance and clean state.** Switch circuits, restart and return to menu repeatedly; no stale minimap, duplicated markers, runtime errors or progressive slowdown.
 
+## v0.6.1-dev — Bikini Bottom sandbox recovery correction
+
+Preserve checks 1–161. The new scene-specific recovery envelope is described in [validation](../validation.md); this is a sandbox fix, not completed imported-circuit race integration.
+
+- [ ] **162. Valid Bikini Bottom road does not cause boundary/fall resets.** Stop/relaunch `scenes/tracks/Bikini_bottom_test.tscn` with F6; drive a complete loop, including the deepest descent and far left/right sections, without unexpected teleportation.
+- [ ] **163. Genuine escape/fall still recovers safely.** Leave the configured safety envelope or fall below the road's fall threshold; return to the authored supported spawn without repeated resets. Shared circuits retain their previous recovery behavior.
+- [ ] **164. Fresh scene starts recalculate imported-road limits.** After owner-authored model changes and reimport, relaunch the scene; check the root's road/kart references still resolve, new road extents are covered and the collision/spawn still match the model. No Blender geometry is automatically modified.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -254,5 +262,6 @@ Preserve checks 1–156. Automated timing and geometry results are recorded in t
 | v0.6.1-dev | Pending | Pending | Retained 1–119 plus circuits 120–151 pending | Unreleased / not accepted |
 | v0.6.1-dev crossing correction | Pending | Pending | Retained 1–151 plus crossing 152–156 pending | Unreleased / not accepted |
 | v0.6.1-dev performance correction | Pending | Pending | Retained 1–156 plus performance 157–161 pending | Unreleased / not accepted |
+| v0.6.1-dev Bikini Bottom recovery correction | Pending | Pending | Retained 1–161 plus sandbox 162–164 pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

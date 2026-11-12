@@ -2,7 +2,18 @@
 
 2026-11-11. **Unreleased, pending developer acceptance.** Audit baseline was clean `1d97794` (v0.6.0). Earlier validation sections below remain unchanged. Current metadata is `0.6.1-dev` / Windows `0.6.1.0`. Full architecture, reference evidence, comparison limitations and commands are in [Testing Grounds](testing-grounds.md).
 
-## Circuit racing performance correction — current results
+## Bikini Bottom sandbox recovery correction — current results
+
+2026-11-12. The imported test road exceeded the shared KartRecovery defaults in both depth and horizontal extent. A script attached only to `scenes/tracks/Bikini_bottom_test.tscn` now calculates the world-space road AABB at startup and configures that kart's existing Recovery component. For the current GLB/transform: X/Z half-extents **236.544 / 151.069 m**, fall threshold **−22.004 m**. Margins are exported on the test-scene root. The authored spawn remains in place and is verified to have road support. Shared recovery/handling/geometry and other circuit settings are unchanged.
+
+- Godot 4.7.2 complete suite: **1,076 checks, zero failures** (1,062 retained + 14 new).
+- Tests exercise the real imported scene/collider. Both legacy limits reproduce a reset on actual road triangle locations; after configuration the real kart remains grounded for 120 physics ticks at each of the low/outer locations, without recovery.
+- Every collision triangle centroid is inside the configured envelope. Escaping the X/Z bounds or falling below the new threshold still returns to the authored safe spawn; manual recovery and cooldown also pass. Shared defaults remain −8 m and (178,158) for existing consumers.
+- Headless editor import and a 180-frame direct sandbox runtime both exit 0. Logs: ignored `.godot/bikini_recovery_import.log`, `.godot/bikini_recovery_tests.log`, `.godot/bikini_recovery_runtime.log`.
+
+Stop/relaunch the sandbox with F6 to apply the startup configuration. Bounds recalculate after a reimport and fresh scene start; they do not update continuously while a running model is edited. This correction does not regenerate the sandbox's saved collision snapshot or add race/AI integration. Human full-lap checks 162–164 remain pending; it is not a claim that every possible recovery cause is eliminated. No version increment or Git mutations.
+
+## Circuit racing performance correction — preceding results
 
 See [diagnosis, implementation and benchmark procedure](circuit-performance.md). Flat-road collision now uses exact-top convex sections; elevated/banked roads retain the prior triangle collision. Minimap routes use cached display-resolution paths and independent live marker drawing. No handling, camera, AI difficulty, scenery or version change.
 
