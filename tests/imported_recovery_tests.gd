@@ -4,11 +4,16 @@ class IdleInput extends DrivingInput:
 	func get_command() -> DrivingCommand: return DrivingCommand.new()
 
 func run(s: SceneTree) -> void:
-	var world := load("res://scenes/tracks/Bikini_bottom_test.tscn").instantiate() as Node3D
+	await _run_scene(s, "res://scenes/tracks/Bikini_bottom_test.tscn", ^"bikini_bottom_track_blockout/TR_BikiniBottom_Road_Test")
+	await _run_scene(s, "res://scenes/tracks/Bikini_bottom_test_v2.tscn", ^"bikini_bottom_test_track/BikiniBottom_test_v1")
+
+func _run_scene(s: SceneTree, scene_path: String, road_path: NodePath) -> void:
+	print("BIKINI RECOVERY SCENE ", scene_path)
+	var world := load(scene_path).instantiate() as Node3D
 	s.root.add_child(world)
 	var kart := world.get_node("Kart") as KartController
 	var recovery := kart.get_node("Recovery") as KartRecovery
-	var road := world.get_node("bikini_bottom_track_blockout/TR_BikiniBottom_Road_Test") as MeshInstance3D
+	var road := world.get_node(road_path) as MeshInstance3D
 	var collider := road.get_node("StaticBody3D/CollisionShape3D") as CollisionShape3D
 	var faces := (collider.shape as ConcavePolygonShape3D).get_faces()
 	var road_bounds: AABB = road.global_transform * road.get_aabb()

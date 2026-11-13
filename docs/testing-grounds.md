@@ -2,7 +2,7 @@
 
 Unreleased, pending developer acceptance. This is the first Testing Grounds delivery. It preserves the v0.6.0 application, original reference circuit and all preceding handling/contact/presentation/item mechanics. No Git mutations were performed.
 
-The subsequent [Figure-8 crossing correction](figure-8-crossing-fix.md) removes the kart's false wall contacts on the upper incline through a rounded native collision hull. The later [racing-performance correction](circuit-performance.md) optimizes flat-road collision and caches minimap routes while retaining the crossing's elevated triangle collider. The [Bikini Bottom sandbox recovery correction](validation.md) adds road-specific startup safety bounds without changing the existing circuits. Current validation is **1,076 checks, zero failures**; manual checks now extend through **164**. Initial-delivery evidence below is preserved.
+The subsequent [Figure-8 crossing correction](figure-8-crossing-fix.md) removes the kart's false wall contacts on the upper incline through a rounded native collision hull. The later [racing-performance correction](circuit-performance.md) optimizes flat-road collision and caches minimap routes while retaining the crossing's elevated triangle collider. The [Bikini Bottom sandbox recovery correction](validation.md) adds road-specific startup safety bounds without changing the existing circuits. Current validation is **1,090 checks, zero failures**; manual checks now extend through **166**. Initial-delivery evidence below is preserved.
 
 ## Repository audit and architecture
 

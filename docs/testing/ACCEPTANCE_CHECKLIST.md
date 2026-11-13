@@ -247,6 +247,13 @@ Preserve checks 1–161. The new scene-specific recovery envelope is described i
 - [ ] **163. Genuine escape/fall still recovers safely.** Leave the configured safety envelope or fall below the road's fall threshold; return to the authored supported spawn without repeated resets. Shared circuits retain their previous recovery behavior.
 - [ ] **164. Fresh scene starts recalculate imported-road limits.** After owner-authored model changes and reimport, relaunch the scene; check the root's road/kart references still resolve, new road extents are covered and the collision/spawn still match the model. No Blender geometry is automatically modified.
 
+## v0.6.1-dev — Bikini Bottom test_v2 recovery wiring
+
+Preserve checks 1–164. The same road-derived recovery setup now covers the separate v2 scene.
+
+- [ ] **165. V2 covers the full road without false boundary/fall resets.** Stop/relaunch `Bikini_bottom_test_v2.tscn` with F6; drive the lowest descent and outermost road sections, then a full loop. Confirm no unexpected teleportation. Repeat after a reimport and fresh scene start.
+- [ ] **166. V2 retains genuine recovery and its authored spawn.** Exit the safety envelope or fall below its configured threshold; recover to a supported spawn with cooldown intact. Recheck the original Bikini Bottom sandbox.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -263,5 +270,6 @@ Preserve checks 1–161. The new scene-specific recovery envelope is described i
 | v0.6.1-dev crossing correction | Pending | Pending | Retained 1–151 plus crossing 152–156 pending | Unreleased / not accepted |
 | v0.6.1-dev performance correction | Pending | Pending | Retained 1–156 plus performance 157–161 pending | Unreleased / not accepted |
 | v0.6.1-dev Bikini Bottom recovery correction | Pending | Pending | Retained 1–161 plus sandbox 162–164 pending | Unreleased / not accepted |
+| v0.6.1-dev Bikini Bottom v2 recovery wiring | Pending | Pending | Retained 1–164 plus v2 165–166 pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

@@ -2,7 +2,17 @@
 
 2026-11-11. **Unreleased, pending developer acceptance.** Audit baseline was clean `1d97794` (v0.6.0). Earlier validation sections below remain unchanged. Current metadata is `0.6.1-dev` / Windows `0.6.1.0`. Full architecture, reference evidence, comparison limitations and commands are in [Testing Grounds](testing-grounds.md).
 
-## Bikini Bottom sandbox recovery correction — current results
+## Bikini Bottom test_v2 recovery wiring — current results
+
+2026-11-13. `Bikini_bottom_test_v2.tscn` was a separate scene without the original sandbox's recovery script/bindings. It therefore used (178,158) m horizontal half-extents and the −8 m fall threshold. Running the shared physical recovery regressions against both scenes before the fix produced **28 checks, four failures**, all in v2: insufficient fall clearance, road outside the envelope and false recovery during both low/outer-road contact scenarios.
+
+The v2 root now uses the existing `imported_test_recovery.gd`, bound to `bikini_bottom_test_track/BikiniBottom_test_v1` and `Kart`. Its computed half-extents are **236.544 / 151.069 m** and fall threshold **−22.004 m**. Road/model/collision/spawn/camera and the shared recovery implementation remain unchanged. Reimported geometry is measured on each fresh scene start.
+
+- Complete suite: **1,090 checks, zero failures**, retaining 1,076 and adding the same 14 assertions for v2. Both actual sandboxes retain support for 120 ticks at each low/outer sample, reject the legacy reset limits and retain fall/bounds/manual recovery and cooldown behavior.
+- Godot 4.7.2 headless editor import and a 180-frame direct v2 runtime both exit 0. Local logs: `.godot/bikini_v2_before.log` (expected failures), `.godot/bikini_v2_import.log`, `.godot/bikini_v2_tests.log`, `.godot/bikini_v2_runtime.log`.
+- Stop the running game, open `scenes/tracks/Bikini_bottom_test_v2.tscn` and launch with F6. Manual full-lap checks 165–166 remain pending; no race integration or performance acceptance is implied. Future sandbox copies must retain the root script and bind their own road/kart. Version unchanged; no Git mutations.
+
+## Bikini Bottom sandbox recovery correction — preceding results
 
 2026-11-12. The imported test road exceeded the shared KartRecovery defaults in both depth and horizontal extent. A script attached only to `scenes/tracks/Bikini_bottom_test.tscn` now calculates the world-space road AABB at startup and configures that kart's existing Recovery component. For the current GLB/transform: X/Z half-extents **236.544 / 151.069 m**, fall threshold **−22.004 m**. Margins are exported on the test-scene root. The authored spawn remains in place and is verified to have road support. Shared recovery/handling/geometry and other circuit settings are unchanged.
 

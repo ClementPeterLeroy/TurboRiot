@@ -6,6 +6,16 @@ Pending developer acceptance. Project/menu/HUD identify `0.6.1-dev`; Windows num
 
 Version scope: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The existing reference circuit remains available. These circuits are playable greybox testing layouts; no beta release or developer acceptance is implied.
 
+### Bikini Bottom test_v2 recovery wiring — 2026-11-13
+
+- The new `Bikini_bottom_test_v2.tscn` lacked the original sandbox's recovery setup and reverted to shared limits, reproducing low/outer-road resets. Attached the existing imported-road recovery script and explicitly bound the v2 road/kart. Bounds now derive from that scene's road at startup; no model, collision, spawn, camera or shared controller changes.
+- Extended the same physical regression tests to both test scenes. Before wiring, v2 fails four assertions; afterward all **1,090 checks pass**. Headless import and a direct v2 runtime smoke also pass. Manual checks 165–166 added; version remains 0.6.1-dev, pending developer acceptance.
+
+### Bikini Bottom evaluated-road export — 2026-11-13
+
+- Diagnosed the missing road in the owner's new environment exports: the Curve/Geometry Nodes road node had no mesh reference in GLB, while buildings and seabed exported normally. Created a separate `bikini_bottom_test_track_mesh.glb` using in-memory evaluated road conversion, preserving the saved Blender source and earlier exports. Godot headless import and mesh-surface verification pass.
+- Documented the repeatable non-destructive export procedure in [Blender road export](docs/blender-road-export.md). This does not replace the existing driving-test model/collision, add race integration or establish full-environment performance acceptance. Runtime version remains 0.6.1-dev.
+
 ### Bikini Bottom sandbox recovery correction — 2026-11-12
 
 - Reproduced valid-road resets caused by the shared fall threshold of −8 m and X bounds of ±178 m: the imported blockout reaches about −12 m elevation and extends beyond ±178 m. The Bikini Bottom test scene now computes its own world-space recovery envelope from the imported road on startup, with configurable 12 m horizontal margin and 10 m fall clearance. Shared recovery defaults, kart physics, model geometry/placement and the authored safe spawn remain unchanged.

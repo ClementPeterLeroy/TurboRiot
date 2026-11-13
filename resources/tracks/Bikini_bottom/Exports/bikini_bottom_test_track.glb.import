@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://du2ablpa3ehgp"
-path="res://.godot/imported/bikini_bottom_test.glb-cddaabbb4b5a8755cf525de89847122b.scn"
+uid="uid://bgvrk8lptjqxx"
+path="res://.godot/imported/bikini_bottom_test_track.glb-5b21251e13f909bd7bf902372fb6c3cd.scn"
 
 [deps]
 
-source_file="res://resources/tracks/Bikini_bottom/Exports/bikini_bottom_test.glb"
-dest_files=["res://.godot/imported/bikini_bottom_test.glb-cddaabbb4b5a8755cf525de89847122b.scn"]
+source_file="res://resources/tracks/Bikini_bottom/Exports/bikini_bottom_test_track.glb"
+dest_files=["res://.godot/imported/bikini_bottom_test_track.glb-5b21251e13f909bd7bf902372fb6c3cd.scn"]
 
 [params]
 

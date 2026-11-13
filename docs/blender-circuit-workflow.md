@@ -69,6 +69,8 @@ Qualification order: first a minimal imported loop to prove loading/reimport, th
 
 ## Blender preparation
 
+The current Bikini Bottom curve/Geometry Nodes road requires evaluated mesh conversion for GLB export; otherwise its node can arrive without a mesh while buildings and terrain export correctly. See the [confirmed road-export diagnosis and non-destructive procedure](blender-road-export.md). Preserve the editable source curve and convert only an export copy or in-memory export representation.
+
 - Model at metric scale, targeting 1 imported Godot unit per metre. Apply mesh scale/rotation before final export; keep the circuit wrapper at unit scale. Check a known-size reference against the existing 1.25 × 0.75 × 2.1 m kart hull after import. Let glTF perform the axis conversion; verify forward orientation in Godot instead of adding a second corrective rotation blindly.
 - Separate visible road/scenery from simplified collision proxies. Use contiguous, clean driving surfaces; avoid duplicate coplanar colliders, seam steps, flipped faces and thin decorative kerbs crossing the road. Keep materials and collision surface identity separate: a green material is not automatically grass physics.
 - Godot import suffixes such as `-colonly` can produce hidden static collision from explicit proxy meshes. Use simple primitive/convex segments where appropriate and measured, simplified triangle sections for irregular road. Never wrap an entire winding circuit in one convex hull: that can fill gaps and block bridges. Do not recreate the expensive whole-detail road collider that caused the Yoshi slowdown.
