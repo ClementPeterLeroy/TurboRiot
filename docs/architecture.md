@@ -4,6 +4,8 @@ Applies to **v0.6.1-dev - Circuit Selection & First Testing Grounds**, Unrelease
 
 ## Scene composition
 
+Circuit 8's authored `EnvironmentArt` subtree is separate from TrackBuilder's transient `Generated` road. TrackDefinition retains authored source-scene children while copying the existing procedural track configuration; it skips `Generated`. The bridge shell/verges and two shared grandstand instances have editable Blender sources/GLB exports, native collision helpers and independently editable placement. No alternative road generator, kart or race manager is introduced. See [Circuit 8 environment assembly](figure8-environment.md).
+
 CircuitMap caches its display-sized route and projection until configuration or resize. A separate child CanvasItem redraws live interpolated racer markers each rendered frame, leaving the static route cached. Both circuit-selection previews and the race HUD use this component; see [performance diagnosis](circuit-performance.md).
 
 v0.6.1 introduces TrackDefinition/TrackRegistry at the application loading boundary. RaceSetup carries a validated circuit ID; geometry scenes provide the route/gates/terrain while the same main scene and RaceManager own gameplay. CircuitMap uses that route for previews and live racer markers. See [Testing Grounds architecture and reference audit](testing-grounds.md) for loading order, tracing, elevation assumptions and circuit-specific item placement.

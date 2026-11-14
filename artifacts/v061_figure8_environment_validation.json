@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-14",
+  "version": "0.6.1-dev",
+  "released": false,
+  "suite": {
+    "checks": 1103,
+    "failures": 0,
+    "retained_checks": 1090,
+    "new_environment_assertions": 13
+  },
+  "crossing_suite": {
+    "checks": 52,
+    "failures": 0
+  },
+  "minimum_sampled_underpass_clearance_m": 4.641,
+  "native_time_trial": {
+    "lap_seconds": 33.533,
+    "recoveries": 0
+  },
+  "ai_race_report": "v061_figure8_environment_ai_race_2_7_3_all_ai_items.json",
+  "performance_report": "v061_figure8_environment_comparison.json",
+  "source_scene_changes_additive_only": true,
+  "protected_file_hashes_unchanged": {
+    "scripts/track/track_builder.gd": true,
+    "scripts/kart/kart_controller.gd": true,
+    "scripts/kart/kart_recovery.gd": true,
+    "scripts/camera/chase_camera.gd": true,
+    "scenes/kart.tscn": true,
+    "resources/tracks/figure_8_trace.json": true,
+    "scenes/tracks/yoshi_ds.tscn": true,
+    "scenes/track.tscn": true,
+    "resources/tracks/Bikini_bottom/Blender/bikini_bottom_test.blend": true,
+    "resources/tracks/Bikini_bottom/Blender/bikini_bottom_test.blend1": true
+  },
+  "manual_acceptance": "Pending checks 167-176"
+}

@@ -2,7 +2,20 @@
 
 2026-11-11. **Unreleased, pending developer acceptance.** Audit baseline was clean `1d97794` (v0.6.0). Earlier validation sections below remain unchanged. Current metadata is `0.6.1-dev` / Windows `0.6.1.0`. Full architecture, reference evidence, comparison limitations and commands are in [Testing Grounds](testing-grounds.md).
 
-## Bikini Bottom test_v2 recovery wiring — current results
+## Circuit 8 environment assembly — current results
+
+2026-11-14. [Full audit, assets, editing instructions, screenshots and measurement limits](figure8-environment.md).
+
+- Complete suite **1,103 checks, zero failures**: retained 1,090 plus 13 environment assertions. The existing 52 crossing regressions pass without changed tolerances. New support/grass/material/resource-sharing/corridor/loading/rebuild tests pass; sampled physical underpass headroom is at least **4.641 m**.
+- Godot 4.7.2 headless editor import, native multi-view capture and native application Time Trial pass. The latter completes a full 1080p physical lap in **33.533 s**, zero recovery. No source-road, controller, camera or other-circuit environment changes.
+- Seven AI / Challenging / three laps / items seed 42: all finish, no DNF, 28 pickups / 26 uses, one recovery total, times 98.317–105.683 s. Report: `artifacts/v061_figure8_environment_ai_race_2_7_3_all_ai_items.json`.
+- Controlled same-process native before/after benchmark, RTX 3070 Ti Laptop GPU / Ryzen 7 6800H, 1920 × 1080, VSync off/uncapped, 60 Hz physics, seven AI and items: **170.4 → 164.5 FPS**; P95 frame 11.29 → 11.54 ms; P99 12.63 → 12.63 ms. Draw calls 1,185 → 1,205; collision shapes 1,142 → 1,194. CPU/GPU time, primitives, objects, memory and cache-influenced load timings are in `artifacts/v061_figure8_environment_comparison.json`. The short run supports the 60 FPS target in this case, not a universal minimum or sustained 120 FPS guarantee.
+- Five inspected geometry captures use `artifacts/v061_figure8_environment_{overview,bridge,underpass,grandstand,top}.png`; native flow captures use `v061_figure8_environment_flow_*`. Blender sources are retained under the assets' import-excluded `sources/` folder.
+- Final logs `.godot/figure8_environment_{import,suite_final,crossing,ai_race,captures,native_flow,comparison}.log` contain only the known certificate-store warning, with no script/runtime errors. Protected road/kart/other-circuit source hashes and Curve3D/configuration are unchanged.
+
+Developer/artistic checks 167–176 remain pending, including real controls, edge-case camera views, all AI difficulties, exported builds and prolonged performance. No version/roadmap milestone changes, staging, commits, pushes, tags, releases or GitHub actions.
+
+## Bikini Bottom test_v2 recovery wiring — preceding results
 
 2026-11-13. `Bikini_bottom_test_v2.tscn` was a separate scene without the original sandbox's recovery script/bindings. It therefore used (178,158) m horizontal half-extents and the −8 m fall threshold. Running the shared physical recovery regressions against both scenes before the fix produced **28 checks, four failures**, all in v2: insufficient fall clearance, road outside the envelope and false recovery during both low/outer-road contact scenarios.
 

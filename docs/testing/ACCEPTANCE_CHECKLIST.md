@@ -254,6 +254,21 @@ Preserve checks 1–164. The same road-derived recovery setup now covers the sep
 - [ ] **165. V2 covers the full road without false boundary/fall resets.** Stop/relaunch `Bikini_bottom_test_v2.tscn` with F6; drive the lowest descent and outermost road sections, then a full loop. Confirm no unexpected teleportation. Repeat after a reimport and fresh scene start.
 - [ ] **166. V2 retains genuine recovery and its authored spawn.** Exit the safety envelope or fall below its configured threshold; recover to a supported spawn with cooldown intact. Recheck the original Bikini Bottom sandbox.
 
+## v0.6.1-dev — Circuit 8 environment completion
+
+Preserve checks 1–166. Automated and native results are documented separately; environment assembly remains pending developer/artistic acceptance.
+
+- [ ] **167. Complete an uninterrupted Circuit 8 lap.** Drive the full Figure-8 in Time Trial with the new environment, without unexpected collisions, jumps or resets.
+- [ ] **168. Bridge approaches and upper deck stay clear.** Test center and passing lanes, normal/mushroom speeds and an opposite-direction inspection; no snagging or new contact flicker.
+- [ ] **169. Underpass clears kart and chase camera.** Traverse the lower road across its usable width; no pier, deck or camera intersection. Existing colored barriers retain their intended behavior.
+- [ ] **170. AI still completes the circuit.** Review the seven-racer field over multiple laps with items and all difficulty profiles; inspect any recovery rather than assuming it is harmless.
+- [ ] **171. Scenery respects the driving corridor.** Grandstands, flags, bridge fascia and approach verges do not block racing/recovery space; reachable structures have sensible simple collision.
+- [ ] **172. New objects remain artist-editable.** Select, reposition, hide and restore each grandstand/flag in Godot; reopen/rebuild the procedural circuit and confirm authored additions survive. Inspect the separate bridge, terrain and collision helpers.
+- [ ] **173. Assets load without missing meshes/materials.** Reopen the scene and test a fresh import/exported build; no duplicate environment, missing assets or unexpected import of Blender source files.
+- [ ] **174. Review native 1080p performance.** Compare identical GPU/settings/full-field runs before/after; record frame-time percentiles, CPU/GPU/physics time, draw calls, primitives, memory and load time. Target stable 60 FPS; 120 FPS remains a stretch rather than an acceptance claim from average FPS alone.
+- [ ] **175. Race integration and regressions remain intact.** Quick Race, Time Trial, checkpoints, items, drifting, recovery, restart and menu returns work; the other circuit environments retain prior behavior.
+- [ ] **176. Artistic review against supplied references.** Review overall/bridge/underpass/grandstand captures and in-game views. Accept or adjust original gold bridge treatment, canopy proportions, restrained decoration and two straight stand placements; these intentionally approximate the reference's more extensive stadium.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -271,5 +286,6 @@ Preserve checks 1–164. The same road-derived recovery setup now covers the sep
 | v0.6.1-dev performance correction | Pending | Pending | Retained 1–156 plus performance 157–161 pending | Unreleased / not accepted |
 | v0.6.1-dev Bikini Bottom recovery correction | Pending | Pending | Retained 1–161 plus sandbox 162–164 pending | Unreleased / not accepted |
 | v0.6.1-dev Bikini Bottom v2 recovery wiring | Pending | Pending | Retained 1–164 plus v2 165–166 pending | Unreleased / not accepted |
+| v0.6.1-dev Circuit 8 environment | Pending | Pending | Retained 1–166 plus environment 167–176 pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

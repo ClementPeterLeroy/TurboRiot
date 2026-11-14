@@ -28,6 +28,13 @@ func instantiate_race() -> Node3D:
 	source.remove_child(ground)
 	ground.owner = null
 	track.add_child(ground)
+	# Authored environment additions are siblings of Ground, never Generated.
+	# Keep their editable scene instances when loading the procedural circuit.
+	for child in source.get_children():
+		if child.name == &"Generated": continue
+		source.remove_child(child)
+		child.owner = null
+		track.add_child(child)
 	source.free()
 	var environment := world.get_node("Environment")
 	world.remove_child(environment)

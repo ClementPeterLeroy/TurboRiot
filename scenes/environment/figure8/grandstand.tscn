@@ -1,0 +1,18 @@
+[gd_scene format=3]
+[ext_resource type="PackedScene" path="res://assets/environment/figure8/grandstand.glb" id="1"]
+[sub_resource type="BoxShape3D" id="Mass"]
+size = Vector3(60,4.8,12)
+[node name="Grandstand" type="Node3D"]
+[node name="Model" parent="." instance=ExtResource("1")]
+[node name="StructureCollision" type="StaticBody3D" parent="."]
+[node name="Mass" type="CollisionShape3D" parent="StructureCollision"]
+position = Vector3(0,2.4,0)
+shape = SubResource("Mass")
+[node name="Banner" type="Label3D" parent="."]
+position = Vector3(0,7.08,-6.80)
+rotation_degrees = Vector3(0,180,0)
+text = "TURBO RIOT  //  CIRCUIT 08"
+font_size = 64
+pixel_size = 0.028
+modulate = Color(0.96,0.94,0.82,1)
+outline_size = 0

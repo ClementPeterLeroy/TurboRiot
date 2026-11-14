@@ -4,7 +4,14 @@
 
 Pending developer acceptance. Project/menu/HUD identify `0.6.1-dev`; Windows numeric metadata uses `0.6.1.0`. Historical entries below remain unchanged; no prior milestone is retrospectively accepted or released.
 
-Version scope: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The existing reference circuit remains available. These circuits are playable greybox testing layouts; no beta release or developer acceptance is implied.
+Initial circuit delivery: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The subsequent Figure-8 environment assembly below remains within this same Unreleased version; Yoshi retains its greybox environment. The existing reference circuit remains available. No beta release or developer acceptance is implied.
+
+### Circuit 8 environment assembly — 2026-11-14
+
+- Preserved the complete Figure-8 road/Curve3D/elevation, driving collision, colored boundaries, 24 gates, AI route, recovery and kart/camera mechanics. Added a separate Blender-authored gold bridge shell with 0.7 m deck thickness, four clear-of-road piers, two reusable six-tier canopy grandstands, four modest approach verges and four editable race flags. Blender sources and GLB exports are included; no reference artwork or advertising assets enter runtime resources.
+- Added native modular environment scenes with simple structural collision, shared meshes/materials and original Turbo Riot banners. TrackDefinition now retains authored source-scene children rather than discarding them; procedural Generated geometry remains separate. Other circuit environments and owner-authored Blender files are unchanged. See [editing workflow, screenshots and validation](docs/figure8-environment.md).
+- Full suite: **1,103 checks, zero failures**, including 13 new environment assertions and the unchanged 52 crossing regressions. Physical seven-AI three-lap item race and native one-lap Time Trial pass; sampled underpass clearance is at least 4.641 m. Manual acceptance criteria 167–176 appended without replacing previous checks.
+- Controlled same-process 1080p full-field benchmark on RTX 3070 Ti: **170.4 → 164.5 FPS**, 99th-percentile frame time about 12.63 ms in both cases, approximately 20 extra draw calls and 52 additional collision shapes. These are measured short-run results, not universal minimum-FPS or sustained-120-FPS guarantees. Version remains 0.6.1-dev, Unreleased pending developer/artistic acceptance; no Git actions performed.
 
 ### Bikini Bottom test_v2 recovery wiring — 2026-11-13
 

@@ -1,0 +1,22 @@
+[gd_scene format=3]
+[sub_resource type="StandardMaterial3D" id="Steel"]
+albedo_color = Color(0.6,0.69,0.73,1)
+roughness = 0.9
+[sub_resource type="StandardMaterial3D" id="FlagPaint"]
+albedo_color = Color(0.06,0.43,0.53,1)
+roughness = 0.9
+[sub_resource type="BoxMesh" id="Pole"]
+size = Vector3(0.12,4,0.12)
+material = SubResource("Steel")
+[sub_resource type="BoxMesh" id="Cloth"]
+size = Vector3(1.5,0.8,0.04)
+material = SubResource("FlagPaint")
+[node name="RaceFlag" type="Node3D"]
+[node name="Pole" type="MeshInstance3D" parent="."]
+position = Vector3(0,2,0)
+mesh = SubResource("Pole")
+cast_shadow = 0
+[node name="Flag" type="MeshInstance3D" parent="."]
+position = Vector3(0.7,3.5,0)
+mesh = SubResource("Cloth")
+cast_shadow = 0
