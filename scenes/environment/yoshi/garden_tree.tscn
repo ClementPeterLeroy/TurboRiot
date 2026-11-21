@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/environment/yoshi/garden_tree.glb" id="Model"]
+
+[sub_resource type="BoxShape3D" id="Collision"]
+size = Vector3(0.800000,3.600000,0.800000)
+
+[node name="garden_tree" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("Model")]
+
+[node name="Body" type="StaticBody3D" parent="."]
+
+[node name="Shape" type="CollisionShape3D" parent="Body"]
+position = Vector3(0.000000,1.800000,0.000000)
+shape = SubResource("Collision")

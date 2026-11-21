@@ -1,0 +1,88 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/environment/yoshi/garden_tunnel.glb" id="Model"]
+
+[sub_resource type="ConvexPolygonShape3D" id="Arch0"]
+points = PackedVector3Array(14.000000,0.000000,-7.000000,13.522962,3.623467,-7.000000,17.000000,0.000000,-7.000000,16.420739,4.399924,-7.000000,14.000000,0.000000,7.000000,13.522962,3.623467,7.000000,17.000000,0.000000,7.000000,16.420739,4.399924,7.000000)
+
+[sub_resource type="ConvexPolygonShape3D" id="Arch1"]
+points = PackedVector3Array(13.522962,3.623467,-7.000000,12.124356,7.000000,-7.000000,16.420739,4.399924,-7.000000,14.722432,8.500000,-7.000000,13.522962,3.623467,7.000000,12.124356,7.000000,7.000000,16.420739,4.399924,7.000000,14.722432,8.500000,7.000000)
+
+[sub_resource type="ConvexPolygonShape3D" id="Arch2"]
+points = PackedVector3Array(12.124356,7.000000,-7.000000,9.899495,9.899495,-7.000000,14.722432,8.500000,-7.000000,12.020815,12.020815,-7.000000,12.124356,7.000000,7.000000,9.899495,9.899495,7.000000,14.722432,8.500000,7.000000,12.020815,12.020815,7.000000)
+
+[sub_resource type="ConvexPolygonShape3D" id="Arch3"]
+points = PackedVector3Array(9.899495,9.899495,-7.000000,7.000000,12.124356,-7.000000,12.020815,12.020815,-7.000000,8.500000,14.722432,-7.000000,9.899495,9.899495,7.000000,7.000000,12.124356,7.000000,12.020815,12.020815,7.000000,8.500000,14.722432,7.000000)
+
+[sub_resource type="ConvexPolygonShape3D" id="Arch4"]
+points = PackedVector3Array(7.000000,12.124356,-7.000000,3.623467,13.522962,-7.000000,8.500000,14.722432,-7.000000,4.399924,16.420739,-7.000000,7.000000,12.124356,7.000000,3.623467,13.522962,7.000000,8.500000,14.722432,7.000000,4.399924,16.420739,7.000000)
+
+[sub_resource type="ConvexPolygonShape3D" id="Arch5"]
+points = PackedVector3Array(3.623467,13.522962,-7.000000,0.000000,14.000000,-7.000000,4.399924,16.420739,-7.000000,0.000000,17.000000,-7.000000,3.623467,13.522962,7.000000,0.000000,14.000000,7.000000,4.399924,16.420739,7.000000,0.000000,17.000000,7.000000)
+
+[sub_resource type="ConvexPolygonShape3D" id="Arch6"]
+points = PackedVector3Array(0.000000,14.000000,-7.000000,-3.623467,13.522962,-7.000000,0.000000,17.000000,-7.000000,-4.399924,16.420739,-7.000000,0.000000,14.000000,7.000000,-3.623467,13.522962,7.000000,0.000000,17.000000,7.000000,-4.399924,16.420739,7.000000)
+
+[sub_resource type="ConvexPolygonShape3D" id="Arch7"]
+points = PackedVector3Array(-3.623467,13.522962,-7.000000,-7.000000,12.124356,-7.000000,-4.399924,16.420739,-7.000000,-8.500000,14.722432,-7.000000,-3.623467,13.522962,7.000000,-7.000000,12.124356,7.000000,-4.399924,16.420739,7.000000,-8.500000,14.722432,7.000000)
+
+[sub_resource type="ConvexPolygonShape3D" id="Arch8"]
+points = PackedVector3Array(-7.000000,12.124356,-7.000000,-9.899495,9.899495,-7.000000,-8.500000,14.722432,-7.000000,-12.020815,12.020815,-7.000000,-7.000000,12.124356,7.000000,-9.899495,9.899495,7.000000,-8.500000,14.722432,7.000000,-12.020815,12.020815,7.000000)
+
+[sub_resource type="ConvexPolygonShape3D" id="Arch9"]
+points = PackedVector3Array(-9.899495,9.899495,-7.000000,-12.124356,7.000000,-7.000000,-12.020815,12.020815,-7.000000,-14.722432,8.500000,-7.000000,-9.899495,9.899495,7.000000,-12.124356,7.000000,7.000000,-12.020815,12.020815,7.000000,-14.722432,8.500000,7.000000)
+
+[sub_resource type="ConvexPolygonShape3D" id="Arch10"]
+points = PackedVector3Array(-12.124356,7.000000,-7.000000,-13.522962,3.623467,-7.000000,-14.722432,8.500000,-7.000000,-16.420739,4.399924,-7.000000,-12.124356,7.000000,7.000000,-13.522962,3.623467,7.000000,-14.722432,8.500000,7.000000,-16.420739,4.399924,7.000000)
+
+[sub_resource type="ConvexPolygonShape3D" id="Arch11"]
+points = PackedVector3Array(-13.522962,3.623467,-7.000000,-14.000000,0.000000,-7.000000,-16.420739,4.399924,-7.000000,-17.000000,0.000000,-7.000000,-13.522962,3.623467,7.000000,-14.000000,0.000000,7.000000,-16.420739,4.399924,7.000000,-17.000000,0.000000,7.000000)
+
+[node name="GardenTunnel" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("Model")]
+
+[node name="ArchCollision" type="StaticBody3D" parent="."]
+
+[node name="Section0" type="CollisionShape3D" parent="ArchCollision"]
+shape = SubResource("Arch0")
+
+[node name="Section1" type="CollisionShape3D" parent="ArchCollision"]
+shape = SubResource("Arch1")
+
+[node name="Section2" type="CollisionShape3D" parent="ArchCollision"]
+shape = SubResource("Arch2")
+
+[node name="Section3" type="CollisionShape3D" parent="ArchCollision"]
+shape = SubResource("Arch3")
+
+[node name="Section4" type="CollisionShape3D" parent="ArchCollision"]
+shape = SubResource("Arch4")
+
+[node name="Section5" type="CollisionShape3D" parent="ArchCollision"]
+shape = SubResource("Arch5")
+
+[node name="Section6" type="CollisionShape3D" parent="ArchCollision"]
+shape = SubResource("Arch6")
+
+[node name="Section7" type="CollisionShape3D" parent="ArchCollision"]
+shape = SubResource("Arch7")
+
+[node name="Section8" type="CollisionShape3D" parent="ArchCollision"]
+shape = SubResource("Arch8")
+
+[node name="Section9" type="CollisionShape3D" parent="ArchCollision"]
+shape = SubResource("Arch9")
+
+[node name="Section10" type="CollisionShape3D" parent="ArchCollision"]
+shape = SubResource("Arch10")
+
+[node name="Section11" type="CollisionShape3D" parent="ArchCollision"]
+shape = SubResource("Arch11")
+[node name="PortalName" type="Label3D" parent="."]
+position = Vector3(0,15.2,7.35)
+text = "GARDEN PASS"
+font_size = 48
+pixel_size = 0.022
+modulate = Color(0.12,0.27,0.25,1)
+outline_size = 0

@@ -1,0 +1,7 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/environment/yoshi/flowerbed.glb" id="Model"]
+
+[node name="flowerbed" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("Model")]

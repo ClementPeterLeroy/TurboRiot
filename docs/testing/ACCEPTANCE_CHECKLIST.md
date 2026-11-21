@@ -269,6 +269,27 @@ Preserve checks 1–166. Automated and native results are documented separately;
 - [ ] **175. Race integration and regressions remain intact.** Quick Race, Time Trial, checkpoints, items, drifting, recovery, restart and menu returns work; the other circuit environments retain prior behavior.
 - [ ] **176. Artistic review against supplied references.** Review overall/bridge/underpass/grandstand captures and in-game views. Accept or adjust original gold bridge treatment, canopy proportions, restrained decoration and two straight stand placements; these intentionally approximate the reference's more extensive stadium.
 
+## v0.6.1-dev — Yoshi coastal environment
+
+Preserve checks 1–176; artistic/developer acceptance remains pending.
+
+- [ ] **177. Full Yoshi lap and race remain valid.** Complete Time Trial and item-enabled Quick Race; checkpoints, laps, finish, drift, items, restart and recovery retain previous behavior.
+- [ ] **178. Coastline supports the whole racing corridor.** Road edges and runoff meet grass without missing floors; sea outside the island has no hidden support. Falling off the coast still recovers correctly.
+- [ ] **179. Both tunnels clear all lanes.** Drive normal/boosted speeds through each passage, including both sides; no snagging, artificial jumps or camera clipping.
+- [ ] **180. Start-area architecture stays outside gameplay.** Houses, tower, stands, trees and flowers do not obstruct racing or safe recovery; inspect the pedestrian square and stand orientation.
+- [ ] **181. Assets remain editable and reusable.** Move/hide a tree, bed, tunnel, house and each stand independently; inspect their separate Blender sources and collision wrappers. Road rebuild preserves placements.
+- [ ] **182. Review the coastal garden art direction.** Check trees, flower visibility, shoreline, tunnel proportions, start-area composition and subtle water animation in motion; no missing materials or visual seams.
+- [ ] **183. Verify 1080p performance on the intended GPU.** Compare warmed-up full-field laps with the same settings, overlays off; target 60 FPS and review frame-time spikes, memory and long-session behavior.
+- [ ] **184. Import, session changes and exported builds stay clean.** Reimport changed model copies, switch circuits/restart/menu repeatedly and verify no stale colliders, missing models, duplicate instances or lost placements.
+
+## v0.6.1-dev — banana spin direction correction
+
+Preserve checks 1–184; the new banana behavior supersedes its original half-turn finish.
+
+- [ ] **185. Banana ends facing the incoming direction.** Take a banana on a straight while holding throttle: one visible full turn, temporary slowdown, then forward driving without needing to turn around. Repeat with AI victims.
+- [ ] **186. Legitimate steering and other hit reactions remain intact.** Steer during/after a banana; inspect drifting, walls, jumps, shell spins and camera stability. The correction must not teleport heading or force a route direction.
+- [ ] **187. Banana cleanup and repeat-hit protection remain correct.** Recover/restart/finish during the effect and test overlapping hits; regain control normally without a stuck or repeatedly extended spin.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -287,5 +308,7 @@ Preserve checks 1–166. Automated and native results are documented separately;
 | v0.6.1-dev Bikini Bottom recovery correction | Pending | Pending | Retained 1–161 plus sandbox 162–164 pending | Unreleased / not accepted |
 | v0.6.1-dev Bikini Bottom v2 recovery wiring | Pending | Pending | Retained 1–164 plus v2 165–166 pending | Unreleased / not accepted |
 | v0.6.1-dev Circuit 8 environment | Pending | Pending | Retained 1–166 plus environment 167–176 pending | Unreleased / not accepted |
+| v0.6.1-dev Yoshi environment | Pending | Pending | Retained 1–176 plus coastal environment 177–184 pending | Unreleased / not accepted |
+| v0.6.1-dev banana heading correction | Pending | Pending | Retained 1–184 plus banana 185–187 pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

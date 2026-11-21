@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/environment/yoshi/race_tower.glb" id="Model"]
+
+[sub_resource type="BoxShape3D" id="Collision"]
+size = Vector3(7.000000,11.000000,7.000000)
+
+[node name="race_tower" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("Model")]
+
+[node name="Body" type="StaticBody3D" parent="."]
+
+[node name="Shape" type="CollisionShape3D" parent="Body"]
+position = Vector3(0.000000,5.500000,0.000000)
+shape = SubResource("Collision")

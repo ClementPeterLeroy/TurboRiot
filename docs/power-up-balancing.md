@@ -2,6 +2,8 @@
 
 **Unreleased, pending developer acceptance.** This request is implemented within `0.5.0-dev`, not as a new v0.5.1 release. At the start of this correction, local HEAD was `0d69490` (v0.4.0), no tags existed, project/export metadata remained `0.5.0-dev` / `0.5.0.0`, and CHANGELOG explicitly marked v0.5.0 Unreleased. Existing staged work was inspected without changing the index. Earlier changelog entries, milestone numbering and metadata are preserved; ROADMAP requires no scope change.
 
+Current banana tuning was updated within v0.6.1-dev on 2026-11-21: one 360-degree turn, with the existing 1.65-second disruption and slowdown retained. The original 842-check validation below records the historical 540-degree implementation; current results are in [validation](validation.md).
+
 ## Mushroom terrain immunity
 
 BoostController tracks mushroom duration independently of its display source and retained strongest boost timer. A pad or stronger mini-turbo cannot grant or refresh mushroom immunity. Under STRONGEST_WINS, accepted overlapping sources keep the stronger speed cap/longer overall timer while the mushroom's own timer expires normally. REPLACE ends the previous source's immunity and feedback.
@@ -16,9 +18,9 @@ ItemActor passes ItemDefinition hit tuning to the existing KartController/KartEf
 | --- | ---: | ---: | ---: | ---: |
 | Red Shell | 360° | 1.35 s | 0.55 | 0.55 / 0.24 |
 | Green Shell | 360° | 1.35 s | 0.55 | 0.55 / 0.24 |
-| Banana | 540° | 1.65 s | 0.50 | 0.50 / 0.20 |
+| Banana | 360° | 1.65 s | 0.50 | 0.50 / 0.20 |
 
-The reaction applies one bounded horizontal hit impulse/retention, clears drift charge and incrementally rotates the **CharacterBody3D**, including its real box collider and attached kart model, during physics updates. It never animates an unrelated mesh or teleports the body. An eased angular curve reaches the configured rotation. Steering/acceleration retain 12% authority during the initial reaction; braking retains partial authority. The kart slides along its incoming traction frame under inertia instead of being forced around a scripted circle. Impaired steering still turns that frame and the physical body. Banana leaves the physical kart facing the opposite direction after 540°; its final orientation affects subsequent driving.
+The reaction applies one bounded horizontal hit impulse/retention, clears drift charge and incrementally rotates the **CharacterBody3D**, including its real box collider and attached kart model, during physics updates. It never animates an unrelated mesh or teleports the body. An eased angular curve reaches the configured rotation. Steering/acceleration retain 12% authority during the initial reaction; braking retains partial authority. The kart slides along its incoming traction frame under inertia instead of being forced around a scripted circle. Impaired steering still turns that frame and the physical body. The original banana tuning used 540° and deliberately ended backward. The 2026-11-21 correction changes the current banana to 360°, returning to the incoming heading while preserving legitimate steering during the reaction.
 
 After the initial spin, a 0.35-second smooth recovery restores speed/grip/input authority and traction toward the body's actual final heading. These durations, angle, control, speed/grip and retention values are configurable in ItemDefinition resources. There is no arbitrary zero-velocity reset. Vertical velocity, gravity, snapping and ramp launch rules retain their existing behavior.
 
@@ -36,7 +38,7 @@ Twenty-eight deterministic, narrow tapered streaks start near the viewport edges
 
 Run cumulative manual checks **1–104**; the new **91–104** remain unchecked. On sand and grass, use a mushroom and confirm acceleration/speed/grip immunity while F3 still reports the real surface. Continue driving as it expires and inspect the smooth return. Compare pads/mini-turbos without a mushroom.
 
-Take a red/green shell and banana hit on a straight, while steering, during a jump and beside a barrier. Observe the actual kart's turn, meaningful speed loss, impaired input and smooth control return. Banana is deliberately longer and can leave you facing backward. Compare AI responses and exercise R/F5/finish during effects; repeated projectiles must not extend one spin forever.
+Take a red/green shell and banana hit on a straight, while steering, during a jump and beside a barrier. Observe the actual kart's turn, meaningful speed loss, impaired input and smooth control return. Banana retains its longer disruption but now completes one full turn and must not impose a backward-facing finish. Compare AI responses and exercise R/F5/finish during effects; repeated projectiles must not extend one spin forever.
 
 Inspect mushroom/pad burst, sustained lines and fade at different resolutions/camera settings. The HUD and central driving view must stay readable. Rerun F4 **A Normal** at about 80 km/h and F7 60/120/uncapped where supported; a stable physics Y alone is insufficient acceptance. Actual keyboard/controller feel, art intensity and motion comfort still require developer testing.
 

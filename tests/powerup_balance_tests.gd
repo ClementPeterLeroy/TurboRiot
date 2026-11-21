@@ -74,7 +74,7 @@ func _spin_model(s: SceneTree) -> void:
 			s.check(not effects.active() and effects.total_rotation == 0 and effects.immunity_remaining == 0, "Cleanup removes all spin/recovery/immunity state")
 	var invalid := KartEffects.new()
 	s.check(not invalid.apply(1.35, 0.5, 0.3, NAN), "Nonfinite spin tuning is rejected before changing state")
-	s.check(ItemCatalog.ITEMS[3].hit_seconds > ItemCatalog.ITEMS[1].hit_seconds and ItemCatalog.ITEMS[3].spin_degrees == 540, "Banana has a longer 540-degree reaction")
+	s.check(ItemCatalog.ITEMS[3].hit_seconds > ItemCatalog.ITEMS[1].hit_seconds and ItemCatalog.ITEMS[3].spin_degrees == 360, "Banana keeps its longer disruption but completes one full turn without forced reversal")
 
 func _feedback(s: SceneTree) -> void:
 	var lines := BoostSpeedLines.new()
@@ -186,6 +186,7 @@ func _integration(s: SceneTree) -> void:
 		_place(opponent, Vector3(520, 0.5, 550))
 		for i in 30: await s.physics_frame
 		camera.snap_to_target()
+		var entry_forward := -human.global_basis.z
 		for body in [human, opponent]:
 			body.velocity = Vector3.FORWARD * 20
 			(body.input_provider as TestInput).command = DrivingCommand.new(1)
@@ -220,6 +221,11 @@ func _integration(s: SceneTree) -> void:
 		s.check(match_effects, "Human and AI kart bodies receive identical spin/velocity response")
 		s.check(human.position.distance_to(start) < 40 and max_orbit < 1.5, "Spin slides under bounded inertia while the chase view avoids orbiting")
 		s.check(not human.effects.active() and human.effects.control_authority() == 1, "Actual kart restores normal control after spin/recovery")
+		if item.identifier == &"5D":
+			s.check((-human.global_basis.z).dot(entry_forward)>0.999 and (-opponent.global_basis.z).dot(entry_forward)>0.999,
+				"Banana restores incoming facing for both human and AI instead of leaving them backward")
+			s.check(human.velocity.dot(entry_forward)>0 and opponent.velocity.dot(entry_forward)>0,
+				"Both banana victims resume forward travel after control recovery")
 		print("SPIN %s degrees=%.3f hit_speed=%.3f body_y_range=%.8f orbit_x=%.3f" % [item.display_name, rad_to_deg(total_yaw), speed_after_hit, maximum_y - minimum_y, max_orbit])
 	await _wall_and_cleanup(s, main, human, race)
 	main.queue_free()

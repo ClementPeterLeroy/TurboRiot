@@ -4,7 +4,19 @@
 
 Pending developer acceptance. Project/menu/HUD identify `0.6.1-dev`; Windows numeric metadata uses `0.6.1.0`. Historical entries below remain unchanged; no prior milestone is retrospectively accepted or released.
 
-Initial circuit delivery: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The subsequent Figure-8 environment assembly below remains within this same Unreleased version; Yoshi retains its greybox environment. The existing reference circuit remains available. No beta release or developer acceptance is implied.
+Initial circuit delivery: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The subsequent Figure-8 and Yoshi environment assemblies below remain within this same Unreleased version. The existing reference circuit remains available. No beta release or developer acceptance is implied.
+
+### Banana spin direction correction — 2026-11-21
+
+- Changed banana rotation from 540° to 360° through its existing ItemDefinition, eliminating the forced backward-facing finish for both human and AI racers. The physical spin, 1.65-second disruption, slowdown, grip/control recovery, hit immunity and shell reactions retain their existing behavior. No heading snap or separate movement implementation added.
+- New real-body regressions reject the prior reversal and require both human/AI victims to finish facing and moving forward on a straight. Historical 540° entries remain preserved; current tuning/docs and manual criteria 185–187 are updated. Version remains 0.6.1-dev, Unreleased pending developer acceptance.
+
+### Yoshi coastal environment assembly — 2026-11-21
+
+- Replaced Yoshi's greybox ground with a grass island, sand rim and low coastal cliffs, surrounded by subtle animated opaque sea. Preserved its road Curve3D, layout/elevation, driving collision, colored barriers, gates, AI and kart/camera systems.
+- Added 21 reusable broadleaf trees, 12 flowerbeds, two collidable short arched garden tunnels, two paddock houses, a control tower, two start-area canopy stands and a pedestrian square/walk. New Blender sources, GLB exports and independently editable native scene instances are included. Stand geometry is shared with Circuit 8; no runtime scenery scattering or generation. See [asset/editing guide and screenshots](docs/yoshi-environment.md).
+- Full suite: **1,114 checks, zero failures**, retaining 1,103 and adding 11 Yoshi environment assertions. Sampled tunnel headroom is at least 9.768 m. Manual criteria 177–184 appended; developer/artistic acceptance remains pending.
+- Same-process native 1080p full-field benchmark: **130.9 → 126.7 FPS**, P99 frame time **15.91 → 15.02 ms**. These are short-run hardware-specific measurements, not a universal minimum-FPS guarantee. Version stays 0.6.1-dev; no Git actions performed.
 
 ### Circuit 8 environment assembly — 2026-11-14
 

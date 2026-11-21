@@ -4,7 +4,7 @@ The established MAJOR.MINOR.PATCH convention, development suffix and numeric fou
 
 ## v0.6.1 — Circuit Selection & First Testing Grounds
 
-This version adds circuit selection and **two new beta test circuits: Figure-8 Circuit and GCN Yoshi Circuit (DS)**, alongside the existing reference circuit. Their initial delivery contained playable greybox layouts **without finished environments or scenery**. The subsequent Figure-8 bridge/grandstand/environment assembly stays within this same Unreleased version, pending developer/artistic acceptance; Yoshi remains a greybox. Their beta status describes testing maturity, not a published beta release.
+This version adds circuit selection and **two new beta test circuits: Figure-8 Circuit and GCN Yoshi Circuit (DS)**, alongside the existing reference circuit. Their initial delivery contained playable greybox layouts **without finished environments or scenery**. The subsequent Figure-8 bridge/grandstand/environment assembly stays within this same Unreleased version, pending developer/artistic acceptance; Yoshi subsequently gains its coastal garden environment within the same version, also pending developer/artistic acceptance. Their beta status describes testing maturity, not a published beta release.
 
 The same v0.6.1 patch includes the **racing FPS-drop correction**, optimizing flat-road collision and minimap rendering, plus the Figure-8 crossing collision correction. See [performance results](docs/circuit-performance.md) and [Testing Grounds](docs/testing-grounds.md). Runtime identity remains **0.6.1-dev**, Windows metadata **0.6.1.0**, Unreleased pending developer acceptance.
 
@@ -33,4 +33,4 @@ The v0.4.0 implementation and its original Unreleased changelog record are prese
 
 The v0.6.0 patch keeps these conventions unchanged and updates only the current development identity to `0.6.0-dev` / `0.6.0.0`. v0.6.1 is roadmap work only. Local history now includes `a31ff9f` (v0.5.0) and `e22a2f2` (v0.5.1); their runtime metadata remained 0.5.0-dev. These commit labels do not establish acceptance or retroactively rename the recorded development entries. Current regression criteria are 1-119; v0.4/v0.5 and v0.6 acceptance remain pending.
 
-Current patch: **v0.6.1-dev - Circuit Selection & First Testing Grounds**, Windows `0.6.1.0`, Unreleased pending developer acceptance. HEAD at audit was `1d97794` (v0.6.0); commit names do not establish a release. The preceding v0.6.0 paragraph records its historical patch scope. Current cumulative checks are 1-176. See [Testing Grounds](docs/testing-grounds.md).
+Current patch: **v0.6.1-dev - Circuit Selection & First Testing Grounds**, Windows `0.6.1.0`, Unreleased pending developer acceptance. HEAD at audit was `1d97794` (v0.6.0); commit names do not establish a release. The preceding v0.6.0 paragraph records its historical patch scope. Current cumulative checks are 1-187. See [Testing Grounds](docs/testing-grounds.md).

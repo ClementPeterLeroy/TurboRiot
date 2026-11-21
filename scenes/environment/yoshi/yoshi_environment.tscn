@@ -1,0 +1,223 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/environment/yoshi/garden_tree.tscn" id="garden_tree"]
+
+[ext_resource type="PackedScene" path="res://scenes/environment/yoshi/flowerbed.tscn" id="flowerbed"]
+
+[ext_resource type="PackedScene" path="res://scenes/environment/yoshi/garden_tunnel.tscn" id="garden_tunnel"]
+
+[ext_resource type="PackedScene" path="res://scenes/environment/yoshi/paddock_house.tscn" id="paddock_house"]
+
+[ext_resource type="PackedScene" path="res://scenes/environment/yoshi/race_tower.tscn" id="race_tower"]
+
+[ext_resource type="PackedScene" path="res://scenes/environment/yoshi/grandstand.tscn" id="grandstand"]
+
+[ext_resource type="Shader" path="res://assets/environment/yoshi/sea.gdshader" id="SeaShader"]
+
+[sub_resource type="ShaderMaterial" id="Water"]
+shader = ExtResource("SeaShader")
+
+[sub_resource type="PlaneMesh" id="Sea"]
+size = Vector2(1800,1800)
+material = SubResource("Water")
+
+[sub_resource type="StandardMaterial3D" id="PromenadePaint"]
+albedo_color = Color(0.72,0.68,0.54,1)
+roughness = 0.95
+[sub_resource type="BoxMesh" id="Plaza"]
+size = Vector3(38,0.02,24)
+material = SubResource("PromenadePaint")
+[sub_resource type="BoxMesh" id="GardenWalk"]
+size = Vector3(3,0.02,24)
+material = SubResource("PromenadePaint")
+
+[node name="EnvironmentArt" type="Node3D"]
+
+[node name="Sea" type="MeshInstance3D" parent="."]
+position = Vector3(0,-3,0)
+mesh = SubResource("Sea")
+cast_shadow = 0
+
+[node name="Trees" type="Node3D" parent="."]
+
+[node name="Flowers" type="Node3D" parent="."]
+
+[node name="Tunnels" type="Node3D" parent="."]
+
+[node name="Paddock" type="Node3D" parent="."]
+
+[node name="Grandstands" type="Node3D" parent="."]
+
+[node name="GardenTree00" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(-65.000000,0.000000,-115.000000)
+scale = Vector3(1.000000,1.000000,1.000000)
+rotation_degrees = Vector3(0,0,0)
+
+[node name="GardenTree01" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(-85.000000,0.000000,-105.000000)
+scale = Vector3(1.120000,1.120000,1.120000)
+rotation_degrees = Vector3(0,71,0)
+
+[node name="GardenTree02" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(-82.000000,0.000000,-85.000000)
+scale = Vector3(1.240000,1.240000,1.240000)
+rotation_degrees = Vector3(0,142,0)
+
+[node name="GardenTree03" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(-62.000000,0.000000,-90.000000)
+scale = Vector3(1.000000,1.000000,1.000000)
+rotation_degrees = Vector3(0,213,0)
+
+[node name="GardenTree04" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(-12.000000,0.000000,-128.000000)
+scale = Vector3(1.120000,1.120000,1.120000)
+rotation_degrees = Vector3(0,284,0)
+
+[node name="GardenTree05" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(15.000000,0.000000,-110.000000)
+scale = Vector3(1.240000,1.240000,1.240000)
+rotation_degrees = Vector3(0,355,0)
+
+[node name="GardenTree06" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(-20.000000,0.000000,-85.000000)
+scale = Vector3(1.000000,1.000000,1.000000)
+rotation_degrees = Vector3(0,66,0)
+
+[node name="GardenTree07" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(-35.000000,0.000000,-100.000000)
+scale = Vector3(1.120000,1.120000,1.120000)
+rotation_degrees = Vector3(0,137,0)
+
+[node name="GardenTree08" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(-22.000000,0.000000,-12.000000)
+scale = Vector3(1.240000,1.240000,1.240000)
+rotation_degrees = Vector3(0,208,0)
+
+[node name="GardenTree09" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(0.000000,0.000000,14.000000)
+scale = Vector3(1.000000,1.000000,1.000000)
+rotation_degrees = Vector3(0,279,0)
+
+[node name="GardenTree10" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(20.000000,0.000000,32.000000)
+scale = Vector3(1.120000,1.120000,1.120000)
+rotation_degrees = Vector3(0,350,0)
+
+[node name="GardenTree11" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(48.000000,0.000000,28.000000)
+scale = Vector3(1.240000,1.240000,1.240000)
+rotation_degrees = Vector3(0,61,0)
+
+[node name="GardenTree12" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(70.000000,0.000000,18.000000)
+scale = Vector3(1.000000,1.000000,1.000000)
+rotation_degrees = Vector3(0,132,0)
+
+[node name="GardenTree13" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(46.000000,0.000000,65.000000)
+scale = Vector3(1.120000,1.120000,1.120000)
+rotation_degrees = Vector3(0,203,0)
+
+[node name="GardenTree14" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(22.000000,0.000000,80.000000)
+scale = Vector3(1.240000,1.240000,1.240000)
+rotation_degrees = Vector3(0,274,0)
+
+[node name="GardenTree15" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(-18.000000,0.000000,117.000000)
+scale = Vector3(1.000000,1.000000,1.000000)
+rotation_degrees = Vector3(0,345,0)
+
+[node name="GardenTree16" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(-66.000000,0.000000,95.000000)
+scale = Vector3(1.120000,1.120000,1.120000)
+rotation_degrees = Vector3(0,56,0)
+
+[node name="GardenTree17" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(55.000000,0.000000,-172.000000)
+scale = Vector3(1.240000,1.240000,1.240000)
+rotation_degrees = Vector3(0,127,0)
+
+[node name="GardenTree18" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(88.000000,0.000000,-60.000000)
+scale = Vector3(1.000000,1.000000,1.000000)
+rotation_degrees = Vector3(0,198,0)
+
+[node name="GardenTree19" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(125.000000,0.000000,70.000000)
+scale = Vector3(1.120000,1.120000,1.120000)
+rotation_degrees = Vector3(0,269,0)
+
+[node name="GardenTree20" parent="Trees" instance=ExtResource("garden_tree")]
+position = Vector3(97.000000,0.000000,95.000000)
+scale = Vector3(1.240000,1.240000,1.240000)
+rotation_degrees = Vector3(0,340,0)
+
+[node name="Flowerbed00" parent="Flowers" instance=ExtResource("flowerbed")]
+position = Vector3(-60.000000,0.000000,-112.000000)
+
+[node name="Flowerbed01" parent="Flowers" instance=ExtResource("flowerbed")]
+position = Vector3(-80.000000,0.000000,-102.000000)
+
+[node name="Flowerbed02" parent="Flowers" instance=ExtResource("flowerbed")]
+position = Vector3(-77.000000,0.000000,-82.000000)
+
+[node name="Flowerbed03" parent="Flowers" instance=ExtResource("flowerbed")]
+position = Vector3(-57.000000,0.000000,-87.000000)
+
+[node name="Flowerbed04" parent="Flowers" instance=ExtResource("flowerbed")]
+position = Vector3(-7.000000,0.000000,-125.000000)
+
+[node name="Flowerbed05" parent="Flowers" instance=ExtResource("flowerbed")]
+position = Vector3(20.000000,0.000000,-107.000000)
+
+[node name="Flowerbed06" parent="Flowers" instance=ExtResource("flowerbed")]
+position = Vector3(-15.000000,0.000000,-82.000000)
+
+[node name="Flowerbed07" parent="Flowers" instance=ExtResource("flowerbed")]
+position = Vector3(-30.000000,0.000000,-97.000000)
+
+[node name="Flowerbed08" parent="Flowers" instance=ExtResource("flowerbed")]
+position = Vector3(-17.000000,0.000000,-9.000000)
+
+[node name="Flowerbed09" parent="Flowers" instance=ExtResource("flowerbed")]
+position = Vector3(5.000000,0.000000,17.000000)
+
+[node name="Flowerbed10" parent="Flowers" instance=ExtResource("flowerbed")]
+position = Vector3(25.000000,0.000000,35.000000)
+
+[node name="Flowerbed11" parent="Flowers" instance=ExtResource("flowerbed")]
+position = Vector3(53.000000,0.000000,31.000000)
+
+[node name="Tunnel0" parent="Tunnels" instance=ExtResource("garden_tunnel")]
+transform = Transform3D(0.9660273,0.0000000,0.2584402,0.0000000,1.0000001,-0.0000000,-0.2584402,0.0000000,0.9660273,-114.8060150,0.0400000,-90.8234940)
+
+[node name="Tunnel1" parent="Tunnels" instance=ExtResource("garden_tunnel")]
+transform = Transform3D(0.0110549,0.0000000,-0.9999389,-0.0000000,1.0000000,-0.0000000,0.9999389,0.0000000,0.0110549,38.8653603,0.0400000,-14.6269894)
+
+[node name="Building0" parent="Paddock" instance=ExtResource("paddock_house")]
+position = Vector3(12.000000,0.000000,104.000000)
+
+[node name="Building1" parent="Paddock" instance=ExtResource("paddock_house")]
+position = Vector3(38.000000,0.000000,104.000000)
+
+[node name="Building2" parent="Paddock" instance=ExtResource("race_tower")]
+position = Vector3(-7.000000,0.000000,-108.000000)
+
+[node name="StartStand0" parent="Grandstands" instance=ExtResource("grandstand")]
+position = Vector3(20.000000,-0.080000,170.000000)
+rotation_degrees = Vector3(0,0,0)
+
+[node name="StartStand1" parent="Grandstands" instance=ExtResource("grandstand")]
+position = Vector3(-75.000000,-0.080000,136.000000)
+rotation_degrees = Vector3(0,-90,0)
+
+[node name="Promenade" type="Node3D" parent="."]
+[node name="PaddockSquare" type="MeshInstance3D" parent="Promenade"]
+position = Vector3(25,-0.07,104)
+mesh = SubResource("Plaza")
+cast_shadow = 0
+[node name="GardenWalk" type="MeshInstance3D" parent="Promenade"]
+position = Vector3(25,-0.07,122)
+mesh = SubResource("GardenWalk")
+cast_shadow = 0

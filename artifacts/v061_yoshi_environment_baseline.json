@@ -1,0 +1,38 @@
+{
+	"cpu": "AMD Ryzen 7 6800H with Radeon Graphics",
+	"difficulty": "Challenging",
+	"engine": "4.7.2-stable (official)",
+	"gpu": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+	"items": true,
+	"physics_ticks": 60,
+	"racers": 7,
+	"resolution": [
+		1920,
+		1080
+	],
+	"results": [
+		{
+			"case": "before",
+			"collision_shapes": 3206,
+			"fps": 130.748921321399,
+			"load_ms": 545.559,
+			"mean_draw_calls": 1723.28680688337,
+			"mean_frame_ms": 7.64824665391969,
+			"mean_physics_ms": 7.47028680688338,
+			"mean_rendered_objects": 2097.52071383047,
+			"mean_rendered_primitives": 398966.644996813,
+			"nodes": 5552,
+			"p95_frame_ms": 12.156,
+			"p99_frame_ms": 15.341,
+			"physics_hz": 59.9995050040837,
+			"render_cpu_ms": 3.21592033027159,
+			"render_gpu_ms": 0.956425749738935,
+			"rendered_frames": 1569,
+			"seconds": 12.000099,
+			"static_memory_bytes": 92781578.0,
+			"video_memory_bytes": 38724651.0
+		}
+	],
+	"seed": 42,
+	"vsync": false
+}

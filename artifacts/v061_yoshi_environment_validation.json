@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-21",
+  "version": "0.6.1-dev",
+  "released": false,
+  "suite_checks": 1114,
+  "suite_failures": 0,
+  "new_assertions": 11,
+  "minimum_tunnel_clearance_m": 9.768,
+  "native_time_trial_seconds": 77.633,
+  "native_time_trial_recoveries": 0,
+  "race_report": "v061_yoshi_environment_ai_race_2_7_3_all_ai_items.json",
+  "performance_report": "v061_yoshi_environment_comparison.json",
+  "protected_sources_unchanged": {
+    "scripts/track/track_builder.gd": true,
+    "scripts/track/track_definition.gd": true,
+    "scripts/kart/kart_controller.gd": true,
+    "scripts/camera/chase_camera.gd": true,
+    "resources/tracks/yoshi_ds_trace.json": true,
+    "scenes/tracks/figure_8.tscn": true,
+    "resources/tracks/Baby_park/Blender/Baby_park.blend": true,
+    "resources/tracks/Baby_park/Blender/Baby_park.blend1": true
+  },
+  "manual_acceptance": "Pending checks 177-184"
+}

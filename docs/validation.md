@@ -2,7 +2,29 @@
 
 2026-11-11. **Unreleased, pending developer acceptance.** Audit baseline was clean `1d97794` (v0.6.0). Earlier validation sections below remain unchanged. Current metadata is `0.6.1-dev` / Windows `0.6.1.0`. Full architecture, reference evidence, comparison limitations and commands are in [Testing Grounds](testing-grounds.md).
 
-## Circuit 8 environment assembly — current results
+## Banana spin direction correction — current results
+
+2026-11-21. The 540° configured banana spin finished half a turn away from its incoming heading, then restored traction toward that reversed heading. Changed only `resources/items/banana.tres` rotation to **360°**. Existing physical rotation/inertia/control recovery code, 1.65-second disruption, 0.5 momentum retention/speed multiplier, 0.2 grip, 0.35-second control recovery and shell tuning remain unchanged. Legitimate steering still applies normally; there is no heading teleport, route alignment or duplicated movement branch.
+
+- Before the resource change, focused tests reported **153 checks, three failures**: the updated rotation contract and both new physical-body heading/travel regressions. Old banana body rotation measured 540°.
+- Final full suite: **1,116 checks, zero failures**, retaining the prior 1,114 checks and adding two physical integration assertions. Real human and AI victims complete 360° and resume forward travel on a straight. Existing multirate rotation, slowdown, grounding, wall separation, airborne behavior, smooth control recovery, overlapping hits and recovery/restart/finish cleanup tests pass. The generic 540° wall-contact fixture remains as shared-effect stress coverage; normal banana gameplay now uses the resource's 360° setting.
+- Godot 4.7.2 headless editor import and application runtime exit 0. Final logs: `.godot/banana_heading_import.log`, `.godot/banana_heading_suite.log`, `.godot/banana_heading_runtime.log`; the existing certificate-store warning remains the only engine warning/error. Original failing evidence is `.godot/banana_heading_before.log`.
+
+Manual feel/steering/camera review remains pending checks **185–187**. Prior 540° development/changelog/test history is preserved. No version increment, staging, commits, pushes, tags, releases or GitHub actions.
+
+## Yoshi coastal environment — preceding results
+
+2026-11-21. [Assets, artist workflow and screenshots](yoshi-environment.md).
+
+- **1,114 checks, zero failures**: 1,103 retained plus 11 new support, tunnel, source-road identity, shared-instance, sea-floor and rebuild assertions. Original handling, presentation, race, item and other-circuit regressions remain enabled.
+- Sampled arch clearance across each tunnel's driving width is at least **9.768 m**. The native grass island supports the road and both shoulders; water beyond its outline has no hidden grass floor. Road Curve3D/trace, TrackBuilder, shared loader, controller, camera, Circuit 8 scene and owner Baby Park source hashes remain unchanged.
+- Controlled native benchmark, same process/GPU, 1920 × 1080, VSync off/uncapped, seven AI, Challenging, items seed 42, 60 Hz physics: **130.89 → 126.68 FPS**, mean frame **7.64 → 7.89 ms**, P95 **13.68 → 12.21 ms**, P99 **15.91 → 15.02 ms**. Physics mean **7.69 → 7.11 ms**, render CPU **3.18 → 3.39 ms**, GPU **0.92 → 0.92 ms**. Timing variation does not establish a physics optimization. Complete GPU/CPU, draw, memory, collision and cache-influenced load data are in `artifacts/v061_yoshi_environment_comparison.json`. The run supports the 60 FPS target in this configuration; it does not guarantee whole-lap minimum FPS or lower-end hardware performance.
+- Native views use `artifacts/v061_yoshi_environment_{overview,top,paddock,tunnel,gardens}.png`; full physical race report and application-flow captures use the same prefix. See the environment guide for actual race completion and remaining manual acceptance.
+- Final physical seven-racer, three-lap item race passes with **zero recoveries / DNF**, times 227.800–232.033 s. Native 1080p Time Trial completes in **77.633 s**, zero recovery. Godot 4.7.2 headless import, application smoke and native captures pass; final logs contain only the existing Windows certificate-store warning.
+
+Logs are local under `.godot/yoshi_*`. No version/export metadata or Git mutations. Developer checks 177–184 remain pending, including real input/camera feel, artistic review, all difficulties, exported builds and prolonged play.
+
+## Circuit 8 environment assembly — preceding results
 
 2026-11-14. [Full audit, assets, editing instructions, screenshots and measurement limits](figure8-environment.md).
 
