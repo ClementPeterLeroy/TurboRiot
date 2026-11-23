@@ -6,6 +6,8 @@ extends Node3D
 @export_range(0.0, 5.0) var cooldown: float = 1.0
 @export_range(1.0, 20.0) var initial_impulse: float = 12.0
 @export var pad_size := Vector2(3.5, 4.0)
+## Optional authored skin; gameplay detection stays in this shared controller.
+@export var visual_scene: PackedScene
 @export var rebuild: bool = false:
 	set(_value):
 		if is_inside_tree():
@@ -26,6 +28,24 @@ func build() -> void:
 	var generated := Node3D.new()
 	generated.name = "Generated"
 	add_child(generated)
+	if visual_scene:
+		generated.add_child(visual_scene.instantiate())
+	else:
+		_build_default_visuals(generated)
+	_area = Area3D.new()
+	_area.name = "SurfaceTrigger"
+	_area.collision_layer = 8
+	_area.collision_mask = 2
+	generated.add_child(_area)
+	var collision := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = Vector3(pad_size.x, 0.9, pad_size.y)
+	collision.shape = shape
+	collision.position.y = 0.45
+	_area.add_child(collision)
+	_area.set_meta("surface", preload("res://resources/surfaces/boost_pad.tres"))
+
+func _build_default_visuals(generated: Node3D) -> void:
 	var paint := RiotGeometry.material(Color("17bad1"))
 	paint.emission_enabled = true
 	paint.emission = Color(0.05, 0.3, 0.4)
@@ -42,18 +62,6 @@ func build() -> void:
 	arrow_mesh.mesh = arrows.commit()
 	arrow_mesh.material_override = RiotGeometry.material(Color.WHITE)
 	generated.add_child(arrow_mesh)
-	_area = Area3D.new()
-	_area.name = "SurfaceTrigger"
-	_area.collision_layer = 8
-	_area.collision_mask = 2
-	generated.add_child(_area)
-	var collision := CollisionShape3D.new()
-	var shape := BoxShape3D.new()
-	shape.size = Vector3(pad_size.x, 0.9, pad_size.y)
-	collision.shape = shape
-	collision.position.y = 0.45
-	_area.add_child(collision)
-	_area.set_meta("surface", preload("res://resources/surfaces/boost_pad.tres"))
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint() or not is_instance_valid(_area):

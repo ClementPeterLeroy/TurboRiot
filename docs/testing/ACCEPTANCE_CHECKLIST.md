@@ -290,6 +290,41 @@ Preserve checks 1–184; the new banana behavior supersedes its original half-tu
 - [ ] **186. Legitimate steering and other hit reactions remain intact.** Steer during/after a banana; inspect drifting, walls, jumps, shell spins and camera stability. The correction must not teleport heading or force a route direction.
 - [ ] **187. Banana cleanup and repeat-hit protection remain correct.** Recover/restart/finish during the effect and test overlapping hits; regain control normally without a stuck or repeatedly extended spin.
 
+## v0.6.1-dev — Circuit 8 reconstruction, Milestone A
+
+Preserve checks 1–187. Previous Figure-8 architecture checks 167–176 retain their history against the archived scene; they are not evidence that the reconstructed stadium exists. Final environment acceptance requires them to pass again when B–D are implemented.
+
+- [ ] **188. Approve the reconstructed road silhouette.** Compare top, perspective and actual chase-camera views; inspect both loops, seam, consistent width and gradual approaches, without visible road cracks, inverted faces or abrupt heading/height changes.
+- [ ] **189. Both crossing decks drive cleanly.** Drive center and side lanes on both decks, normal and boosted; inspect approach/crest camera clearance, contact stability and absence of false wall impacts. Temporary floating approaches and missing structure remain documented B work.
+- [ ] **190. Complete a full Time Trial and Quick Race.** Verify all checkpoints/laps, AI progress, items, drift, normal jump/contact behavior and results without unexpected resets or geometry snags.
+- [ ] **191. Recovery, restart and circuit switching remain valid.** Recover on each raised approach and lower road; restart and switch to/from other circuits. Confirm safe road placement and no duplicated/archived scenery in the active study.
+- [ ] **192. Accept A before starting B.** Review temporary materials, saved editable curve, preserved old assembly and documented defects. Check 1080p performance in motion on the developer's PC; approve the road before terrain, bridge structure and stadium work.
+
+## v0.6.1-dev — Circuit 8 stadium environment
+
+Preserve checks 1–192. The developer approved proceeding from the road study via the stadium brief; this does not reconstruct individual historical check results or accept a release. Earlier architecture checks retain their archived evidence; verify the replacement environment below.
+
+- [ ] **193. Grandstands read as a stadium from the kart.** Inspect both sweeping corners and finish stands; distinguish curved seating tiers, stairs, concrete support, closed backs, roofs, columns and restrained crowd colors. Review joins and intentional aisle breaks.
+- [ ] **194. Pit complex is complete and grounded.** Inspect eight framed/numbered garages, service doors/equipment, upper glazing/balconies, parapets and control tower; no floating or road-intruding structures. The apron remains non-drivable.
+- [ ] **195. Bridge and approaches are structurally coherent.** Inspect continuous deck, girders, caps, four piers, footings, abutments, grass banks and retaining toes from upper, lower and side views; no floating raised road or supports in driving lanes.
+- [ ] **196. Both decks preserve gameplay and camera clearance.** Drive boosted and normally in every lane, drift through approaches, inspect the underpass and crest, and recover on both levels without false hits or camera clipping.
+- [ ] **197. Rails, catch fences and enclosure are continuous.** Inspect corners, elevations and closure; no major gaps, overlapping road obstructions or empty ground horizon in the six documented chase views. Review fence aliasing on the intended display.
+- [ ] **198. Original materials and signage remain readable.** Check garage numbers, gantry, lamps, signs, tower, concrete, seating, glass treatment, metal and turf under normal lighting. Decorative timing/lamps do not replace HUD information.
+- [ ] **199. Complete Time Trial and item-enabled Quick Race.** Full laps retain gates, lap timing, AI, items, collisions, boosts, drift and results without scenery-related recovery or jams; restart/menu/circuit switching remain clean.
+- [ ] **200. Reusable authoring survives iteration.** Edit/move one stand, garage, sign and mast, then reimport a model copy. Rebuild the road; stadium instances, materials and placement survive without duplicate visuals. Preserve manual edits before running authoring tools.
+- [ ] **201. Verify sustained target-PC performance.** Run warmed-up seven-racer laps at 1080p, overlays off; target 60 FPS and review frame spikes, memory, fence/crowd detail and longer sessions using identical comparison settings.
+- [ ] **202. Approve the stadium presentation.** Review all six kart-camera sites, top/overview and bridge side; report remaining art/visibility issues. Inspect an exported build and broader devices before release acceptance. All architectural systems are implemented, but automated checks alone do not grant artistic acceptance.
+
+## v0.6.1-dev — Circuit 8 final polish
+
+Preserve checks 1–202. The developer approved the stadium/environment reconstruction and artistic direction in the final-polish brief; no individual gameplay/device results or release acceptance are inferred.
+
+- [ ] **203. Official artwork replaces arch branding on both sides.** Inspect normal and reverse approaches: supplied colors/transparency/proportions, centered logo, no old text, stretching, mirroring or clipping; pillars, header, lights and approved surroundings remain unchanged.
+- [ ] **204. Exactly two pads fit their road sections.** Inspect centered bridge-approach and corner-exit pads: readable forward chevrons, flush elevation/orientation, no gaps, bumps, edge placement or checkpoint obstruction.
+- [ ] **205. Human and AI boost behavior remains controlled.** Drive both pads; observe a brief acceleration/feedback with steering and drift available. Test standing occupancy, re-entry, overlapping stronger boosts, restart/recovery and expiry without repeated stacking or unintended launches. Observe AI activation too.
+- [ ] **206. Full racing and approved environment remain intact.** Complete Time Trial and item-enabled Quick Race, crossing both decks and all gates; check AI, collisions, laps/results, camera stability and zero scenery changes beyond the logo/pads.
+- [ ] **207. Final performance and build review.** Run sustained seven-racer 1080p laps on the target PC, compare identical settings, inspect texture/fence aliasing and test an exported build. Approve final pad feel and logo visibility before release acceptance.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -310,5 +345,8 @@ Preserve checks 1–184; the new banana behavior supersedes its original half-tu
 | v0.6.1-dev Circuit 8 environment | Pending | Pending | Retained 1–166 plus environment 167–176 pending | Unreleased / not accepted |
 | v0.6.1-dev Yoshi environment | Pending | Pending | Retained 1–176 plus coastal environment 177–184 pending | Unreleased / not accepted |
 | v0.6.1-dev banana heading correction | Pending | Pending | Retained 1–184 plus banana 185–187 pending | Unreleased / not accepted |
+| v0.6.1-dev Circuit 8 reconstruction A | Pending | Pending | Retained regressions plus road 188–192 pending; earlier architecture retained in archive | Unreleased / not accepted |
+| v0.6.1-dev Circuit 8 stadium | Developer approval, 2026-11-26 final-polish brief | Individual device details not provided | Environment reconstruction/artistic direction approved; granular 193–202 gameplay/device results not supplied | Art direction approved; not released |
+| v0.6.1-dev Circuit 8 final polish | Pending | Pending | Retained regressions plus polish 203–207 pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

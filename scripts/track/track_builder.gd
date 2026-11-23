@@ -5,6 +5,8 @@ signal geometry_rebuilt
 ## Opt-in authored elevation; the original reference remains exactly flat.
 @export var use_curve_elevation := false
 @export var use_curve_banking := false
+## Milestone A presentation only: shared physics and road construction remain.
+@export var road_study_mode := false
 
 const CHECKPOINT_SCENE := preload("res://scenes/checkpoint.tscn")
 ## The saved Curve3D is the source of truth. Generated nodes are transient:
@@ -89,7 +91,7 @@ const CHECKPOINT_SCENE := preload("res://scenes/checkpoint.tscn")
 		if has_node("Generated/Checkpoints"):
 			for gate in get_node("Generated/Checkpoints").get_children():
 				gate.set_debug_visible(value)
-var _barrier_mesh: ArrayMesh
+var _barrier_mesh: Mesh
 var _queued := false
 var road_vertices := PackedVector3Array()
 var road_indices := PackedInt32Array()
@@ -167,19 +169,59 @@ func build() -> void:
 	SurfaceDetector.tag_collision(road, preload("res://resources/surfaces/asphalt.tres"))
 	_build_shoulders(generated)
 	_build_barriers(generated)
-	var kerb_steps := ceili(length / 1.8)
-	for i in kerb_steps:
-		var a := length * float(i) / kerb_steps
-		var b := length * float(i + 1) / kerb_steps
-		for side in [-1.0, 1.0]:
-			var start := boundary_point(a, side, 0.25)
-			var end := boundary_point(b, side, 0.25)
-			var kerb := RiotGeometry.box(generated, "Kerb", Vector3(0.65, 0.035, start.distance_to(end) + 0.04),
-				(start + end) * 0.5, red if i % 2 == 0 else white)
-			kerb.rotation.y = atan2(end.x - start.x, end.z - start.z)
+	if road_study_mode:
+		_build_study_kerbs(generated)
+	else:
+		var kerb_steps := ceili(length / 1.8)
+		for i in kerb_steps:
+			var a := length * float(i) / kerb_steps
+			var b := length * float(i + 1) / kerb_steps
+			for side in [-1.0, 1.0]:
+				var start := boundary_point(a, side, 0.25)
+				var end := boundary_point(b, side, 0.25)
+				var kerb := RiotGeometry.box(generated, "Kerb", Vector3(0.65, 0.035, start.distance_to(end) + 0.04),
+					(start + end) * 0.5, red if i % 2 == 0 else white)
+				kerb.rotation.y = atan2(end.x - start.x, end.z - start.z)
 	_build_start(generated, white)
 	_build_checkpoints(generated)
 	geometry_rebuilt.emit()
+
+func _build_study_kerbs(parent: Node3D) -> void:
+	var vertices := PackedVector3Array()
+	var normals := PackedVector3Array()
+	var colors := PackedColorArray()
+	var indices := PackedInt32Array()
+	var length := curve.get_baked_length()
+	var count := ceili(length / 0.5)
+	for side in [-1.0, 1.0]:
+		for i in count:
+			var a := length * i / count
+			var b := length * (i + 1) / count
+			var base := vertices.size()
+			for offset in [a, b]:
+				for extra in [0.0, 0.60]:
+					vertices.append(boundary_point(offset, side, extra) + Vector3.UP * 0.018)
+					normals.append(road_right(offset).cross(sample_forward(offset)).normalized())
+					colors.append(Color("ede9df") if floori((a + b) * 0.25) % 2 == 0 else Color("ba4143"))
+			var tris := [base, base+2, base+1, base+1, base+2, base+3] if side > 0 else [base, base+1, base+2, base+1, base+3, base+2]
+			for index in tris:
+				indices.append(index)
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = vertices
+	arrays[Mesh.ARRAY_NORMAL] = normals
+	arrays[Mesh.ARRAY_COLOR] = colors
+	arrays[Mesh.ARRAY_INDEX] = indices
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	var visual := MeshInstance3D.new()
+	visual.name = "StudyKerbs"
+	visual.mesh = mesh
+	var paint := StandardMaterial3D.new()
+	paint.vertex_color_use_as_albedo = true
+	paint.roughness = 0.95
+	visual.material_override = paint
+	parent.add_child(visual)
 
 func _build_road_collisions(road: MeshInstance3D) -> void:
 	if use_curve_elevation or use_curve_banking:
@@ -386,9 +428,11 @@ func _build_checkpoints(parent: Node3D) -> void:
 		gate.set_debug_visible(show_checkpoints)
 
 func _build_barriers(parent: Node3D) -> void:
-	if _barrier_mesh == null:
-		_barrier_mesh = BarrierMesh.create()
+	if _barrier_mesh == null or road_study_mode != (_barrier_mesh is BoxMesh):
+		_barrier_mesh = BoxMesh.new() if road_study_mode else BarrierMesh.create()
 	var palette: Array[Color] = [Color("ef4444"), Color("3b82f6"), Color("facc15"), Color("22c55e")]
+	if road_study_mode:
+		palette.fill(Color("a4b5b9"))
 	var transforms: Array = [[], [], [], []]
 	var length := curve.get_baked_length()
 	barrier_paths.clear()

@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/environment/figure8_stadium/floodlight_mast.glb" id="Model"]
+
+[sub_resource type="BoxShape3D" id="Base"]
+size = Vector3(1.500000, 2.000000, 1.500000)
+
+[node name="floodlight_mast" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("Model")]
+
+[node name="StructureCollision" type="StaticBody3D" parent="."]
+
+[node name="Base" type="CollisionShape3D" parent="StructureCollision"]
+position = Vector3(0.000000, 1.000000, 0.000000)
+rotation = Vector3(0, 0.0000000, 0)
+shape = SubResource("Base")

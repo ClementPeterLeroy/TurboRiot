@@ -20,7 +20,7 @@ func instantiate_race() -> Node3D:
 	# Keep the original sibling's construction order and all exported node links.
 	var track := world.get_node("Track") as TrackBuilder
 	var source := scene.instantiate() as TrackBuilder
-	for property in ["curve", "road_width", "sample_spacing", "use_curve_elevation", "use_curve_banking", "outer_perimeter_enabled",
+	for property in ["curve", "road_width", "sample_spacing", "use_curve_elevation", "use_curve_banking", "road_study_mode", "outer_perimeter_enabled",
 		"playable_half_extents", "checkpoint_count", "checkpoint_fractions", "barrier_runs", "barrier_sections",
 		"left_barrier_clearance", "right_barrier_clearance"]:
 		track.set(property, source.get(property))

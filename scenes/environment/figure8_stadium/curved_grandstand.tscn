@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/environment/figure8_stadium/curved_grandstand.glb" id="Model"]
+
+[sub_resource type="BoxShape3D" id="Mass"]
+size = Vector3(25.000000, 8.800000, 14.000000)
+
+[node name="curved_grandstand" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("Model")]
+
+[node name="StructureCollision" type="StaticBody3D" parent="."]
+
+[node name="Mass" type="CollisionShape3D" parent="StructureCollision"]
+position = Vector3(0.000000, 4.250000, 6.000000)
+rotation = Vector3(0, 0.0000000, 0)
+shape = SubResource("Mass")

@@ -1,0 +1,36 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/environment/figure8_stadium/start_gantry.glb" id="Model"]
+[ext_resource type="PackedScene" path="res://scenes/branding/gantry_logo.tscn" id="Brand"]
+
+[sub_resource type="BoxShape3D" id="Upright0"]
+size = Vector3(0.650000, 8.000000, 1.000000)
+
+[sub_resource type="BoxShape3D" id="Upright1"]
+size = Vector3(0.650000, 8.000000, 1.000000)
+
+[sub_resource type="BoxShape3D" id="Header"]
+size = Vector3(22.000000, 1.800000, 1.000000)
+
+[node name="start_gantry" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("Model")]
+
+[node name="OfficialBrand" parent="." instance=ExtResource("Brand")]
+
+[node name="StructureCollision" type="StaticBody3D" parent="."]
+
+[node name="Upright0" type="CollisionShape3D" parent="StructureCollision"]
+position = Vector3(-10.500000, 4.000000, 0.000000)
+rotation = Vector3(0, 0.0000000, 0)
+shape = SubResource("Upright0")
+
+[node name="Upright1" type="CollisionShape3D" parent="StructureCollision"]
+position = Vector3(10.500000, 4.000000, 0.000000)
+rotation = Vector3(0, 0.0000000, 0)
+shape = SubResource("Upright1")
+
+[node name="Header" type="CollisionShape3D" parent="StructureCollision"]
+position = Vector3(0.000000, 7.800000, 0.000000)
+rotation = Vector3(0, 0.0000000, 0)
+shape = SubResource("Header")

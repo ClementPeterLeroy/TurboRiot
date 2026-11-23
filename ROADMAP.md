@@ -20,6 +20,8 @@ The approved scope amendment moves all new circuit/framework work from v0.6.0 to
 
 Historical v0.3.0 handling and v0.3.1 reference/corridor/pad/trunk corrections remain recorded in CHANGELOG.md. The developer-reported v0.3.2 baseline is not silently retagged or assigned a new historical build identifier.
 
+Circuit 8 reconstruction within v0.6.1 proceeds through **A: road**, **B: terrain and bridge structure**, **C: curved stadium and pits**, **D: safety and visual polish**. All stages are implemented; the developer approved the stadium/environment reconstruction and artistic direction in the final-polish brief. Only the official arch logo and two speed pads were added in that [final pass](docs/figure8-final-polish.md), pending its acceptance. Both the earlier assembly and road study remain archived. See [road audit](docs/figure8-road-reconstruction.md) and [stadium evidence](docs/figure8-stadium.md). Release acceptance and future milestone numbering/scope remain unchanged.
+
 ## Acceptance and regression policy
 
 Keep the exact v0.2.0 ten-check baseline in [docs/testing/ACCEPTANCE_CHECKLIST.md](docs/testing/ACCEPTANCE_CHECKLIST.md) and rerun it for every subsequent patch. The prior [runoff procedures](docs/acceptance.md) are retained. Extend the canonical checklist with stable new criteria for each patch; do not replace or silently delete existing checks. Record developer-reported manual results separately from automated results and Codex inspection. Each subsequent patch requires its baseline regressions plus its new criteria to pass before developer acceptance. Never mark a new patch as released before that acceptance.

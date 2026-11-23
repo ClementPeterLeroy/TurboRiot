@@ -1,0 +1,7 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/environment/figure8_stadium/sponsor_panel.glb" id="Model"]
+
+[node name="sponsor_panel" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("Model")]

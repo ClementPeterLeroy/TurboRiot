@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cmme3cyqq1mxd"]
+
+[ext_resource type="Script" uid="uid://bayb0eanbnhif" path="res://scripts/track/track_builder.gd" id="1"]
+[ext_resource type="Script" uid="uid://dk46b4o6o02jv" path="res://scripts/track/greybox_ground.gd" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/environment/figure8/figure8_environment.tscn" id="3_environment"]
+
+[sub_resource type="Curve3D" id="Route"]
+bake_interval = 0.15
+_data = {
+"points": PackedVector3Array(7.3333335, 0, 0, -7.3333335, 0, 0, -8.5, 0.04, -1.25, 9.25, 0, 0, -9.25, 0, 0, -36.5, 0.04, -1.25, 9.166667, 0, 0, -9.166667, 0, 0, -64, 0.04, -1.25, 9.166667, 0, 0, -9.166667, 0, 0, -91.5, 0.04, -1.25, 7.6666665, 0, -0.3333333, -7.6666665, 0, 0.3333333, -119, 0.04, -1.25, 5.5833335, 0, -1.9166667, -5.5833335, 0, 1.9166667, -137.5, 0.04, 0.75, 4.0833335, 0, -4.1666665, -4.0833335, 0, 4.1666665, -152.5, 0.04, 10.25, 1.75, 0, -5.1666665, -1.75, 0, 5.1666665, -162, 0.04, 25.75, -0.9166667, 0, -4.9166665, 0.9166667, 0, 4.9166665, -163, 0.04, 41.25, -3.25, 0, -3.75, 3.25, 0, 3.75, -156.5, 0.04, 55.25, -4.6666665, 0, -1.6666667, 4.6666665, 0, 1.6666667, -143.5, 0.04, 63.75, -5.1666665, 0, 0.6666667, 5.1666665, 0, -0.6666667, -128.5, 0.04, 65.25, -5.0833335, 0, 2.8333333, 5.0833335, 0, -2.8333333, -112.5, 0.04, 59.75, -4.75, 0, 4.25, 4.75, 0, -4.25, -98, 0.04, 48.25, -5.25, -0.6666667, 5.4166665, 5.25, 0.6666667, -5.4166665, -84, 1.54, 34.25, -5.8333335, -0.8333333, 6.1666665, 5.8333335, 0.8333333, -6.1666665, -66.5, 4.04, 15.75, -5.8333335, -0.5, 6.1666665, 5.8333335, 0.5, -6.1666665, -49, 6.54, -2.75, -5.8333335, 0, 6.1666665, 5.8333335, 0, -6.1666665, -31.5, 7.04, -21.25, -5.8333335, 0.5, 6.1666665, 5.8333335, -0.5, -6.1666665, -14, 6.54, -39.75, -5.4166665, 0.8333333, 5.5833335, 5.4166665, -0.8333333, -5.5833335, 3.5, 4.04, -58.25, -4.6666665, 0.6666667, 4, 4.6666665, -0.6666667, -4, 18.5, 1.54, -73.25, -4.5833335, 0, 2.3333333, 4.5833335, 0, -2.3333333, 31.5, 0.04, -82.25, -4.9166665, 0, 0.8333333, 4.9166665, 0, -0.8333333, 46, 0.04, -87.25, -4.8333335, 0, -1, 4.8333335, 0, 1, 61, 0.04, -87.25, -4.25, 0, -2.75, 4.25, 0, 2.75, 75, 0.04, -81.25, -3.0833333, 0, -4, 3.0833333, 0, 4, 86.5, 0.04, -70.75, -1.5, 0, -4.5833335, 1.5, 0, 4.5833335, 93.5, 0.04, -57.25, 0.25, 0, -4.5, -0.25, 0, 4.5, 95.5, 0.04, -43.25, 1.8333333, 0, -4.0833335, -1.8333333, 0, 4.0833335, 92, 0.04, -30.25, 3.1666667, 0, -3.3333333, -3.1666667, 0, 3.3333333, 84.5, 0.04, -18.75, 4.3333335, 0, -2.3333333, -4.3333335, 0, 2.3333333, 73, 0.04, -10.25, 5.0833335, 0, -1.4166667, -5.0833335, 0, 1.4166667, 58.5, 0.04, -4.75, 5.8333335, 0, -0.5833333, -5.8333335, 0, 0.5833333, 42.5, 0.04, -1.75, 5.8333335, 0, -0.0833333, -5.8333335, 0, 0.0833333, 23.5, 0.04, -1.25, 5.3333335, 0, 0, -5.3333335, 0, 0, 7.5, 0.04, -1.25, 7.3333335, 0, 0, -7.3333335, 0, 0, -8.5, 0.04, -1.25),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 36
+
+[node name="Track" type="Path3D" unique_id=1022622000]
+curve = SubResource("Route")
+script = ExtResource("1")
+use_curve_elevation = true
+road_width = 15.0
+sample_spacing = 1.0
+outer_perimeter_enabled = false
+playable_half_extents = Vector2(273.5, 139.75)
+checkpoint_count = 24
+checkpoint_fractions = PackedFloat32Array()
+
+[node name="Ground" type="Node3D" parent="." unique_id=540367517]
+script = ExtResource("2")
+
+[node name="EnvironmentArt" parent="." unique_id=995113948 instance=ExtResource("3_environment")]
+
+[node name="Bridge" parent="EnvironmentArt" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.410286, 0, -1.2591285)
+
+[node name="Pier0" parent="EnvironmentArt/Bridge/Supports" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.965097, 1.3591447, 14.760111)
+
+[node name="Pier1" parent="EnvironmentArt/Bridge/Supports" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.312177, 1.3591447, 25.724117)
+
+[node name="Pier2" parent="EnvironmentArt/Bridge/Supports" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.419897, 3.0799928, -25.828192)
+
+[node name="Pier3" parent="EnvironmentArt/Bridge/Supports" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.043373, 3.0799928, -14.8329735)
+
+[node name="Terrain" parent="EnvironmentArt" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.410286, 0, -1.2591285)
+
+[node name="FinishStand" parent="EnvironmentArt/Grandstands" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -0.08, 22)
+
+[node name="NorthStand" parent="EnvironmentArt/Grandstands" index="1"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 52, -0.08, -112)
+
+[node name="RaceFlag0" parent="EnvironmentArt/Props" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -0.08, 14.5)
+
+[node name="RaceFlag1" parent="EnvironmentArt/Props" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, -0.08, 14.5)
+
+[node name="RaceFlag2" parent="EnvironmentArt/Props" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, -0.08, -103)
+
+[node name="RaceFlag3" parent="EnvironmentArt/Props" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82, -0.08, -103)
+
+[editable path="EnvironmentArt"]

@@ -1,0 +1,10 @@
+{
+  "stage": "Milestone A only",
+  "method": "periodic C2 cubic XZ; sampled quintic elevation Hermite handles",
+  "rise_m": 8,
+  "ascent_m": 195,
+  "descent_m": 205,
+  "peak_planar_offset": 331.9671875176575,
+  "horizontal_control_positions_preserved": true,
+  "archive": "scenes\\tracks\\archive\\figure_8_before_reconstruction.tscn"
+}

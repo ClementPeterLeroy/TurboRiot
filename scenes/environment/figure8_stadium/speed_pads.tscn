@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/figure8_speed_pad.tscn" id="1_8gueq"]
+
+[node name="SpeedPads" type="Node3D" unique_id=449175288]
+
+[node name="BridgeApproach" type="Node3D" parent="." unique_id=425721974 instance=ExtResource("1_8gueq")]
+transform = Transform3D(0.71632624, -0.034275677, -0.69692314, 0, 0.99879277, -0.049122058, 0.6977655, 0.03518742, 0.7154615, -87.66406, 6.9759555, 38.044056)
+metadata/route_offset = 278.0
+
+[node name="CornerExit" type="Node3D" parent="." unique_id=48678270 instance=ExtResource("1_8gueq")]
+transform = Transform3D(-0.07035038, 9.288802e-09, 0.99752235, 0, 1, -9.311873e-09, -0.99752235, -6.550938e-10, -0.07035038, 40.917316, 0.055000003, -1.6254852)
+metadata/route_offset = 614.0

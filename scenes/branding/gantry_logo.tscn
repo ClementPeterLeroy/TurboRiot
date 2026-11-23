@@ -1,0 +1,26 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/brand/turbo_riot_logo.png" id="Logo"]
+
+[sub_resource type="StandardMaterial3D" id="Artwork"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("Logo")
+texture_filter = 3
+
+[sub_resource type="QuadMesh" id="Panel"]
+material = SubResource("Artwork")
+size = Vector2(3.84, 1.638)
+
+[node name="OfficialBrand" type="Node3D"]
+
+[node name="Front" type="MeshInstance3D" parent="."]
+position = Vector3(0,7.8,-0.515)
+rotation = Vector3(0,3.14159265,0)
+mesh = SubResource("Panel")
+cast_shadow = 0
+
+[node name="Back" type="MeshInstance3D" parent="."]
+position = Vector3(0,7.8,0.515)
+mesh = SubResource("Panel")
+cast_shadow = 0

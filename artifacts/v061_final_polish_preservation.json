@@ -1,0 +1,12 @@
+{
+  "approved_files": 30,
+  "changed": [
+    "assets\\environment\\figure8_stadium\\start_gantry.glb",
+    "assets\\environment\\figure8_stadium\\sources\\start_gantry.blend",
+    "scenes\\environment\\figure8_stadium\\start_gantry.tscn",
+    "scenes\\tracks\\figure_8.tscn"
+  ],
+  "unchanged_count": 26,
+  "logo_source_sha256": "2e248ca86eb58fc27596fd556199e1ef78bad1f04254f679195bf97997a584fe",
+  "logo_runtime_sha256": "2e248ca86eb58fc27596fd556199e1ef78bad1f04254f679195bf97997a584fe"
+}

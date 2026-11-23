@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/track/boost_pad.gd" id="Controller"]
+[ext_resource type="PackedScene" path="res://scenes/figure8_speed_pad_visual.tscn" id="Visual"]
+
+[node name="Circuit8SpeedPad" type="Node3D"]
+script = ExtResource("Controller")
+strength = 1.25
+duration = 1.0
+cooldown = 2.0
+initial_impulse = 5.0
+pad_size = Vector2(6.4,5.2)
+visual_scene = ExtResource("Visual")

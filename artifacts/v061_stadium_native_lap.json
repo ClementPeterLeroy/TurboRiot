@@ -1,0 +1,12 @@
+{
+	"camera_obstructions": {},
+	"lap_time": 33.3833333333327,
+	"native_rendering": true,
+	"passed": true,
+	"physics_samples": 2184,
+	"recoveries": 0,
+	"resolution": [
+		1920,
+		1080
+	]
+}

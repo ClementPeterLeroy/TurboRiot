@@ -1,7 +1,11 @@
 extends RefCounted
 ## Physical space contracts for additions around the unchanged driving surface.
 func run(s: SceneTree) -> void:
-	var world := TrackRegistry.get_definition(&"figure_8").instantiate_race()
+	# Preserve the previous environment's contracts on its archived road. The
+	# active reconstruction has a separate stadium with its own contracts.
+	var definition := TrackRegistry.get_definition(&"figure_8")
+	definition.scene=load("res://scenes/tracks/archive/figure_8_before_reconstruction.tscn")
+	var world := definition.instantiate_race()
 	world.managed=true
 	world.get_node("Items").enabled=false
 	world.get_node("RaceManager").opponent_count=0
