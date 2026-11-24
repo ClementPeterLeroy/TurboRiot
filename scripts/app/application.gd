@@ -43,6 +43,17 @@ func _bind_pause() -> void:
 		navigation.device = -1
 		navigation.button_index = pair[1]
 		if not InputMap.action_has_event(pair[0], navigation): InputMap.action_add_event(pair[0], navigation)
+	for pair in [["ui_left", JOY_BUTTON_DPAD_LEFT], ["ui_right", JOY_BUTTON_DPAD_RIGHT], ["ui_up", JOY_BUTTON_DPAD_UP], ["ui_down", JOY_BUTTON_DPAD_DOWN]]:
+		var direction := InputEventJoypadButton.new()
+		direction.device = -1
+		direction.button_index = pair[1]
+		if not InputMap.action_has_event(pair[0], direction): InputMap.action_add_event(pair[0], direction)
+	for pair in [["ui_left", JOY_AXIS_LEFT_X, -1.0], ["ui_right", JOY_AXIS_LEFT_X, 1.0], ["ui_up", JOY_AXIS_LEFT_Y, -1.0], ["ui_down", JOY_AXIS_LEFT_Y, 1.0]]:
+		var stick := InputEventJoypadMotion.new()
+		stick.device = -1
+		stick.axis = pair[1]
+		stick.axis_value = pair[2]
+		if not InputMap.action_has_event(pair[0], stick): InputMap.action_add_event(pair[0], stick)
 	if InputMap.has_action("pause_race"): return
 	InputMap.add_action("pause_race")
 	var key := InputEventKey.new()
@@ -98,21 +109,13 @@ func show_circuits(request: RaceSetup) -> void:
 	if draft.mode == RaceSetup.Mode.QUICK_RACE: quick_setup = draft
 	else: trial_setup = draft
 	screen = "circuits"
-	menu.page("CIRCUIT SELECTION", "Choose a circuit, then Start Race")
-	for definition in TrackRegistry.entries():
-		var selected := draft.circuit_id == definition.identifier
-		menu.button(("[SELECTED] " if selected else "") + definition.display_name, func() -> void:
-			draft.circuit_id = definition.identifier
-			show_circuits(draft))
-		menu.text(definition.category + " / Available\n" + definition.description)
-		var preview := CircuitMap.new()
-		preview.custom_minimum_size = Vector2(0, 100)
-		preview.configure(definition.preview_curve())
-		menu.body.add_child(preview)
-	menu.button("Start Race", func() -> void: start_session(draft))
-	menu.button("Back", func() -> void: show_configuration(draft.mode), true)
-	menu.finish()
-	menu._focus_later.call_deferred(menu.focusables[TrackRegistry.IDS.find(draft.circuit_id)])
+	menu.page("", "")
+	var gallery := CircuitGallery.new()
+	gallery.configure(TrackRegistry.entries(), draft.circuit_id)
+	gallery.selected.connect(func(identifier: StringName) -> void: draft.circuit_id = identifier)
+	gallery.launch_requested.connect(func() -> void: start_session(draft))
+	gallery.back_requested.connect(func() -> void: show_configuration(draft.mode))
+	menu.show_gallery(gallery)
 
 func start_session(request: RaceSetup, countdown := false) -> void:
 	if transitioning: return

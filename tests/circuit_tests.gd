@@ -107,10 +107,10 @@ func _navigation(s: SceneTree) -> void:
 	app.show_circuits(setup)
 	await _frames(s)
 	s.check(app.screen=="circuits" and app.menu.focusables.size()==5, "Circuit screen has three circuit buttons plus Start and Back")
-	await _key(s,KEY_UP)
+	await _key(s,KEY_LEFT)
 	await _key(s,KEY_ENTER)
 	s.check(app.quick_setup.circuit_id==&"figure_8", "Keyboard navigates and selects an actual circuit card")
-	for button in [JOY_BUTTON_DPAD_DOWN,JOY_BUTTON_A]:
+	for button in [JOY_BUTTON_DPAD_RIGHT,JOY_BUTTON_A]:
 		for pressed in [true,false]:
 			var pad := InputEventJoypadButton.new()
 			pad.button_index=button

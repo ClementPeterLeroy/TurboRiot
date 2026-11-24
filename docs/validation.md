@@ -2,7 +2,18 @@
 
 2026-11-11. **Unreleased, pending developer acceptance.** Audit baseline was clean `1d97794` (v0.6.0). Earlier validation sections below remain unchanged. Current metadata is `0.6.1-dev` / Windows `0.6.1.0`. Full architecture, reference evidence, comparison limitations and commands are in [Testing Grounds](testing-grounds.md).
 
-## Circuit 8 final logo/pad polish — current results
+## Circuit selection gallery — current results
+
+2026-11-26. [Design, metadata, captures and file scope](circuit-gallery.md). Version remains **0.6.1-dev**, Unreleased pending developer acceptance. No gameplay/geometry changes or Git mutations.
+
+- Full suite: **1,224 checks, zero failures**, preserving 1,183 and adding 41 gallery assertions. All six display names, three original playable IDs/scene references, deferred entry filtering, actual source samples, uniform projection, cache invalidation, elevated crossing, absence of visible developer labels, selection versus launch, remembered choices and teardown pass. The existing three-circuit/two-mode launch tests remain enabled; their navigation keys now match the horizontal layout.
+- Mouse, keyboard, D-pad and A/B interaction tests pass. Analog-axis injection verifies navigation, 0.55 deadzone, 0.4 s initial repeat delay, subsequent repeat and release stopping. A separate Start action loads the selected existing scene; card confirmation never launches by itself.
+- Native captures at **1920×1080, 1280×720, 960×540 and 1024×768 / 125% UI** were inspected. Names, distinct actual outlines, selection/focus, single description and footer remain readable without vertical scrolling or clipping. Automated bounds/scroll checks include 960×540 at 150% UI and a six-card growth fixture: added cards follow focus horizontally while footer actions remain visible.
+- Godot 4.7.2 headless editor import and application smoke exit 0. Final logs: `.godot/gallery_import.log`, `.godot/gallery_runtime.log`, `.godot/gallery_suite.log`, `.godot/gallery_capture.log`. The inherited Windows certificate-store warning remains the only expected engine error/warning.
+
+Only three circuits currently have authoritative race integration. Legend Park is a standalone authoring fixture; Riot Arena and Sunhaven Square are deferred catalog entries. They have no invented public previews/launch cards. Physical controller hardware and exported builds remain manual acceptance items **208–213**. Previous texture-import edits remain local; engine validation can refresh their derived metadata. Existing kart/camera/track/model source files are unchanged. Earlier results below retain their historical scope and names.
+
+## Circuit 8 final logo/pad polish — preceding results
 
 2026-11-26. The developer approved the existing stadium/environment reconstruction and artistic direction. [Final polish file scope, screenshots and behavior](figure8-final-polish.md). Only the official two-sided gantry artwork and two functional pads are added; version remains **0.6.1-dev**, Unreleased pending final acceptance.
 

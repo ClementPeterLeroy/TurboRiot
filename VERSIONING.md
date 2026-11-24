@@ -8,7 +8,7 @@ This version adds circuit selection and **two new beta test circuits: Figure-8 C
 
 The same v0.6.1 patch includes the **racing FPS-drop correction**, optimizing flat-road collision and minimap rendering, plus the Figure-8 crossing collision correction. See [performance results](docs/circuit-performance.md) and [Testing Grounds](docs/testing-grounds.md). Runtime identity remains **0.6.1-dev**, Windows metadata **0.6.1.0**, Unreleased pending developer acceptance.
 
-Current Circuit 8 work includes [road reconstruction A](docs/figure8-road-reconstruction.md) and the [stadium environment](docs/figure8-stadium.md), within this same version. The developer approved its environment reconstruction/artistic direction, then requested [official arch branding and two speed pads](docs/figure8-final-polish.md). Those localized improvements are implemented; previous assembly and road study remain archived. Cumulative checks extend through 207; no release acceptance is implied.
+Current Circuit 8 work includes [road reconstruction A](docs/figure8-road-reconstruction.md) and the [stadium environment](docs/figure8-stadium.md), within this same version. The developer approved its environment reconstruction/artistic direction, then requested [official arch branding and two speed pads](docs/figure8-final-polish.md). Those localized improvements are implemented; previous assembly and road study remain archived. Cumulative checks extend through 213; no release acceptance is implied.
 
 ## Version conventions and history
 
@@ -35,4 +35,6 @@ The v0.4.0 implementation and its original Unreleased changelog record are prese
 
 The v0.6.0 patch keeps these conventions unchanged and updates only the current development identity to `0.6.0-dev` / `0.6.0.0`. v0.6.1 is roadmap work only. Local history now includes `a31ff9f` (v0.5.0) and `e22a2f2` (v0.5.1); their runtime metadata remained 0.5.0-dev. These commit labels do not establish acceptance or retroactively rename the recorded development entries. Current regression criteria are 1-119; v0.4/v0.5 and v0.6 acceptance remain pending.
 
-Current patch: **v0.6.1-dev - Circuit Selection & First Testing Grounds**, Windows `0.6.1.0`, Unreleased pending developer acceptance. HEAD at audit was `1d97794` (v0.6.0); commit names do not establish a release. The preceding v0.6.0 paragraph records its historical patch scope. Current cumulative checks are 1-207. See [Testing Grounds](docs/testing-grounds.md).
+Current patch: **v0.6.1-dev - Circuit Selection & First Testing Grounds**, Windows `0.6.1.0`, Unreleased pending developer acceptance. HEAD at audit was `1d97794` (v0.6.0); commit names do not establish a release. The preceding v0.6.0 paragraph records its historical patch scope. Current cumulative checks are 1-213. See [Testing Grounds](docs/testing-grounds.md).
+
+The visual circuit-selection gallery also remains within v0.6.1-dev: player-facing names/previews/navigation change, while circuit IDs, content and race loading remain unchanged. See [gallery design and evidence](docs/circuit-gallery.md).

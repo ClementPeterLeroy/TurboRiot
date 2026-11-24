@@ -9,6 +9,7 @@ var focusables: Array[Control] = []
 var _column := VBoxContainer.new()
 var _background := ColorRect.new()
 var _scroll := ScrollContainer.new()
+var gallery: CircuitGallery
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -68,6 +69,11 @@ func _resize() -> void:
 	_column.custom_minimum_size.x = minf(640, maxf(260, size.x - 48))
 
 func page(title: String, detail: String, overlay := false) -> void:
+	if is_instance_valid(gallery):
+		remove_child(gallery)
+		gallery.queue_free()
+		gallery = null
+	_column.visible = true
 	visible = true
 	heading.text = title
 	subtitle.text = detail
@@ -78,6 +84,13 @@ func page(title: String, detail: String, overlay := false) -> void:
 		child.queue_free()
 	focusables.clear()
 	_scroll.scroll_vertical = 0
+
+func show_gallery(view: CircuitGallery) -> void:
+	_column.visible = false
+	gallery = view
+	add_child(gallery)
+	gallery.cue_requested.connect(func(event: StringName) -> void: cue_requested.emit(event))
+	focusables.assign(gallery.focusables)
 
 func text(value: String) -> Label:
 	var label := Label.new()

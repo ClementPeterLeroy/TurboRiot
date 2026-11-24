@@ -5,6 +5,11 @@ extends Resource
 @export var display_name: String
 @export var category: String
 @export var description: String
+@export var available := true
+@export var internal_only := false
+@export var authoring_scene_path := ""
+@export var preview_source: Curve3D
+@export var accent := Color("40d5e5")
 @export var scene: PackedScene
 @export var default_laps := 3
 @export var grid_row_spacing := 5.5
@@ -60,6 +65,8 @@ func instantiate_race() -> Node3D:
 	return world
 
 func preview_curve() -> Curve3D:
+	if preview_source: return preview_source
+	if not available: return null
 	var source := (scene if scene else load("res://scenes/track.tscn") as PackedScene).instantiate() as TrackBuilder
 	var result := source.curve
 	source.free()

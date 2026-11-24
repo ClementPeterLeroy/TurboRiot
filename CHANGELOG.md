@@ -6,6 +6,12 @@ Pending developer acceptance. Project/menu/HUD identify `0.6.1-dev`; Windows num
 
 Initial circuit delivery: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The subsequent Figure-8 and Yoshi environment assemblies below remain within this same Unreleased version. The existing reference circuit remains available. No beta release or developer acceptance is implied.
 
+### Circuit selection gallery — 2026-11-26
+
+- Replaced the technical vertical list with reusable visual cards, large cached authoritative-curve outlines, clear selection/focus treatment and a single selected-circuit description. Three playable cards fit together without vertical scrolling; additional registered tracks use horizontal focus scrolling. Existing logo/colors/theme and menu audio are reused.
+- Player names are Desert Run, Circuit 8 and Serpent Coast, with unchanged launch IDs/paths. Metadata records Legend Park, Riot Arena and Sunhaven Square for deferred authoring/catalog entries; unavailable entries remain outside the normal gallery without invented outlines or launch scenes. Internal reference/category information remains in metadata, not player cards.
+- Mouse, arrows/D-pad, Enter/A, Escape/B and analog navigation retain separate selection/Start actions. Analog deadzone/repeat/release, responsive layout, return-selection persistence, both race-mode launches and normal-menu teardown are covered by regression tests. No circuit meshes, physics, scenery or version metadata changed. [Implementation, screenshots and validation](docs/circuit-gallery.md). Manual checks 208–213 appended; version stays 0.6.1-dev, Unreleased. No Git mutations or GitHub operations.
+
 ### Circuit 8 final polish — 2026-11-26
 
 - Following developer approval of the stadium/environment direction, removed only the gantry's baked wordmark and placed the supplied official transparent Turbo Riot artwork on both faces at its original aspect ratio. Runtime PNG is byte-identical to `references/brand/logo_overhead.png`; original source, arch structure, lights and surrounding architecture remain intact.

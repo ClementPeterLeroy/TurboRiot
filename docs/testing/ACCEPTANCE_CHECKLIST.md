@@ -325,6 +325,17 @@ Preserve checks 1–202. The developer approved the stadium/environment reconstr
 - [ ] **206. Full racing and approved environment remain intact.** Complete Time Trial and item-enabled Quick Race, crossing both decks and all gates; check AI, collisions, laps/results, camera stability and zero scenery changes beyond the logo/pads.
 - [ ] **207. Final performance and build review.** Run sustained seven-racer 1080p laps on the target PC, compare identical settings, inspect texture/fence aliasing and test an exported build. Approve final pad feel and logo visibility before release acceptance.
 
+## v0.6.1-dev — visual circuit gallery
+
+Preserve checks 1–207 and their recorded history. Circuit display names are metadata; existing IDs and geometry remain unchanged.
+
+- [ ] **208. Names and player-facing information.** Verify Desert Run, Circuit 8 and Serpent Coast in the playable gallery, with no internal/reference/implementation labels. Deferred Legend Park, Riot Arena and Sunhaven Square remain metadata-only until race-ready; no fake preview or launch card appears.
+- [ ] **209. Accurate recognizable previews.** Compare outlines to the actual three circuits: correct proportions, centered scale, consistent stroke, start markers and clear upper crossing on Circuit 8. Reopen selection and inspect resize without stutter or stale previews.
+- [ ] **210. Mouse and keyboard selection are predictable.** Click/confirm cards without starting a race. Inspect distinct selected/focused states, arrows, Tab, Down to Start, Enter to launch and Escape/Back to return. Rapidly open/close the gallery without focus loss.
+- [ ] **211. Controller navigation is complete.** Verify D-pad, both stick axes, deadzone, held-direction repeat and release on real hardware; A selects/starts only the focused action, B returns, and focus remains visible. Avoid accidental selection from stick drift.
+- [ ] **212. Layout adapts to the intended displays.** Inspect 1080p, 720p, 960×540 and 4:3/125% UI: all three cards and footer visible, readable names/description, no overlap/clipping or vertical scroll. Verify more cards scroll horizontally to follow focus when added.
+- [ ] **213. Existing races and remembered choices work.** Launch every playable circuit through Quick Race and Time Trial; confirm the correct unchanged scene, items/opponents and race flow. Return/reopen/restart and check per-mode selection/configuration persistence. Review an exported build before acceptance.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -348,5 +359,7 @@ Preserve checks 1–202. The developer approved the stadium/environment reconstr
 | v0.6.1-dev Circuit 8 reconstruction A | Pending | Pending | Retained regressions plus road 188–192 pending; earlier architecture retained in archive | Unreleased / not accepted |
 | v0.6.1-dev Circuit 8 stadium | Developer approval, 2026-11-26 final-polish brief | Individual device details not provided | Environment reconstruction/artistic direction approved; granular 193–202 gameplay/device results not supplied | Art direction approved; not released |
 | v0.6.1-dev Circuit 8 final polish | Pending | Pending | Retained regressions plus polish 203–207 pending | Unreleased / not accepted |
+
+| v0.6.1-dev circuit gallery | Pending | Pending | Retained regressions plus gallery 208–213 pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

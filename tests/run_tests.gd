@@ -32,6 +32,7 @@ func _run() -> void:
 	await preload("res://tests/powerup_balance_tests.gd").new().run(self)
 	await preload("res://tests/alpha_tests.gd").new().run(self)
 	await preload("res://tests/circuit_tests.gd").new().run(self)
+	await preload("res://tests/gallery_tests.gd").new().run(self)
 	await preload("res://tests/crossing_collision_tests.gd").new().run(self)
 	await preload("res://tests/circuit_performance_tests.gd").new().run(self)
 	await preload("res://tests/imported_recovery_tests.gd").new().run(self)
