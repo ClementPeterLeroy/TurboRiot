@@ -47,6 +47,8 @@ var _debug_timer := 0.0
 
 func _ready() -> void:
 	assert(track and kart)
+	if not track.has_node("Generated/Checkpoints"):
+		track.build() # Authored tracks may be instantiated after sibling bindings.
 	process_physics_priority = 10 # Validate after every kart moves.
 	for argument in OS.get_cmdline_user_args():
 		if not use_command_line_configuration: break
@@ -64,12 +66,13 @@ func _on_track_rebuilt() -> void:
 	racing_line.build(track)
 	if competitors.is_empty(): _create_field()
 	for record in competitors:
+		record.kart.get_node("Recovery").fall_height = track.recovery_fall_height
 		record.session.checkpoint_count = gates.size()
 		if recovery_half_extents != Vector2.ZERO:
 			record.kart.get_node("Recovery").recovery_half_extents = recovery_half_extents
 		record.session.lap_count = lap_count
 		record.grid = grid_transform(record.id)
-		if record.kart.input_provider is AIInput: record.kart.input_provider.line = racing_line
+		if record.kart.input_provider is AIInput: record.kart.input_provider.line = _driver_line(record.id)
 	_start_spawn = competitors[0].grid
 	if is_instance_valid(_debug_root):
 		_debug_root.free()
@@ -83,6 +86,8 @@ func grid_transform(index: int) -> Transform3D:
 	var column := index % 2
 	var offset := fposmod(-4.0 - row * grid_row_spacing - column * grid_stagger, racing_line.length)
 	var forward := track.sample_forward(offset)
+	forward.y = 0
+	forward = forward.normalized()
 	var side := (-0.5 if column == 0 else 0.5) * grid_lane_spacing
 	return track.global_transform * Transform3D(Basis.looking_at(forward), track.sample_center(offset) + forward.cross(Vector3.UP) * side + Vector3.UP * 0.65)
 
@@ -110,7 +115,7 @@ func _create_field() -> void:
 			var driver := AIInput.new()
 			driver.name = "AIInput"
 			driver.kart = record.kart
-			driver.line = racing_line
+			driver.line = _driver_line(index)
 			driver.driver_id = index
 			driver.profile = driver_profile_override if driver_profile_override else PROFILES[difficulty]
 			driver.recovery_requested.connect(_on_ai_recovery.bind(record))
@@ -238,20 +243,36 @@ func _process_record(record: CompetitorState, from: Vector3, to: Vector3) -> voi
 	var progress := fposmod(projection.x - start, length)
 	var legal := racing_line.legal(to, projection)
 	if legal and (progress <= interval + 3 or progress > length - 6): record.interval_travel += distance
-	record.segment_progress = minf(clampf(progress / interval, 0, 0.999), clampf(record.interval_travel / interval, 0, 0.999)) if legal and progress <= interval + 3 else 0.0
+	record.segment_progress = minf(clampf(progress / interval, 0, 0.999), clampf(record.interval_travel / racing_line.minimum_interval_length(start, expected.route_offset), 0, 0.999)) if legal and progress <= interval + 3 else 0.0
 	var crossing := expected.crossing_fraction(from, to)
-	if crossing >= 0 and record.interval_travel >= interval * minimum_interval_travel_ratio:
+	if crossing >= 0 and record.interval_travel >= racing_line.minimum_interval_length(start, expected.route_offset) * minimum_interval_travel_ratio:
 		record.crossing_fraction = crossing
 		if model.cross_checkpoint(expected.gate_index):
-			record.kart.safe_spawn = expected.recovery_transform()
+			record.kart.safe_spawn = _recovery_pose(record,expected)
 			record.interval_travel = 0
 			record.segment_progress = 0
 	_update_driver_gates(record)
 
 func _update_driver_gates(record: CompetitorState) -> void:
 	if record.kart.input_provider is AIInput:
-		record.kart.input_provider.validated_offset = gates[record.session.latest_checkpoint].route_offset
-		record.kart.input_provider.expected_offset = gates[record.session.next_checkpoint % gates.size()].route_offset
+		var line: RacingLine = record.kart.input_provider.line
+		record.kart.input_provider.validated_offset = line.from_canonical(gates[record.session.latest_checkpoint].route_offset)
+		record.kart.input_provider.expected_offset = line.from_canonical(gates[record.session.next_checkpoint % gates.size()].route_offset)
+
+func _driver_line(index: int) -> RacingLine:
+	if track.route_branches.is_empty(): return racing_line
+	var line := RacingLine.new()
+	line.build(track, index % (1 << track.route_branches.size()), false)
+	return line
+
+func _recovery_pose(record: CompetitorState, gate: CheckpointGate) -> Transform3D:
+	if track.route_branches.is_empty() or not record.kart.input_provider is AIInput:
+		return gate.recovery_transform()
+	var line: RacingLine = record.kart.input_provider.line
+	var offset := line.from_canonical(gate.route_offset)+2
+	var forward := line.point_at(offset+.2)-line.point_at(offset-.2)
+	forward.y=0
+	return Transform3D(Basis.looking_at(forward.normalized()),line.point_at(offset)+Vector3.UP*.65)
 
 func _on_competitor_state(state: RaceSession.State, record: CompetitorState) -> void:
 	if record.is_player and state == RaceSession.State.RACING and phase == RaceSession.State.COUNTDOWN:

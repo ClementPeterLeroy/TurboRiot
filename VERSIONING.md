@@ -8,9 +8,11 @@ This version adds circuit selection and **two new beta test circuits: Figure-8 C
 
 The same v0.6.1 patch includes the **racing FPS-drop correction**, optimizing flat-road collision and minimap rendering, plus the Figure-8 crossing collision correction. See [performance results](docs/circuit-performance.md) and [Testing Grounds](docs/testing-grounds.md). Runtime identity remains **0.6.1-dev**, Windows metadata **0.6.1.0**, Unreleased pending developer acceptance.
 
-Current Circuit 8 work includes [road reconstruction A](docs/figure8-road-reconstruction.md) and the [stadium environment](docs/figure8-stadium.md), within this same version. The developer approved its environment reconstruction/artistic direction, then requested [official arch branding and two speed pads](docs/figure8-final-polish.md). Those localized improvements are implemented; previous assembly and road study remain archived. Cumulative checks extend through 213; no release acceptance is implied.
+Current Circuit 8 work includes [road reconstruction A](docs/figure8-road-reconstruction.md) and the [stadium environment](docs/figure8-stadium.md), within this same version. The developer approved its environment reconstruction/artistic direction, then requested [official arch branding and two speed pads](docs/figure8-final-polish.md). Those localized improvements are implemented; previous assembly and road study remain archived. Cumulative checks reached 213 with the gallery; City Square extends them below. No release acceptance is implied.
 
 ## Version conventions and history
+
+City Square initial construction is another **0.6.1-dev** increment, not a new release. The original delivery's two beta circuits remain historical; the gallery now includes City Square as a fourth playable circuit, with authored environment assets and shared branch support. See [implementation and outstanding timing/AI limits](docs/city-square.md). Cumulative manual checks extend through **221**, pending acceptance.
 
 | Location | Current value | Meaning |
 | --- | --- | --- |

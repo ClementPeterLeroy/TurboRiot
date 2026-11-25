@@ -50,4 +50,6 @@ func set_debug_visible(value: bool) -> void:
 	$Debug.visible = value
 
 func recovery_transform() -> Transform3D:
-	return global_transform * Transform3D(Basis.IDENTITY, Vector3(0, 0.65, -2.0))
+	var forward := -global_basis.z
+	forward.y = 0
+	return Transform3D(Basis.looking_at(forward.normalized()), global_transform * Vector3(0, 0.65, -2.0))

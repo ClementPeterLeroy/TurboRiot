@@ -6,6 +6,13 @@ Pending developer acceptance. Project/menu/HUD identify `0.6.1-dev`; Windows num
 
 Initial circuit delivery: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The subsequent Figure-8 and Yoshi environment assemblies below remain within this same Unreleased version. The existing reference circuit remains available. No beta release or developer acceptance is implied.
 
+### City Square initial construction — 2026-11-27
+
+- Added City Square through the reserved `delfino_square_ds` entry: traced avenue, fountain plaza, technical parallel streets, supported open wooden docks and grass gardens. Built six reusable original house models and 206 deterministic instances, authored surfaces/junctions/stairs, coast and simple water. No decorative scenery or speed pads.
+- Added reusable authored-track loading and directed branch stations for common checkpoint/ranking validation, AI route choice and route-aware recovery. Left/right city streets share a 5.4 m drop and effectively identical 120.1596 m lengths, with one long versus three short stair flights. Existing recovery handles genuine water falls at a track-specific threshold; other track defaults remain intact.
+- Source/capture/test evidence and known limitations are in [City Square](docs/city-square.md). Measured traversal time still differs by approximately 1.35 s; traffic can require AI recovery and earlier item-race runs included a DNF. These are outstanding beta tuning issues, not accepted gameplay. Version remains 0.6.1-dev, Unreleased; no Git mutations or GitHub actions.
+- Final regressions: 1,274 checks, zero failures; headless import/runtime pass. Native lap completes in 75.483 s without recovery/camera obstruction. Joined decorative stair treads to actual road cross-sections, shared branch resources directly in gallery previews, and corrected a render-frame-dependent analog-repeat test to wait for its real timer. Cumulative manual checks 214–221 append to preserved history; [validation and performance comparison](docs/validation.md) distinguish passing runs, earlier failures and remaining limits.
+
 ### Circuit selection gallery — 2026-11-26
 
 - Replaced the technical vertical list with reusable visual cards, large cached authoritative-curve outlines, clear selection/focus treatment and a single selected-circuit description. Three playable cards fit together without vertical scrolling; additional registered tracks use horizontal focus scrolling. Existing logo/colors/theme and menu audio are reused.

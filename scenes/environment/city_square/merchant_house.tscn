@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/environment/city_square/merchant_house.glb" id="1_losdp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8m7bc"]
+size = Vector3(8, 8.4, 9)
+
+[node name="merchant_house" type="Node3D" unique_id=1562455920]
+
+[node name="merchant_house" type="Node3D" parent="." unique_id=397414742 instance=ExtResource("1_losdp")]
+
+[node name="@StaticBody3D@8" type="StaticBody3D" parent="." unique_id=1774829576]
+
+[node name="@CollisionShape3D@9" type="CollisionShape3D" parent="@StaticBody3D@8" unique_id=225160035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, 0)
+shape = SubResource("BoxShape3D_8m7bc")

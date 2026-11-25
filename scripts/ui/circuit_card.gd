@@ -21,6 +21,7 @@ func _ready() -> void:
 	caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	caption.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	outline.configure(definition.preview_curve(), definition.accent)
+	outline.configure_branches(definition.preview_branches())
 	resized.connect(_layout)
 	focus_entered.connect(queue_redraw)
 	focus_exited.connect(queue_redraw)

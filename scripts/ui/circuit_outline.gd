@@ -7,6 +7,13 @@ var snapshot: Dictionary = {}
 var accent := Color("40d5e5")
 var projected := PackedVector2Array()
 var elevated: Array[PackedVector2Array] = []
+var branch_snapshots: Array[Dictionary] = []
+var branch_lines: Array[PackedVector2Array] = []
+
+func configure_branches(curves: Array[Curve3D]) -> void:
+	branch_snapshots.clear()
+	for curve in curves: branch_snapshots.append(snapshot_for(curve))
+	_project()
 
 static func snapshot_for(curve: Curve3D) -> Dictionary:
 	if not curve: return {}
@@ -42,11 +49,16 @@ func _ready() -> void:
 func _project() -> void:
 	projected.clear()
 	elevated.clear()
+	branch_lines.clear()
 	if snapshot.is_empty(): return
 	var bounds: Rect2 = snapshot.bounds
 	var area := (size - Vector2.ONE * 48).max(Vector2.ONE)
 	var scale_factor := minf(area.x / maxf(bounds.size.x, 1), area.y / maxf(bounds.size.y, 1))
 	var origin := size / 2 - bounds.get_center() * scale_factor
+	for data in branch_snapshots:
+		var line := PackedVector2Array()
+		for p in data.points: line.append(p*scale_factor+origin)
+		branch_lines.append(line)
 	var raised := PackedVector2Array()
 	for i in snapshot.points.size():
 		var p: Vector2 = snapshot.points[i] * scale_factor + origin
@@ -63,6 +75,9 @@ func _draw() -> void:
 	if projected.size() < 2: return
 	draw_polyline(projected, Color("07121f"), 13, true)
 	draw_polyline(projected, accent, 5, true)
+	for line in branch_lines:
+		draw_polyline(line, Color("07121f"), 13, true)
+		draw_polyline(line, accent, 5, true)
 	# Redraw higher road last with a dark clearance band at the crossing.
 	for segment in elevated:
 		draw_polyline(segment, Color("07121f"), 13, true)

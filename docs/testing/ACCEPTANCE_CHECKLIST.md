@@ -336,6 +336,19 @@ Preserve checks 1–207 and their recorded history. Circuit display names are me
 - [ ] **212. Layout adapts to the intended displays.** Inspect 1080p, 720p, 960×540 and 4:3/125% UI: all three cards and footer visible, readable names/description, no overlap/clipping or vertical scroll. Verify more cards scroll horizontally to follow focus when added.
 - [ ] **213. Existing races and remembered choices work.** Launch every playable circuit through Quick Race and Time Trial; confirm the correct unchanged scene, items/opponents and race flow. Return/reopen/restart and check per-mode selection/configuration persistence. Review an exported build before acceptance.
 
+## v0.6.1-dev — City Square initial construction
+
+Preserve checks 1–213 and their history. City Square now supersedes the deferred Sunhaven Square catalog status in check 208; the gallery contains four circuits and scrolls horizontally as already covered by 212. Automated results do not mark these checks accepted. [Authoring/evidence and known limits](../city-square.md).
+
+- [ ] **214. Reference topology and elevations.** Drive Avenue → Fountain → City Streets → Docks → Gardens → Avenue for consecutive laps. Compare the overhead: avenue climbs toward the highest plaza, streets descend toward the low harbour and gardens. No misplaced junctions or broken seams.
+- [ ] **215. Both stair streets are usable and fair.** Drive the left long staircase and right three short flights, including fork/merge at racing speed. Confirm the same height/drop, near-equal lengths, visible treads, continuous support and comparable manual traversal times. The current AI fixture still differs by approximately 1.35 s; this remains tuning work.
+- [ ] **216. Architectural assets are coherent and editable.** Inspect six reusable house types, street-border placement without sidewalks/barriers, facade variation, roof/window/shutter/door/balcony details, foundation seams and reimport of a source copy. Native instances remain individually editable.
+- [ ] **217. Supported docks have genuinely exposed edges.** Inspect timber thickness, beams/piles and water from above/side. Drive across deck joins and both edges; no invisible floor or rail prevents a genuine fall.
+- [ ] **218. Water recovery preserves the race.** Fall at several dock locations on both stair-route choices, then recover/restart. Respawn upright on safe validated road without checkpoint/lap shortcuts, repeated resets, wrong branch heading or retained item/hit state.
+- [ ] **219. Branches preserve human/AI progression.** Mix stair and fountain approaches across multiple laps, then race seven item-enabled competitors on all difficulties. Shared gates, lap timing, live places and results remain correct. Review traffic jams/recoveries and DNF behavior; earlier automated runs included a DNF.
+- [ ] **220. Terrain and existing mechanics remain correct.** Garden grass applies existing off-road handling; stone and wood are drivable. Check drift, items, mushroom, landing, collisions and high-speed presentation. Recheck the other three circuits, all modes, gallery focus/outline/selection persistence and restart/menu navigation.
+- [ ] **221. Performance and construction acceptance.** Compare warmed 1080p seven-racer item laps with Circuit 8 at identical settings; target sustained 60 FPS and inspect spikes, memory and longer sessions. Inspect every sector, both stairs, an exported build and controller hardware. Excluded decorative scenery stays deferred; approve this construction separately from release acceptance.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -361,5 +374,7 @@ Preserve checks 1–207 and their recorded history. Circuit display names are me
 | v0.6.1-dev Circuit 8 final polish | Pending | Pending | Retained regressions plus polish 203–207 pending | Unreleased / not accepted |
 
 | v0.6.1-dev circuit gallery | Pending | Pending | Retained regressions plus gallery 208–213 pending | Unreleased / not accepted |
+
+| v0.6.1-dev City Square construction | Pending | Pending | Retained regressions plus City Square 214–221 pending; timing/traffic limits outstanding | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

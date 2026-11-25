@@ -1,0 +1,22 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/track/authored_circuit.gd" id="Script"]
+[ext_resource type="Curve3D" path="res://resources/tracks/city_square/centerline.tres" id="Curve"]
+[ext_resource type="Resource" path="res://resources/tracks/city_square/left_street.tres" id="Left"]
+[ext_resource type="Resource" path="res://resources/tracks/city_square/fountain_lane.tres" id="Fountain"]
+[ext_resource type="Script" path="res://resources/route_branch.gd" id="BranchType"]
+[ext_resource type="Curve" path="res://resources/tracks/city_square/widths.tres" id="Widths"]
+[ext_resource type="PackedScene" path="res://scenes/environment/city_square/environment.tscn" id="Environment"]
+[node name="Track" type="Path3D"]
+script = ExtResource("Script")
+curve = ExtResource("Curve")
+use_curve_elevation = true
+road_width = 10.0
+sample_spacing = 1.0
+route_branches = Array[ExtResource("BranchType")]([ExtResource("Left"), ExtResource("Fountain")])
+width_profile = ExtResource("Widths")
+recovery_fall_height = -0.35
+outer_perimeter_enabled = false
+playable_half_extents = Vector2(280,230)
+checkpoint_count = 14
+checkpoint_fractions = PackedFloat32Array(0.0, 0.0808435760778252, 0.103602180051549, 0.231421206561091, 0.368216473264849, 0.499347884676273, 0.553435022594011, 0.622123223980767, 0.677347239238257, 0.7475806326954, 0.801883810431342, 0.866668941507942, 0.9233923540727, 0.964428773159873)
+[node name="Ground" parent="." instance=ExtResource("Environment")]

@@ -1,5 +1,9 @@
 # v0.6.1-dev — Circuit Selection & First Testing Grounds
 
+## City Square extension — 2026-11-27
+
+The initial delivery/audit below retains its historical three-circuit scope. There are now **four playable definitions**, including City Square under the existing reserved `delfino_square_ds` ID. AuthoredCircuit preserves native imported surfaces rather than rebuilding a road ribbon; shared branch station mapping supports the two stair streets and both fountain approaches. [Authoring assets, scene hierarchy, recovery, tests and limitations](city-square.md). City Square remains Unreleased pending acceptance, with route-time balance and traffic reliability outstanding. Legend Park and Riot Arena remain deferred.
+
 Unreleased, pending developer acceptance. This is the first Testing Grounds delivery. It preserves the v0.6.0 application, original reference circuit and all preceding handling/contact/presentation/item mechanics. No Git mutations were performed.
 
 The subsequent [Figure-8 crossing correction](figure-8-crossing-fix.md) removes the kart's false wall contacts on the upper incline through a rounded native collision hull. The later [racing-performance correction](circuit-performance.md) optimizes flat-road collision and caches minimap routes while retaining the crossing's elevated triangle collider. The [Bikini Bottom sandbox recovery correction](validation.md) adds road-specific startup safety bounds without changing the existing circuits. The subsequent [Circuit 8 environment assembly](figure8-environment.md) adds an editable bridge, two grandstands, verges and four flags. The preceding validation reported **1,116 checks, zero failures**, with manual checks through **187**. Initial-delivery evidence below is preserved.

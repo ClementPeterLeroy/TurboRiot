@@ -1,12 +1,12 @@
 extends RefCounted
 
 func run(s: SceneTree) -> void:
-	var names := {&"reference": "Desert Run", &"figure_8": "Circuit 8", &"yoshi_ds": "Serpent Coast", &"baby_park": "Legend Park", &"wario_stadium_ds": "Riot Arena", &"delfino_square_ds": "Sunhaven Square"}
+	var names := {&"reference": "Desert Run", &"figure_8": "Circuit 8", &"yoshi_ds": "Serpent Coast", &"baby_park": "Legend Park", &"wario_stadium_ds": "Riot Arena", &"delfino_square_ds": "City Square"}
 	for definition in TrackRegistry.catalog_entries():
 		s.check(definition.display_name == names[definition.identifier], "Catalog display name: " + str(definition.identifier))
 		if definition.identifier not in TrackRegistry.IDS:
 			s.check(not definition.available and definition.internal_only and definition.preview_curve() == null, "Deferred circuits stay out of normal selection without fake previews")
-	s.check(TrackRegistry.IDS == [&"reference", &"figure_8", &"yoshi_ds"], "Menu redesign preserves existing launch identifiers")
+	s.check(TrackRegistry.IDS == [&"reference", &"figure_8", &"yoshi_ds", &"delfino_square_ds"], "Menu redesign preserves existing launch identifiers")
 	var scratch := Curve3D.new()
 	for p in [Vector3.ZERO, Vector3(10, 0, 0), Vector3(10, 0, 10), Vector3.ZERO]: scratch.add_point(p)
 	var old := CircuitOutline.snapshot_for(scratch)
@@ -21,8 +21,8 @@ func run(s: SceneTree) -> void:
 	app.show_circuits(RaceSetup.new())
 	await _frames(s)
 	var gallery := app.menu.gallery
-	s.check(gallery.cards.size() == 3 and gallery.focusables.size() == 5, "Gallery contains three playable cards and two separate actions")
-	var expected_scenes := ["", "res://scenes/tracks/figure_8.tscn", "res://scenes/tracks/yoshi_ds.tscn"]
+	s.check(gallery.cards.size() == 4 and gallery.focusables.size() == 6, "Gallery contains four playable cards and two separate actions")
+	var expected_scenes := ["", "res://scenes/tracks/figure_8.tscn", "res://scenes/tracks/yoshi_ds.tscn", "res://scenes/tracks/city_square.tscn"]
 	for i in gallery.cards.size():
 		var card := gallery.cards[i]
 		var curve := card.definition.preview_curve()
@@ -67,7 +67,10 @@ func run(s: SceneTree) -> void:
 	s.check(s.root.gui_get_focus_owner() == gallery.cards[0] and gallery._repeat.is_stopped(), "Analog deadzone prevents focus drift")
 	axis.axis_value = 1
 	s.root.push_input(axis)
-	await _frames(s, 28)
+	# Wait for the timer rather than inferring elapsed time from render frames.
+	# Import/render load can make 28 frames include several repeats on slow runs.
+	s.check(s.root.gui_get_focus_owner() == gallery.cards[1] and gallery._repeat.time_left > .39, "Held analog direction starts with its configured initial delay")
+	await gallery._repeat.timeout
 	s.check(s.root.gui_get_focus_owner() == gallery.cards[2], "Held analog direction repeats predictably after its initial delay")
 	axis = InputEventJoypadMotion.new()
 	axis.axis = JOY_AXIS_LEFT_X
@@ -101,9 +104,9 @@ func run(s: SceneTree) -> void:
 		gallery = app.menu.gallery
 		var visible_rect := gallery.get_global_rect()
 		var fits := true
-		for control in gallery.focusables:
+		for control in [gallery.cards[0],gallery.cards[1],gallery.cards[2],gallery._start,gallery._back]:
 			fits = fits and visible_rect.encloses(control.get_global_rect())
-		s.check(fits and not gallery._scroll.get_v_scroll_bar().visible and not gallery._scroll.get_h_scroll_bar().visible, "All cards/actions fit without scrolling at %dx%d scale %.2f" % row)
+		s.check(fits and not gallery._scroll.get_v_scroll_bar().visible and gallery._scroll.get_h_scroll_bar().visible, "Visible cards/actions fit with horizontal browsing at %dx%d scale %.2f" % row)
 	# Six actual-curve test definitions exercise horizontal growth without
 	# exposing the deferred catalog or inventing public placeholder outlines.
 	var expanded := TrackRegistry.entries()

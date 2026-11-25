@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="RouteBranch" format=3]
+
+[ext_resource type="Script" path="res://resources/route_branch.gd" id="1_n3png"]
+
+[sub_resource type="Curve3D" id="Curve3D_lcr8b"]
+bake_interval = 0.15
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -120, 10.5, -71.25, -3.3168461, 0, 3.032545, 3.3168461, 0, -3.032545, -103.5, 10.5, -82.5, -1.7942328, 0, 3.4887857, 1.7942328, 0, -3.4887857, -93.75, 10.5, -95.25, 0, 0, 0, 0, 0, 0, -90, 10.5, -108.75),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[resource]
+script = ExtResource("1_n3png")
+label = "Fountain east side"
+curve = SubResource("Curve3D_lcr8b")
+entry_offset = 120.26833
+exit_offset = 242.358

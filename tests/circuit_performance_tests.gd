@@ -7,6 +7,9 @@ func run(s: SceneTree) -> void:
 		var scene := definition.scene
 		if scene == null: scene = load("res://scenes/track.tscn")
 		var track := scene.instantiate() as TrackBuilder
+		if track is AuthoredCircuit:
+			track.free() # Dedicated authored-mesh support coverage: city_square_tests.
+			continue
 		s.root.add_child(track)
 		await s.physics_frame
 		var asphalt := track.get_node("Generated/Asphalt") as MeshInstance3D

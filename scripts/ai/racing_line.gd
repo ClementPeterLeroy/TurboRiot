@@ -9,9 +9,11 @@ var length := 0.0
 var spacing := 2.0
 var road_half_width := 0.0
 var outline := PackedVector2Array()
+var routes := CircuitRoutes.new()
 
-func build(track: TrackBuilder) -> void:
-	length = track.curve.get_baked_length()
+func build(track: TrackBuilder, variant := 0, include_alternatives := true) -> void:
+	var source := routes.configure(track,variant,include_alternatives)
+	length = source.get_baked_length()
 	road_half_width = track.road_width * 0.5
 	var count := maxi(4, ceili(length / 2.0))
 	spacing = length / count
@@ -20,12 +22,21 @@ func build(track: TrackBuilder) -> void:
 	curvatures.resize(count)
 	corridor.resize(count)
 	for i in count:
-		points[i] = track.to_global(track.sample_center(i * spacing))
-		forwards[i] = (track.global_basis * track.sample_forward(i * spacing)).normalized()
-		corridor[i] = track.corridor_limits(i * spacing)
+		if variant == 0:
+			points[i] = track.to_global(track.sample_center(i * spacing))
+			forwards[i] = (track.global_basis * track.sample_forward(i * spacing)).normalized()
+		else:
+			points[i] = track.to_global(source.sample_baked(i*spacing,true))
+			forwards[i] = (track.global_basis * (source.sample_baked(fposmod(i*spacing+.2,length),true)-source.sample_baked(fposmod(i*spacing-.2,length),true)).normalized()).normalized()
+		corridor[i] = track.corridor_limits(routes.to_canonical(i * spacing))
 	for i in count:
 		var before := forwards[posmod(i - 1, count)]
 		var after := forwards[(i + 1) % count]
+		# Lateral corner planning measures heading, not changing road grade.
+		before.y=0
+		after.y=0
+		before=before.normalized()
+		after=after.normalized()
 		curvatures[i] = absf(before.signed_angle_to(after, Vector3.UP)) / (2.0 * spacing)
 	outline.clear()
 	for point in track.legal_outline():
@@ -61,9 +72,17 @@ func project(position: Vector3, hint: int = -1) -> Vector3:
 			distance = squared
 			best = Vector3(fposmod((index + fraction) * spacing, length),
 				(position - closest).dot(forwards[index].cross(Vector3.UP).normalized()), index)
+	var alternative := routes.project_alternatives(position,best,distance,spacing)
+	if alternative != best: return alternative
 	if hint >= 0 and distance > 18.0 * 18.0:
 		return project(position)
 	return best
+
+func from_canonical(offset: float) -> float:
+	return routes.from_canonical(offset)
+
+func minimum_interval_length(start: float, finish: float) -> float:
+	return routes.minimum_interval_length(start,finish)
 
 func legal(position: Vector3, projection: Vector3) -> bool:
 	if not outline.is_empty() and not Geometry2D.is_point_in_polygon(Vector2(position.x, position.z), outline):

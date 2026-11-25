@@ -1,5 +1,7 @@
 # Circuit selection gallery — v0.6.1-dev
 
+2026-11-27 extension: [City Square construction](city-square.md) now activates `delfino_square_ds`, replacing its provisional Sunhaven Square display name. Four playable cards share the existing horizontal focus scrolling; City previews include both authoritative alternative curves without constructing the environment in the menu. The following 2026-11-26 description/results preserve the original three-card delivery.
+
 2026-11-26. Implemented within the existing Unreleased version; developer acceptance remains pending. This changes circuit metadata and menus only. Track scene paths, meshes, collision, physics, scenery and race loading remain unchanged.
 
 ## Player experience

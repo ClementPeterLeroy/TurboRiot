@@ -7,7 +7,7 @@ func run(s: SceneTree) -> void:
 	var invalid := RaceSetup.new()
 	invalid.circuit_id = &"missing"
 	s.check(invalid.validated().circuit_id == &"reference", "Unknown circuit falls back safely")
-	s.check(TrackRegistry.entries().size() == 3, "Registry exposes exactly three implemented circuits")
+	s.check(TrackRegistry.entries().size() == 4, "Registry exposes four implemented circuits")
 	for id in [&"figure_8", &"yoshi_ds"]:
 		await _geometry(s, id)
 	await _navigation(s)
@@ -106,7 +106,7 @@ func _navigation(s: SceneTree) -> void:
 	s.check(app.screen=="home" and s.root.gui_get_focus_owner()==app.menu.focusables[0], "Rapid circuit-screen cancellation keeps safe focus")
 	app.show_circuits(setup)
 	await _frames(s)
-	s.check(app.screen=="circuits" and app.menu.focusables.size()==5, "Circuit screen has three circuit buttons plus Start and Back")
+	s.check(app.screen=="circuits" and app.menu.focusables.size()==6, "Circuit screen has four circuit cards plus Start and Back")
 	await _key(s,KEY_LEFT)
 	await _key(s,KEY_ENTER)
 	s.check(app.quick_setup.circuit_id==&"figure_8", "Keyboard navigates and selects an actual circuit card")
@@ -132,11 +132,11 @@ func _navigation(s: SceneTree) -> void:
 		s.root.push_input(mouse, true)
 	await _frames(s)
 	s.check(app.quick_setup.circuit_id==&"reference", "Circuit card updates the selected setup")
-	app.menu.focusables[4].pressed.emit()
+	app.menu.gallery._back.pressed.emit()
 	await _frames(s)
 	s.check(app.screen=="config" and app.quick_setup.laps==5 and app.quick_setup.opponents==2, "Back preserves circuit and race configuration")
 	for mode in [RaceSetup.Mode.QUICK_RACE,RaceSetup.Mode.TIME_TRIAL]:
-		for id in [&"figure_8",&"yoshi_ds",&"reference"]:
+		for id in [&"figure_8",&"yoshi_ds",&"reference",&"delfino_square_ds"]:
 			setup.mode=mode
 			setup.circuit_id=id
 			setup.laps=1

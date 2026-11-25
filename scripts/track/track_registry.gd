@@ -1,6 +1,6 @@
 class_name TrackRegistry
 extends RefCounted
-const IDS := [&"reference", &"figure_8", &"yoshi_ds"]
+const IDS := [&"reference", &"figure_8", &"yoshi_ds", &"delfino_square_ds"]
 ## Deferred authoring/catalog entries do not enter race setup validation.
 const CATALOG_IDS := [&"reference", &"figure_8", &"yoshi_ds", &"baby_park", &"wario_stadium_ds", &"delfino_square_ds"]
 
@@ -34,10 +34,19 @@ static func _definition(id: StringName) -> TrackDefinition:
 			definition.description = "Thread coastal gardens and tunnels through a winding island course."
 			definition.scene = load("res://scenes/tracks/yoshi_ds.tscn")
 			definition.pickup_fractions = PackedFloat32Array([0.18, 0.48, 0.77])
-		&"baby_park", &"wario_stadium_ds", &"delfino_square_ds":
+		&"delfino_square_ds":
+			definition.display_name = "City Square"
+			definition.description = "Climb a coastal town, choose your stairway and race over open timber docks."
+			definition.category = "Private educational / City Square"
+			definition.scene = load("res://scenes/tracks/city_square.tscn")
+			definition.preview_source = load("res://resources/tracks/city_square/centerline.tres")
+			definition.preview_branch_sources = [load("res://resources/tracks/city_square/left_street.tres").curve,load("res://resources/tracks/city_square/fountain_lane.tres").curve]
+			definition.pickup_fractions = PackedFloat32Array([.04,.57,.86])
+			definition.accent = Color("f3ae63")
+		&"baby_park", &"wario_stadium_ds":
 			definition.available = false
 			definition.internal_only = true
-			definition.display_name = {&"baby_park": "Legend Park", &"wario_stadium_ds": "Riot Arena", &"delfino_square_ds": "Sunhaven Square"}[id]
+			definition.display_name = {&"baby_park": "Legend Park", &"wario_stadium_ds": "Riot Arena"}[id]
 			if id == &"baby_park": definition.authoring_scene_path = "res://scenes/tracks/Baby_park.tscn"
 		_:
 			definition.display_name = "Desert Run"

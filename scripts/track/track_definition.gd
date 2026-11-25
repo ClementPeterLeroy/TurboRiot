@@ -9,6 +9,7 @@ extends Resource
 @export var internal_only := false
 @export var authoring_scene_path := ""
 @export var preview_source: Curve3D
+@export var preview_branch_sources: Array[Curve3D] = []
 @export var accent := Color("40d5e5")
 @export var scene: PackedScene
 @export var default_laps := 3
@@ -25,7 +26,23 @@ func instantiate_race() -> Node3D:
 	# Keep the original sibling's construction order and all exported node links.
 	var track := world.get_node("Track") as TrackBuilder
 	var source := scene.instantiate() as TrackBuilder
-	for property in ["curve", "road_width", "sample_spacing", "use_curve_elevation", "use_curve_banking", "road_study_mode", "outer_perimeter_enabled",
+	if source.get_script() != track.get_script():
+		# Authored mesh circuits supply their own TrackBuilder subclass. Keep its
+		# node at the original sibling index, before any _ready callbacks run.
+		var index := track.get_index()
+		world.remove_child(track)
+		track.free()
+		track = source
+		track.name = "Track"
+		world.add_child(track)
+		world.move_child(track, index)
+	else:
+		_copy_procedural_source(source, track)
+	_apply_definition(world, track)
+	return world
+
+func _copy_procedural_source(source: TrackBuilder, track: TrackBuilder) -> void:
+	for property in ["curve", "road_width", "sample_spacing", "use_curve_elevation", "use_curve_banking", "road_study_mode", "route_branches", "recovery_fall_height", "outer_perimeter_enabled",
 		"playable_half_extents", "checkpoint_count", "checkpoint_fractions", "barrier_runs", "barrier_sections",
 		"left_barrier_clearance", "right_barrier_clearance"]:
 		track.set(property, source.get(property))
@@ -41,6 +58,8 @@ func instantiate_race() -> Node3D:
 		child.owner = null
 		track.add_child(child)
 	source.free()
+
+func _apply_definition(world: Node3D, track: TrackBuilder) -> void:
 	var environment := world.get_node("Environment")
 	world.remove_child(environment)
 	environment.free()
@@ -62,7 +81,11 @@ func instantiate_race() -> Node3D:
 		row.route_fraction = fraction
 		row.spacing = minf(3.2, (track.road_width - 3.0) / 3.0)
 		items.row_configurations.append(row)
-	return world
+
+func preview_branches() -> Array[Curve3D]:
+	# Menu previews share the authoritative resources without instantiating a
+	# complete environment (and hundreds of house nodes) just to inspect routes.
+	return preview_branch_sources if available else [] as Array[Curve3D]
 
 func preview_curve() -> Curve3D:
 	if preview_source: return preview_source

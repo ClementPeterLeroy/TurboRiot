@@ -7,6 +7,8 @@ signal geometry_rebuilt
 @export var use_curve_banking := false
 ## Milestone A presentation only: shared physics and road construction remain.
 @export var road_study_mode := false
+@export var route_branches: Array[RouteBranch] = []
+@export var recovery_fall_height := -8.0
 
 const CHECKPOINT_SCENE := preload("res://scenes/checkpoint.tscn")
 ## The saved Curve3D is the source of truth. Generated nodes are transient:
