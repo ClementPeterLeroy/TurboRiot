@@ -1,0 +1,78 @@
+{
+  "files": {
+    "assets\\environment\\city_square\\townhouse.glb": {
+      "before": "6561a1124465b0142d4ffa63828c409899f9ae03802c4838ecd18bc57249a1f0",
+      "after": "6561a1124465b0142d4ffa63828c409899f9ae03802c4838ecd18bc57249a1f0",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\sources\\townhouse.blend": {
+      "before": "08ce323e5d2a26f31927b3ebfeb8dd8f2839d58560e612bfbfde593adc1c50ab",
+      "after": "08ce323e5d2a26f31927b3ebfeb8dd8f2839d58560e612bfbfde593adc1c50ab",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\narrow_house.glb": {
+      "before": "5f8c604f5e3e891d5285484b265f81b6aa219f9af55c216e081463b7c03af5c7",
+      "after": "5f8c604f5e3e891d5285484b265f81b6aa219f9af55c216e081463b7c03af5c7",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\sources\\narrow_house.blend": {
+      "before": "7ead6b85312bf301c137620cc539e898631061b15ebb84c4b5bf9dd98f09138e",
+      "after": "7ead6b85312bf301c137620cc539e898631061b15ebb84c4b5bf9dd98f09138e",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\wide_house.glb": {
+      "before": "9396be3c4b3e6913d325ddd3806126a911a93d04cf09bf07bccd3574c58b79f5",
+      "after": "9396be3c4b3e6913d325ddd3806126a911a93d04cf09bf07bccd3574c58b79f5",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\sources\\wide_house.blend": {
+      "before": "090beb82a4c52fcf7648111ef309db25715897176d5c5c939277c4bbbadc08c1",
+      "after": "090beb82a4c52fcf7648111ef309db25715897176d5c5c939277c4bbbadc08c1",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\merchant_house.glb": {
+      "before": "8f39d6cda72daf2a081ede3268721b3b18656c5561e2ef71bcee5fd102208d36",
+      "after": "8f39d6cda72daf2a081ede3268721b3b18656c5561e2ef71bcee5fd102208d36",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\sources\\merchant_house.blend": {
+      "before": "5d0862dbc2b7337718b4c672e895a3c7a3fe4742b032fb98944bd5120e040d19",
+      "after": "5d0862dbc2b7337718b4c672e895a3c7a3fe4742b032fb98944bd5120e040d19",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\corner_house.glb": {
+      "before": "d28e140dc750148e3e19ab01b5e7b91f63f9d187bdfa30d31b04ad359310854d",
+      "after": "d28e140dc750148e3e19ab01b5e7b91f63f9d187bdfa30d31b04ad359310854d",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\sources\\corner_house.blend": {
+      "before": "94c60a8839af4f56da26d521f518a5f8aac3141c595bb119f85efdc81439a5c4",
+      "after": "94c60a8839af4f56da26d521f518a5f8aac3141c595bb119f85efdc81439a5c4",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\harbour_house.glb": {
+      "before": "ab53e00ad08ddedeb8d453fbf06200e221f70110a0a3b1a42d32e69d318bdf95",
+      "after": "ab53e00ad08ddedeb8d453fbf06200e221f70110a0a3b1a42d32e69d318bdf95",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\sources\\harbour_house.blend": {
+      "before": "19d3fad5135ea156d83e2f473622b75db3a5ead296a40fdbeaff59ed23d524d7",
+      "after": "19d3fad5135ea156d83e2f473622b75db3a5ead296a40fdbeaff59ed23d524d7",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\fountain.glb": {
+      "before": "b5c1fd6f9d00afdbef237908dbc674cba5285ee630e7ee17fe18e9cbe2636ccc",
+      "after": "b5c1fd6f9d00afdbef237908dbc674cba5285ee630e7ee17fe18e9cbe2636ccc",
+      "identical": true
+    },
+    "assets\\environment\\city_square\\sources\\fountain.blend": {
+      "before": "4b32f4d85dbb83d98d0a6afa60aa8815e9daf35468284651a8c681af3b6b7575",
+      "after": "4b32f4d85dbb83d98d0a6afa60aa8815e9daf35468284651a8c681af3b6b7575",
+      "identical": true
+    }
+  },
+  "passed": true,
+  "retained_house_horizontal_transforms": 79,
+  "before_houses": 135,
+  "after_houses": 117
+}

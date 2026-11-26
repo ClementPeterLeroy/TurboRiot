@@ -1,0 +1,13 @@
+{
+  "scene": "scenes/tracks/city_square.tscn",
+  "native_editor": true,
+  "runs": [
+    {
+      "run": 1,
+      "exit_code": 0,
+      "unexpected_errors": [],
+      "passed": true
+    }
+  ],
+  "passed": true
+}

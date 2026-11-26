@@ -6,6 +6,18 @@ Pending developer acceptance. Project/menu/HUD identify `0.6.1-dev`; Windows num
 
 Initial circuit delivery: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The subsequent Figure-8 and Yoshi environment assemblies below remain within this same Unreleased version. The existing reference circuit remains available. No beta release or developer acceptance is implied.
 
+### City Square annotated structural refinements — 2026-11-27
+
+- Applied the black/red/purple/orange reference annotations through targeted edits of existing masters. Widened docks 13 → 19.5 m with matching support/collision; removed the island and three houses. Added 38 reused houses and 12 named, roofed/windowed architectural-link groups while retaining 79 original street houses; removed only the 53 marked rear houses. Approved house/fountain model masters and exports remain byte-identical.
+- Repositioned the four visible stair flights onto straight, junction-free footprints over continuous inclined collision. Redistributed only elevation: all curve point/handle XZ coordinates are unchanged. Added compatible graded garden grass, paving cutouts, terrain support and visible footing extensions; retained off-road handling and checkpoint rules. Corrected overlapping-surface height mapping at the left merge rather than changing kart physics.
+- Added permanent structural regressions for annotation coverage, uphill/downhill/standstill/reverse driving, genuine grounding, garden exit/re-entry and both-sided dock falls/recovery. Guarded original generators against overwriting authored refinements; added collision-only refresh tooling. [Files, editing guide, evidence and manual checks 231–244](docs/city-square-structure.md). Version stays 0.6.1-dev, Unreleased; no Git/GitHub operations.
+- Final verification: **1,417 checks, zero failures**; all seven finish a three-lap item race without recovery/DNF; native 1080p lap 74.817 s with no recovery/camera obstruction. Headless import/runtime and native editor opening pass. The current City performance sample averages **76.12 FPS**, down from 92.79 before the added architecture, with P99 60.81 ms; sustained target-device performance remains pending. [Actual results and limits](docs/validation.md).
+
+### City Square race/camera launch correction — 2026-11-27
+
+- Removed a saved +67.18084 m X translation on the City Square `Ground` environment instance. The environment/collisions had moved away from the unchanged curve, grid and checkpoints, leaving the kart unsupported and collapsing the chase camera against misplaced scenery. Corrected only that transform; retained the other local scene/resource metadata edits. No camera/handling constants or geometry rebuilding.
+- Added application-level human-input launch regressions for Time Trial and Quick Race: paved support, countdown/control activation, actual acceleration/grounding, active camera target/distance and visible kart framing. Complete suite **1,312 checks, zero failures**; native launches **12 checks, zero failures**. Added manual checks 229–230. Still 0.6.1-dev, Unreleased; no Git/GitHub actions. [Evidence and launch instructions](docs/validation.md).
+
 ### City Square feedback corrections — 2026-11-27
 
 - Widened city streets/stairs from 10 to 20 m, retained 22 m avenue/plaza approaches, removed obstructing avenue-end placements, and assembled continuous terrace lots using the approved house models. The current site has 135 house instances; all six house GLBs and Blender masters remain byte-identical. Existing corner-house modules are reused.

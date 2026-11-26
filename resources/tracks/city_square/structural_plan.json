@@ -1,0 +1,185 @@
+{
+  "annotation_source": "references/tracks/City Square/1 - Circuit layout/feedback_city_square.png",
+  "dock_width": 19.5,
+  "garden_polygon": [
+    [
+      -116.25,
+      78.75
+    ],
+    [
+      -66,
+      75
+    ],
+    [
+      -41.25,
+      86.25
+    ],
+    [
+      10.5,
+      86.25
+    ],
+    [
+      10.5,
+      142.5
+    ],
+    [
+      -120,
+      142.5
+    ]
+  ],
+  "stair_flights": {
+    "left": [
+      [
+        12.0,
+        50.0,
+        5.4
+      ]
+    ],
+    "right": [
+      [
+        12.0,
+        35.0,
+        1.8
+      ],
+      [
+        68.0,
+        82.0,
+        1.8
+      ],
+      [
+        90.0,
+        105.0,
+        1.8
+      ]
+    ]
+  },
+  "remove_house_prefixes": [
+    "Block",
+    "Harbour0"
+  ],
+  "frontages": [
+    {
+      "name": "FountainWest",
+      "kind": "plaza",
+      "start": 115,
+      "end": 340
+    },
+    {
+      "name": "FountainSouthEast",
+      "kind": "plaza",
+      "start": 20,
+      "end": 65
+    },
+    {
+      "name": "CityOuter",
+      "kind": "main",
+      "start": 247,
+      "end": 612,
+      "side": 1
+    },
+    {
+      "name": "CityInner",
+      "kind": "main",
+      "start": 250,
+      "end": 425,
+      "side": -1
+    },
+    {
+      "name": "RightStairBlock",
+      "kind": "main",
+      "start": 456,
+      "end": 550,
+      "side": -1
+    },
+    {
+      "name": "LeftStairWest",
+      "kind": "left",
+      "start": 10,
+      "end": 108,
+      "side": -1
+    },
+    {
+      "name": "LeftStairEast",
+      "kind": "left",
+      "start": 10,
+      "end": 108,
+      "side": 1
+    },
+    {
+      "name": "HarbourDescent",
+      "kind": "main",
+      "start": 578,
+      "end": 608,
+      "side": -1
+    },
+    {
+      "name": "CoastFront",
+      "kind": "boundary",
+      "points": [
+        [
+          97.5,
+          16.5
+        ],
+        [
+          67.5,
+          24.75
+        ],
+        [
+          48.75,
+          45
+        ],
+        [
+          37.5,
+          61.5
+        ],
+        [
+          37.5,
+          86.25
+        ]
+      ],
+      "side": -1
+    },
+    {
+      "name": "GardenTownEdge",
+      "kind": "boundary",
+      "points": [
+        [
+          -111,
+          78.2
+        ],
+        [
+          -66,
+          75
+        ],
+        [
+          -41.25,
+          86.25
+        ],
+        [
+          10.5,
+          86.25
+        ]
+      ],
+      "side": 1
+    },
+    {
+      "name": "AvenueEntryWest",
+      "kind": "main",
+      "start": 1090,
+      "end": 1132,
+      "side": -1
+    },
+    {
+      "name": "AvenueEntryEast",
+      "kind": "main",
+      "start": 1098,
+      "end": 1125,
+      "side": 1
+    }
+  ],
+  "horizontal_sha256": {
+    "centerline.tres": "2191016989815af7241d24c3fbcea093ffd90f821d629ff6d1a22636eeb39de2",
+    "left_street.tres": "3ced18b1923338eda02bdfac95ff658f5d7f8e4954adec4cb5eabbac4602de05",
+    "fountain_lane.tres": "17867dd1eb881ddea6eddd128cf91f5a49ef1ef045b98b0f7bb7c42485e3fa86"
+  }
+}

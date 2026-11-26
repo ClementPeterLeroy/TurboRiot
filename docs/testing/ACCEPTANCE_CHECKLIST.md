@@ -361,6 +361,32 @@ Preserve 1–221. The developer approved the house designs; this does not accept
 - [ ] **227. Garden grass remains a valid route.** Cross both garden checkpoint planes on connected grass to either side where available, rejoin the road and finish a lap. Retain normal grass handling, ordered gates, lap timing and live ranking; jumping into water or skipping checkpoint order must not award progress.
 - [ ] **228. Rerun circuit and application regressions.** Complete multi-lap item races and Time Trials, including both stair routes; inspect camera, collisions, drift, water recovery, menu/restart and the other circuits. Confirm sustained target-PC performance and approve the corrected assembly separately from release status.
 
+## v0.6.1-dev — City Square race/camera launch correction
+
+Preserve 1–228. A saved environment-only translation was removed; use F5 and the application menus to play, F6 on the track scene only for environment authoring.
+
+- [ ] **229. Launch and drive both City Square race modes.** From the normal application, select Time Trial and Quick Race separately, start the countdown and accelerate/steer. The kart starts on the paved avenue, stays grounded and remains clearly framed by its active chase camera. No falling/reset loop or view compressed into scenery. Recheck after restart and returning from another circuit.
+- [ ] **230. Keep authored geometry aligned with gameplay data.** Open the City track scene and inspect Ground's local transform: identity relative to Track. Its road, grid, checkpoint helpers, item rows and outline align. If relocating the circuit, move the complete assembly and update any world-space safety bounds; do not independently shift only the environment. Other local authoring metadata remains intact.
+
+## v0.6.1-dev — City Square annotated structural refinements
+
+Preserve 1–230 and all history. Use [the structural guide](../city-square-structure.md) and the supplied black/red/purple/orange annotations. Automatic results do not accept architectural appearance or release status.
+
+- [ ] **231. Preserve the original circuit footprint.** Compare overhead views: avenue, fountain, two city streets, corners, docks and garden paths retain their XZ layout. Checkpoints/minimap/grid still align after elevation station remapping; both alternatives remain usable.
+- [ ] **232. Wider docks are structurally complete.** Inspect approximately 19.5 m decks, consistent timber, outward beams/piles, matching collision and seamless land connections at low/high speed. No missing supports, exposed end-cap obstacle or material mismatch.
+- [ ] **233. Harbour interior is water with exposed edges.** The grass island and its three houses/colliders are absent. Fall from inner and outer sides of several deck sections; no railing, invisible wall or hidden floor prevents falling. Recovery preserves validated progress without shortcuts.
+- [ ] **234. All red boundaries read as continuous urban architecture.** Inspect the fountain perimeter, street entrance, outer streets, interior blocks, harbour descent, coastline, town/garden edge and avenue entrance. Keep intended streets/intersections open; inspect preserved coast/garden corner insets rather than blindly closing a road opening.
+- [ ] **235. Architecture retains the approved style.** Original modular house designs remain recognizable, with varied models/facades/roof tones/orientations. New corner links read as roofed buildings with openings and foundations; no sidewalk, curb, grass strip or artificial racing fence separates street facades from pavement. Review roof/window/foundation joins at driving height.
+- [ ] **236. Purple rear buildings are removed selectively.** All marked redundant rear houses and collision are absent; the front avenue row and underlying terrain remain. No replacement background assets or stray colliders occupy the cleared area.
+- [ ] **237. Every staircase is straight and clear of junctions.** Inspect one long left flight and three short right flights. No curved treads or stairs inside corners/intersections; landings are smooth and the steps span the intended 20 m street.
+- [ ] **238. Drive every staircase uphill and downhill.** Use low/high speed and both street sides; transitions must not catch the collider. The kart can climb normally without boost, global handling changes or forced snapping during legitimate jumps elsewhere.
+- [ ] **239. Stop, restart and reverse on each flight.** Brake to a standstill halfway, hold, accelerate again and reverse direction/uphill. No permanent stall, creeping into an edge or recovery loop.
+- [ ] **240. Ground contact remains reliable.** Monitor F3 during flights, flat landings and the left merge. No flat-road flicker, false takeoff or vertical ejection. Ramp/jump and high-speed presentation regressions remain intact on other circuits.
+- [ ] **241. Garden road edges are accessible.** At normal open points on both sides, leave pavement, cross grass and rejoin without a vertical lip or trapping step. Inspect visual/collision agreement, including the graded avenue approach. Deliberate building fronts are architectural boundaries, not grass crossings.
+- [ ] **242. Off-road handling and checkpoint integrity remain.** Grass still slows/reduces grip; asphalt behavior returns on re-entry. Crossing a garden gate on grass works, but missing/reversing gates, teleporting, water jumps or illegitimate sector skipping do not award laps.
+- [ ] **243. Complete races and application regressions.** Drive multiple consecutive laps and seven-racer item races using both city routes. Verify AI, ranking, camera, timing, items, restart/recovery/menu/circuit switching and the other three circuits. Reopen/edit the City scene normally.
+- [ ] **244. Review sustained performance and construction acceptance.** Compare warmed 1080p conditions with the preceding assembly; record frame spikes and scene complexity, not just average FPS. Target 60 FPS, inspect longer sessions/controller hardware and an exported build. Approve structures separately from the later decoration pass and release acceptance.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -390,5 +416,7 @@ Preserve 1–221. The developer approved the house designs; this does not accept
 | v0.6.1-dev City Square construction | Pending | Pending | Retained regressions plus City Square 214–221 pending; timing/traffic limits outstanding | Unreleased / not accepted |
 
 | v0.6.1-dev City Square feedback | Pending | Pending | Checks 222–228 and all retained regressions pending; house designs approved separately | Unreleased / not accepted |
+
+| v0.6.1-dev City Square structures | Pending | Pending | Checks 231–244 plus retained regressions pending; no decoration/release acceptance | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

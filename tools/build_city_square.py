@@ -6,6 +6,8 @@ import bpy,bmesh,math,json,sys
 from mathutils import Vector,geometry
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'assets/environment/city_square';SRC=OUT/'sources'
+if (OUT/'manifest.json').exists() and json.loads((OUT/'manifest.json').read_text()).get('structural_revision',0)>=1:
+ raise SystemExit('City structural refinements are authored. Edit existing masters/scenes and refresh collision; the initial generator must not replace this assembly.')
 SRC.mkdir(parents=True,exist_ok=True);(SRC/'.gdignore').write_text('')
 if any(SRC.glob('*.blend')) and '--replace-generated' not in sys.argv:raise SystemExit('Sources exist: review edits before --replace-generated.')
 SURVEY=json.loads((ROOT/'resources/tracks/city_square/survey.json').read_text())

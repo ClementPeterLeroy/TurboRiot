@@ -1,19 +1,19 @@
 [
 	{
 		"lane": -8.0,
-		"largest_step": 0.366729825735092,
+		"largest_step": 0.366726130247116,
 		"lateral_shift": 0.0,
 		"sector": "finish"
 	},
 	{
 		"lane": 0.0,
-		"largest_step": 0.366733759641647,
+		"largest_step": 0.366728603839874,
 		"lateral_shift": 0.0,
 		"sector": "finish"
 	},
 	{
 		"lane": 8.0,
-		"largest_step": 0.366704791784287,
+		"largest_step": 0.366722732782364,
 		"lateral_shift": 0.0,
 		"sector": "finish"
 	},
@@ -26,13 +26,13 @@
 	{
 		"lane": 0.0,
 		"largest_step": 0.366676330566406,
-		"lateral_shift": 0.0000152587890625,
+		"lateral_shift": 0.00002288818359375,
 		"sector": "plaza"
 	},
 	{
 		"lane": 8.0,
-		"largest_step": 0.366680145263672,
-		"lateral_shift": -0.00299835205078125,
+		"largest_step": 0.366695404052734,
+		"lateral_shift": -0.00301361083984375,
 		"sector": "plaza"
 	}
 ]

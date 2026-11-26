@@ -15,7 +15,8 @@
         11.8
       ],
       "block": "Avenue-1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_01",
@@ -32,7 +33,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 1
+      "lot": 1,
+      "foundation_extension": 0.2439582347869874
     },
     {
       "name": "Avenue_Left_02",
@@ -49,7 +51,8 @@
         11.8
       ],
       "block": "Avenue-1",
-      "lot": 2
+      "lot": 2,
+      "foundation_extension": 0.6106362342834474
     },
     {
       "name": "Avenue_Left_03",
@@ -66,7 +69,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 3
+      "lot": 3,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_04",
@@ -83,7 +87,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 4
+      "lot": 4,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_05",
@@ -100,7 +105,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 5
+      "lot": 5,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_06",
@@ -117,7 +123,8 @@
         11.8
       ],
       "block": "Avenue-1",
-      "lot": 6
+      "lot": 6,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_07",
@@ -134,7 +141,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 7
+      "lot": 7,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_08",
@@ -151,7 +159,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 8
+      "lot": 8,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_09",
@@ -168,7 +177,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 9
+      "lot": 9,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_10",
@@ -185,7 +195,8 @@
         11.8
       ],
       "block": "Avenue-1",
-      "lot": 10
+      "lot": 10,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_11",
@@ -202,7 +213,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 11
+      "lot": 11,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_12",
@@ -219,7 +231,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 12
+      "lot": 12,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_13",
@@ -236,7 +249,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 13
+      "lot": 13,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_14",
@@ -253,7 +267,8 @@
         11.8
       ],
       "block": "Avenue-1",
-      "lot": 14
+      "lot": 14,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_15",
@@ -270,7 +285,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 15
+      "lot": 15,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_16",
@@ -287,7 +303,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 16
+      "lot": 16,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Left_17",
@@ -304,7 +321,8 @@
         8.700000000000001
       ],
       "block": "Avenue-1",
-      "lot": 17
+      "lot": 17,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_00",
@@ -321,7 +339,8 @@
         11.8
       ],
       "block": "Avenue1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_01",
@@ -338,7 +357,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 1
+      "lot": 1,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_02",
@@ -355,7 +375,8 @@
         11.8
       ],
       "block": "Avenue1",
-      "lot": 2
+      "lot": 2,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_03",
@@ -372,7 +393,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 3
+      "lot": 3,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_04",
@@ -389,7 +411,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 4
+      "lot": 4,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_05",
@@ -406,7 +429,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 5
+      "lot": 5,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_06",
@@ -423,7 +447,8 @@
         11.8
       ],
       "block": "Avenue1",
-      "lot": 6
+      "lot": 6,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_07",
@@ -440,7 +465,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 7
+      "lot": 7,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_08",
@@ -457,7 +483,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 8
+      "lot": 8,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_09",
@@ -474,7 +501,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 9
+      "lot": 9,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_10",
@@ -491,7 +519,8 @@
         11.8
       ],
       "block": "Avenue1",
-      "lot": 10
+      "lot": 10,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_11",
@@ -508,7 +537,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 11
+      "lot": 11,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_12",
@@ -525,7 +555,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 12
+      "lot": 12,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_13",
@@ -542,7 +573,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 13
+      "lot": 13,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_14",
@@ -559,7 +591,8 @@
         11.8
       ],
       "block": "Avenue1",
-      "lot": 14
+      "lot": 14,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_15",
@@ -576,7 +609,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 15
+      "lot": 15,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_16",
@@ -593,7 +627,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 16
+      "lot": 16,
+      "foundation_extension": 0
     },
     {
       "name": "Avenue_Right_17",
@@ -610,7 +645,8 @@
         8.700000000000001
       ],
       "block": "Avenue1",
-      "lot": 17
+      "lot": 17,
+      "foundation_extension": 0
     },
     {
       "name": "PlazaExit_Left_00",
@@ -627,7 +663,8 @@
         11.8
       ],
       "block": "PlazaExit-1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 0
     },
     {
       "name": "PlazaExit_Left_01",
@@ -644,7 +681,8 @@
         8.700000000000001
       ],
       "block": "PlazaExit-1",
-      "lot": 1
+      "lot": 1,
+      "foundation_extension": 0
     },
     {
       "name": "PlazaExit_Left_02",
@@ -661,7 +699,8 @@
         11.8
       ],
       "block": "PlazaExit-1",
-      "lot": 2
+      "lot": 2,
+      "foundation_extension": 0
     },
     {
       "name": "PlazaExit_Left_03",
@@ -678,7 +717,8 @@
         8.700000000000001
       ],
       "block": "PlazaExit-1",
-      "lot": 3
+      "lot": 3,
+      "foundation_extension": 0
     },
     {
       "name": "PlazaExit_Right_00",
@@ -695,7 +735,8 @@
         11.8
       ],
       "block": "PlazaExit1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 0
     },
     {
       "name": "PlazaExit_Right_01",
@@ -712,7 +753,8 @@
         8.700000000000001
       ],
       "block": "PlazaExit1",
-      "lot": 1
+      "lot": 1,
+      "foundation_extension": 0
     },
     {
       "name": "PlazaExit_Right_02",
@@ -729,7 +771,8 @@
         11.8
       ],
       "block": "PlazaExit1",
-      "lot": 2
+      "lot": 2,
+      "foundation_extension": 0
     },
     {
       "name": "UpperWest_Left_00",
@@ -746,7 +789,8 @@
         11.8
       ],
       "block": "UpperWest-1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 0
     },
     {
       "name": "UpperWest_Left_01",
@@ -763,7 +807,8 @@
         8.700000000000001
       ],
       "block": "UpperWest-1",
-      "lot": 1
+      "lot": 1,
+      "foundation_extension": 0
     },
     {
       "name": "UpperNorth_Right_00",
@@ -780,7 +825,8 @@
         11.8
       ],
       "block": "UpperNorth1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 0
     },
     {
       "name": "UpperEast_Left_00",
@@ -797,7 +843,8 @@
         11.8
       ],
       "block": "UpperEast-1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 0
     },
     {
       "name": "UpperEast_Left_01",
@@ -814,7 +861,8 @@
         8.700000000000001
       ],
       "block": "UpperEast-1",
-      "lot": 1
+      "lot": 1,
+      "foundation_extension": 0
     },
     {
       "name": "UpperEast_Right_00",
@@ -831,14 +879,15 @@
         11.8
       ],
       "block": "UpperEast1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 0.15573120117187464
     },
     {
       "name": "UpperEast_Right_01",
       "model": 2,
       "position": [
         45.53831100463867,
-        7.662631034851074,
+        7.837508102935914,
         -103.5364990234375
       ],
       "yaw": 1.6115900079915744,
@@ -848,14 +897,15 @@
         8.700000000000001
       ],
       "block": "UpperEast1",
-      "lot": 1
+      "lot": 1,
+      "foundation_extension": 1.4119099584046633
     },
     {
       "name": "ForkNorth_Left_00",
       "model": 4,
       "position": [
         44.25,
-        7.257823944091797,
+        7.125122964677756,
         -73.12152099609375
       ],
       "yaw": -0.0,
@@ -865,14 +915,15 @@
         11.8
       ],
       "block": "ForkNorth-1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 1.6542062166308802
     },
     {
       "name": "ForkNorth_Left_01",
       "model": 2,
       "position": [
         53.25,
-        6.213068962097168,
+        6.525811876419683,
         -72.62152099609375
       ],
       "yaw": -0.0,
@@ -882,14 +933,15 @@
         8.700000000000001
       ],
       "block": "ForkNorth-1",
-      "lot": 1
+      "lot": 1,
+      "foundation_extension": 0.2776600972448776
     },
     {
       "name": "ForkNorth_Left_02",
       "model": 1,
       "position": [
         61.25,
-        5.603481292724609,
+        5.757397085656983,
         -73.62152099609375
       ],
       "yaw": -0.0,
@@ -899,14 +951,15 @@
         11.8
       ],
       "block": "ForkNorth-1",
-      "lot": 2
+      "lot": 2,
+      "foundation_extension": 0
     },
     {
       "name": "ForkNorth_Left_03",
       "model": 3,
       "position": [
         68.25,
-        5.600000858306885,
+        7.202512760201474,
         -73.12152099609375
       ],
       "yaw": -0.0,
@@ -916,14 +969,15 @@
         8.700000000000001
       ],
       "block": "ForkNorth-1",
-      "lot": 3
+      "lot": 3,
+      "foundation_extension": 2.5254917335901452
     },
     {
       "name": "ForkNorth_Right_02",
       "model": 1,
       "position": [
         61.25,
-        5.603481292724609,
+        5.630880390799425,
         -104.70152282714844
       ],
       "yaw": 3.141592653589793,
@@ -933,7 +987,8 @@
         11.8
       ],
       "block": "ForkNorth1",
-      "lot": 2
+      "lot": 2,
+      "foundation_extension": 0
     },
     {
       "name": "ForkNorth_Right_03",
@@ -950,14 +1005,15 @@
         8.700000000000001
       ],
       "block": "ForkNorth1",
-      "lot": 3
+      "lot": 3,
+      "foundation_extension": 0
     },
     {
       "name": "RightStairs_Left_02",
       "model": 1,
       "position": [
         68.3799819946289,
-        3.799999475479126,
+        3.8040575252800766,
         -59.5
       ],
       "yaw": -1.5707963267948966,
@@ -967,14 +1023,15 @@
         11.8
       ],
       "block": "RightStairs-1",
-      "lot": 2
+      "lot": 2,
+      "foundation_extension": 0.07760565150077978
     },
     {
       "name": "RightStairs_Left_03",
       "model": 3,
       "position": [
         67.8799819946289,
-        3.626948595046997,
+        3.764462044176952,
         -52.5
       ],
       "yaw": -1.5707963267948966,
@@ -984,14 +1041,15 @@
         8.700000000000001
       ],
       "block": "RightStairs-1",
-      "lot": 3
+      "lot": 3,
+      "foundation_extension": 0.990566780505077
     },
     {
       "name": "RightStairs_Left_04",
       "model": 0,
       "position": [
         67.8799819946289,
-        2.685452699661255,
+        2.797129431222218,
         -44.5
       ],
       "yaw": -1.5707963267948966,
@@ -1001,14 +1059,15 @@
         8.700000000000001
       ],
       "block": "RightStairs-1",
-      "lot": 4
+      "lot": 4,
+      "foundation_extension": 0.4107730774624524
     },
     {
       "name": "RightStairs_Right_00",
       "model": 4,
       "position": [
         98.76559448242188,
-        3.8601224422454834,
+        5.492959433913184,
         -76.5
       ],
       "yaw": 1.5707963267948966,
@@ -1018,14 +1077,15 @@
         11.8
       ],
       "block": "RightStairs1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 0
     },
     {
       "name": "RightStairs_Right_01",
       "model": 2,
       "position": [
         99.26559448242188,
-        3.799999952316284,
+        5.113530736773679,
         -67.5
       ],
       "yaw": 1.5707963267948966,
@@ -1035,14 +1095,15 @@
         8.700000000000001
       ],
       "block": "RightStairs1",
-      "lot": 1
+      "lot": 1,
+      "foundation_extension": 0
     },
     {
       "name": "RightStairs_Right_02",
       "model": 1,
       "position": [
         98.26559448242188,
-        3.799999475479126,
+        3.8041124977910212,
         -59.5
       ],
       "yaw": 1.5707963267948966,
@@ -1052,14 +1113,15 @@
         11.8
       ],
       "block": "RightStairs1",
-      "lot": 2
+      "lot": 2,
+      "foundation_extension": 0
     },
     {
       "name": "RightStairs_Right_03",
       "model": 3,
       "position": [
         98.76559448242188,
-        3.626948595046997,
+        3.7644336374950784,
         -52.5
       ],
       "yaw": 1.5707963267948966,
@@ -1069,14 +1131,15 @@
         8.700000000000001
       ],
       "block": "RightStairs1",
-      "lot": 3
+      "lot": 3,
+      "foundation_extension": 0
     },
     {
       "name": "RightStairs_Right_04",
       "model": 0,
       "position": [
         98.76559448242188,
-        2.685452699661255,
+        2.797159516504696,
         -44.5
       ],
       "yaw": 1.5707963267948966,
@@ -1086,14 +1149,15 @@
         8.700000000000001
       ],
       "block": "RightStairs1",
-      "lot": 4
+      "lot": 4,
+      "foundation_extension": 0
     },
     {
       "name": "RightStairs_Right_05",
       "model": 2,
       "position": [
         99.26559448242188,
-        2.0005908012390137,
+        1.9900821790220327,
         -35.5
       ],
       "yaw": 1.5707963267948966,
@@ -1103,7 +1167,8 @@
         8.700000000000001
       ],
       "block": "RightStairs1",
-      "lot": 5
+      "lot": 5,
+      "foundation_extension": 0
     },
     {
       "name": "LeftStairs_Left_00",
@@ -1120,7 +1185,8 @@
         11.8
       ],
       "block": "LeftStairs-1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 0.29490661621093717
     },
     {
       "name": "LeftStairs_Left_01",
@@ -1137,7 +1203,8 @@
         8.700000000000001
       ],
       "block": "LeftStairs-1",
-      "lot": 1
+      "lot": 1,
+      "foundation_extension": 1.547047615051269
     },
     {
       "name": "LeftStairs_Left_02",
@@ -1154,7 +1221,8 @@
         11.8
       ],
       "block": "LeftStairs-1",
-      "lot": 2
+      "lot": 2,
+      "foundation_extension": 3.5406141281127925
     },
     {
       "name": "LeftStairs_Left_03",
@@ -1171,7 +1239,8 @@
         8.700000000000001
       ],
       "block": "LeftStairs-1",
-      "lot": 3
+      "lot": 3,
+      "foundation_extension": 3.795439720153808
     },
     {
       "name": "LeftStairs_Left_04",
@@ -1188,7 +1257,8 @@
         8.700000000000001
       ],
       "block": "LeftStairs-1",
-      "lot": 4
+      "lot": 4,
+      "foundation_extension": 3.3772740364074703
     },
     {
       "name": "LeftStairs_Left_05",
@@ -1205,14 +1275,15 @@
         8.700000000000001
       ],
       "block": "LeftStairs-1",
-      "lot": 5
+      "lot": 5,
+      "foundation_extension": 2.1451430320739746
     },
     {
       "name": "LeftStairs_Right_02",
       "model": 1,
       "position": [
         44.1273193359375,
-        7.120879173278809,
+        5.098039558999115,
         -59.5
       ],
       "yaw": 1.5707963267948966,
@@ -1222,14 +1293,15 @@
         11.8
       ],
       "block": "LeftStairs1",
-      "lot": 2
+      "lot": 2,
+      "foundation_extension": 1.5111407552881775
     },
     {
       "name": "LeftStairs_Right_03",
       "model": 3,
       "position": [
         44.6273193359375,
-        6.550917625427246,
+        3.6665180730532274,
         -52.5
       ],
       "yaw": 1.5707963267948966,
@@ -1239,14 +1311,15 @@
         8.700000000000001
       ],
       "block": "LeftStairs1",
-      "lot": 3
+      "lot": 3,
+      "foundation_extension": 1.1348103093813524
     },
     {
       "name": "LeftStairs_Right_04",
       "model": 0,
       "position": [
         44.6273193359375,
-        5.654652118682861,
+        2.412687457918442,
         -44.5
       ],
       "yaw": 1.5707963267948966,
@@ -1256,14 +1329,15 @@
         8.700000000000001
       ],
       "block": "LeftStairs1",
-      "lot": 4
+      "lot": 4,
+      "foundation_extension": 0.3126889837973482
     },
     {
       "name": "MergeSouth_Left_00",
       "model": 4,
       "position": [
         44.25,
-        2.0002691745758057,
+        1.9913395173869775,
         -6.7867631912231445
       ],
       "yaw": -0.0,
@@ -1273,14 +1347,15 @@
         11.8
       ],
       "block": "MergeSouth-1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 0
     },
     {
       "name": "MergeSouth_Left_01",
       "model": 2,
       "position": [
         53.25,
-        2.0,
+        2.000000059915684,
         -6.286762237548828
       ],
       "yaw": -0.0,
@@ -1290,14 +1365,15 @@
         8.700000000000001
       ],
       "block": "MergeSouth-1",
-      "lot": 1
+      "lot": 1,
+      "foundation_extension": 0
     },
     {
       "name": "MergeSouth_Left_02",
       "model": 1,
       "position": [
         61.25,
-        1.999999761581421,
+        1.9999994654129807,
         -7.2867631912231445
       ],
       "yaw": -0.0,
@@ -1307,7 +1383,8 @@
         11.8
       ],
       "block": "MergeSouth-1",
-      "lot": 2
+      "lot": 2,
+      "foundation_extension": 0
     },
     {
       "name": "HarbourApproach_Right_00",
@@ -1324,7 +1401,8 @@
         11.8
       ],
       "block": "HarbourApproach1",
-      "lot": 0
+      "lot": 0,
+      "foundation_extension": 0
     },
     {
       "name": "HarbourApproach_Right_01",
@@ -1341,847 +1419,692 @@
         8.700000000000001
       ],
       "block": "HarbourApproach1",
-      "lot": 1
+      "lot": 1,
+      "foundation_extension": 0
     },
     {
-      "name": "Block00_00",
-      "model": 0,
-      "position": [
-        -187.5,
-        9.699999809265137,
-        -45.0
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block00_01",
-      "model": 1,
-      "position": [
-        -187.5,
-        9.083501815795898,
-        -33.75
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        6,
-        8,
-        11.8
-      ]
-    },
-    {
-      "name": "Block00_02",
-      "model": 4,
-      "position": [
-        -187.5,
-        8.16767406463623,
-        -22.5
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        11.8
-      ]
-    },
-    {
-      "name": "Block00_03",
-      "model": 2,
-      "position": [
-        -187.5,
-        7.286629676818848,
-        -11.25
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        10,
-        10,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block00_04",
-      "model": 3,
-      "position": [
-        -187.5,
-        6.442667484283447,
-        0.0
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block00_05",
-      "model": 0,
-      "position": [
-        -187.5,
-        5.90217924118042,
-        11.25
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block00_06",
-      "model": 1,
-      "position": [
-        -187.5,
-        5.355411529541016,
-        22.5
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        6,
-        8,
-        11.8
-      ]
-    },
-    {
-      "name": "Block00_07",
-      "model": 4,
-      "position": [
-        -187.5,
-        4.863040924072266,
-        33.75
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        11.8
-      ]
-    },
-    {
-      "name": "Block00_08",
-      "model": 2,
-      "position": [
-        -187.5,
-        4.373574733734131,
-        45.0
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        10,
-        10,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block00_09",
-      "model": 3,
-      "position": [
-        -187.5,
-        3.8272626399993896,
-        56.25
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block00_10",
-      "model": 0,
-      "position": [
-        -187.5,
-        3.3231117725372314,
-        67.5
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block00_11",
-      "model": 1,
-      "position": [
-        -187.5,
-        2.8189690113067627,
-        78.75
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        6,
-        8,
-        11.8
-      ]
-    },
-    {
-      "name": "Block00_12",
-      "model": 4,
-      "position": [
-        -187.5,
-        1.8034279346466064,
-        90.0
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        11.8
-      ]
-    },
-    {
-      "name": "Block01_00",
-      "model": 2,
-      "position": [
-        -177.0,
-        9.699999809265137,
-        -45.0
-      ],
-      "yaw": 0,
-      "size": [
-        10,
-        10,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block01_01",
-      "model": 3,
-      "position": [
-        -177.0,
-        9.083501815795898,
-        -33.75
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block01_02",
-      "model": 0,
-      "position": [
-        -177.0,
-        8.16767406463623,
-        -22.5
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block01_03",
-      "model": 1,
-      "position": [
-        -177.0,
-        7.286629676818848,
-        -11.25
-      ],
-      "yaw": 0,
-      "size": [
-        6,
-        8,
-        11.8
-      ]
-    },
-    {
-      "name": "Block01_04",
-      "model": 4,
-      "position": [
-        -177.0,
-        6.442667484283447,
-        0.0
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        11.8
-      ]
-    },
-    {
-      "name": "Block01_05",
-      "model": 2,
-      "position": [
-        -177.0,
-        5.90217924118042,
-        11.25
-      ],
-      "yaw": 0,
-      "size": [
-        10,
-        10,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block01_06",
-      "model": 3,
-      "position": [
-        -177.0,
-        5.355411529541016,
-        22.5
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block01_07",
-      "model": 0,
-      "position": [
-        -177.0,
-        4.863040924072266,
-        33.75
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block01_08",
-      "model": 1,
-      "position": [
-        -177.0,
-        4.373574733734131,
-        45.0
-      ],
-      "yaw": 0,
-      "size": [
-        6,
-        8,
-        11.8
-      ]
-    },
-    {
-      "name": "Block01_09",
-      "model": 4,
-      "position": [
-        -177.0,
-        3.8272626399993896,
-        56.25
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        11.8
-      ]
-    },
-    {
-      "name": "Block01_10",
-      "model": 2,
-      "position": [
-        -177.0,
-        3.3231117725372314,
-        67.5
-      ],
-      "yaw": 0,
-      "size": [
-        10,
-        10,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block01_11",
-      "model": 3,
-      "position": [
-        -177.0,
-        2.8189690113067627,
-        78.75
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block01_12",
-      "model": 0,
-      "position": [
-        -177.0,
-        1.8557331562042236,
-        90.0
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block02_00",
-      "model": 1,
-      "position": [
-        -166.5,
-        9.700033187866211,
-        -45.0
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        6,
-        8,
-        11.8
-      ]
-    },
-    {
-      "name": "Block02_01",
-      "model": 4,
-      "position": [
-        -166.5,
-        9.083501815795898,
-        -33.75
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        11.8
-      ]
-    },
-    {
-      "name": "Block02_02",
-      "model": 2,
-      "position": [
-        -166.5,
-        8.16767406463623,
-        -22.5
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        10,
-        10,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block02_03",
-      "model": 3,
-      "position": [
-        -166.5,
-        7.286629676818848,
-        -11.25
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block02_04",
-      "model": 0,
-      "position": [
-        -166.5,
-        6.442667484283447,
-        0.0
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block02_05",
-      "model": 1,
-      "position": [
-        -166.5,
-        5.90217924118042,
-        11.25
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        6,
-        8,
-        11.8
-      ]
-    },
-    {
-      "name": "Block02_06",
-      "model": 4,
-      "position": [
-        -166.5,
-        5.355411529541016,
-        22.5
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        11.8
-      ]
-    },
-    {
-      "name": "Block02_07",
-      "model": 2,
-      "position": [
-        -166.5,
-        4.863040924072266,
-        33.75
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        10,
-        10,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block02_08",
-      "model": 3,
-      "position": [
-        -166.5,
-        4.373574733734131,
-        45.0
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block02_09",
-      "model": 0,
-      "position": [
-        -166.5,
-        3.8272626399993896,
-        56.25
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block02_10",
-      "model": 1,
-      "position": [
-        -166.5,
-        3.3231117725372314,
-        67.5
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        6,
-        8,
-        11.8
-      ]
-    },
-    {
-      "name": "Block02_11",
-      "model": 4,
-      "position": [
-        -166.5,
-        2.8189690113067627,
-        78.75
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        8,
-        9,
-        11.8
-      ]
-    },
-    {
-      "name": "Block02_12",
-      "model": 2,
-      "position": [
-        -166.5,
-        1.9607293605804443,
-        90.0
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        10,
-        10,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block03_00",
-      "model": 3,
-      "position": [
-        -156.0,
-        9.700033187866211,
-        -45.0
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block03_01",
-      "model": 0,
-      "position": [
-        -156.0,
-        9.083501815795898,
-        -33.75
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block03_02",
-      "model": 1,
-      "position": [
-        -156.0,
-        8.16767406463623,
-        -22.5
-      ],
-      "yaw": 0,
-      "size": [
-        6,
-        8,
-        11.8
-      ]
-    },
-    {
-      "name": "Block03_03",
-      "model": 4,
-      "position": [
-        -156.0,
-        7.286629676818848,
-        -11.25
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        11.8
-      ]
-    },
-    {
-      "name": "Block03_04",
-      "model": 2,
-      "position": [
-        -156.0,
-        6.442667484283447,
-        0.0
-      ],
-      "yaw": 0,
-      "size": [
-        10,
-        10,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block03_05",
-      "model": 3,
-      "position": [
-        -156.0,
-        5.90217924118042,
-        11.25
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block03_06",
-      "model": 0,
-      "position": [
-        -156.0,
-        5.355411529541016,
-        22.5
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block03_07",
-      "model": 1,
-      "position": [
-        -156.0,
-        4.863040924072266,
-        33.75
-      ],
-      "yaw": 0,
-      "size": [
-        6,
-        8,
-        11.8
-      ]
-    },
-    {
-      "name": "Block03_08",
-      "model": 4,
-      "position": [
-        -156.0,
-        4.373574733734131,
-        45.0
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        11.8
-      ]
-    },
-    {
-      "name": "Block03_09",
-      "model": 2,
-      "position": [
-        -156.0,
-        3.8272626399993896,
-        56.25
-      ],
-      "yaw": 0,
-      "size": [
-        10,
-        10,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block03_10",
-      "model": 3,
-      "position": [
-        -156.0,
-        3.3231117725372314,
-        67.5
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block03_11",
-      "model": 0,
-      "position": [
-        -156.0,
-        2.8189690113067627,
-        78.75
-      ],
-      "yaw": 0,
-      "size": [
-        8,
-        9,
-        8.700000000000001
-      ]
-    },
-    {
-      "name": "Block03_12",
-      "model": 1,
-      "position": [
-        -156.0,
-        2.0655181407928467,
-        90.0
-      ],
-      "yaw": 0,
-      "size": [
-        6,
-        8,
-        11.8
-      ]
-    },
-    {
-      "name": "Block04_04",
-      "model": 1,
-      "position": [
-        -145.5,
-        6.442667484283447,
-        0.0
-      ],
-      "yaw": 3.141592653589793,
-      "size": [
-        6,
-        8,
-        11.8
-      ]
-    },
-    {
-      "name": "Harbour00",
+      "name": "CityOuter_House05",
       "model": 5,
       "position": [
-        97.5,
-        1.0499999523162842,
-        99.0
+        -41.83905792236328,
+        9.243307304382324,
+        -93.0468521118164
+      ],
+      "yaw": 0.20013392375797198,
+      "size": [
+        7,
+        8,
+        8.700000000000001
+      ],
+      "palette": 1,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CityOuter_House06",
+      "model": 0,
+      "position": [
+        -32.422142028808594,
+        9.202432823181152,
+        -97.01595306396484
+      ],
+      "yaw": 0.7126142052436409,
+      "size": [
+        8,
+        9,
+        8.700000000000001
+      ],
+      "palette": 2,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CityOuter_House23",
+      "model": 5,
+      "position": [
+        16.00633430480957,
+        7.452813339233399,
+        -91.40282440185547
+      ],
+      "yaw": -1.581716828843209,
+      "size": [
+        7,
+        8,
+        8.700000000000001
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CityInner_House08",
+      "model": 3,
+      "position": [
+        -55.81423568725586,
+        8.938977432250976,
+        -140.93983459472656
+      ],
+      "yaw": -1.6024604909065534,
+      "size": [
+        8,
+        9,
+        8.700000000000001
+      ],
+      "palette": 0,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CityInner_House09",
+      "model": 1,
+      "position": [
+        -52.58258819580078,
+        8.904130172729491,
+        -149.78250122070312
+      ],
+      "yaw": -2.1287642511122074,
+      "size": [
+        6,
+        8,
+        11.8
+      ],
+      "palette": 1,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CityInner_House11",
+      "model": 5,
+      "position": [
+        -37.910118103027344,
+        8.687043380737304,
+        -160.43028259277344
+      ],
+      "yaw": -2.8790521562846174,
+      "size": [
+        7,
+        8,
+        8.700000000000001
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CityInner_House15",
+      "model": 1,
+      "position": [
+        -4.058380126953125,
+        8.40993137359619,
+        -160.6667938232422
+      ],
+      "yaw": 2.978970161238303,
+      "size": [
+        6,
+        8,
+        11.8
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CityInner_House17",
+      "model": 5,
+      "position": [
+        10.457672119140625,
+        8.272916030883788,
+        -157.17686462402344
+      ],
+      "yaw": 2.8406173793939917,
+      "size": [
+        7,
+        8,
+        8.700000000000001
+      ],
+      "palette": 1,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CityInner_House19",
+      "model": 2,
+      "position": [
+        24.96151351928711,
+        8.14725227355957,
+        -151.68319702148438
+      ],
+      "yaw": 2.5298587347703596,
+      "size": [
+        10,
+        10,
+        8.700000000000001
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CityInner_House20",
+      "model": 3,
+      "position": [
+        32.88310241699219,
+        8.04819984436035,
+        -144.08799743652344
+      ],
+      "yaw": 2.3283298789606826,
+      "size": [
+        8,
+        9,
+        8.700000000000001
+      ],
+      "palette": 0,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CityInner_House21",
+      "model": 1,
+      "position": [
+        38.46186065673828,
+        7.960054588317871,
+        -136.2760772705078
+      ],
+      "yaw": 2.146052796386288,
+      "size": [
+        6,
+        8,
+        11.8
+      ],
+      "palette": 1,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CityInner_House23",
+      "model": 5,
+      "position": [
+        43.51887130737305,
+        7.850495529174805,
+        -121.82487487792969
+      ],
+      "yaw": 1.6846333882984805,
+      "size": [
+        7,
+        8,
+        8.700000000000001
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "RightStairBlock_House04",
+      "model": 4,
+      "position": [
+        79.84851837158203,
+        5.600000095367432,
+        -104.91072845458984
+      ],
+      "yaw": 3.008749682673817,
+      "size": [
+        8,
+        9,
+        11.8
+      ],
+      "palette": 0,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "RightStairBlock_House05",
+      "model": 5,
+      "position": [
+        88.90026092529297,
+        5.600000095367432,
+        -101.27667236328125
+      ],
+      "yaw": 2.5997917365166594,
+      "size": [
+        7,
+        8,
+        8.700000000000001
+      ],
+      "palette": 1,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "RightStairBlock_House06",
+      "model": 0,
+      "position": [
+        96.2253189086914,
+        5.600000095367432,
+        -93.6406478881836
+      ],
+      "yaw": 1.9881555927452164,
+      "size": [
+        8,
+        9,
+        8.700000000000001
+      ],
+      "palette": 2,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "LeftStairWest_House09",
+      "model": 1,
+      "position": [
+        49.378746032714844,
+        1.9999999523162841,
+        -35.89232635498047
+      ],
+      "yaw": -3.084382191551217,
+      "size": [
+        6,
+        8,
+        11.8
+      ],
+      "palette": 1,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "LeftStairWest_House11",
+      "model": 5,
+      "position": [
+        63.085811614990234,
+        1.9999999523162841,
+        -36.407962799072266
+      ],
+      "yaw": -3.135690628939235,
+      "size": [
+        7,
+        8,
+        8.700000000000001
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "LeftStairEast_House07",
+      "model": 2,
+      "position": [
+        13.690917015075684,
+        1.999999713897705,
+        -20.69965171813965
+      ],
+      "yaw": -1.3394558963410705,
+      "size": [
+        10,
+        10,
+        8.700000000000001
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "LeftStairEast_House08",
+      "model": 3,
+      "position": [
+        23.844287872314453,
+        1.9999999523162841,
+        -9.021707534790039
+      ],
+      "yaw": -0.45690977224606016,
+      "size": [
+        8,
+        9,
+        8.700000000000001
+      ],
+      "palette": 0,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "LeftStairEast_House09",
+      "model": 1,
+      "position": [
+        33.48230743408203,
+        1.9999999523162841,
+        -7.472601890563965
+      ],
+      "yaw": -0.05068648756497868,
+      "size": [
+        6,
+        8,
+        11.8
+      ],
+      "palette": 1,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "HarbourDescent_House02",
+      "model": 3,
+      "position": [
+        93.24578094482422,
+        1.469672155380249,
+        17.148038864135742
+      ],
+      "yaw": 1.3082101992757962,
+      "size": [
+        8,
+        9,
+        8.700000000000001
+      ],
+      "palette": 2,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "HarbourDescent_House03",
+      "model": 1,
+      "position": [
+        89.7509765625,
+        1.3962823867797851,
+        25.074331283569336
+      ],
+      "yaw": 1.1216829911314512,
+      "size": [
+        6,
+        8,
+        11.8
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CoastFront_House05",
+      "model": 5,
+      "position": [
+        55.85960006713867,
+        1.2,
+        31.434154510498047
+      ],
+      "yaw": -2.317751900171157,
+      "size": [
+        7,
+        8,
+        8.700000000000001
+      ],
+      "palette": 1,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CoastFront_House07",
+      "model": 2,
+      "position": [
+        44.61886215209961,
+        1.2,
+        42.18331527709961
+      ],
+      "yaw": -2.1692152113194356,
+      "size": [
+        10,
+        10,
+        8.700000000000001
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CoastFront_House08",
+      "model": 3,
+      "position": [
+        39.406978607177734,
+        1.2,
+        50.71498489379883
+      ],
+      "yaw": -2.1692152113194356,
+      "size": [
+        8,
+        9,
+        8.700000000000001
+      ],
+      "palette": 0,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CoastFront_House09",
+      "model": 1,
+      "position": [
+        35.320091247558594,
+        1.2,
+        57.59665298461914
+      ],
+      "yaw": -2.1692152113194356,
+      "size": [
+        6,
+        8,
+        11.8
+      ],
+      "palette": 1,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "CoastFront_House11",
+      "model": 5,
+      "position": [
+        33.5,
+        1.2,
+        73.3800048828125
+      ],
+      "yaw": -1.5707963267948966,
+      "size": [
+        7,
+        8,
+        8.700000000000001
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenTownEdge_House02",
+      "model": 3,
+      "position": [
+        -89.79745483398438,
+        2.5927911480849195,
+        72.18090057373047
+      ],
+      "yaw": -3.070601112343636,
+      "size": [
+        8,
+        9,
+        8.700000000000001
+      ],
+      "palette": 2,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenTownEdge_House03",
+      "model": 1,
+      "position": [
+        -81.93590545654297,
+        2.1640574923969673,
+        72.12311553955078
+      ],
+      "yaw": -3.070601112343636,
+      "size": [
+        6,
+        8,
+        11.8
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenTownEdge_House05",
+      "model": 5,
+      "position": [
+        -67.2619857788086,
+        1.550496504976971,
+        71.07964324951172
+      ],
+      "yaw": -3.070601112343636,
+      "size": [
+        7,
+        8,
+        8.700000000000001
+      ],
+      "palette": 1,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenTownEdge_House07",
+      "model": 2,
+      "position": [
+        -51.55598449707031,
+        1.2759962999704235,
+        76.07316589355469
+      ],
+      "yaw": 2.714965153063544,
+      "size": [
+        10,
+        10,
+        8.700000000000001
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenTownEdge_House08",
+      "model": 3,
+      "position": [
+        -42.92359924316406,
+        1.2318487278859938,
+        80.54621124267578
+      ],
+      "yaw": 2.714965153063544,
+      "size": [
+        8,
+        9,
+        8.700000000000001
+      ],
+      "palette": 0,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenTownEdge_House10",
+      "model": 4,
+      "position": [
+        -30.302886962890625,
+        1.2246859416840732,
+        81.75
+      ],
+      "yaw": 3.141592653589793,
+      "size": [
+        8,
+        9,
+        11.8
+      ],
+      "palette": 2,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenTownEdge_House11",
+      "model": 5,
+      "position": [
+        -22.34134864807129,
+        1.2228621034662004,
+        82.25
       ],
       "yaw": 3.141592653589793,
       "size": [
         7,
         8,
         8.700000000000001
-      ]
+      ],
+      "palette": 3,
+      "structural_added": true,
+      "foundation_extension": 0
     },
     {
-      "name": "Harbour01",
-      "model": 5,
+      "name": "GardenTownEdge_House13",
+      "model": 2,
       "position": [
-        120.0,
-        1.0499999523162842,
-        99.0
+        -7.413462162017822,
+        1.2158841043598139,
+        81.25
       ],
       "yaw": 3.141592653589793,
       "size": [
-        7,
-        8,
+        10,
+        10,
         8.700000000000001
-      ]
+      ],
+      "palette": 1,
+      "structural_added": true,
+      "foundation_extension": 0
     },
     {
-      "name": "Harbour02",
-      "model": 5,
+      "name": "GardenTownEdge_House14",
+      "model": 3,
       "position": [
-        142.5,
-        1.0499999523162842,
-        99.0
+        2.5384626388549805,
+        1.2118708296874858,
+        81.75
       ],
       "yaw": 3.141592653589793,
       "size": [
-        7,
         8,
+        9,
         8.700000000000001
-      ]
+      ],
+      "palette": 2,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "AvenueEntryWest_House01",
+      "model": 2,
+      "position": [
+        -127.71598052978516,
+        1.2,
+        128.25241088867188
+      ],
+      "yaw": -0.5665983546960632,
+      "size": [
+        10,
+        10,
+        8.700000000000001
+      ],
+      "palette": 1,
+      "structural_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "AvenueEntryWest_House02",
+      "model": 3,
+      "position": [
+        -136.24073791503906,
+        1.249795150756836,
+        115.8152084350586
+      ],
+      "yaw": -1.2896454313715051,
+      "size": [
+        8,
+        9,
+        8.700000000000001
+      ],
+      "palette": 2,
+      "structural_added": true,
+      "foundation_extension": 0
     }
   ],
   "assets": [
@@ -2228,5 +2151,20 @@
       8,
       8.700000000000001
     ]
+  ],
+  "structural_revision": 1,
+  "structural_frontages": [
+    "FountainWest",
+    "FountainSouthEast",
+    "CityOuter",
+    "CityInner",
+    "RightStairBlock",
+    "LeftStairWest",
+    "LeftStairEast",
+    "HarbourDescent",
+    "CoastFront",
+    "GardenTownEdge",
+    "AvenueEntryWest",
+    "AvenueEntryEast"
   ]
 }

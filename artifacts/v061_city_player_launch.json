@@ -1,0 +1,7 @@
+{
+	"checks": 12,
+	"engine": "4.7.2-stable (official)",
+	"failures": 0,
+	"native_rendering": true,
+	"passed": true
+}

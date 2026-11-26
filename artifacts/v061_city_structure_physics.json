@@ -1,0 +1,135 @@
+{
+	"frontages": [
+		{
+			"covered": 27,
+			"fraction": 1.0,
+			"name": "FountainWest",
+			"tested": 27
+		},
+		{
+			"covered": 4,
+			"fraction": 1.0,
+			"name": "FountainSouthEast",
+			"tested": 4
+		},
+		{
+			"covered": 73,
+			"fraction": 1.0,
+			"name": "CityOuter",
+			"tested": 73
+		},
+		{
+			"covered": 39,
+			"fraction": 1.0,
+			"name": "CityInner",
+			"tested": 39
+		},
+		{
+			"covered": 24,
+			"fraction": 1.0,
+			"name": "RightStairBlock",
+			"tested": 24
+		},
+		{
+			"covered": 19,
+			"fraction": 1.0,
+			"name": "LeftStairWest",
+			"tested": 19
+		},
+		{
+			"covered": 25,
+			"fraction": 1.0,
+			"name": "LeftStairEast",
+			"tested": 25
+		},
+		{
+			"covered": 8,
+			"fraction": 1.0,
+			"name": "HarbourDescent",
+			"tested": 8
+		},
+		{
+			"covered": 20,
+			"fraction": 1.0,
+			"name": "CoastFront",
+			"tested": 20
+		},
+		{
+			"covered": 31,
+			"fraction": 1.0,
+			"name": "GardenTownEdge",
+			"tested": 31
+		},
+		{
+			"covered": 11,
+			"fraction": 1.0,
+			"name": "AvenueEntryWest",
+			"tested": 11
+		},
+		{
+			"covered": 7,
+			"fraction": 1.0,
+			"name": "AvenueEntryEast",
+			"tested": 7
+		}
+	],
+	"grass_cases": 11,
+	"stairs": [
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(65.90215, 6.775939, -89.09763)",
+			"flight": 0,
+			"uphill": false
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(40.81089, 8.66224, -87.73172)",
+			"flight": 0,
+			"uphill": true
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(82.40047, 4.975935, -59.15933)",
+			"flight": 1,
+			"uphill": false
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(83.96823, 6.775782, -75.45676)",
+			"flight": 1,
+			"uphill": true
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(82.5, 3.175936, -36.41938)",
+			"flight": 2,
+			"uphill": false
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(82.5, 4.975839, -53.36702)",
+			"flight": 2,
+			"uphill": true
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(29.86442, 3.175993, -37.42746)",
+			"flight": 3,
+			"uphill": false
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(30.01067, 8.575936, -77.69739)",
+			"flight": 3,
+			"uphill": true
+		}
+	]
+}

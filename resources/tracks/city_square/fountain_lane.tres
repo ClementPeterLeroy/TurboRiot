@@ -14,6 +14,6 @@ point_count = 4
 script = ExtResource("1_n3png")
 label = "Fountain east side"
 curve = SubResource("Curve3D_lcr8b")
-entry_offset = 120.31554
+entry_offset = 120.31553
 exit_offset = 242.40462
 width = 22.0

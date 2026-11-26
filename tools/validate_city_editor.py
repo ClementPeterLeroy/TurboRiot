@@ -8,6 +8,7 @@ def main():
  parser=argparse.ArgumentParser()
  parser.add_argument('--godot',required=True)
  parser.add_argument('--runs',type=int,default=3)
+ parser.add_argument('--report-prefix',default='v061_city_feedback')
  args=parser.parse_args()
  root=Path(__file__).resolve().parents[1]
  env=os.environ.copy()
@@ -30,7 +31,7 @@ def main():
    results.append({'run':i+1,'passed':False,'reason':'45-second editor timeout'})
   print(results[-1],flush=True)
  report={'scene':'scenes/tracks/city_square.tscn','native_editor':True,'runs':results,'passed':all(r['passed'] for r in results)}
- (root/'artifacts/v061_city_feedback_editor.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
+ (root/'artifacts'/f'{Path(args.report_prefix).name}_editor.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
  return 0 if report['passed'] else 1
 
 if __name__=='__main__':raise SystemExit(main())

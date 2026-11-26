@@ -1,0 +1,22 @@
+{
+  "stage": "intermediate structural implementation, not accepted",
+  "failures": {
+    "full_suite_checks": 1400,
+    "full_suite_failures": 3,
+    "junction_point": [
+      38.161,
+      2.8,
+      -21.40948
+    ],
+    "first_floor_height": 1.788524,
+    "intermediate_floor_height": 1.814754,
+    "expected_floor_height": 2.8,
+    "ai_run": "Interrupted after repeated city-sector recoveries; not a passing race"
+  },
+  "correction": "Map actual upper/lower union faces to the new support surface, rather than shifting all vertices by the nearest centreline delta.",
+  "final_floor_height": 2.800001,
+  "final_reports": [
+    "v061_city_structure_physics.json",
+    "v061_city_structural_ai_race_2_7_3_all_ai_items.json"
+  ]
+}

@@ -45,6 +45,12 @@ func inner_curve(points: Array, corner_shift: float) -> Curve3D:
 	return result
 
 func run() -> void:
+	if FileAccess.file_exists(OUT+"survey.json"):
+		var current: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(OUT+"survey.json"))
+		if current.get("structural_revision",0)>=1:
+			push_error("Preserve the authored structural route; edit its existing resources instead of running the initial bake.")
+			quit(1)
+			return
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(OUT+"layout.json"))
 	var curve := make_curve(data.points,true)
 	var entry := curve.get_closest_offset(curve.get_point_position(data.branch_entry_index))

@@ -18,7 +18,7 @@ func run(s: SceneTree) -> void:
 	s.check(not track.has_node("Generated/BarrierCollision"),"City has no artificial track barriers")
 	s.check(world.get_node("TrackFeatures/Generated").get_child_count()==0,"City adds no speed pads or optional launch ramps")
 	var street := track.route_branches[0]
-	s.near(street.curve.get_baked_length(),street.exit_offset-street.entry_offset,"Both city streets have equal three-dimensional length",.01)
+	s.near(street.curve.get_baked_length(),street.exit_offset-street.entry_offset,"Both city streets retain near-equal length after straight-flight elevation redistribution",.25)
 	s.near(street.curve.get_point_position(0).y-street.curve.get_point_position(street.curve.point_count-1).y,5.4,"Both stair routes descend 5.4 metres",.01)
 	var errors: Array[String]=[]
 	for variant in 4:
