@@ -18,6 +18,8 @@ func _apply(node: Node) -> void:
 			elif node.name == &"PavedStreets" or "StairTreads" in str(node.name): texture=STONE
 			elif node.name == &"TimberDecks": texture=WOOD
 			if texture:
+				# Editor re-entry/reparenting must not clone our own overrides again.
+				if original.albedo_texture==texture:continue
 				var key := str(original.get_instance_id())+texture.resource_path
 				if not _shared.has(key):
 					var paint := original.duplicate() as StandardMaterial3D

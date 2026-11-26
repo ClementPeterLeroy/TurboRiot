@@ -385,6 +385,9 @@ func spawn_transform() -> Transform3D:
 	return global_transform * Transform3D(Basis.looking_at(forward),
 		sample_center(0.0) - forward * 4.0 + Vector3.UP * 0.65)
 
+func checkpoint_limits(offset: float, _index: int) -> Vector2:
+	return corridor_limits(offset)
+
 func _build_checkpoints(parent: Node3D) -> void:
 	var checkpoints := Node3D.new()
 	checkpoints.name = "Checkpoints"
@@ -398,7 +401,7 @@ func _build_checkpoints(parent: Node3D) -> void:
 			offset = curve.get_baked_length() * checkpoint_fractions[i]
 		# Keep finish fixed; numbered gates lie at regular progress sectors.
 		# Their asymmetric limits follow actual fences, including grass openings.
-		var limits := corridor_limits(offset)
+		var limits := checkpoint_limits(offset,i)
 		gate.gate_width = road_width
 		gate.left_extent = limits.x
 		gate.right_extent = limits.y

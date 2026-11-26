@@ -14,6 +14,9 @@ func make_curve(points: Array, closed: bool) -> Curve3D:
 		var a := Vector3(before[0],before[1],before[2])
 		var b := Vector3(after[0],after[1],after[2])
 		var tangent := (b-a).normalized()*minf(6,minf(a.distance_to(p),b.distance_to(p))*.28)
+		# Flat landings must remain flat across widened intersections; otherwise
+		# a neighbouring plaza cuts a vertical lip into the rising approach.
+		if is_equal_approx(p.y,a.y) or is_equal_approx(p.y,b.y):tangent.y=0
 		curve.add_point(p,-tangent,tangent)
 	return curve
 
@@ -79,6 +82,7 @@ func run() -> void:
 	var branch := RouteBranch.new()
 	branch.label="Left street / long stairs"
 	branch.curve=inner
+	branch.width=20
 	branch.entry_offset=entry
 	branch.exit_offset=exit
 	ResourceSaver.save(branch,OUT+"left_street.tres")
@@ -87,6 +91,7 @@ func run() -> void:
 	var fountain := RouteBranch.new()
 	fountain.label="Fountain east side"
 	fountain.curve=make_curve(fountain_points,false)
+	fountain.width=22
 	fountain.entry_offset=curve.get_closest_offset(Vector3(data.points[3][0],10.5,data.points[3][2]))
 	fountain.exit_offset=curve.get_closest_offset(Vector3(data.points[10][0],10.5,data.points[10][2]))
 	ResourceSaver.save(fountain,OUT+"fountain_lane.tres")
@@ -97,12 +102,13 @@ func run() -> void:
 		var p := curve.sample_baked(offset,true)
 		var forward := (curve.sample_baked(fposmod(offset+.2,length),true)-curve.sample_baked(fposmod(offset-.2,length),true)).normalized()
 		var r := forward.cross(Vector3.UP).normalized()
-		var width := 22.0 if i*1.0/ceili(length)<fountain.entry_offset/length or offset>length-22 else 10.0
+		var width := 22.0 if i*1.0/ceili(length)<fountain.entry_offset/length or offset>length-22 else 20.0
 		if offset>length*.8 and absf(p.x+120)<1.5:width=22.0
-		if offset>=fountain.entry_offset and offset<=fountain.exit_offset:width=12
+		if offset>=fountain.entry_offset and offset<=fountain.exit_offset:width=22
 		var wood_start := curve.get_closest_offset(Vector3(data.points[27][0],2,data.points[27][2]))
 		var wood_end := curve.get_closest_offset(Vector3(data.points[42][0],2,data.points[42][2]))
 		if offset>=wood_start and offset<=wood_end:width=13
+		if offset>wood_end and offset<length-22 and not (offset>length*.8 and absf(p.x+120)<1.5):width=10
 		samples.append({"offset":offset,"position":[p.x,p.y,p.z],"right":[r.x,r.y,r.z],"width":width,"wood":offset>=wood_start and offset<=wood_end})
 	var branches: Array=[]
 	for route in [branch,fountain]:
@@ -112,11 +118,24 @@ func run() -> void:
 			var p: Vector3 = route.curve.sample_baked(s,true)
 			var f: Vector3 = (route.curve.sample_baked(minf(s+.2,route.curve.get_baked_length()),true)-route.curve.sample_baked(maxf(0,s-.2),true)).normalized()
 			var r: Vector3 = f.cross(Vector3.UP).normalized()
-			rows.append({"offset":s,"position":[p.x,p.y,p.z],"right":[r.x,r.y,r.z],"width":10.0})
+			rows.append({"offset":s,"position":[p.x,p.y,p.z],"right":[r.x,r.y,r.z],"width":route.width})
 		branches.append({"label":route.label,"entry":route.entry_offset,"exit":route.exit_offset,"length":route.curve.get_baked_length(),"rows":rows})
 	var gates: Array=[]
 	for index in data.checkpoints:
 		gates.append(curve.get_closest_offset(Vector3(data.points[index][0],data.points[index][1],data.points[index][2]))/length)
+	# Validate the whole avenue before it splits around the fountain, rather
+	# than putting a narrow, angled gate in the middle of the fork.
+	gates[2]=110.0/length
+	var widths := Curve.new()
+	widths.max_value=30
+	var previous := -1.0
+	for row in samples:
+		if row.width!=previous:
+			if widths.point_count>0:widths.add_point(Vector2(maxf(0,row.offset/length-.002),previous))
+			widths.add_point(Vector2(row.offset/length,row.width))
+			previous=row.width
+	if widths.get_point_position(widths.point_count-1).x<1:widths.add_point(Vector2(1,22))
+	ResourceSaver.save(widths,OUT+"widths.tres")
 	FileAccess.open(OUT+"survey.json",FileAccess.WRITE).store_string(JSON.stringify({"length":length,"samples":samples,"branches":branches,"gates":gates,"fountain":data.fountain_center},"\t"))
 	print("CITY_ROUTES length=",length," city outer=",exit-entry," inner=",inner.get_baked_length())
 	quit()

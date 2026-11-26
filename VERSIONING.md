@@ -12,6 +12,8 @@ Current Circuit 8 work includes [road reconstruction A](docs/figure8-road-recons
 
 ## Version conventions and history
 
+City Square feedback corrections retain **0.6.1-dev / 0.6.1.0**. Approved house designs are preserved; widened streets, contact/editor hardening and broader checkpoints add manual checks **222–228**, without accepting or releasing the construction patch. See [feedback correction](docs/city-square-feedback.md).
+
 City Square initial construction is another **0.6.1-dev** increment, not a new release. The original delivery's two beta circuits remain historical; the gallery now includes City Square as a fourth playable circuit, with authored environment assets and shared branch support. See [implementation and outstanding timing/AI limits](docs/city-square.md). Cumulative manual checks extend through **221**, pending acceptance.
 
 | Location | Current value | Meaning |

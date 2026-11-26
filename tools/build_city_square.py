@@ -81,6 +81,10 @@ for index,(name,w,d,floors,color) in enumerate([
  ('townhouse',8,9,2,(.85,.74,.52)),('narrow_house',6,8,3,(.76,.59,.43)),
  ('wide_house',10,10,2,(.87,.80,.64)),('merchant_house',8,9,2,(.83,.58,.40)),
  ('corner_house',8,9,3,(.79,.73,.55)),('harbour_house',7,8,2,(.73,.79,.71))]):
+ if '--site-only' in sys.argv:
+  old=json.loads((OUT/'manifest.json').read_text())
+  MANIFEST['assets'].append(name);MANIFEST['house_sizes'].append(old['house_sizes'][index])
+  continue
  start(color);height=.9+floors*3.1
  box('StoneFoundation',(0,.0,0),(w,1.8,d),'Stone')
  box('StuccoWalls',(0,(height+.8)/2,0),(w,height-.8,d),'Plaster')
@@ -140,6 +144,9 @@ for i,row in enumerate(ROWS):
   part.append(row);groups.append((kind,part));part=[ROWS[i-1],row];kind=row['wood']
  else:part.append(row)
 groups.append((kind,part))
+# Overlap the two stone ends through the lap seam before boolean union. Caps
+# that only touch at the finish can survive as internal vertical collision faces.
+if not groups[0][0] and not groups[-1][0]:groups[-1][1].extend(ROWS[1:3])
 for i,(wood,rows) in enumerate(groups):
  obj=strip('RoadSegment%d'%i,rows,'Wood' if wood else 'Stone')
  (wood_parts if wood else road_parts).append(obj)
@@ -157,7 +164,7 @@ def stair_tread(a,b,name):
  if p.y-q.y<=.025:return
  # Join the actual road cross-sections through corners. A thin midpoint box
  # intersects the sloped road and leaves triangular gaps/overlaps at bends.
- r=Vector(a['right'])*4.9;s=Vector(b['right'])*4.9
+ r=Vector(a['right'])*(a['width']/2-.1);s=Vector(b['right'])*(b['width']/2-.1)
  height=max(p.y,q.y)+.015
  top=[p-r,p+r,q+s,q-s]
  vertices=[(v.x,height,v.z) for v in top]+[(v.x,min(p.y,q.y)-.12,v.z) for v in top]
@@ -223,24 +230,47 @@ def house_ok(p,yaw,w,d):
  for row in all_rows:
   c=Vector(row['position']);v=c-p
   # Reserve the entire road width, including branch junctions and the plaza.
-  if abs(v.dot(right))<w/2+.4 and abs(v.dot(back))<d/2+row['width']/2-.15:return False
- for q,ww,dd in occupied:
-  if (p-q).length<(max(w,d)+max(ww,dd))*.39:return False
+  dx=max(0,abs(v.dot(right))-w/2);dz=max(0,abs(v.dot(back))-d/2)
+  if math.hypot(dx,dz)<row['width']/2+.08:return False
+ for q,ww,dd,angle in occupied:
+  qr=Vector((math.cos(angle),0,-math.sin(angle)));qb=Vector((math.sin(angle),0,math.cos(angle)))
+  if all(abs((p-q).dot(axis)) < (abs(right.dot(axis))*w+abs(back.dot(axis))*d+abs(qr.dot(axis))*ww+abs(qb.dot(axis))*dd)/2-.002 for axis in [right,back,qr,qb]):return False
  return True
-urban=[r for r in ROWS if not r['wood'] and (r['offset']<BRANCHES[0]['exit']+45 or (r['offset']>SURVEY['length']*.8 and abs(r['position'][0]+120)<1.5))]
-urban+=BRANCHES[0]['rows']
-for side in [-1,1]:
- last=-100;counter=0
- for i,row in enumerate(urban):
-  c=Vector(row['position']);r=Vector(row['right']);outward=r*side
-  if (Vector((c.x-f[0],0,c.z-f[2]))).length<32:continue
-  model=[0,2,1,3,4,0,3,2,5][counter%9];w,d,h=size_table[model]
-  if i-last<(w+size_table[[0,2,1,3,4,0,3,2,5][max(0,counter-1)%9]][0])*.5-.2:continue
-  p=c+outward*(row['width']/2+d/2-.05);p.y=c.y-.8
-  yaw=math.atan2(outward.x,outward.z)
-  if not house_ok(p,yaw,w,d):continue
-  MANIFEST['houses'].append({'name':'Frontage%03d'%len(MANIFEST['houses']),'model':model,'position':list(p),'yaw':yaw,'size':[w,d,h]})
-  occupied.append((p,w,d));last=i;counter+=1
+# Explicit frontage blocks: consecutive lots share party-wall planes. Reserve
+# intersections rather than marching separate sampled houses around every bend.
+def frontage(a,b,width,label):
+ a=Vector(((a[0]-520)*.75,0,(a[1]-300)*.75));b=Vector(((b[0]-520)*.75,0,(b[1]-300)*.75))
+ direction=(b-a).normalized();length=(b-a).length-14
+ if length<6:return
+ models=[];total=0
+ while True:
+  model=4 if not models else [0,2,1,3][len(models)%4]
+  w=size_table[model][0]
+  if total+w>length:break
+  models.append(model);total+=w
+ for side in [-1,1]:
+  outward=Vector((direction.z,0,-direction.x))*side;yaw=math.atan2(outward.x,outward.z);cursor=-total/2
+  # Bezier approaches bulge beyond their control polygon. Fit a continuous
+  # frontage to the actual road envelope, not to the unbaked straight chord.
+  bulge=0
+  for row in all_rows:
+   v=Vector(row['position'])-a;along=v.dot(direction);across=v.dot(outward)
+   if 0<=along<=(b-a).length and abs(across)<width*.6 and abs(Vector(row['right']).dot(outward))>.9:bulge=max(bulge,across)
+  for i,model in enumerate(models):
+   w,d,h=size_table[model];center=(a+b)/2+direction*(cursor+w/2);cursor+=w
+   # Use the actual sampled grade while keeping the frontage in one plane.
+   row=min(all_rows,key=lambda r:(r['position'][0]-center.x)**2+(r['position'][2]-center.z)**2)
+   p=center+outward*(width/2+d/2+bulge+.12);p.y=row['position'][1]-.8
+   if not house_ok(p,yaw,w,d):continue
+   MANIFEST['houses'].append({'name':label+('_Left' if side<0 else '_Right')+'_%02d'%i,'model':model,'position':list(p),'yaw':yaw,'size':[w,d,h],'block':label+str(side),'lot':i})
+   occupied.append((p,w,d,yaw))
+frontage((360,440),(360,225),22,'Avenue')
+for label,a,b in [
+ ('PlazaExit',(400,155),(465,155)),('UpperWest',(465,155),(465,112)),
+ ('UpperNorth',(475,104),(510,104)),('UpperEast',(558,133),(560,182)),
+ ('ForkNorth',(560,182),(630,182)),('RightStairs',(630,182),(630,270)),
+ ('LeftStairs',(560,182),(560,270)),('MergeSouth',(560,270),(630,270)),
+ ('HarbourApproach',(630,270),(625,320))]:frontage(a,b,22 if label=='PlazaExit' else 20,label)
 # The square is enclosed by discrete townhouses, with street portals reserved.
 for i,angle in enumerate(range(0,360,16)):
  theta=math.radians(angle);outward=Vector((math.cos(theta),0,math.sin(theta)))
@@ -249,7 +279,7 @@ for i,angle in enumerate(range(0,360,16)):
  yaw=math.atan2(outward.x,outward.z)
  if house_ok(p,yaw,w,d):
   MANIFEST['houses'].append({'name':'Square%02d'%i,'model':model,'position':list(p),'yaw':yaw,'size':[w,d,h]})
-  occupied.append((p,w,d))
+  occupied.append((p,w,d,yaw))
 # Inaccessible coherent blocks behind the primary street frontage.
 for ix,x in enumerate(range(270,335,14)):
  for iz,z in enumerate(range(240,425,15)):
@@ -258,7 +288,7 @@ for ix,x in enumerate(range(270,335,14)):
   yaw=0 if ix%2 else math.pi
   if house_ok(p,yaw,w,d):
    MANIFEST['houses'].append({'name':'Block%02d_%02d'%(ix,iz),'model':model,'position':list(p),'yaw':yaw,'size':[w,d,h]})
-   occupied.append((p,w,d))
+   occupied.append((p,w,d,yaw))
 # Harbour/island structures do not obstruct the outer timber racing platform.
 for i,pixel in enumerate([(650,432),(680,432),(710,432)]):
  p=Vector(((pixel[0]-520)*.75,1.05,(pixel[1]-300)*.75))

@@ -349,6 +349,18 @@ Preserve checks 1–213 and their history. City Square now supersedes the deferr
 - [ ] **220. Terrain and existing mechanics remain correct.** Garden grass applies existing off-road handling; stone and wood are drivable. Check drift, items, mushroom, landing, collisions and high-speed presentation. Recheck the other three circuits, all modes, gallery focus/outline/selection persistence and restart/menu navigation.
 - [ ] **221. Performance and construction acceptance.** Compare warmed 1080p seven-racer item laps with Circuit 8 at identical settings; target sustained 60 FPS and inspect spikes, memory and longer sessions. Inspect every sector, both stairs, an exported build and controller hardware. Excluded decorative scenery stays deferred; approve this construction separately from release acceptance.
 
+## v0.6.1-dev — City Square feedback corrections
+
+Preserve 1–221. The developer approved the house designs; this does not accept the whole circuit or these corrections. The initial timing difference recorded in 215 is superseded by the current 224 fixture; manual balance approval remains pending. [Diagnosis and procedures](../city-square-feedback.md).
+
+- [ ] **222. Edit the City scene normally.** Open `scenes/tracks/city_square.tscn`, expand/select road and house nodes, toggle checkpoint helpers, edit a curve copy and rebuild repeatedly. Close/reopen in the normal editor session; no crash, frozen queue or increasing material overrides. Native automated openings passed, but the original intermittent crash still needs developer confirmation.
+- [ ] **223. Avenue entrance is unobstructed across its width.** Drive center, both edges and the right-side fountain approach at low/high speed. The former end house is absent from the portal; no curb, hole, raised lip or collidable decoration blocks the plaza.
+- [ ] **224. Wider city streets retain joined architecture.** Both stair streets are at least 20 m wide. Inspect consecutive terrace houses touching along party walls, sensible open junctions, corner-house reuse, foundations/roof seams and original approved styles. Compare both routes manually; the current isolated AI times are approximately 9.37/9.40 s.
+- [ ] **225. Finish line never ejects the kart.** Cross all lanes during race start and repeated completed laps, with steering, drifting and boost. No sideways teleport, invisible seam, lost contact or reset into a wall. Recovery/restart still place the kart safely.
+- [ ] **226. Avenue checkpoints cover the whole road.** With checkpoint debug visibility enabled, drive both road edges through the last two avenue gates. The last gate lies before the fountain fork; either plaza approach can then be used without a missed checkpoint.
+- [ ] **227. Garden grass remains a valid route.** Cross both garden checkpoint planes on connected grass to either side where available, rejoin the road and finish a lap. Retain normal grass handling, ordered gates, lap timing and live ranking; jumping into water or skipping checkpoint order must not award progress.
+- [ ] **228. Rerun circuit and application regressions.** Complete multi-lap item races and Time Trials, including both stair routes; inspect camera, collisions, drift, water recovery, menu/restart and the other circuits. Confirm sustained target-PC performance and approve the corrected assembly separately from release status.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -376,5 +388,7 @@ Preserve checks 1–213 and their history. City Square now supersedes the deferr
 | v0.6.1-dev circuit gallery | Pending | Pending | Retained regressions plus gallery 208–213 pending | Unreleased / not accepted |
 
 | v0.6.1-dev City Square construction | Pending | Pending | Retained regressions plus City Square 214–221 pending; timing/traffic limits outstanding | Unreleased / not accepted |
+
+| v0.6.1-dev City Square feedback | Pending | Pending | Checks 222–228 and all retained regressions pending; house designs approved separately | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

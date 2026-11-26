@@ -6,6 +6,14 @@ Pending developer acceptance. Project/menu/HUD identify `0.6.1-dev`; Windows num
 
 Initial circuit delivery: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The subsequent Figure-8 and Yoshi environment assemblies below remain within this same Unreleased version. The existing reference circuit remains available. No beta release or developer acceptance is implied.
 
+### City Square feedback corrections — 2026-11-27
+
+- Widened city streets/stairs from 10 to 20 m, retained 22 m avenue/plaza approaches, removed obstructing avenue-end placements, and assembled continuous terrace lots using the approved house models. The current site has 135 house instances; all six house GLBs and Blender masters remain byte-identical. Existing corner-house modules are reused.
+- Removed the road closure's coincident-cap collision seam that reproduced a 4.4 m sideways solver displacement at the finish. Closed the avenue/fork paving gaps and levelled the plaza landing before the broadened junction. Three-lane finish/plaza physics regressions now retain normal motion without lateral ejection.
+- Moved the last avenue checkpoint before the fork and widened avenue coverage. Added resource-configured connected garden runoff to both checkpoint extents and legal-progress corridors, retaining ordered/directional/travel validation and water recovery.
+- Hardened native-editor initialization with deferred helper generation, a reusable rebuild queue and idempotent material overrides. The initial native signal-11 crash was intermittent, not a proven GDScript exception; three native full-scene opening checks pass, with developer-session confirmation still required. [Diagnosis, changes, evidence and manual checks 222–228](docs/city-square-feedback.md). Still 0.6.1-dev, Unreleased; no Git mutations or GitHub operations.
+- Final validation: **1,300 checks, zero failures**, headless import/runtime pass; native lap 74.567 s with zero recovery/camera obstruction. All seven finish the final three-lap item race, two recoveries total. Stair-sector times are now 9.3667 / 9.4000 s without recovery. The isolated current 1080p comparison averages 127.11 FPS on Circuit 8 / 96.52 on City Square; City P99 is 35.88 ms, so sustained minimum-60 performance remains unaccepted. [Detailed results](docs/validation.md).
+
 ### City Square initial construction — 2026-11-27
 
 - Added City Square through the reserved `delfino_square_ds` entry: traced avenue, fountain plaza, technical parallel streets, supported open wooden docks and grass gardens. Built six reusable original house models and 206 deterministic instances, authored surfaces/junctions/stairs, coast and simple water. No decorative scenery or speed pads.

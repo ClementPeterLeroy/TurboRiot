@@ -5,12 +5,12 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_46hsa"]
 size = Vector3(8, 11.5, 9)
 
-[node name="corner_house" type="Node3D" unique_id=1250604417]
+[node name="corner_house" type="Node3D" unique_id=1245092246]
 
 [node name="corner_house" type="Node3D" parent="." unique_id=555559482 instance=ExtResource("1_fqpo5")]
 
-[node name="@StaticBody3D@10" type="StaticBody3D" parent="." unique_id=1094865527]
+[node name="@StaticBody3D@10" type="StaticBody3D" parent="." unique_id=1744722013]
 
-[node name="@CollisionShape3D@11" type="CollisionShape3D" parent="@StaticBody3D@10" unique_id=2041092906]
+[node name="@CollisionShape3D@11" type="CollisionShape3D" parent="@StaticBody3D@10" unique_id=1080083991]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.95, 0)
 shape = SubResource("BoxShape3D_46hsa")

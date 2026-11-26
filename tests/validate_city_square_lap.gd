@@ -20,7 +20,9 @@ func _run() -> void:
 	var race := app.game.get_node("RaceManager") as RaceManager
 	var driver := AIInput.new()
 	driver.kart = race.kart
-	driver.line = race.racing_line
+	# Like a real AI competitor, follow one directed route. The human progress
+	# line also projects alternatives, which must not change an AI's target path.
+	driver.line = race._driver_line(0)
 	driver.profile = RaceManager.PROFILES[2]
 	driver.recovery_requested.connect(race._on_ai_recovery.bind(race.competitors[0]))
 	race.kart.add_child(driver)

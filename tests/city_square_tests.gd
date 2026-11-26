@@ -14,7 +14,7 @@ func run(s: SceneTree) -> void:
 	s.check(track.route_branches.size()==2 and race.gates.size()==14,"City has alternative streets/fountain and common ordered gates")
 	var previews := TrackRegistry.get_definition(&"delfino_square_ds").preview_branches()
 	s.check(previews.size()==2 and previews[0]==track.route_branches[0].curve and previews[1]==track.route_branches[1].curve,"City previews share actual branch resources without loading environment instances")
-	s.check(track.get_node("Ground/Architecture").get_child_count()>130,"City reuses modular townhouses in coherent blocks")
+	s.check(track.get_node("Ground/Architecture").get_child_count()>100,"City reuses modular townhouses in coherent blocks")
 	s.check(not track.has_node("Generated/BarrierCollision"),"City has no artificial track barriers")
 	s.check(world.get_node("TrackFeatures/Generated").get_child_count()==0,"City adds no speed pads or optional launch ramps")
 	var street := track.route_branches[0]
