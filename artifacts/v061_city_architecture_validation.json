@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-27",
+  "version": "0.6.1-dev",
+  "status": "Unreleased, pending developer acceptance",
+  "godot_suite": {
+    "checks": 1460,
+    "failures": 0
+  },
+  "source_audit": {
+    "checks": 120,
+    "failures": 0
+  },
+  "frozen_files": 28,
+  "changed_frozen_files": [],
+  "unexpected_final_log_errors": {
+    "tests": [],
+    "audit": [],
+    "import": [],
+    "apply": [],
+    "capture": [],
+    "native_lap": [],
+    "ai": [],
+    "performance": [],
+    "lap_parse": [],
+    "headless": []
+  },
+  "native_wrappers_unchanged": true,
+  "manual_checks": "245-254 pending",
+  "git_operations": "Read-only inspection; no staging, commits, pushes, tags or GitHub operations"
+}

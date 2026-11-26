@@ -6,6 +6,13 @@ Pending developer acceptance. Project/menu/HUD identify `0.6.1-dev`; Windows num
 
 Initial circuit delivery: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The subsequent Figure-8 and Yoshi environment assemblies below remain within this same Unreleased version. The existing reference circuit remains available. No beta release or developer acceptance is implied.
 
+### City Square final architectural corrections - 2026-11-27
+
+- Reworked the six existing house masters/GLBs with closed 18 cm terracotta roof shells: gabled townhouse/narrow/merchant/harbour roofs and hipped wide/corner roofs, solid gable wall caps, seated eaves and no shared-side overhang overlap. Original facade meshes, transforms and UVs remain unchanged. All 117 instances still share six models; no individual roof tiles or inaccessible interiors.
+- Corrected the actual open-sheet defect in all twelve existing architectural-link groups: added roof undersides/edge thickness, closed gable returns and bottom caps, repaired clipped base seams and separated roof vertex fans before thickening. No new decorative assets or runtime generation.
+- Set back only the garden/avenue entrance architecture: eight existing houses and two connector groups, 2 m outward per side, with matching saved collision. The former pinch at route offset 1105 now has about 13.79 m facade clearance versus 9.80 m. Road, routes, widths, stairs, terrain, elevations, checkpoints, recovery, physics and camera code remain byte-identical to the pre-pass baseline.
+- Verification: **1,460 Godot checks, zero failures**, plus **120 Blender/source/freeze checks, zero failures**. Native 1080p lap: 74.817 s, no recovery/camera obstruction; seven racers finish three item-enabled laps without recovery/DNF. Editor opening and headless import pass. Manual criteria **245-254** remain pending. [Architecture, exact files, visual evidence and performance limits](docs/city-square-architecture.md). Still **0.6.1-dev**, Unreleased; no Git/GitHub operations.
+
 ### City Square annotated structural refinements — 2026-11-27
 
 - Applied the black/red/purple/orange reference annotations through targeted edits of existing masters. Widened docks 13 → 19.5 m with matching support/collision; removed the island and three houses. Added 38 reused houses and 12 named, roofed/windowed architectural-link groups while retaining 79 original street houses; removed only the 53 marked rear houses. Approved house/fountain model masters and exports remain byte-identical.

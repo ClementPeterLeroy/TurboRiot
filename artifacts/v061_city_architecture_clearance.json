@@ -1,0 +1,654 @@
+{
+	"minimum_camera_distance": 7.15837478637695,
+	"minimum_facade_clearance": 5.18068408966064,
+	"samples": [
+		{
+			"camera_distance": 8.74642658233643,
+			"lane": -3.5,
+			"offset": 1070,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642658233643,
+			"lane": 0.0,
+			"offset": 1070,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642658233643,
+			"lane": 3.5,
+			"offset": 1070,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": -3.5,
+			"offset": 1072,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 0.0,
+			"offset": 1072,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 3.5,
+			"offset": 1072,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": -3.5,
+			"offset": 1074,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 0.0,
+			"offset": 1074,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 3.5,
+			"offset": 1074,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1076,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1076,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1076,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642944335938,
+			"lane": -3.5,
+			"offset": 1078,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642944335938,
+			"lane": 0.0,
+			"offset": 1078,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642944335938,
+			"lane": 3.5,
+			"offset": 1078,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74643039703369,
+			"lane": -3.5,
+			"offset": 1080,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74643039703369,
+			"lane": 0.0,
+			"offset": 1080,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74643039703369,
+			"lane": 3.5,
+			"offset": 1080,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642658233643,
+			"lane": -3.5,
+			"offset": 1082,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642658233643,
+			"lane": 0.0,
+			"offset": 1082,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642658233643,
+			"lane": 3.5,
+			"offset": 1082,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1084,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1084,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1084,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74643135070801,
+			"lane": -3.5,
+			"offset": 1086,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74643135070801,
+			"lane": 0.0,
+			"offset": 1086,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74643135070801,
+			"lane": 3.5,
+			"offset": 1086,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642944335938,
+			"lane": -3.5,
+			"offset": 1088,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642944335938,
+			"lane": 0.0,
+			"offset": 1088,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642944335938,
+			"lane": 3.5,
+			"offset": 1088,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": -3.5,
+			"offset": 1090,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 0.0,
+			"offset": 1090,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 3.5,
+			"offset": 1090,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1092,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1092,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1092,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642658233643,
+			"lane": -3.5,
+			"offset": 1094,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642658233643,
+			"lane": 0.0,
+			"offset": 1094,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642658233643,
+			"lane": 3.5,
+			"offset": 1094,
+			"visible": true
+		},
+		{
+			"camera_distance": 7.15837478637695,
+			"lane": -3.5,
+			"offset": 1096,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642562866211,
+			"lane": 0.0,
+			"offset": 1096,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642562866211,
+			"lane": 3.5,
+			"offset": 1096,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": -3.5,
+			"offset": 1098,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 0.0,
+			"offset": 1098,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 3.5,
+			"offset": 1098,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": -3.5,
+			"offset": 1100,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 0.0,
+			"offset": 1100,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 3.5,
+			"offset": 1100,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74643135070801,
+			"lane": -3.5,
+			"offset": 1102,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74643135070801,
+			"lane": 0.0,
+			"offset": 1102,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74643135070801,
+			"lane": 3.5,
+			"offset": 1102,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642944335938,
+			"lane": -3.5,
+			"offset": 1104,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642944335938,
+			"lane": 0.0,
+			"offset": 1104,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642944335938,
+			"lane": 3.5,
+			"offset": 1104,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": -3.5,
+			"offset": 1106,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 0.0,
+			"offset": 1106,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 3.5,
+			"offset": 1106,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1108,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1108,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1108,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": -3.5,
+			"offset": 1110,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 0.0,
+			"offset": 1110,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 3.5,
+			"offset": 1110,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1112,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1112,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1112,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": -3.5,
+			"offset": 1114,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 0.0,
+			"offset": 1114,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 3.5,
+			"offset": 1114,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642944335938,
+			"lane": -3.5,
+			"offset": 1116,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642944335938,
+			"lane": 0.0,
+			"offset": 1116,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642944335938,
+			"lane": 3.5,
+			"offset": 1116,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": -3.5,
+			"offset": 1118,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 0.0,
+			"offset": 1118,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642848968506,
+			"lane": 3.5,
+			"offset": 1118,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1120,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1120,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1120,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1122,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1122,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1122,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1124,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1124,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1124,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1126,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1126,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1126,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1128,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1128,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1128,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1130,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1130,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1130,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1132,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1132,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1132,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1134,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1134,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1134,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1136,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1136,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1136,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1138,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1138,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1138,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": -3.5,
+			"offset": 1140,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 0.0,
+			"offset": 1140,
+			"visible": true
+		},
+		{
+			"camera_distance": 8.74642753601074,
+			"lane": 3.5,
+			"offset": 1140,
+			"visible": true
+		}
+	]
+}

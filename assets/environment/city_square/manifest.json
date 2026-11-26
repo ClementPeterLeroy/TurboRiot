@@ -4,7 +4,7 @@
       "name": "Avenue_Left_00",
       "model": 4,
       "position": [
-        -103.68378448486328,
+        -101.68378448486328,
         2.1174495220184326,
         93.375
       ],
@@ -22,7 +22,7 @@
       "name": "Avenue_Left_01",
       "model": 2,
       "position": [
-        -103.18378448486328,
+        -101.18378448486328,
         2.543957471847534,
         84.375
       ],
@@ -40,7 +40,7 @@
       "name": "Avenue_Left_02",
       "model": 1,
       "position": [
-        -104.18378448486328,
+        -102.18378448486328,
         2.910635471343994,
         76.375
       ],
@@ -328,7 +328,7 @@
       "name": "Avenue_Right_00",
       "model": 4,
       "position": [
-        -137.33961486816406,
+        -139.33961486816406,
         2.1174495220184326,
         93.375
       ],
@@ -346,7 +346,7 @@
       "name": "Avenue_Right_01",
       "model": 2,
       "position": [
-        -137.83961486816406,
+        -139.83961486816406,
         2.543957471847534,
         84.375
       ],
@@ -364,7 +364,7 @@
       "name": "Avenue_Right_02",
       "model": 1,
       "position": [
-        -136.83961486816406,
+        -138.83961486816406,
         2.910635471343994,
         76.375
       ],
@@ -2074,7 +2074,7 @@
       "name": "AvenueEntryWest_House01",
       "model": 2,
       "position": [
-        -127.71598052978516,
+        -129.71598052978516,
         1.2,
         128.25241088867188
       ],
@@ -2092,7 +2092,7 @@
       "name": "AvenueEntryWest_House02",
       "model": 3,
       "position": [
-        -136.24073791503906,
+        -138.24073791503906,
         1.249795150756836,
         115.8152084350586
       ],
@@ -2166,5 +2166,20 @@
     "GardenTownEdge",
     "AvenueEntryWest",
     "AvenueEntryEast"
-  ]
+  ],
+  "architecture_revision": 1,
+  "entrance_setbacks_x": {
+    "Avenue_Left_00": 2,
+    "Avenue_Left_01": 2,
+    "Avenue_Left_02": 2,
+    "Avenue_Right_00": -2,
+    "Avenue_Right_01": -2,
+    "Avenue_Right_02": -2,
+    "AvenueEntryWest_House01": -2,
+    "AvenueEntryWest_House02": -2
+  },
+  "link_setbacks_x": {
+    "AvenueEntryWest": -2,
+    "AvenueEntryEast": 2
+  }
 }

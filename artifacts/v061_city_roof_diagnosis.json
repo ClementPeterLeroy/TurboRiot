@@ -1,0 +1,178 @@
+{
+  "townhouse": [
+    {
+      "object": "TerracottaRoof",
+      "roof_faces": 5,
+      "open_roof_edges": 0,
+      "bounds": [
+        7.099999904632568,
+        8.699999809265137
+      ]
+    }
+  ],
+  "narrow_house": [
+    {
+      "object": "TerracottaRoof",
+      "roof_faces": 5,
+      "open_roof_edges": 0,
+      "bounds": [
+        10.199999809265137,
+        11.800000190734863
+      ]
+    }
+  ],
+  "wide_house": [
+    {
+      "object": "TerracottaRoof",
+      "roof_faces": 5,
+      "open_roof_edges": 0,
+      "bounds": [
+        7.099999904632568,
+        8.699999809265137
+      ]
+    }
+  ],
+  "merchant_house": [
+    {
+      "object": "TerracottaRoof",
+      "roof_faces": 5,
+      "open_roof_edges": 0,
+      "bounds": [
+        7.099999904632568,
+        8.699999809265137
+      ]
+    }
+  ],
+  "corner_house": [
+    {
+      "object": "TerracottaRoof",
+      "roof_faces": 5,
+      "open_roof_edges": 0,
+      "bounds": [
+        10.199999809265137,
+        11.800000190734863
+      ]
+    }
+  ],
+  "harbour_house": [
+    {
+      "object": "TerracottaRoof",
+      "roof_faces": 5,
+      "open_roof_edges": 0,
+      "bounds": [
+        7.099999904632568,
+        8.699999809265137
+      ]
+    }
+  ],
+  "architectural_links": [
+    {
+      "object": "FountainWest",
+      "roof_faces": 559,
+      "open_roof_edges": 339,
+      "bounds": [
+        17.75,
+        19.149999618530273
+      ]
+    },
+    {
+      "object": "FountainSouthEast",
+      "roof_faces": 112,
+      "open_roof_edges": 80,
+      "bounds": [
+        17.75,
+        19.149999618530273
+      ]
+    },
+    {
+      "object": "CityOuter",
+      "roof_faces": 1818,
+      "open_roof_edges": 764,
+      "bounds": [
+        9.310550689697266,
+        19.09246253967285
+      ]
+    },
+    {
+      "object": "CityInner",
+      "roof_faces": 796,
+      "open_roof_edges": 408,
+      "bounds": [
+        15.736562728881836,
+        19.092897415161133
+      ]
+    },
+    {
+      "object": "RightStairBlock",
+      "roof_faces": 268,
+      "open_roof_edges": 240,
+      "bounds": [
+        10.050000190734863,
+        16.208114624023438
+      ]
+    },
+    {
+      "object": "LeftStairWest",
+      "roof_faces": 348,
+      "open_roof_edges": 152,
+      "bounds": [
+        10.050000190734863,
+        16.849998474121094
+      ]
+    },
+    {
+      "object": "LeftStairEast",
+      "roof_faces": 275,
+      "open_roof_edges": 261,
+      "bounds": [
+        10.049999237060547,
+        16.31390380859375
+      ]
+    },
+    {
+      "object": "HarbourDescent",
+      "roof_faces": 90,
+      "open_roof_edges": 80,
+      "bounds": [
+        9.355977058410645,
+        10.897074699401855
+      ]
+    },
+    {
+      "object": "CoastFront",
+      "roof_faces": 210,
+      "open_roof_edges": 164,
+      "bounds": [
+        9.25,
+        10.649999618530273
+      ]
+    },
+    {
+      "object": "GardenTownEdge",
+      "roof_faces": 205,
+      "open_roof_edges": 157,
+      "bounds": [
+        9.259956359863281,
+        12.307780265808105
+      ]
+    },
+    {
+      "object": "AvenueEntryWest",
+      "roof_faces": 135,
+      "open_roof_edges": 109,
+      "bounds": [
+        9.25,
+        11.695115089416504
+      ]
+    },
+    {
+      "object": "AvenueEntryEast",
+      "roof_faces": 107,
+      "open_roof_edges": 81,
+      "bounds": [
+        9.299795150756836,
+        11.464046478271484
+      ]
+    }
+  ]
+}

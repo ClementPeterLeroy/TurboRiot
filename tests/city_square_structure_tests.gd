@@ -59,6 +59,9 @@ func run(s: SceneTree) -> void:
 		for i in range(0,path.points.size(),4):
 			var point: Array=path.points[i]
 			var p := Vector3(point[0],point[1],point[2])
+			# Entrance architecture was translated locally in the final pass;
+			# survey coverage at the saved facade, not beyond its former end cap.
+			if path.name in ["AvenueEntryWest","AvenueEntryEast"]:p.x+=(links.get_node(path.name) as Node3D).position.x
 			var normal := Vector3(path.normals[i][0],0,path.normals[i][1])
 			var behind := ground(track,kart,p+normal*.5)
 			if not behind.is_empty() and str(behind.collider.name) in ["PavedStreetsCollision","TimberDecksCollision"]:continue # Preserve real road openings.
@@ -68,6 +71,7 @@ func run(s: SceneTree) -> void:
 			var reach := 5.0 if path.name in ["CoastFront","GardenTownEdge"] else 4.0
 			var hit := track.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(p-normal*.4+Vector3.UP*2,p+normal*reach+Vector3.UP*2,1,[kart.get_rid()]))
 			if not hit.is_empty():covered+=1
+			else:print("CITY_FRONTAGE_GAP ",path.name," point=",p," normal=",normal," reach=",reach)
 		var fraction := float(covered)/maxi(tested,1)
 		coverage.append({"name":path.name,"tested":tested,"covered":covered,"fraction":fraction})
 		print("CITY_FRONTAGE ",JSON.stringify(coverage[-1]))

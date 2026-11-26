@@ -12,6 +12,8 @@ Current Circuit 8 work includes [road reconstruction A](docs/figure8-road-recons
 
 ## Version conventions and history
 
+City Square's final architectural correction remains **0.6.1-dev / 0.6.1.0**, Unreleased. Closed source roofs and local entrance setbacks extend manual criteria through **254**, preserving checks 1-244 and all historical version entries. Road and gameplay features are frozen. See [architecture and acceptance](docs/city-square-architecture.md).
+
 City Square's annotated structural pass also remains **0.6.1-dev / 0.6.1.0**, Unreleased: targeted dock, architecture, staircase and garden edits preserve the horizontal layout and approved house models. Manual criteria now extend through **244**. This does not advance the decoration pass, roadmap numbering or acceptance status. See [structural refinements](docs/city-square-structure.md).
 
 City Square feedback corrections retain **0.6.1-dev / 0.6.1.0**. Approved house designs are preserved; widened streets, contact/editor hardening and broader checkpoints add manual checks **222–228**, without accepting or releasing the construction patch. See [feedback correction](docs/city-square-feedback.md).

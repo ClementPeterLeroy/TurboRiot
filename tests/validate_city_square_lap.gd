@@ -5,6 +5,9 @@ func _initialize() -> void:
 	_run.call_deferred()
 
 func _run() -> void:
+	var prefix := "v061_city"
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--report-prefix="):prefix=arg.get_slice("=",1).validate_filename()
 	var app := load("res://scenes/app.tscn").instantiate() as TurboApplication
 	app.settings.path = "res://.godot/city_lap_settings.cfg"
 	app.auto_pause_on_focus_loss = false
@@ -45,11 +48,11 @@ func _run() -> void:
 		sampled_frames += 1
 		if tick == 900:
 			await RenderingServer.frame_post_draw
-			root.get_texture().get_image().save_png("res://artifacts/v061_city_native_lap.png")
+			root.get_texture().get_image().save_png("res://artifacts/%s_native_lap.png"%prefix)
 	var passed := race.race_complete and race.session.lap_times.size() == 1 and not race.competitors[0].dnf and race.competitors[0].recoveries == 0 and blockers.is_empty()
 	var report := {"passed": passed, "lap_time": race.session.final_time, "recoveries": race.competitors[0].recoveries,
 		"camera_obstructions": blockers, "physics_samples": sampled_frames, "resolution": [1920, 1080], "native_rendering": true}
-	FileAccess.open("res://artifacts/v061_city_native_lap.json", FileAccess.WRITE).store_string(JSON.stringify(report, "\t"))
+	FileAccess.open("res://artifacts/%s_native_lap.json"%prefix, FileAccess.WRITE).store_string(JSON.stringify(report, "\t"))
 	print("CITY_NATIVE_LAP ", JSON.stringify(report))
 	app.queue_free()
 	for i in 10:

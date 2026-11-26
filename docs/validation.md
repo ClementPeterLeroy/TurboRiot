@@ -2,7 +2,19 @@
 
 2026-11-11. **Unreleased, pending developer acceptance.** Audit baseline was clean `1d97794` (v0.6.0). Earlier validation sections below remain unchanged. Current metadata is `0.6.1-dev` / Windows `0.6.1.0`. Full architecture, reference evidence, comparison limitations and commands are in [Testing Grounds](testing-grounds.md).
 
-## City Square annotated structural refinements — current results
+## City Square final architectural corrections - current results
+
+2026-11-27. **0.6.1-dev, Unreleased, pending developer acceptance.** [Scope, source editing, exact files and visual evidence](city-square-architecture.md). All earlier results below retain their historical context.
+
+- Complete Godot suite: **1,460 checks, zero failures** (previous 1,417 plus 43 architecture assertions). Read-only Blender/source audit: **120 checks, zero failures**. The six original facade fingerprints are unchanged; closed roofs, wall/gable volumes and all 28 frozen resource/source/code hashes pass. [Source audit](../artifacts/v061_city_architecture_audit.json).
+- Entrance sweep: 108 positions across centre/left/right lanes, minimum 5.181 m centre-to-facade clearance and 7.158 m camera distance; kart visible throughout. At the former offset-1105 pinch, total facade gap rises from 9.80 to 13.79 m through building movement alone. [Measurements](../artifacts/v061_city_architecture_clearance.json), [racing views](../artifacts/v061_city_architecture_entry_1105.png).
+- Native 1080p application lap: **74.817 s**, zero recovery/camera obstruction, 4,670 physics samples. Seven Challenging AI racers complete three item-enabled laps, seed 42, with zero recovery/DNF and 31 item uses. [Lap](../artifacts/v061_city_architecture_native_lap.json), [race](../artifacts/v061_city_architecture_ai_race_2_7_3_all_ai_items.json). All existing uphill/downhill/standstill/reverse stairs, grass, water recovery, launch, handling and presentation regressions pass.
+- Godot headless import and native City editor opening pass; [editor evidence](../artifacts/v061_city_architecture_editor.json). Final logs retain only the known Windows root-certificate-store warning, with no game/script errors.
+- Matched 1080p native City sample: **76.33 -> 73.72 FPS**, mean **13.10 -> 13.57 ms**, P95 **19.33 -> 28.23 ms**, P99 **67.91 -> 61.32 ms**. Geometry rises from about 286k to 351k rendered primitives; nodes/shapes stay **2,023 / 186**. [Before](../artifacts/v061_city_architecture_before_performance.json), [after](../artifacts/v061_city_architecture_after_performance.json). The closed geometry has a measured cost; average remains above 60, but existing spikes still exceed budget. This is not sustained target-device acceptance.
+
+Manual checks **245-254** append to unchanged 1-244. Human visual review, longer sessions, controller hardware and an exported build remain pending. No roadmap/version advance, new decoration, road/gameplay changes or Git/GitHub operations. Final local logs: `.godot/city_architecture_*.log`.
+
+## City Square annotated structural refinements — preceding results
 
 2026-11-27. [Structural scope, files, source editing and acceptance](city-square-structure.md). All horizontal route points/handles and approved model files are preserved; version remains **0.6.1-dev**, Unreleased. No decoration/release acceptance is inferred.
 

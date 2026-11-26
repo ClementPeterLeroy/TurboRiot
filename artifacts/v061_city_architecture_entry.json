@@ -1,0 +1,82 @@
+[
+	{
+		"camera_distance": 8.7476921081543,
+		"clearance": [
+			{
+				"collider": "none",
+				"distance": 20,
+				"side": -1.0
+			},
+			{
+				"collider": "none",
+				"distance": 20,
+				"side": 1.0
+			}
+		],
+		"offset": 1070.0
+	},
+	{
+		"camera_distance": 8.7500057220459,
+		"clearance": [
+			{
+				"collider": "none",
+				"distance": 20,
+				"side": -1.0
+			},
+			{
+				"collider": "AvenueEntryEastCollision",
+				"distance": 10.3059692382813,
+				"side": 1.0
+			}
+		],
+		"offset": 1085.0
+	},
+	{
+		"camera_distance": 8.74997138977051,
+		"clearance": [
+			{
+				"collider": "AvenueEntryWestCollision",
+				"distance": 12.2829399108887,
+				"side": -1.0
+			},
+			{
+				"collider": "AvenueEntryEastCollision",
+				"distance": 7.35967874526978,
+				"side": 1.0
+			}
+		],
+		"offset": 1095.0
+	},
+	{
+		"camera_distance": 8.74692726135254,
+		"clearance": [
+			{
+				"collider": "AvenueEntryWestCollision",
+				"distance": 7.02299308776855,
+				"side": -1.0
+			},
+			{
+				"collider": "AvenueEntryEastCollision",
+				"distance": 6.7647876739502,
+				"side": 1.0
+			}
+		],
+		"offset": 1105.0
+	},
+	{
+		"camera_distance": 8.74711322784424,
+		"clearance": [
+			{
+				"collider": "AvenueEntryWestCollision",
+				"distance": 12.7508459091187,
+				"side": -1.0
+			},
+			{
+				"collider": "AvenueEntryEastCollision",
+				"distance": 12.8919429779053,
+				"side": 1.0
+			}
+		],
+		"offset": 1115.0
+	}
+]

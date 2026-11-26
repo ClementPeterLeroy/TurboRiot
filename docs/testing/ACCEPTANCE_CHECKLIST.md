@@ -387,6 +387,21 @@ Preserve 1–230 and all history. Use [the structural guide](../city-square-stru
 - [ ] **243. Complete races and application regressions.** Drive multiple consecutive laps and seven-racer item races using both city routes. Verify AI, ranking, camera, timing, items, restart/recovery/menu/circuit switching and the other three circuits. Reopen/edit the City scene normally.
 - [ ] **244. Review sustained performance and construction acceptance.** Compare warmed 1080p conditions with the preceding assembly; record frame spikes and scene complexity, not just average FPS. Target 60 FPS, inspect longer sessions/controller hardware and an exported build. Approve structures separately from the later decoration pass and release acceptance.
 
+## v0.6.1-dev - City Square final architectural corrections
+
+Preserve checks 1-244 and their history. Use [the architecture guide](../city-square-architecture.md), the saved source modules and actual chase camera. Automated closure/clearance results do not accept visual quality or release status.
+
+- [ ] **245. Review all six source roofs.** Inspect townhouse, narrow, wide, merchant, corner and harbour modules from front/rear/sides/above, including low angles beneath eaves. Roofs have slopes, ridges, thickness and appropriate gabled/hipped ends; no missing faces or floating sheets.
+- [ ] **246. Verify complete exterior volumes.** All four wall sides and foundation bottoms are closed. Gable wall caps meet the seated roofs without daylight holes. Preserve facades, shutters, doors, colours and original detail; no inaccessible interiors are required.
+- [ ] **247. Check terrace roof seams.** Inspect touching modules and mixed-height rows, including corner houses. Shared-side roofs meet without interpenetrating overhangs; short front/rear eaves remain believable. No new cracks or flicker at party walls.
+- [ ] **248. Review all twelve connecting buildings.** Inspect roof undersides, perimeter returns, exposed sides, corners and graded foundations throughout the existing assembly. No visible paper roofs, exposed backfaces or open gable ends.
+- [ ] **249. Inspect the garden entrance while racing.** Approach the garden-to-avenue bend at low and high speed, through centre/left/right lanes. The widened architectural gap is readable, facades clear the driving area and the camera keeps the kart visible.
+- [ ] **250. Review entrance continuity.** Inspect the two moved connector groups and eight moved houses from ground and elevated views. Existing corner modules, setbacks and adjacent rows form coherent boundaries without accidental roof/wall intersections or blocked passages.
+- [ ] **251. Confirm the structural freeze.** Compare route, widths, elevations, both city streets, four stair flights, fountain, docks and garden paving to the accepted pre-pass structure. Drive stairs uphill/downhill and cross grass edges; none is redesigned by this pass.
+- [ ] **252. Complete races with traffic.** Drive consecutive laps with human control and six opponents, using both alternatives. Confirm AI, collision, ranking, items, checkpoints, recovery, restart and results; falls from both dock sides still recover correctly.
+- [ ] **253. Recheck presentation and editor stability.** Reopen City Square in the editor, test race launches/return-to-menu/circuit switching, camera turning and high-speed stability on supported controls and an exported build.
+- [ ] **254. Review performance and accept architecture separately.** Compare warmed 1080p runs on the same machine, including frame spikes, not only average FPS. Approve roofs and entrance appearance explicitly; this does not release the patch or authorize a decoration pass.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -418,5 +433,7 @@ Preserve 1–230 and all history. Use [the structural guide](../city-square-stru
 | v0.6.1-dev City Square feedback | Pending | Pending | Checks 222–228 and all retained regressions pending; house designs approved separately | Unreleased / not accepted |
 
 | v0.6.1-dev City Square structures | Pending | Pending | Checks 231–244 plus retained regressions pending; no decoration/release acceptance | Unreleased / not accepted |
+
+| v0.6.1-dev City Square architecture | Pending | Pending | Checks 245-254 plus all retained regressions pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.
