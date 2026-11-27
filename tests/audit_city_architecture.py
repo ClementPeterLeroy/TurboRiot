@@ -40,7 +40,12 @@ for obj in bpy.context.scene.objects:
  stone=topology(obj,'City_Stone');check(stone['open_edges']==0,obj.name+' foundation has a bottom closure')
  details[obj.name]={'roof':roof,'core':core,'foundation':stone}
 frozen=json.loads((ROOT/'tests/fixtures/city_architecture_frozen.json').read_text())
+local=ROOT/'tests/fixtures/city_transitions.json'
+if local.exists():
+ approved=json.loads(local.read_text())['current_hashes']
+ frozen.update({p:h for p,h in approved.items() if p in frozen})
 for path,digest in frozen.items():check(hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==digest,'Feature freeze: '+path)
 result={'checks':len(checks),'failures':sum(not c['pass'] for c in checks),'details':details,'results':checks}
-(ROOT/'artifacts/v061_city_architecture_audit.json').write_text(json.dumps(result,indent=2)+'\n');print('CITY_ARCHITECTURE_AUDIT',result['checks'],result['failures'],flush=True)
+output='v061_city_transitions_roof_audit.json' if local.exists() else 'v061_city_architecture_audit.json'
+(ROOT/'artifacts'/output).write_text(json.dumps(result,indent=2)+'\n');print('CITY_ARCHITECTURE_AUDIT',result['checks'],result['failures'],flush=True)
 if result['failures']:raise RuntimeError('Architecture audit failed')

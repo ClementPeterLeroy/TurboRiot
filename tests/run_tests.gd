@@ -38,6 +38,7 @@ func _run() -> void:
 	await preload("res://tests/city_square_launch_tests.gd").new().run(self)
 	await preload("res://tests/city_square_structure_tests.gd").new().run(self)
 	await preload("res://tests/city_square_architecture_tests.gd").new().run(self)
+	await preload("res://tests/city_square_transition_tests.gd").new().run(self)
 	await preload("res://tests/crossing_collision_tests.gd").new().run(self)
 	await preload("res://tests/circuit_performance_tests.gd").new().run(self)
 	await preload("res://tests/imported_recovery_tests.gd").new().run(self)

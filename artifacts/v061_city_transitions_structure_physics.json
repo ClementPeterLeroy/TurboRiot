@@ -1,0 +1,123 @@
+{
+	"frontages": [
+		{
+			"covered": 27,
+			"fraction": 1.0,
+			"name": "FountainWest",
+			"tested": 27
+		},
+		{
+			"covered": 4,
+			"fraction": 1.0,
+			"name": "FountainSouthEast",
+			"tested": 4
+		},
+		{
+			"covered": 73,
+			"fraction": 1.0,
+			"name": "CityOuter",
+			"tested": 73
+		},
+		{
+			"covered": 39,
+			"fraction": 1.0,
+			"name": "CityInner",
+			"tested": 39
+		},
+		{
+			"covered": 24,
+			"fraction": 1.0,
+			"name": "RightStairBlock",
+			"tested": 24
+		},
+		{
+			"covered": 19,
+			"fraction": 1.0,
+			"name": "LeftStairWest",
+			"tested": 19
+		},
+		{
+			"covered": 25,
+			"fraction": 1.0,
+			"name": "LeftStairEast",
+			"tested": 25
+		},
+		{
+			"covered": 8,
+			"fraction": 1.0,
+			"name": "HarbourDescent",
+			"tested": 8
+		},
+		{
+			"covered": 20,
+			"fraction": 1.0,
+			"name": "CoastFront",
+			"tested": 20
+		},
+		{
+			"covered": 31,
+			"fraction": 1.0,
+			"name": "GardenTownEdge",
+			"tested": 31
+		}
+	],
+	"grass_cases": 11,
+	"stairs": [
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(65.90131, 6.775934, -89.09764)",
+			"flight": 0,
+			"uphill": false
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(40.81003, 8.660851, -87.73175)",
+			"flight": 0,
+			"uphill": true
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(82.40047, 4.975935, -59.15933)",
+			"flight": 1,
+			"uphill": false
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(83.96815, 6.776023, -75.45549)",
+			"flight": 1,
+			"uphill": true
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(82.5, 3.175936, -36.41912)",
+			"flight": 2,
+			"uphill": false
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(82.5, 4.976045, -53.36699)",
+			"flight": 2,
+			"uphill": true
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(29.86442, 3.175993, -37.42746)",
+			"flight": 3,
+			"uphill": false
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"final_position": "(30.01024, 8.575936, -77.51842)",
+			"flight": 3,
+			"uphill": true
+		}
+	]
+}

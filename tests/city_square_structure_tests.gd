@@ -50,10 +50,13 @@ func run(s: SceneTree) -> void:
 	s.check(not unwanted,"Purple rear houses and the three island houses are absent")
 	s.check(architecture.has_node("Avenue_Left_00") and architecture.has_node("HarbourApproach_Right_01"),"Existing avenue and harbour-descent frontages remain")
 	var links := environment.get_node("ArchitecturalLinks")
-	s.check(links.get_child_count()==plan.frontages.size(),"All twelve annotated architectural boundary groups have saved roofed links")
+	var manifest: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/environment/city_square/manifest.json"))
+	var replaced: Array=manifest.get("transition_removed_link_groups",[])
+	s.check(links.get_child_count()==plan.frontages.size()-replaced.size(),"All retained annotated boundary groups have saved roofed links; only approved local replacements are excluded")
 	var report: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://resources/tracks/city_square/structural_report.json"))
 	var coverage: Array[Dictionary]=[]
 	for path in report.frontage_paths:
+		if path.name in replaced:continue # Independently tested against the new modular frontage below.
 		var tested := 0
 		var covered := 0
 		for i in range(0,path.points.size(),4):
@@ -157,16 +160,26 @@ func run(s: SceneTree) -> void:
 		for side in [-1.0,1.0]:
 			var p: Vector3=center+right*side*(width/2+3)
 			var hit := ground(track,kart,p)
+			# Find the actual grass edge after the later local paved apron. Keep
+			# the same grass-to-road test; nominal corridor width is unchanged.
+			if not hit.is_empty() and str(hit.collider.name)=="PavedStreetsCollision":
+				for extra in [5.0,7.0,9.0,11.0]:
+					p=center+right*side*(width/2+extra)
+					hit=ground(track,kart,p)
+					if hit.is_empty() or str(hit.collider.name)!="PavedStreetsCollision":break
 			if hit.is_empty() or str(hit.collider.name)!="GardenGrassCollision":continue
 			# An intentional house frontage is not a road/grass opening. Exclude
 			# only real architecture at body height, never a paved-edge lip.
-			var wall := track.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(hit.position+Vector3.UP,center+Vector3.UP,1,[kart.get_rid()]))
+			# Start on the road: a grass probe inside an existing house's box
+			# must not evade the wall merely because ray-from-inside is disabled.
+			var wall := track.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(center+Vector3.UP,hit.position+Vector3.UP,1,[kart.get_rid()]))
 			if not wall.is_empty() and absf(wall.normal.y)<.5:
 				var is_architecture := architecture.is_ancestor_of(wall.collider)
 				for frontage in plan.frontages:is_architecture=is_architecture or str(wall.collider.name)==frontage.name+"Collision"
 				if is_architecture:continue
 			grass_cases+=1
 			var start: Vector3=hit.position
+			var grass_distance := absf((start-center).dot(right))
 			await place(s,kart,input,start,-right*side)
 			input.command=DrivingCommand.new(1)
 			var completed := false
@@ -174,14 +187,19 @@ func run(s: SceneTree) -> void:
 			for i in 180:
 				await s.physics_frame
 				if not kart.is_on_floor():air+=1
-				if (kart.global_position-start).dot(-right*side)>width/2+4:completed=true;break
+				if (kart.global_position-start).dot(-right*side)>grass_distance+1:completed=true;break
 			s.check(completed and air==0,"Grass re-entry has no trapping lip/airborne transition at "+str(offset)+" side="+str(side))
 			s.check(kart.surface_detector.current.identifier==&"asphalt","Grass re-entry restores actual paved-surface detection")
 			await place(s,kart,input,center,right*side)
 			input.command=DrivingCommand.new(1)
-			for i in 150:
+			for i in 210:
 				await s.physics_frame
-				if (kart.global_position-center).dot(right*side)>width/2+3:break
+				if (kart.global_position-center).dot(right*side)>grass_distance and kart.surface_detector.current.identifier==&"grass" and kart.is_on_floor():break
+			print("CITY_GRASS_EXIT ",offset," side=",side," distance=",(kart.global_position-center).dot(right*side)," target=",grass_distance," surface=",kart.surface_detector.current.identifier," grounded=",kart.is_on_floor())
+			if kart.surface_detector.current.identifier!=&"grass":
+				for j in kart.get_slide_collision_count():
+					var contact := kart.get_slide_collision(j)
+					print("CITY_EXIT_CONTACT ",offset," ",contact.get_collider().name," position=",contact.get_position()," normal=",contact.get_normal()," body=",kart.global_position," velocity=",kart.velocity," real=",kart.get_real_velocity()," command=",kart.current_command.throttle," driving=",kart.driving_enabled," forward=",-kart.global_basis.z)
 			s.check(kart.surface_detector.current.identifier==&"grass" and kart.is_on_floor(),"Kart can leave the path for real slowing grass at "+str(offset))
 	s.check(grass_cases>=4,"Garden physical re-entry covers multiple locations and both accessible sides")
 	var recovery := kart.get_node("Recovery") as KartRecovery
@@ -202,6 +220,7 @@ func run(s: SceneTree) -> void:
 			if reset[0]:break
 		kart.reset_performed.disconnect(callback)
 		s.check(reset[0] and race.session.next_checkpoint==1,"Water recovery works from either dock edge without awarding progress")
-	FileAccess.open("res://artifacts/v061_city_structure_physics.json",FileAccess.WRITE).store_string(JSON.stringify({"stairs":measurements,"grass_cases":grass_cases,"frontages":coverage},"\t"))
+	var report_path := "res://artifacts/v061_city_transitions_structure_physics.json" if not replaced.is_empty() else "res://artifacts/v061_city_structure_physics.json"
+	FileAccess.open(report_path,FileAccess.WRITE).store_string(JSON.stringify({"stairs":measurements,"grass_cases":grass_cases,"frontages":coverage},"\t"))
 	world.queue_free()
 	await s.process_frame

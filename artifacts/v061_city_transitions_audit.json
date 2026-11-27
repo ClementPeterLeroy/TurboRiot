@@ -1,0 +1,480 @@
+{
+  "checks": 115,
+  "failures": 0,
+  "details": {
+    "PavedStreets": {
+      "samples": 4453,
+      "maximum_height_error": 3.814697265625e-06,
+      "shared_edge_normal_aliases": 0,
+      "mismatches": []
+    },
+    "GardenGrass": {
+      "samples": 1052,
+      "maximum_height_error": 3.814697265625e-06,
+      "shared_edge_normal_aliases": 6,
+      "mismatches": []
+    }
+  },
+  "results": [
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/corner_house.glb"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/fountain.glb"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/harbour_house.glb"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/merchant_house.glb"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/narrow_house.glb"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/stairs_and_dock_structure.glb"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/townhouse.glb"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/wide_house.glb"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/sources/.gdignore"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/sources/corner_house.blend"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/sources/fountain.blend"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/sources/harbour_house.blend"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/sources/merchant_house.blend"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/sources/narrow_house.blend"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/sources/stairs_and_dock_structure.blend"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/sources/townhouse.blend"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/sources/wide_house.blend"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: resources/tracks/city_square/centerline.tres"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: resources/tracks/city_square/fountain_lane.tres"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: resources/tracks/city_square/layout.json"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: resources/tracks/city_square/left_street.tres"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: resources/tracks/city_square/structural_plan.json"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: resources/tracks/city_square/structural_report.json"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: resources/tracks/city_square/survey.json"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: resources/tracks/city_square/widths.tres"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scenes/environment/city_square/corner_house.tscn"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scenes/environment/city_square/harbour_house.tscn"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scenes/environment/city_square/merchant_house.tscn"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scenes/environment/city_square/narrow_house.tscn"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scenes/environment/city_square/townhouse.tscn"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scenes/environment/city_square/wide_house.tscn"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scenes/tracks/city_square.tscn"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: project.godot"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/main.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/ai/ai_input.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/ai/circuit_routes.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/ai/racing_line.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/app/application.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/app/app_settings.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/app/race_setup.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/audio/audio_director.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/audio/riot_sounds.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/camera/chase_camera.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/debug/presentation_diagnostics.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/input/driving_command.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/input/driving_input.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/input/player_input.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/items/item_actor.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/items/item_catalog.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/items/item_model.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/items/item_system.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/items/kart_inventory.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/items/loot_box.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/items/loot_box_row.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/items/powerup_models.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/kart/boost_controller.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/kart/drift_controller.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/kart/kart_contact_solver.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/kart/kart_controller.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/kart/kart_dynamics.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/kart/kart_effects.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/kart/kart_recovery.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/kart/kart_visuals.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/kart/surface_detector.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/race/checkpoint_gate.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/race/competitor_state.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/race/race_manager.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/race/race_session.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/track/authored_circuit.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/track/boost_pad.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/track/city_materials.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/track/greybox_ground.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/track/imported_test_recovery.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/track/ramp.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/track/stadium_environment.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/track/track_builder.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/track/track_definition.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/track/track_features.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/track/track_registry.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/ui/alpha_menu.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/ui/boost_speed_lines.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/ui/circuit_card.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/ui/circuit_gallery.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/ui/circuit_map.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/ui/circuit_outline.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/ui/hud.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/world/barrier_mesh.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/world/environment_builder.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scripts/world/geometry.gd"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/driving_surfaces.glb"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/sources/driving_surfaces.blend"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/coast_and_terrain.glb"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/sources/coast_and_terrain.blend"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/architectural_links.glb"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/sources/architectural_links.blend"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: assets/environment/city_square/manifest.json"
+    },
+    {
+      "passed": true,
+      "check": "File scope/hash: scenes/environment/city_square/environment.tscn"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: driving_surfaces/TimberDecks"
+    },
+    {
+      "passed": true,
+      "check": "PavedStreets preserves support height/normals outside the entrance crop"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: coast_and_terrain/TownLand"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: coast_and_terrain/CoastalCliffs"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: coast_and_terrain/Water"
+    },
+    {
+      "passed": true,
+      "check": "GardenGrass preserves support height/normals outside the entrance crop"
+    },
+    {
+      "passed": true,
+      "check": "Grass has no downward rendered faces"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: architectural_links/FountainWest"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: architectural_links/FountainSouthEast"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: architectural_links/CityOuter"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: architectural_links/CityInner"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: architectural_links/RightStairBlock"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: architectural_links/LeftStairWest"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: architectural_links/LeftStairEast"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: architectural_links/HarbourDescent"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: architectural_links/CoastFront"
+    },
+    {
+      "passed": true,
+      "check": "Unchanged source component: architectural_links/GardenTownEdge"
+    },
+    {
+      "passed": true,
+      "check": "Exactly the two local infills are removed; all other groups remain"
+    }
+  ]
+}

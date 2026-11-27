@@ -402,6 +402,21 @@ Preserve checks 1-244 and their history. Use [the architecture guide](../city-sq
 - [ ] **253. Recheck presentation and editor stability.** Reopen City Square in the editor, test race launches/return-to-menu/circuit switching, camera turning and high-speed stability on supported controls and an exported build.
 - [ ] **254. Review performance and accept architecture separately.** Compare warmed 1080p runs on the same machine, including frame spikes, not only average FPS. Approve roofs and entrance appearance explicitly; this does not release the patch or authorize a decoration pass.
 
+## v0.6.1-dev - City Square local transitions
+
+Preserve checks 1-254 and their history. Use [the local-transition report](../city-square-transitions.md) and the three developer screenshots. This later brief authorizes paving changes only around the garden entrance; the preceding roof work and other sectors remain preserved.
+
+For historical checks 248 and 250, assess the ten retained infills and the two local replacements through checks 257-258. The original wording remains as history; the later brief explicitly replaces those two meshes. All other locations and regression requirements still apply.
+
+- [ ] **255. Avenue/fountain continuity.** Drive toward and away from the fountain on both sides. The four inserted modules close the major gaps, meet the existing terraces and fountain frame, preserve roof quality, and leave the full avenue and sightline open.
+- [ ] **256. Wider, finished garden entrance.** Inspect and drive the 18 m paved bend and flared forecourt from centre/left/right lanes. Paving reaches the framing houses without exposed slab ends, grass slits, clipping or malformed geometry; the route stays recognizable.
+- [ ] **257. Correct local building replacements.** The two irregular entrance infills and their colliders are absent. The two relocated houses and seven added garden modules form coherent corners/rows, with seated bases, complete facades and no roof intersections or invisible walls.
+- [ ] **258. Garden land enclosure and waterfront.** Review the northern connection to the coast frontage and western terrace. Land-facing sides read as town boundaries; the intended route openings, grass play area and waterfront remain open, without new fences or barriers.
+- [ ] **259. Contact and camera stability.** Enter/leave real grass beside the apron, accelerate, brake, steer and drift through the bend at racing speeds. No snag, step, false takeoff or camera collapse; surface names and off-road penalties change correctly after their normal debounce/blend.
+- [ ] **260. Complete races and traffic.** Test both alternatives, human input and six opponents, with and without items, over consecutive laps. Check AI, passing, checkpoint order, ranking, items, recovery, restart and results. Record recovery causes rather than assuming every item race has none.
+- [ ] **261. Preserve the rest.** Compare the other 115 original house placements, six source house models/roofs, ten retained infills, other streets, four stair flights, fountain, docks, water recovery and other circuits to the previous baseline. No unrelated housing or layout changes.
+- [ ] **262. Editor, performance and local acceptance.** Reopen/edit City Square, inspect low/elevated racing views and test an exported build/controller. Record warmed 1080p frame times and longer-session behaviour. Accept these local changes explicitly; no next milestone or release is implied.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -435,5 +450,7 @@ Preserve checks 1-244 and their history. Use [the architecture guide](../city-sq
 | v0.6.1-dev City Square structures | Pending | Pending | Checks 231–244 plus retained regressions pending; no decoration/release acceptance | Unreleased / not accepted |
 
 | v0.6.1-dev City Square architecture | Pending | Pending | Checks 245-254 plus all retained regressions pending | Unreleased / not accepted |
+
+| v0.6.1-dev City Square local transitions | Pending | Pending | Checks 255-262 and retained regressions pending | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

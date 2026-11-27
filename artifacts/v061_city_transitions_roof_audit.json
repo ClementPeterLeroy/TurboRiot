@@ -1,0 +1,706 @@
+{
+  "checks": 114,
+  "failures": 0,
+  "details": {
+    "townhouse": {
+      "roof": {
+        "faces": 10,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "effective_thickness": 0.1799995819188963,
+      "party_wall_x_bounds": [
+        -4.0,
+        4.0
+      ]
+    },
+    "narrow_house": {
+      "roof": {
+        "faces": 10,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "effective_thickness": 0.18000029622659477,
+      "party_wall_x_bounds": [
+        -3.0,
+        3.0
+      ]
+    },
+    "wide_house": {
+      "roof": {
+        "faces": 12,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "effective_thickness": 0.18000001978600022,
+      "party_wall_x_bounds": [
+        -5.0,
+        5.0
+      ]
+    },
+    "merchant_house": {
+      "roof": {
+        "faces": 10,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "effective_thickness": 0.1799995819188963,
+      "party_wall_x_bounds": [
+        -4.0,
+        4.0
+      ]
+    },
+    "corner_house": {
+      "roof": {
+        "faces": 12,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "effective_thickness": 0.1799999035145609,
+      "party_wall_x_bounds": [
+        -4.0,
+        4.0
+      ]
+    },
+    "harbour_house": {
+      "roof": {
+        "faces": 10,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "effective_thickness": 0.1800000578080272,
+      "party_wall_x_bounds": [
+        -3.5,
+        3.5
+      ]
+    },
+    "FountainWest": {
+      "roof": {
+        "faces": 1457,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "core": {
+        "faces": 1672,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "foundation": {
+        "faces": 1457,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      }
+    },
+    "FountainSouthEast": {
+      "roof": {
+        "faces": 304,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "core": {
+        "faces": 463,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "foundation": {
+        "faces": 304,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      }
+    },
+    "CityOuter": {
+      "roof": {
+        "faces": 4400,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "core": {
+        "faces": 5718,
+        "open_edges": 0,
+        "nonmanifold_edges": 2
+      },
+      "foundation": {
+        "faces": 4358,
+        "open_edges": 0,
+        "nonmanifold_edges": 2
+      }
+    },
+    "CityInner": {
+      "roof": {
+        "faces": 2000,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "core": {
+        "faces": 2484,
+        "open_edges": 0,
+        "nonmanifold_edges": 9
+      },
+      "foundation": {
+        "faces": 1992,
+        "open_edges": 0,
+        "nonmanifold_edges": 9
+      }
+    },
+    "RightStairBlock": {
+      "roof": {
+        "faces": 776,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "core": {
+        "faces": 1403,
+        "open_edges": 0,
+        "nonmanifold_edges": 3
+      },
+      "foundation": {
+        "faces": 773,
+        "open_edges": 0,
+        "nonmanifold_edges": 3
+      }
+    },
+    "LeftStairWest": {
+      "roof": {
+        "faces": 848,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "core": {
+        "faces": 1000,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "foundation": {
+        "faces": 848,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      }
+    },
+    "LeftStairEast": {
+      "roof": {
+        "faces": 811,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "core": {
+        "faces": 1504,
+        "open_edges": 0,
+        "nonmanifold_edges": 3
+      },
+      "foundation": {
+        "faces": 803,
+        "open_edges": 0,
+        "nonmanifold_edges": 3
+      }
+    },
+    "HarbourDescent": {
+      "roof": {
+        "faces": 260,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "core": {
+        "faces": 341,
+        "open_edges": 0,
+        "nonmanifold_edges": 2
+      },
+      "foundation": {
+        "faces": 257,
+        "open_edges": 0,
+        "nonmanifold_edges": 2
+      }
+    },
+    "CoastFront": {
+      "roof": {
+        "faces": 584,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "core": {
+        "faces": 1078,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "foundation": {
+        "faces": 584,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      }
+    },
+    "GardenTownEdge": {
+      "roof": {
+        "faces": 567,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "core": {
+        "faces": 901,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      },
+      "foundation": {
+        "faces": 567,
+        "open_edges": 0,
+        "nonmanifold_edges": 0
+      }
+    }
+  },
+  "results": [
+    {
+      "pass": true,
+      "message": "townhouse roof is a closed manifold shell"
+    },
+    {
+      "pass": true,
+      "message": "townhouse has sloping top and underside"
+    },
+    {
+      "pass": true,
+      "message": "townhouse is an 18 cm shell rather than a floating sheet"
+    },
+    {
+      "pass": true,
+      "message": "townhouse roof stops at shared side walls"
+    },
+    {
+      "pass": true,
+      "message": "townhouse preserves every original facade object/UV/transform"
+    },
+    {
+      "pass": true,
+      "message": "townhouse StuccoWalls encloses all four sides and bottom"
+    },
+    {
+      "pass": true,
+      "message": "townhouse StoneFoundation encloses all four sides and bottom"
+    },
+    {
+      "pass": true,
+      "message": "townhouse uses correct closed gable caps or hipped ends"
+    },
+    {
+      "pass": true,
+      "message": "townhouse RoofGableWall-1 is a closed wall prism"
+    },
+    {
+      "pass": true,
+      "message": "townhouse RoofGableWall1 is a closed wall prism"
+    },
+    {
+      "pass": true,
+      "message": "narrow_house roof is a closed manifold shell"
+    },
+    {
+      "pass": true,
+      "message": "narrow_house has sloping top and underside"
+    },
+    {
+      "pass": true,
+      "message": "narrow_house is an 18 cm shell rather than a floating sheet"
+    },
+    {
+      "pass": true,
+      "message": "narrow_house roof stops at shared side walls"
+    },
+    {
+      "pass": true,
+      "message": "narrow_house preserves every original facade object/UV/transform"
+    },
+    {
+      "pass": true,
+      "message": "narrow_house StuccoWalls encloses all four sides and bottom"
+    },
+    {
+      "pass": true,
+      "message": "narrow_house StoneFoundation encloses all four sides and bottom"
+    },
+    {
+      "pass": true,
+      "message": "narrow_house uses correct closed gable caps or hipped ends"
+    },
+    {
+      "pass": true,
+      "message": "narrow_house RoofGableWall-1 is a closed wall prism"
+    },
+    {
+      "pass": true,
+      "message": "narrow_house RoofGableWall1 is a closed wall prism"
+    },
+    {
+      "pass": true,
+      "message": "wide_house roof is a closed manifold shell"
+    },
+    {
+      "pass": true,
+      "message": "wide_house has sloping top and underside"
+    },
+    {
+      "pass": true,
+      "message": "wide_house is an 18 cm shell rather than a floating sheet"
+    },
+    {
+      "pass": true,
+      "message": "wide_house roof stops at shared side walls"
+    },
+    {
+      "pass": true,
+      "message": "wide_house preserves every original facade object/UV/transform"
+    },
+    {
+      "pass": true,
+      "message": "wide_house StuccoWalls encloses all four sides and bottom"
+    },
+    {
+      "pass": true,
+      "message": "wide_house StoneFoundation encloses all four sides and bottom"
+    },
+    {
+      "pass": true,
+      "message": "wide_house uses correct closed gable caps or hipped ends"
+    },
+    {
+      "pass": true,
+      "message": "merchant_house roof is a closed manifold shell"
+    },
+    {
+      "pass": true,
+      "message": "merchant_house has sloping top and underside"
+    },
+    {
+      "pass": true,
+      "message": "merchant_house is an 18 cm shell rather than a floating sheet"
+    },
+    {
+      "pass": true,
+      "message": "merchant_house roof stops at shared side walls"
+    },
+    {
+      "pass": true,
+      "message": "merchant_house preserves every original facade object/UV/transform"
+    },
+    {
+      "pass": true,
+      "message": "merchant_house StuccoWalls encloses all four sides and bottom"
+    },
+    {
+      "pass": true,
+      "message": "merchant_house StoneFoundation encloses all four sides and bottom"
+    },
+    {
+      "pass": true,
+      "message": "merchant_house uses correct closed gable caps or hipped ends"
+    },
+    {
+      "pass": true,
+      "message": "merchant_house RoofGableWall-1 is a closed wall prism"
+    },
+    {
+      "pass": true,
+      "message": "merchant_house RoofGableWall1 is a closed wall prism"
+    },
+    {
+      "pass": true,
+      "message": "corner_house roof is a closed manifold shell"
+    },
+    {
+      "pass": true,
+      "message": "corner_house has sloping top and underside"
+    },
+    {
+      "pass": true,
+      "message": "corner_house is an 18 cm shell rather than a floating sheet"
+    },
+    {
+      "pass": true,
+      "message": "corner_house roof stops at shared side walls"
+    },
+    {
+      "pass": true,
+      "message": "corner_house preserves every original facade object/UV/transform"
+    },
+    {
+      "pass": true,
+      "message": "corner_house StuccoWalls encloses all four sides and bottom"
+    },
+    {
+      "pass": true,
+      "message": "corner_house StoneFoundation encloses all four sides and bottom"
+    },
+    {
+      "pass": true,
+      "message": "corner_house uses correct closed gable caps or hipped ends"
+    },
+    {
+      "pass": true,
+      "message": "harbour_house roof is a closed manifold shell"
+    },
+    {
+      "pass": true,
+      "message": "harbour_house has sloping top and underside"
+    },
+    {
+      "pass": true,
+      "message": "harbour_house is an 18 cm shell rather than a floating sheet"
+    },
+    {
+      "pass": true,
+      "message": "harbour_house roof stops at shared side walls"
+    },
+    {
+      "pass": true,
+      "message": "harbour_house preserves every original facade object/UV/transform"
+    },
+    {
+      "pass": true,
+      "message": "harbour_house StuccoWalls encloses all four sides and bottom"
+    },
+    {
+      "pass": true,
+      "message": "harbour_house StoneFoundation encloses all four sides and bottom"
+    },
+    {
+      "pass": true,
+      "message": "harbour_house uses correct closed gable caps or hipped ends"
+    },
+    {
+      "pass": true,
+      "message": "harbour_house RoofGableWall-1 is a closed wall prism"
+    },
+    {
+      "pass": true,
+      "message": "harbour_house RoofGableWall1 is a closed wall prism"
+    },
+    {
+      "pass": true,
+      "message": "FountainWest roof shell has no open or nonmanifold edges"
+    },
+    {
+      "pass": true,
+      "message": "FountainWest plaster core and gable returns have no open edges"
+    },
+    {
+      "pass": true,
+      "message": "FountainWest foundation has a bottom closure"
+    },
+    {
+      "pass": true,
+      "message": "FountainSouthEast roof shell has no open or nonmanifold edges"
+    },
+    {
+      "pass": true,
+      "message": "FountainSouthEast plaster core and gable returns have no open edges"
+    },
+    {
+      "pass": true,
+      "message": "FountainSouthEast foundation has a bottom closure"
+    },
+    {
+      "pass": true,
+      "message": "CityOuter roof shell has no open or nonmanifold edges"
+    },
+    {
+      "pass": true,
+      "message": "CityOuter plaster core and gable returns have no open edges"
+    },
+    {
+      "pass": true,
+      "message": "CityOuter foundation has a bottom closure"
+    },
+    {
+      "pass": true,
+      "message": "CityInner roof shell has no open or nonmanifold edges"
+    },
+    {
+      "pass": true,
+      "message": "CityInner plaster core and gable returns have no open edges"
+    },
+    {
+      "pass": true,
+      "message": "CityInner foundation has a bottom closure"
+    },
+    {
+      "pass": true,
+      "message": "RightStairBlock roof shell has no open or nonmanifold edges"
+    },
+    {
+      "pass": true,
+      "message": "RightStairBlock plaster core and gable returns have no open edges"
+    },
+    {
+      "pass": true,
+      "message": "RightStairBlock foundation has a bottom closure"
+    },
+    {
+      "pass": true,
+      "message": "LeftStairWest roof shell has no open or nonmanifold edges"
+    },
+    {
+      "pass": true,
+      "message": "LeftStairWest plaster core and gable returns have no open edges"
+    },
+    {
+      "pass": true,
+      "message": "LeftStairWest foundation has a bottom closure"
+    },
+    {
+      "pass": true,
+      "message": "LeftStairEast roof shell has no open or nonmanifold edges"
+    },
+    {
+      "pass": true,
+      "message": "LeftStairEast plaster core and gable returns have no open edges"
+    },
+    {
+      "pass": true,
+      "message": "LeftStairEast foundation has a bottom closure"
+    },
+    {
+      "pass": true,
+      "message": "HarbourDescent roof shell has no open or nonmanifold edges"
+    },
+    {
+      "pass": true,
+      "message": "HarbourDescent plaster core and gable returns have no open edges"
+    },
+    {
+      "pass": true,
+      "message": "HarbourDescent foundation has a bottom closure"
+    },
+    {
+      "pass": true,
+      "message": "CoastFront roof shell has no open or nonmanifold edges"
+    },
+    {
+      "pass": true,
+      "message": "CoastFront plaster core and gable returns have no open edges"
+    },
+    {
+      "pass": true,
+      "message": "CoastFront foundation has a bottom closure"
+    },
+    {
+      "pass": true,
+      "message": "GardenTownEdge roof shell has no open or nonmanifold edges"
+    },
+    {
+      "pass": true,
+      "message": "GardenTownEdge plaster core and gable returns have no open edges"
+    },
+    {
+      "pass": true,
+      "message": "GardenTownEdge foundation has a bottom closure"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: resources/tracks/city_square/centerline.tres"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: resources/tracks/city_square/fountain_lane.tres"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: resources/tracks/city_square/layout.json"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: resources/tracks/city_square/left_street.tres"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: resources/tracks/city_square/structural_plan.json"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: resources/tracks/city_square/structural_report.json"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: resources/tracks/city_square/survey.json"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: resources/tracks/city_square/widths.tres"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: scenes/tracks/city_square.tscn"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: project.godot"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: scripts/kart/boost_controller.gd"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: scripts/kart/drift_controller.gd"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: scripts/kart/kart_contact_solver.gd"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: scripts/kart/kart_controller.gd"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: scripts/kart/kart_dynamics.gd"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: scripts/kart/kart_effects.gd"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: scripts/kart/kart_recovery.gd"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: scripts/kart/kart_visuals.gd"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: scripts/kart/surface_detector.gd"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: scripts/camera/chase_camera.gd"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: assets/environment/city_square/coast_and_terrain.glb"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: assets/environment/city_square/driving_surfaces.glb"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: assets/environment/city_square/fountain.glb"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: assets/environment/city_square/stairs_and_dock_structure.glb"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: assets/environment/city_square/sources/coast_and_terrain.blend"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: assets/environment/city_square/sources/driving_surfaces.blend"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: assets/environment/city_square/sources/fountain.blend"
+    },
+    {
+      "pass": true,
+      "message": "Feature freeze: assets/environment/city_square/sources/stairs_and_dock_structure.blend"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+	"cpu": "AMD Ryzen 7 6800H with Radeon Graphics",
+	"difficulty": "Challenging",
+	"engine": "4.7.2-stable (official)",
+	"gpu": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+	"items": true,
+	"physics_ticks": 60,
+	"racers": 7,
+	"resolution": [
+		1920,
+		1080
+	],
+	"results": [
+		{
+			"case": "before",
+			"collision_shapes": 1306,
+			"fps": 137.853208239807,
+			"load_ms": 356.836,
+			"mean_draw_calls": 1223.983081571,
+			"mean_frame_ms": 7.25409305135952,
+			"mean_physics_ms": 8.00806948640486,
+			"mean_rendered_objects": 1687.37099697885,
+			"mean_rendered_primitives": 564315.241087613,
+			"nodes": 3055,
+			"p95_frame_ms": 13.685,
+			"p99_frame_ms": 15.197,
+			"physics_hz": 59.9723927085565,
+			"render_cpu_ms": 2.06507250844892,
+			"render_gpu_ms": 1.03618005903106,
+			"rendered_frames": 1655,
+			"seconds": 12.005524,
+			"static_memory_bytes": 82584580.0,
+			"video_memory_bytes": 50843515.0
+		},
+		{
+			"case": "after",
+			"collision_shapes": 195,
+			"fps": 75.9885953783103,
+			"load_ms": 268.683,
+			"mean_draw_calls": 1532.12609649123,
+			"mean_frame_ms": 13.1598695175439,
+			"mean_physics_ms": 10.9112083333332,
+			"mean_rendered_objects": 1909.03070175439,
+			"mean_rendered_primitives": 395609.95504386,
+			"nodes": 2072,
+			"p95_frame_ms": 29.13,
+			"p99_frame_ms": 46.011,
+			"physics_hz": 59.9909963512976,
+			"render_cpu_ms": 2.70835964479729,
+			"render_gpu_ms": 1.69890679837319,
+			"rendered_frames": 912,
+			"seconds": 12.001801,
+			"static_memory_bytes": 95787604.0,
+			"video_memory_bytes": 50006455.0
+		}
+	],
+	"seed": 42,
+	"vsync": false
+}

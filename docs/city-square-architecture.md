@@ -2,6 +2,8 @@
 
 2026-11-27. **0.6.1-dev / 0.6.1.0, Unreleased, pending developer acceptance.** This pass changes roofs and local entrance architecture. The preceding [structural refinement](city-square-structure.md) remains the baseline; no decoration phase or new milestone is introduced.
 
+The subsequent [local transition correction](city-square-transitions.md) replaces only the two irregular entrance infills and explicitly reopens garden-entrance paving. The results and freeze policy below describe this preceding roof pass; its six house masters remain unchanged by the later work.
+
 ## Diagnosis and source changes
 
 The six original house roofs were solid gabled prisms, rather than open planes. Their 40 cm side overhangs intersected neighbouring terrace roofs. The more serious open-sheet defect was in the twelve newer connecting buildings: the source audit found between 80 and 764 open roof edges per group, with raised roof profiles and no corresponding gable closure. See the [pre-edit diagnosis](../artifacts/v061_city_roof_diagnosis.json).

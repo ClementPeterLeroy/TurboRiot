@@ -2,6 +2,13 @@ extends RefCounted
 ## Actual saved source instances and entrance clearances; no driving code changes.
 func run(s: SceneTree) -> void:
 	var frozen: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/city_architecture_frozen.json"))
+	# The later local paving pass explicitly supersedes only its four approved
+	# source/export hashes. The original architectural baseline remains recorded.
+	var local := "res://tests/fixtures/city_transitions.json"
+	if FileAccess.file_exists(local):
+		var approved: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(local))
+		for path in frozen:
+			if approved.current_hashes.has(path):frozen[path]=approved.current_hashes[path]
 	for path in frozen:s.check(FileAccess.get_sha256("res://"+path)==frozen[path],"Architecture feature freeze: "+path)
 	var world := TrackRegistry.get_definition(&"delfino_square_ds").instantiate_race()
 	world.managed=true
@@ -55,6 +62,7 @@ func run(s: SceneTree) -> void:
 			samples.append({"offset":offset,"lane":lane,"camera_distance":distance,"visible":visible})
 	s.check(minimum_clearance>5.0,"Entire garden-to-avenue transition keeps facades outside the full 10 m garden road")
 	s.check(clear,"Centre and both driving lanes keep a visible kart and at least 6 m chase-camera clearance")
-	FileAccess.open("res://artifacts/v061_city_architecture_clearance.json",FileAccess.WRITE).store_string(JSON.stringify({"minimum_facade_clearance":minimum_clearance,"minimum_camera_distance":minimum_camera,"samples":samples},"\t"))
+	var report_path := "res://artifacts/v061_city_transitions_clearance.json" if manifest.get("transition_revision",0)>0 else "res://artifacts/v061_city_architecture_clearance.json"
+	FileAccess.open(report_path,FileAccess.WRITE).store_string(JSON.stringify({"minimum_facade_clearance":minimum_clearance,"minimum_camera_distance":minimum_camera,"samples":samples},"\t"))
 	world.queue_free()
 	await s.process_frame

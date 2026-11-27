@@ -1,0 +1,38 @@
+[
+	{
+		"lane": -8.0,
+		"largest_step": 0.366729706525803,
+		"lateral_shift": 0.0,
+		"sector": "finish"
+	},
+	{
+		"lane": 0.0,
+		"largest_step": 0.366734445095062,
+		"lateral_shift": 0.0,
+		"sector": "finish"
+	},
+	{
+		"lane": 8.0,
+		"largest_step": 0.366695046424866,
+		"lateral_shift": 0.0,
+		"sector": "finish"
+	},
+	{
+		"lane": -8.0,
+		"largest_step": 0.366676330566406,
+		"lateral_shift": 0.000030517578125,
+		"sector": "plaza"
+	},
+	{
+		"lane": 0.0,
+		"largest_step": 0.366668701171875,
+		"lateral_shift": 0.000030517578125,
+		"sector": "plaza"
+	},
+	{
+		"lane": 8.0,
+		"largest_step": 0.366695404052734,
+		"lateral_shift": -0.00078582763671875,
+		"sector": "plaza"
+	}
+]

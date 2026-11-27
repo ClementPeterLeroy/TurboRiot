@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-27",
+  "version": "0.6.1-dev",
+  "status": "Unreleased, pending developer acceptance",
+  "godot_suite": {
+    "checks": 1683,
+    "failures": 0
+  },
+  "locality_audit": {
+    "checks": 115,
+    "failures": 0
+  },
+  "roof_audit": {
+    "checks": 114,
+    "failures": 0
+  },
+  "frozen_files": 89,
+  "reviewed_local_files": 8,
+  "original_houses_unchanged": 115,
+  "original_houses_moved": 2,
+  "new_shared_module_instances": 11,
+  "replaced_infill_groups": 2,
+  "native_lap": {
+    "camera_obstructions": {},
+    "lap_time": 74.849999999997,
+    "native_rendering": true,
+    "passed": true,
+    "physics_samples": 4672,
+    "recoveries": 0,
+    "resolution": [
+      1920,
+      1080
+    ]
+  },
+  "manual_checks": "255-262 pending",
+  "unexpected_final_log_errors": {
+    "tests": [],
+    "import": [],
+    "apply": [],
+    "native_lap": [],
+    "ai": [],
+    "ai_no_items": [],
+    "capture": [],
+    "after_performance": [],
+    "headless": [],
+    "audit": [],
+    "roof_audit": []
+  },
+  "git_policy": "No staging, commits, pushes, tags or GitHub actions. Read-only local inspection only."
+}

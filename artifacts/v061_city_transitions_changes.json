@@ -1,0 +1,405 @@
+{
+  "moved": [
+    {
+      "name": "AvenueEntryWest_House01",
+      "before": {
+        "name": "AvenueEntryWest_House01",
+        "model": 2,
+        "position": [
+          -129.71598052978516,
+          1.2,
+          128.25241088867188
+        ],
+        "yaw": -0.5665983546960632,
+        "size": [
+          10,
+          10,
+          8.700000000000001
+        ],
+        "palette": 1,
+        "structural_added": true,
+        "foundation_extension": 0
+      },
+      "after": {
+        "name": "AvenueEntryWest_House01",
+        "model": 2,
+        "position": [
+          -139.83961486816406,
+          1.2,
+          129
+        ],
+        "yaw": -1.5707963267948966,
+        "size": [
+          10,
+          10,
+          8.700000000000001
+        ],
+        "palette": 1,
+        "structural_added": true,
+        "foundation_extension": 0
+      }
+    },
+    {
+      "name": "AvenueEntryWest_House02",
+      "before": {
+        "name": "AvenueEntryWest_House02",
+        "model": 3,
+        "position": [
+          -138.24073791503906,
+          1.249795150756836,
+          115.8152084350586
+        ],
+        "yaw": -1.2896454313715051,
+        "size": [
+          8,
+          9,
+          8.700000000000001
+        ],
+        "palette": 2,
+        "structural_added": true,
+        "foundation_extension": 0
+      },
+      "after": {
+        "name": "AvenueEntryWest_House02",
+        "model": 3,
+        "position": [
+          -139.33961486816406,
+          1.2,
+          138
+        ],
+        "yaw": -1.5707963267948966,
+        "size": [
+          8,
+          9,
+          8.700000000000001
+        ],
+        "palette": 2,
+        "structural_added": true,
+        "foundation_extension": 0
+      }
+    }
+  ],
+  "added": [
+    {
+      "name": "FountainEntry_West_00",
+      "model": 3,
+      "position": [
+        -138.0,
+        9.7,
+        -52.882516860961914
+      ],
+      "yaw": -1.5707963267948966,
+      "size": [
+        8.515033721923828,
+        9,
+        8.700000000000001
+      ],
+      "scale": [
+        1.0643792152404785,
+        1,
+        1
+      ],
+      "palette": 0,
+      "transition_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "FountainEntry_West_01",
+      "model": 4,
+      "position": [
+        -138.0,
+        9.7,
+        -61.39755058288574
+      ],
+      "yaw": -1.5707963267948966,
+      "size": [
+        8.515033721923828,
+        9,
+        11.8
+      ],
+      "scale": [
+        1.0643792152404785,
+        1,
+        1
+      ],
+      "palette": 1,
+      "transition_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "FountainEntry_East_00",
+      "model": 3,
+      "position": [
+        -101.0,
+        9.7,
+        -52.97183609008789
+      ],
+      "yaw": 1.5707963267948966,
+      "size": [
+        8.693672180175781,
+        9,
+        8.700000000000001
+      ],
+      "scale": [
+        1.0867090225219727,
+        1,
+        1
+      ],
+      "palette": 2,
+      "transition_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "FountainEntry_East_01",
+      "model": 4,
+      "position": [
+        -101.0,
+        9.7,
+        -61.66550827026367
+      ],
+      "yaw": 1.5707963267948966,
+      "size": [
+        8.693672180175781,
+        9,
+        11.8
+      ],
+      "scale": [
+        1.0867090225219727,
+        1,
+        1
+      ],
+      "palette": 3,
+      "transition_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenEntry_West_00",
+      "model": 4,
+      "position": [
+        -139.33961486816406,
+        1.2,
+        101.47115384615384
+      ],
+      "yaw": -1.5707963267948966,
+      "size": [
+        8.192307692307692,
+        9,
+        11.8
+      ],
+      "scale": [
+        1.0240384615384615,
+        1,
+        1
+      ],
+      "palette": 0,
+      "transition_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenEntry_West_01",
+      "model": 2,
+      "position": [
+        -139.83961486816406,
+        1.2,
+        110.6875
+      ],
+      "yaw": -1.5707963267948966,
+      "size": [
+        10.240384615384615,
+        10,
+        8.700000000000001
+      ],
+      "scale": [
+        1.0240384615384615,
+        1,
+        1
+      ],
+      "palette": 1,
+      "transition_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenEntry_West_02",
+      "model": 3,
+      "position": [
+        -139.33961486816406,
+        1.2,
+        119.90384615384615
+      ],
+      "yaw": -1.5707963267948966,
+      "size": [
+        8.192307692307692,
+        9,
+        8.700000000000001
+      ],
+      "scale": [
+        1.0240384615384615,
+        1,
+        1
+      ],
+      "palette": 2,
+      "transition_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenEntry_Corner",
+      "model": 4,
+      "position": [
+        -101.68378448486328,
+        1.2,
+        101.375
+      ],
+      "yaw": 1.5707963267948966,
+      "size": [
+        8.0,
+        9,
+        11.8
+      ],
+      "scale": [
+        1.0,
+        1,
+        1
+      ],
+      "palette": 3,
+      "transition_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenLandEdge_00",
+      "model": 5,
+      "position": [
+        13.087338765462238,
+        1.2,
+        82.25
+      ],
+      "yaw": 3.141592653589793,
+      "size": [
+        7.165064493815104,
+        8,
+        8.700000000000001
+      ],
+      "scale": [
+        1.0235806419735862,
+        1,
+        1
+      ],
+      "palette": 0,
+      "transition_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenLandEdge_01",
+      "model": 3,
+      "position": [
+        20.764193580264134,
+        1.2,
+        81.75
+      ],
+      "yaw": 3.141592653589793,
+      "size": [
+        8.18864513578869,
+        9,
+        8.700000000000001
+      ],
+      "scale": [
+        1.0235806419735862,
+        1,
+        1
+      ],
+      "palette": 1,
+      "transition_added": true,
+      "foundation_extension": 0
+    },
+    {
+      "name": "GardenLandEdge_02",
+      "model": 1,
+      "position": [
+        27.929258074079236,
+        1.2,
+        82.25
+      ],
+      "yaw": 3.141592653589793,
+      "size": [
+        6.141483851841517,
+        8,
+        11.8
+      ],
+      "scale": [
+        1.0235806419735862,
+        1,
+        1
+      ],
+      "palette": 2,
+      "transition_added": true,
+      "foundation_extension": 0
+    }
+  ],
+  "removed_link_groups": [
+    "AvenueEntryWest",
+    "AvenueEntryEast"
+  ],
+  "paving_station_range": [
+    1045,
+    1135
+  ],
+  "paved_apron_width": 18.0,
+  "allowed_geometry_bounds": {
+    "garden_paving": [
+      -146,
+      -75,
+      80,
+      144
+    ],
+    "garden_houses": [
+      -145,
+      38,
+      70,
+      144
+    ],
+    "fountain_houses": [
+      -151,
+      -92,
+      -70,
+      -45
+    ]
+  },
+  "forecourt_polygon_xz": [
+    [
+      -131,
+      80
+    ],
+    [
+      -109,
+      80
+    ],
+    [
+      -106.1837845,
+      84
+    ],
+    [
+      -106.1837845,
+      105.375
+    ],
+    [
+      -112,
+      108
+    ],
+    [
+      -118,
+      113
+    ],
+    [
+      -125,
+      125
+    ],
+    [
+      -134.8396149,
+      125
+    ],
+    [
+      -134.8396149,
+      84
+    ]
+  ],
+  "clipped_grass_triangles": 378
+}

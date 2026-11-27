@@ -6,6 +6,13 @@ Pending developer acceptance. Project/menu/HUD identify `0.6.1-dev`; Windows num
 
 Initial circuit delivery: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The subsequent Figure-8 and Yoshi environment assemblies below remain within this same Unreleased version. The existing reference circuit remains available. No beta release or developer acceptance is implied.
 
+### City Square local transition fixes - 2026-11-27
+
+- Closed both avenue/fountain frontage gaps with four shared-module houses. Replaced only the two irregular garden entrance infills/colliders with normal modular framing; relocated two existing west-side houses and added seven garden lots, including the missing land-side connection to the coast frontage. Total 128 house instances, still sharing six unchanged masters; 115 original house placements and all ten other connector meshes remain unchanged.
+- Expanded the garden bend from a 10 m path to an 18 m paved apron, with a local forecourt meeting the house fronts. Remeshed only the bounded garden entrance, clipped grass beneath it and matched seam heights to actual paving. Removed clipping dust and validated imported collision triangles. Fountain paving, centreline/width resources, other streets, stairs, docks, water, kart physics and camera code remain unchanged.
+- Complete suite: **1,683 checks, zero failures**; source/locality audit **115 checks**, roof audit **114 checks**, both zero failures. Native 1080p lap **74.850 s**, no recovery/camera obstruction. All seven finish three item-enabled laps with no DNF; one recovery is recorded. Manual checks **255-262** remain pending. [Exact lots, paving method, evidence and limits](docs/city-square-transitions.md).
+- Kept **0.6.1-dev**, Unreleased. No next milestone, release acceptance or Git/GitHub operations.
+
 ### City Square final architectural corrections - 2026-11-27
 
 - Reworked the six existing house masters/GLBs with closed 18 cm terracotta roof shells: gabled townhouse/narrow/merchant/harbour roofs and hipped wide/corner roofs, solid gable wall caps, seated eaves and no shared-side overhang overlap. Original facade meshes, transforms and UVs remain unchanged. All 117 instances still share six models; no individual roof tiles or inaccessible interiors.

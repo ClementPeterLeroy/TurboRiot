@@ -1,0 +1,27 @@
+{
+	"fountain_facade_clearance": 13.5,
+	"lanes": [
+		{
+			"airborne": 0,
+			"completed": true,
+			"lane": -6.0,
+			"last_offset": 1120.00537109375,
+			"maximum_y_step": 0.017653226852417
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"lane": 0.0,
+			"last_offset": 1120.02014160156,
+			"maximum_y_step": 0.0167195796966553
+		},
+		{
+			"airborne": 0,
+			"completed": true,
+			"lane": 6.0,
+			"last_offset": 1120.05017089844,
+			"maximum_y_step": 0.0242204666137695
+		}
+	],
+	"maximum_grade_factor": 0.143779456615448
+}

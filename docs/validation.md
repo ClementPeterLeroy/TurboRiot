@@ -2,7 +2,19 @@
 
 2026-11-11. **Unreleased, pending developer acceptance.** Audit baseline was clean `1d97794` (v0.6.0). Earlier validation sections below remain unchanged. Current metadata is `0.6.1-dev` / Windows `0.6.1.0`. Full architecture, reference evidence, comparison limitations and commands are in [Testing Grounds](testing-grounds.md).
 
-## City Square final architectural corrections - current results
+## City Square local transitions - current results
+
+2026-11-27. **0.6.1-dev, Unreleased, pending developer acceptance.** [Exact lots, scope, source editing and before/after views](city-square-transitions.md). Only the avenue/fountain enclosure and garden/avenue entrance are reopened. All preceding results below retain their historical context.
+
+- Full suite: **1,683 checks, zero failures**. Locality audit: **115 checks**, roof audit: **114 checks**, both zero failures. The 89-file freeze, 115 unchanged original houses, ten retained connector meshes, six house masters, dock/stair/fountain/route/runtime assets all pass. Outside the entrance crop, 5,505 source support samples retain height within 3.815 micrometres. [Locality](../artifacts/v061_city_transitions_audit.json), [roof audit](../artifacts/v061_city_transitions_roof_audit.json).
+- The 15 m lane envelope is paved/walkable. Three physical entrance lanes (-6 / 0 / +6 m) finish with zero airborne frames; peak per-tick height change is at most 24.3 mm at the conservative fixture speed. Eleven actual grass entry/exit cases, all four stair flights, dock falls/recovery, launch and earlier handling/presentation/item regressions pass. [Driving](../artifacts/v061_city_transitions_driving.json), [structure](../artifacts/v061_city_transitions_structure_physics.json).
+- Native 1080p lap: **74.850 s**, zero recovery and zero sampled camera obstructions across 4,672 physics samples. All seven finish three item-enabled laps with no DNF; 35 item uses and one recovery are recorded. The separate seven-racer no-item lap finishes with zero recovery/DNF. [Native lap](../artifacts/v061_city_transitions_native_lap.json), [item race](../artifacts/v061_city_transitions_ai_race_2_7_3_all_ai_items.json), [no-item probe](../artifacts/v061_city_transitions_ai_race_2_7_1_all_ai_baseline.json).
+- Headless import/runtime and actual editor opening pass. [Editor report](../artifacts/v061_city_transitions_editor.json). Final validation logs have no game/script errors; the known Windows certificate-store warning remains.
+- Matched native City sample: **57.39 -> 75.99 FPS**, mean **17.42 -> 13.16 ms**, P95 **32.39 -> 29.13 ms**, P99 **108.57 -> 46.01 ms**. The unchanged Figure-8 reference also moves **101.43 -> 137.85 FPS**, so variable machine/load conditions prevent attributing that increase to this patch. Draw calls/primitives rise to about 1,532 / 396k; nodes/shapes are 2,072 / 195. [Before](../artifacts/v061_city_transitions_before_performance.json), [after](../artifacts/v061_city_transitions_after_performance.json). Frame spikes and sustained target-device acceptance remain outstanding.
+
+During implementation, the focused tests caught clipping dust/collapsed imported triangles, an intermediate incompatible height blend, and a fixture casting from inside a house. These are corrected in the final mesh/test setup. Collision and high-speed camera/controller logic were not changed to mask them. Historical acceptance wording remains intact; new human criteria **255-262** remain pending. No version/milestone advance, staging, commits, pushes, tags or GitHub actions.
+
+## City Square final architectural corrections - preceding results
 
 2026-11-27. **0.6.1-dev, Unreleased, pending developer acceptance.** [Scope, source editing, exact files and visual evidence](city-square-architecture.md). All earlier results below retain their historical context.
 
