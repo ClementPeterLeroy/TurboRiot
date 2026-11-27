@@ -1,0 +1,53 @@
+{
+	"audio_driver_requested": "Dummy",
+	"checks": 1976,
+	"failures": 0,
+	"metrics": [
+		{
+			"capture": "menu",
+			"frames": 12288,
+			"peak": 0.225262686610222
+		},
+		{
+			"capture": "general",
+			"frames": 45056,
+			"peak": 0.217412114143372
+		},
+		{
+			"held": 0.386031746031746,
+			"pause": "general",
+			"resumed": 0.386031746864319,
+			"same_decoder": true,
+			"saved": 0.374421768707483
+		},
+		{
+			"capture": "general loop",
+			"frames": 36864,
+			"peak": 0.220645993947983
+		},
+		{
+			"capture": "final",
+			"frames": 12288,
+			"peak": 0.0513339936733246
+		},
+		{
+			"held": 0.200272108843537,
+			"pause": "final",
+			"resumed": 0.200272113084793,
+			"same_decoder": true,
+			"saved": 0.188662131519274
+		},
+		{
+			"capture": "final loop",
+			"frames": 36864,
+			"peak": 0.233481407165527
+		},
+		{
+			"capture": "menu loop",
+			"frames": 49152,
+			"peak": 0.233481422066689
+		}
+	],
+	"passed": true,
+	"real_time_mixer": true
+}

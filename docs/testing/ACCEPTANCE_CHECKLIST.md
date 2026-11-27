@@ -417,6 +417,25 @@ For historical checks 248 and 250, assess the ten retained infills and the two l
 - [ ] **261. Preserve the rest.** Compare the other 115 original house placements, six source house models/roofs, ten retained infills, other streets, four stair flights, fountain, docks, water recovery and other circuits to the previous baseline. No unrelated housing or layout changes.
 - [ ] **262. Editor, performance and local acceptance.** Reopen/edit City Square, inspect low/elevated racing views and test an exported build/controller. Record warmed 1080p frame times and longer-session behaviour. Accept these local changes explicitly; no next milestone or release is implied.
 
+## Menu and music update - v0.6.1-dev (manual acceptance pending)
+
+Retain checks 1-262 unchanged. Run these with speakers/headphones and the exported build as well as the editor; automation does not establish listening acceptance.
+
+- [ ] **263. Menu continuity.** Navigate Home, race configuration, circuit gallery, settings and credits; the menu theme loops without restarting. No additional selection menus are implied.
+- [ ] **264. Standard race.** Complete three laps; general music begins at GO, final music begins on entering the last lap and loops until completion, then menu music plays with results.
+- [ ] **265. Configurable laps.** Test one, two and five laps. A one-lap race starts with the final theme; all others switch exactly once at the correct lap.
+- [ ] **266. Local authority.** Let an AI enter its final lap first; music stays with the local player's progression. Reverse/duplicate finish crossings do not switch themes.
+- [ ] **267. Normal-lap pause.** Pause, wait and resume; menu music plays during pause and racing resumes at the same audible musical position without restarting.
+- [ ] **268. Final-lap pause.** Repeat on the final lap; resume the final theme at the retained position.
+- [ ] **269. Repeated pause.** Rapidly pause/resume, including during fades; no overlapping music, wrong themes, stuck silence or lost playback position.
+- [ ] **270. Pause settings.** Open/close settings while paused; menu playback remains continuous and race playback stays suspended.
+- [ ] **271. Restart.** Restart during normal/final laps and pause; the next countdown/GO resets music state and selects the proper initial theme.
+- [ ] **272. Abandonment.** Quit a paused race to Home; menu playback continues without restarting. Start another race and verify independent progression.
+- [ ] **273. Audio settings.** Adjust/mute Music independently of Effects/Master, apply and relaunch. Preview/cancel restores settings; saved levels apply in menus and races.
+- [ ] **274. Loop/fade quality.** Listen across all three loop boundaries and state transitions. Fades are brief; final-lap feedback is urgent, with no unintended layering or clicks. Record any discontinuity in the supplied audio.
+- [ ] **275. Missing assets and overrides.** In a disposable test setup, verify missing final falls back to general, missing required music produces safe silence/diagnostics, and optional circuit themes fall back to globals. Restore assets afterward.
+- [ ] **276. Regression/device acceptance.** Verify SFX, physics, camera, race/checkpoint rules, scene transitions and longer play remain correct on the target PC/controller. Consecutive ordinary races reset independently; actual Grand Prix testing is deferred until that mode exists.
+
 ## Review record
 
 | Build | Date/tester | Controls/hardware/resolution | Checks/results | Acceptance |
@@ -452,5 +471,7 @@ For historical checks 248 and 250, assess the ten retained infills and the two l
 | v0.6.1-dev City Square architecture | Pending | Pending | Checks 245-254 plus all retained regressions pending | Unreleased / not accepted |
 
 | v0.6.1-dev City Square local transitions | Pending | Pending | Checks 255-262 and retained regressions pending | Unreleased / not accepted |
+
+| v0.6.1-dev menu/music | Pending | Pending | Checks 263-276 plus retained regressions pending; actual Grand Prix mode unavailable | Unreleased / not accepted |
 
 Automation is documented separately in [validation](../validation.md). A checkbox is a human verification result, not a unit-test result. Codex must never stage, commit, push, tag, publish a release or perform GitHub actions.

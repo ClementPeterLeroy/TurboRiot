@@ -5,7 +5,6 @@ const EVENTS := [&"navigate", &"confirm", &"back", &"countdown", &"go", &"engine
 var race: RaceManager
 var engine := AudioStreamPlayer.new()
 var drift_loop := AudioStreamPlayer.new()
-var music := AudioStreamPlayer.new()
 var events := {} # Transient diagnostics, never persisted.
 var _voices: Array[AudioStreamPlayer] = []
 var _ui_voices: Array[AudioStreamPlayer] = []
@@ -22,17 +21,10 @@ var _paused := false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	for bus in ["Music", "Effects"]:
-		if AudioServer.get_bus_index(bus) < 0:
-			AudioServer.add_bus()
-			var index := AudioServer.bus_count - 1
-			AudioServer.set_bus_name(index, bus)
-			AudioServer.set_bus_send(index, "Master")
-	for player in [engine, drift_loop, music]: add_child(player)
+	MusicController.ensure_buses()
+	for player in [engine, drift_loop]: add_child(player)
 	engine.bus = "Effects"
 	drift_loop.bus = "Effects"
-	music.bus = "Music"
-	music.volume_db = -9
 	for i in 12:
 		var player := AudioStreamPlayer.new()
 		player.bus = "Effects"
@@ -47,8 +39,6 @@ func _ready() -> void:
 	if DisplayServer.get_name() != "headless":
 		engine.stream = RiotSounds.sound(&"engine")
 		drift_loop.stream = RiotSounds.sound(&"drift_loop")
-		music.stream = RiotSounds.sound(&"music")
-		music.play()
 
 func play(event: StringName, at: Variant = null) -> void:
 	if _clock < float(_cooldowns.get(event, -1)): return
@@ -99,7 +89,6 @@ func unbind_race() -> void:
 	engine.stream_paused = false
 	drift_loop.stream_paused = false
 	for voice in _voices: voice.stop()
-	music.volume_db = -9
 	_cooldowns.clear()
 
 func pause_audio(value: bool) -> void:
@@ -107,7 +96,6 @@ func pause_audio(value: bool) -> void:
 	engine.stream_paused = value
 	drift_loop.stream_paused = value
 	for voice in _voices: voice.stop()
-	music.volume_db = -15 if value else -9
 
 func _on_state(state: RaceSession.State) -> void:
 	if state == RaceSession.State.RACING: play(&"go")
@@ -138,6 +126,6 @@ func _process(delta: float) -> void:
 
 func _exit_tree() -> void:
 	unbind_race()
-	for player in [engine, drift_loop, music] + _voices + _ui_voices:
+	for player in [engine, drift_loop] + _voices + _ui_voices:
 		player.stop()
 		player.stream = null

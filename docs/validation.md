@@ -2,6 +2,16 @@
 
 2026-11-11. **Unreleased, pending developer acceptance.** Audit baseline was clean `1d97794` (v0.6.0). Earlier validation sections below remain unchanged. Current metadata is `0.6.1-dev` / Windows `0.6.1.0`. Full architecture, reference evidence, comparison limitations and commands are in [Testing Grounds](testing-grounds.md).
 
+## Menu and music update - current results
+
+2026-11-27. **0.6.1-dev, Unreleased, pending developer acceptance.** [Implementation, changed files, commands and evidence](music.md).
+
+Full Godot suite **1,985 checks, zero failures**, including 302 music assertions. Real-time native/Dummy mixer validation passes **1,976 checks**: nonzero decoded PCM, all three WAV loops, same decoder and retained playback position across normal/final-lap pause, and no audible overlap on sampled frames. Physical one- and three-lap local races finish with no recovery and exactly one authoritative final-lap selection. The three-lap transition occurs after two validated laps; single-lap music starts directly in the final theme at GO. Existing menus, AI authority isolation, restart/new-session cleanup, missing assets and settings persistence are covered.
+
+Read-only Blender locality/roof audits pass **115/114 checks**. Headless editor import passes. The Windows certificate-store warning remains. Original music assets, kart/camera/race logic and circuit resources remain hash-identical. Historical freeze fixtures are retained, with an explicit later override for exactly five music integration files; historical City reports below retain their original context. New reports use the `music_` prefix.
+
+These results do not establish artistic loop quality or real-device listening acceptance. Actual Grand Prix UI/sequence does not exist; independent consecutive-race reset is tested instead. Permanent human checks **263-276** remain pending. No version advance or Git/GitHub operations.
+
 ## City Square local transitions - current results
 
 2026-11-27. **0.6.1-dev, Unreleased, pending developer acceptance.** [Exact lots, scope, source editing and before/after views](city-square-transitions.md). Only the avenue/fountain enclosure and garden/avenue entrance are reopened. All preceding results below retain their historical context.

@@ -44,8 +44,11 @@ local=ROOT/'tests/fixtures/city_transitions.json'
 if local.exists():
  approved=json.loads(local.read_text())['current_hashes']
  frozen.update({p:h for p,h in approved.items() if p in frozen})
+music=json.loads((ROOT/'tests/fixtures/music_update.json').read_text())['approved_code_hashes']
+frozen.update({p:h for p,h in music.items() if p in frozen})
 for path,digest in frozen.items():check(hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==digest,'Feature freeze: '+path)
 result={'checks':len(checks),'failures':sum(not c['pass'] for c in checks),'details':details,'results':checks}
 output='v061_city_transitions_roof_audit.json' if local.exists() else 'v061_city_architecture_audit.json'
+if (ROOT/'tests/fixtures/music_update.json').exists():output='music_city_roof_audit.json'
 (ROOT/'artifacts'/output).write_text(json.dumps(result,indent=2)+'\n');print('CITY_ARCHITECTURE_AUDIT',result['checks'],result['failures'],flush=True)
 if result['failures']:raise RuntimeError('Architecture audit failed')

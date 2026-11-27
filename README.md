@@ -41,7 +41,7 @@ The inherited [balancing correction](docs/power-up-balancing.md) adds mushroom-o
 ## Included
 
 - Main menu, validated Quick Race/Time Trial setup, responsive keyboard/mouse/controller UI, pause and fresh-scene restart/results flow.
-- ConfigFile settings, display/UI controls, independent audio buses and original synthesized placeholder music/engine/cues.
+- ConfigFile settings, display/UI controls, independent audio buses, project-provided menu/race music and synthesized engine/cues.
 
 - Weighted one-slot inventories, four original item models/icons, homing/ricocheting shells, banana traps and 3 x 4 editor-visible loot boxes.
 - Mass-based kart contact impulses and controllable one-entry boost pads.
@@ -138,3 +138,5 @@ For real physical AI-only validation, run `godot --headless --fixed-fps 60 --pat
 The three supplied images are in `references/` for private educational review only. The brief's suggested `docs/references/circuit_01/` path is absent in this checkout; references were inspected at their actual location. `references/` is ignored by Git and Godot; no game resource loads its images. All game geometry/materials are original. The Windows export preset excludes documentation, tests, references and review artifacts. Install matching export templates before exporting; no exported executable is included or validated. This patch performs no Git mutations or GitHub actions.
 
 Run an item-enabled race with `godot --headless --fixed-fps 60 --path . --script tests/run_ai_race.gd -- --items --laps=3`. Native model/row/HUD captures: `godot --path . --fixed-fps 60 --script tests/capture_items_preview.gd`. Performance: `godot --path . --script tests/benchmark_items.gd` (no fixed FPS). See [validation](docs/validation.md).
+
+The [centralized music system](docs/music.md) keeps menu navigation continuous, selects racing/final-lap themes from validated local progression, and preserves race playback across pause/resume. Existing Music volume settings apply throughout. Manual listening acceptance remains pending.

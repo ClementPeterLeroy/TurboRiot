@@ -13,6 +13,8 @@ extends Resource
 @export var accent := Color("40d5e5")
 @export var scene: PackedScene
 @export var default_laps := 3
+@export var racing_music: AudioStream
+@export var final_lap_music: AudioStream
 @export var grid_row_spacing := 5.5
 @export var grid_lane_spacing := 4.2
 @export var grid_stagger := 2.0

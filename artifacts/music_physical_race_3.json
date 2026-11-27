@@ -1,0 +1,19 @@
+{
+	"final_selections": [
+		{
+			"completed": 2,
+			"lap": 3,
+			"time": 62.6666666666644
+		}
+	],
+	"final_starts": 1,
+	"general_starts": 1,
+	"lap_times": [
+		31.7666666666661,
+		30.8999999999982,
+		30.8999999999983
+	],
+	"laps": 3,
+	"passed": true,
+	"recoveries": 0
+}

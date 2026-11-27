@@ -59,7 +59,10 @@ results=[];details={}
 def check(value,label):
     results.append({'passed':bool(value),'check':label})
     if not value:print('FAIL',label,flush=True)
-for path,digest in {**fixture['frozen_files'],**fixture['current_hashes']}.items():
+expected={**fixture['frozen_files'],**fixture['current_hashes']}
+music=json.loads((ROOT/'tests/fixtures/music_update.json').read_text())['approved_code_hashes']
+expected.update({p:h for p,h in music.items() if p in expected})
+for path,digest in expected.items():
     check(hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==digest,'File scope/hash: '+path)
 for name,objects in fixture['objects'].items():
     bpy.ops.wm.open_mainfile(filepath=str(ROOT/ASSETS/'sources'/f'{name}.blend'))
@@ -88,6 +91,7 @@ for name,objects in fixture['objects'].items():
     if name=='coast_and_terrain':check(all(f.normal.z>=0 for f in bpy.data.objects['GardenGrass'].data.polygons),'Grass has no downward rendered faces')
     if name=='architectural_links':check(set(o.name for o in bpy.context.scene.objects if o.type=='MESH')==set(objects),'Exactly the two local infills are removed; all other groups remain')
 report={'checks':len(results),'failures':sum(not r['passed'] for r in results),'details':details,'results':results}
-(ROOT/'artifacts/v061_city_transitions_audit.json').write_text(json.dumps(report,indent=2)+'\n')
+output='music_city_locality_audit.json' if (ROOT/'tests/fixtures/music_update.json').exists() else 'v061_city_transitions_audit.json'
+(ROOT/'artifacts'/output).write_text(json.dumps(report,indent=2)+'\n')
 print('CITY_TRANSITION_AUDIT',report['checks'],report['failures'],details,flush=True)
 if report['failures']:raise RuntimeError('Source/locality audit failed')

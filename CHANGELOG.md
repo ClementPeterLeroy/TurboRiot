@@ -6,6 +6,15 @@ Pending developer acceptance. Project/menu/HUD identify `0.6.1-dev`; Windows num
 
 Initial circuit delivery: circuit selection, **two new beta test circuits without finished environments or scenery — Figure-8 Circuit and GCN Yoshi Circuit (DS)** — and corrections for racing FPS drops and Figure-8 crossing collisions. The subsequent Figure-8 and Yoshi environment assemblies below remain within this same Unreleased version. The existing reference circuit remains available. No beta release or developer acceptance is implied.
 
+### Menu and music system - 2026-11-27
+
+- Added persistent `MusicManager` Autoload with looped existing `main_menu_first.wav`, `racing_general.wav` and `racing_final_lap.wav`. Sequential configurable fades keep only one music transport audible; assets and their import settings remain unchanged.
+- Existing menus share uninterrupted menu playback. Racing starts at GO; only the local validated RaceSession selects final-lap music, once per race, including single-lap races. Results return to menu music; restart/new races reset independently.
+- Pause suspends the actual race decoder, plays menu music and resumes the same decoder/position, including final-lap state. Pause settings and paused abandonment retain menu continuity. Existing persistent Master/Music/Effects settings remain authoritative; sound effects and handling are unchanged.
+- Added optional circuit racing/final theme metadata with global fallbacks and safe missing-asset handling. No new menus or Grand Prix implementation. Existing synthesized sound effects remain; synthesized placeholder music is no longer used by the application.
+- Verification: **1,985 Godot checks, zero failures**, including 302 music assertions; real-time Dummy-mixer PCM/loop/pause validation passes, plus physical one- and three-lap local races. City locality/roof audits pass 115/114 checks. Human listening and exported-device acceptance remain pending. [Implementation, changed files, commands and limits](docs/music.md).
+- Remains **0.6.1-dev, Unreleased**. No historical version entries rewritten or Git/GitHub operations performed.
+
 ### City Square local transition fixes - 2026-11-27
 
 - Closed both avenue/fountain frontage gaps with four shared-module houses. Replaced only the two irregular garden entrance infills/colliders with normal modular framing; relocated two existing west-side houses and added seven garden lots, including the missing land-side connection to the coast frontage. Total 128 house instances, still sharing six unchanged masters; 115 original house placements and all ten other connector meshes remain unchanged.

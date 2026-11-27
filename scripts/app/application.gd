@@ -17,6 +17,7 @@ var _settings_back := "home"
 var _draft: AppSettings
 var _controller_ids: Array[int] = []
 var _circuit_mode := RaceSetup.Mode.QUICK_RACE
+var _music_session: RaceSession
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -64,6 +65,7 @@ func _bind_pause() -> void:
 	InputMap.action_add_event("pause_race", pad)
 
 func show_home() -> void:
+	_music().play_menu()
 	screen = "home"
 	menu.page("TURBO RIOT", "TESTING GROUNDS  /  v0.6.1-dev")
 	menu.button("Quick Race", func() -> void: show_configuration(RaceSetup.Mode.QUICK_RACE))
@@ -134,7 +136,8 @@ func start_session(request: RaceSetup, countdown := false) -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame # Present loading before procedural initialization.
 	if generation != _generation: return
-	var instance := TrackRegistry.get_definition(setup.circuit_id).instantiate_race()
+	var definition := TrackRegistry.get_definition(setup.circuit_id)
+	var instance := definition.instantiate_race()
 	instance.managed = true
 	instance.process_mode = Node.PROCESS_MODE_PAUSABLE
 	var race := instance.get_node("RaceManager") as RaceManager
@@ -160,6 +163,8 @@ func start_session(request: RaceSetup, countdown := false) -> void:
 		button.theme = menu.theme
 		button.custom_minimum_size.y = 44
 	audio.bind_race(race, items)
+	_music().bind_session(race.session,definition.racing_music,definition.final_lap_music)
+	_music_session=race.session
 	race.field_completed.connect(_seal_results)
 	menu.visible = false
 	screen = "race"
@@ -168,6 +173,8 @@ func start_session(request: RaceSetup, countdown := false) -> void:
 	else: hud.focus_primary.call_deferred()
 
 func _dispose_game() -> void:
+	if _music_session:_music().release_session(_music_session)
+	_music_session=null
 	audio.unbind_race()
 	get_tree().paused = false
 	Engine.max_fps = 0
@@ -201,6 +208,7 @@ func pause_session() -> void:
 	get_tree().paused = true
 	game.get_node("HUD").visible = false
 	audio.pause_audio(true)
+	_music().pause_race()
 	screen = "pause"
 	menu.page("PAUSED", "The race, AI, items and effect timers are stopped.", true)
 	menu.button("Resume", resume_session)
@@ -218,6 +226,7 @@ func resume_session() -> void:
 	menu.visible = false
 	screen = "race"
 	audio.pause_audio(false)
+	_music().resume_race()
 	get_tree().paused = false
 
 func show_settings(back: String) -> void:
@@ -264,13 +273,17 @@ func close_settings() -> void:
 func show_credits() -> void:
 	screen = "credits"
 	menu.page("CREDITS", "Turbo Riot / development prototype")
-	menu.text("Built with Godot Engine (MIT license).\n\nGame code and procedural art: Turbo Riot project contributors.\n\nMenu music, engine loop and cues are original synthesized placeholders generated for this project. No third-party game recordings are included.\n\nThe educational reference circuit is retained for private testing. Original circuits and the Graffiti Speed identity are deferred to later milestones.")
+	menu.text("Built with Godot Engine (MIT license).\n\nGame code and procedural art: Turbo Riot project contributors.\n\nMusic: project-provided tracks in assets/music. Engine loop and feedback cues: synthesized prototype audio.\n\nThe educational reference circuit is retained for private testing. Original circuits and the Graffiti Speed identity are deferred to later milestones.")
 	menu.button("Back", show_home, true)
 	menu.finish()
 
 func quit_game() -> void:
 	_dispose_game()
+	await _music().shutdown()
 	get_tree().quit()
+
+func _exit_tree() -> void:
+	if _music_session:_music().release_session(_music_session)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.echo: return
@@ -308,3 +321,6 @@ func _on_controller_connection(device: int, connected: bool) -> void:
 		settings.apply_audio()
 		pause_session()
 		menu.message.text = "Selected controller disconnected. Reconnect to resume, or return to Main Menu to choose controls."
+
+func _music() -> MusicController:
+	return get_node("/root/MusicManager") as MusicController

@@ -12,7 +12,7 @@ func wall(track: TrackBuilder,kart: KartController,a: Vector3,b: Vector3) -> Dic
 
 func run(s: SceneTree) -> void:
 	var fixture: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/city_transitions.json"))
-	for path in fixture.frozen_files:s.check(FileAccess.get_sha256("res://"+path)==fixture.frozen_files[path],"Local transition preserves file: "+path)
+	for path in fixture.frozen_files:s.check(FileAccess.get_sha256("res://"+path)==preload("res://tests/music_scope.gd").expected_hash(path,fixture.frozen_files[path]),"Local transition preserves file: "+path)
 	for path in fixture.current_hashes:s.check(FileAccess.get_sha256("res://"+path)==fixture.current_hashes[path],"Reviewed local source/scene: "+path)
 	var manifest: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://assets/environment/city_square/manifest.json"))
 	var world := TrackRegistry.get_definition(&"delfino_square_ds").instantiate_race()

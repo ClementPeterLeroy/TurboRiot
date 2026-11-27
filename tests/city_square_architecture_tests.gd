@@ -9,7 +9,7 @@ func run(s: SceneTree) -> void:
 		var approved: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(local))
 		for path in frozen:
 			if approved.current_hashes.has(path):frozen[path]=approved.current_hashes[path]
-	for path in frozen:s.check(FileAccess.get_sha256("res://"+path)==frozen[path],"Architecture feature freeze: "+path)
+	for path in frozen:s.check(FileAccess.get_sha256("res://"+path)==preload("res://tests/music_scope.gd").expected_hash(path,frozen[path]),"Architecture feature freeze: "+path)
 	var world := TrackRegistry.get_definition(&"delfino_square_ds").instantiate_race()
 	world.managed=true
 	world.get_node("Items").enabled=false
